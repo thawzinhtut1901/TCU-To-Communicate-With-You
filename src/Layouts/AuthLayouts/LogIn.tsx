@@ -1,5 +1,4 @@
-import LoginDesign from "./LoginDesign"
-import LogInForm from "./LogInForm"
+import { LoginDesign, LogInForm } from "../../pages/AuthPages"
 
 const LogIn = () => {
   return (

@@ -1,5 +1,7 @@
 import LogIn from "./LogIn";
-import LoginDesign from "./LoginDesign";
-import LogInForm from "./LogInForm";
+import SignUpLayout from "./SignUpLayout";
 
-export {LogIn, LoginDesign, LogInForm};
+export {
+    LogIn,
+    SignUpLayout,
+};

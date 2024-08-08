@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-const TOKEN_KEY = "TCUToken";
+const TOKEN_KEY = "TCUSecurityToken";
 
 export function login(token:string) {
     Cookies.set(TOKEN_KEY, token, {
