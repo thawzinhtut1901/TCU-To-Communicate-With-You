@@ -22,6 +22,7 @@ const SignupForm = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [errors, setErrors] = useState<Errors>({});
     const createAccount = useSignUp();
+    console.log(createAccount)
 
     useEffect(() => {
         if(createAccount.isSuccess) {
@@ -98,9 +99,9 @@ const SignupForm = () => {
 
   return (
     <div>
-        <h2 className="flex justify-center mt-[30px] font-medium font-poppins text-2xl text-white">Sign in</h2>
+        <h2 className="md:flex md:justify-center hidden md:mt-[30px] md:font-medium md:font-poppins md:text-2xl md:text-white">Sign in</h2>
 
-        <div className="flex-col mx-auto mt-[20px] w-[550px] font-poppins font-thin text-[14px] text-white">
+        <div className="flex-col mx-auto mt-[30px] md:mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
             <Label htmlFor="email">
                 Email *
             </Label>
@@ -118,7 +119,7 @@ const SignupForm = () => {
             )}
         </div>
 
-        <div className="flex-col mx-auto mt-[20px] w-[550px] font-poppins font-thin text-[14px] text-white">
+        <div className="flex-col mx-auto mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
             <Label htmlFor="password" className="font-poppins font-thin text-[14px]">
                 Password *
             </Label>
@@ -137,7 +138,7 @@ const SignupForm = () => {
             )}
         </div>
 
-        <div className="flex-col mx-auto mt-[20px] w-[550px] font-poppins font-thin text-[14px] text-white">
+        <div className="flex-col mx-auto mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
             <Label htmlFor="confirm">
                 Confirm Your Password *
             </Label>
@@ -157,24 +158,24 @@ const SignupForm = () => {
 
         </div>
 
-        <div className="flex space-x-2 mx-auto mt-[50px] w-[550px] font-poppins font-thin text-[9px] text-white">
-            <Checkbox id="recieve-email" className="rounded-[5px]"/>
+        <div className="flex space-x-2 mx-auto mt-[30px] md:mt-[50px] w-[350px] lg:w-[550px] font-poppins font-thin text-[9px] text-white">
+            <Checkbox id="recieve-email" className="mt-1 rounded-[5px]"/>
             <Label
                 htmlFor="recieve-email"
-                className="cursor-pointer"
+                className="text-[12px] md:text-[14px] cursor-pointer"
             >
                 I want to receive emails about the product, feature updates, event and 
                 marketing promotion.
             </Label>
         </div>
 
-        <h2 className="flex mx-auto mt-[24px] w-[550px] font-poppins font-thin text-[14px] text-white">By creating an account, you agree to the <a href="#" className="pl-1 border-b"> Term of use and Privacy Policy.</a></h2>
+        <h2 className="md:flex mx-auto mt-[24px] w-[350px] md:w-[550px] font-poppins font-thin text-[12px] text-white md:text-[14px]">By creating an account, you agree to the <a href="#" className="pl-[2px] md:pl-1 border-b"> Term of use and Privacy Policy.</a></h2>
 
-        <Button onClick={handleSubmit} type="submit" className="flex bg-slate-50 hover:bg-slate-300 mt-[24px] ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[14px]">
+        <Button onClick={handleSubmit} type="submit" className="flex bg-slate-50 hover:bg-slate-300 mt-[24px] ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
             Create An Account
         </Button>
 
-        <h2 className="flex mx-auto mt-[24px] w-[550px] font-poppins font-thin text-[14px] text-white">Already have an account? <a href="/" className="pl-1 border-b">Log in</a></h2>
+        <h2 className="flex mx-auto mt-[14px] md:mt-[24px] pb-[20px] md:pb-0 w-[400px] md:w-[550px] font-poppins font-thin text-[12px] text-white md:text-[14px]">Already have an account? <a href="/" className="md:hover:border-slate-50 hover:border-[#D24DF3] pl-1 border-transparent border-b-0 hover:border-b-2 text-[#D24DF3] md:text-white">Log in</a></h2>
     </div>
   )
 }
