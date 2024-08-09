@@ -9,10 +9,6 @@ module.exports = {
   ],
   prefix: "",
   theme: {
-    fontFamily: {
-      inter: ['Inter', 'sans-serif'],
-      poppins: ['Poppins', 'sans-serif'],
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -21,9 +17,6 @@ module.exports = {
       },
     },
     extend: {
-      backgroundImage: {
-        'custom-gradient': 'linear-gradient(90deg, #051960 0%, #591DA9 90%)',
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom"
-import { Button } from "../../components/ui/button"
-import { Checkbox } from "../../components/ui/checkbox"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
-import { useSignUp } from "../../hooks"
-import { useEffect, useState } from "react"
-import { AuthData } from "../../types/type"
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/ui/button";
+import { Checkbox } from "../../components/ui/checkbox";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { useSignUp } from "../../hooks";
+import { useEffect, useState } from "react";
+import { AuthData } from "../../types/type";
 
 interface Errors {
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 const SignupForm = () => {
@@ -60,42 +60,91 @@ const SignupForm = () => {
             console.log(accountData);
         }
     }
+  }, [createAccount.isSuccess]);
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const email = event.target.value;
-        setAccountData((prev) => ({ ...prev, email }));
-        setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
 
-        if (!email) {
-            setErrors((prevErrors) => ({ ...prevErrors, email: "* Email is required !" }));
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid Email !" }));
-        }
-    };
+    const validationErrors: Errors = {};
 
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const password = event.target.value;
-        setAccountData((prev) => ({ ...prev, password }));
-        setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+    if (!accountData.email) {
+      validationErrors.email = "* Email is required !";
+    } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
+      validationErrors.email = "Invalid Email !";
+    }
 
-        if (!password) {
-            setErrors((prevErrors) => ({ ...prevErrors, password: "* Password is required !" }));
-        } else if (password.length < 8) {
-            setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters !" }));
-        }
-    };
+    if (!accountData.password) {
+      validationErrors.password = "* Password is required !";
+    } else if (accountData.password.length < 8) {
+      validationErrors.password = "Password must be at least 8 characters !";
+    }
 
-    const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const confirmPassword = event.target.value;
-        setConfirmPassword(confirmPassword);
-        setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
+    if (!confirmPassword) {
+      validationErrors.confirmPassword = "";
+    } else if (confirmPassword !== accountData.password) {
+      validationErrors.confirmPassword = "Password does not match !";
+    }
 
-        if (!confirmPassword) {
-            setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "* Confirm Password is required !" }));
-        } else if (confirmPassword !== accountData.password) {
-            setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "Password does not match !" }));
-        }
-    };
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      createAccount.mutate(accountData);
+      console.log(accountData);
+    }
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const email = event.target.value;
+    setAccountData((prev) => ({ ...prev, email }));
+    setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+
+    if (!email) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "* Email is required !",
+      }));
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid Email !" }));
+    }
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    setAccountData((prev) => ({ ...prev, password }));
+    setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+
+    if (!password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "* Password is required !",
+      }));
+    } else if (password.length < 8) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must be at least 8 characters !",
+      }));
+    }
+  };
+
+  const handleConfirmPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const confirmPassword = event.target.value;
+    setConfirmPassword(confirmPassword);
+    setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
+
+    if (!confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: "* Confirm Password is required !",
+      }));
+    } else if (confirmPassword !== accountData.password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        confirmPassword: "Password does not match !",
+      }));
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
@@ -177,7 +226,7 @@ const SignupForm = () => {
 
         <h2 className="flex mx-auto mt-[14px] md:mt-[24px] pb-[20px] md:pb-0 w-[400px] md:w-[550px] font-poppins font-thin text-[12px] text-white md:text-[14px]">Already have an account? <a href="/" className="md:hover:border-slate-50 hover:border-[#D24DF3] pl-1 border-transparent border-b-0 hover:border-b-2 text-[#D24DF3] md:text-white">Log in</a></h2>
     </div>
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupForm;
