@@ -2,15 +2,12 @@ import {  LoginDesign, SignupDesign, SignupForm } from "../../pages/AuthPages"
 
 const SignUpLayout = () => {
   return (
-    <div className="md:flex h-full overflow-hidden">
-      <div className="bg-custom-gradient w-full md:w-1/2">
-          <div className="md:hidden">
-            <LoginDesign/>
-          </div>
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-1/2 bg-custom-gradient">
           <SignupForm/>
         </div>
 
-      <div className="md:block hidden md:bg-slate-50 md:w-1/2">
+      <div className="w-1/2 bg-slate-50">
         <SignupDesign/>
       </div>
     </div>

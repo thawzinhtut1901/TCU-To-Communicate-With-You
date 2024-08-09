@@ -3,8 +3,8 @@ import { logoMobile, TCULogCom, textHeader } from "../../assets"
 
 const LoginDesign = () => {
   return (
-    <div>
-      <div className="md:flex md:flex-col md:justify-center md:items-center hidden md:mt-[30px]">
+    <div className="flex flex-col items-center justify-center h-screen">
+
         <h1 className="font-extrabold text-[50px]">Welcome To <span className="text-[#D24DF3]">TCU</span></h1>
         <img src={textHeader} alt="" className="mt-[15px] w-[170px]"/>
         <img src={TCULogCom} alt="" className="w-[550px] h-[550px]"/>
