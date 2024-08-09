@@ -25,7 +25,7 @@ const LogInForm = () => {
 
         <Input className="rounded-[8px]" />
 
-        <div className="md:block hidden">
+        <div className="hidden md:block">
             <div className="flex justify-end mt-[5px]">
                 <h1 className="border-b w-fit text-[12px] cursor-pointer">Forget Password</h1>
             </div>
@@ -41,7 +41,7 @@ const LogInForm = () => {
             </div>
         </div>
         </div>
-      </div>
+     
         <Button className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
             Log In
         </Button>
