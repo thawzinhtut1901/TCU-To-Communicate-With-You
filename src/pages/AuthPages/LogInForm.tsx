@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom"
-import { divider, googleLog } from "../../assets"
-import { Button } from "../../components/ui/button"
-import { Checkbox } from "../../components/ui/checkbox"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
+import { NavLink } from "react-router-dom";
+import { divider, googleLog } from "../../assets";
+import { Button } from "../../components/ui/button";
+import { Checkbox } from "../../components/ui/checkbox";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 
 const LogInForm = () => {
    
@@ -15,16 +15,15 @@ const LogInForm = () => {
         <Label htmlFor="email">
             Email Address or Username
         </Label>
-
-        <Input className="rounded-[8px]"/>
-        </div>
+        <Input className="rounded-[8px]" />
+      </div>
 
         <div className="flex-col mx-auto mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
         <Label htmlFor="password" className="font-poppins font-thin text-[14px]">
             Password
         </Label>
 
-        <Input className="rounded-[8px]"/>
+        <Input className="rounded-[8px]" />
 
         <div className="md:block hidden">
             <div className="flex justify-end mt-[5px]">
@@ -42,7 +41,7 @@ const LogInForm = () => {
             </div>
         </div>
         </div>
-
+      </div>
         <Button className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
             Log In
         </Button>
@@ -82,7 +81,7 @@ const LogInForm = () => {
             </Button>
         </NavLink>
     </div>
-  )
-}
+  );
+};
 
-export default LogInForm
+export default LogInForm;
