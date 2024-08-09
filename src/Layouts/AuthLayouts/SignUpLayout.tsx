@@ -1,4 +1,4 @@
-import {  SignupDesign, SignupForm } from "../../pages/AuthPages"
+import {  LoginDesign, SignupDesign, SignupForm } from "../../pages/AuthPages"
 
 const SignUpLayout = () => {
   return (
