@@ -97,8 +97,8 @@ const SignupForm = () => {
     };
 
   return (
-    <div>
-        <h2 className="flex justify-center mt-[30px] font-medium font-poppins text-2xl text-white">Sign in</h2>
+    <div className="flex flex-col items-center justify-center h-screen ">
+        <h2 className="flex justify-center text-2xl font-medium text-white font-poppins">Sign in</h2>
 
         <div className="flex-col mx-auto mt-[20px] w-[550px] font-poppins font-thin text-[14px] text-white">
             <Label htmlFor="email">
@@ -114,7 +114,7 @@ const SignupForm = () => {
             />
 
             {errors.email && (
-                <span className="my-2 font-bold text-red-500 text-sm">{errors.email}</span>
+                <span className="my-2 text-sm font-bold text-red-500">{errors.email}</span>
             )}
         </div>
 
@@ -131,7 +131,7 @@ const SignupForm = () => {
                 className="rounded-[8px]"
             />
             {errors.password && (
-                <span className="my-2 font-bold text-red-500 text-sm">
+                <span className="my-2 text-sm font-bold text-red-500">
                     {errors.password}
                 </span>
             )}
@@ -150,7 +150,7 @@ const SignupForm = () => {
                 className="rounded-[8px]"/>
 
             {errors.confirmPassword && (
-                <span className="my-2 font-bold text-red-500 text-sm">
+                <span className="my-2 text-sm font-bold text-red-500">
                     {errors.confirmPassword}
                 </span>
             )}

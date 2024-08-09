@@ -2,12 +2,12 @@ import { LoginDesign, LogInForm } from "../../pages/AuthPages"
 
 const LogIn = () => {
   return (
-    <div className="flex h-full">
-      <div className="bg-slate-50 w-1/2">
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-1/2 bg-slate-50">
         <LoginDesign/>
       </div>
 
-        <div className="bg-custom-gradient w-1/2">
+        <div className="w-1/2 bg-custom-gradient">
           <LogInForm/>
         </div>
     </div>
