@@ -7,8 +7,8 @@ import { Label } from "../../components/ui/label"
 
 const LogInForm = () => {
   return (
-    <div>
-        <h2 className="flex justify-center mt-[30px] font-medium font-poppins text-2xl text-white">Log in</h2>
+    <div className="flex flex-col items-center justify-center h-screen">
+        <h2 className="flex justify-center text-2xl font-medium text-white font-poppins">Log in</h2>
 
         <div className="flex-col mx-auto mt-[20px] w-[550px] font-poppins font-thin text-[14px] text-white">
         <Label htmlFor="email">
