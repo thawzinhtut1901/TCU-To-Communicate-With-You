@@ -1,5 +1,4 @@
 import { RouteObject } from "react-router-dom"
-import { LogIn } from "../Layouts/AuthLayouts"
 
 
 const AuthRouter: RouteObject[] = [
