@@ -1,13 +1,13 @@
-import {  SignupDesign, SignupForm } from "../../pages/AuthPages"
+import {  LoginDesign, SignupDesign, SignupForm } from "../../pages/AuthPages"
 
 const SignUpLayout = () => {
   return (
-    <div className="flex h-full">
-      <div className="bg-custom-gradient w-1/2">
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-1/2 bg-custom-gradient">
           <SignupForm/>
         </div>
 
-      <div className="bg-slate-50 w-1/2">
+      <div className="w-1/2 bg-slate-50">
         <SignupDesign/>
       </div>
     </div>
