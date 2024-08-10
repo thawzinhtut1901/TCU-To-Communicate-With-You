@@ -1,20 +1,21 @@
-import {  LoginDesign, SignupDesign, SignupForm } from "../../pages/AuthPages"
+import { useAuthContext } from "@/context/authContext";
+import { SignupDesign, SignupForm } from "../../pages/AuthPages";
+import InputOTPBox from "@/components/authComponents/InputOTPBox";
 
 const SignUpLayout = () => {
+  const { openOTPBox } = useAuthContext();
   return (
-    <div className="md:flex h-full overflow-hidden">
-      <div className="bg-custom-gradient w-full md:w-1/2">
-          <div className="md:hidden">
-            <LoginDesign/>
-          </div>
-          <SignupForm/>
-        </div>
-
-      <div className="md:block hidden md:bg-slate-50 md:w-1/2">
-        <SignupDesign/>
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-1/2 bg-custom-gradient">
+        <SignupForm />
       </div>
-    </div>
-  )
-}
 
-export default SignUpLayout
+      <div className="w-1/2 bg-slate-50">
+        <SignupDesign />
+      </div>
+      {openOTPBox && <InputOTPBox />}
+    </div>
+  );
+};
+
+export default SignUpLayout;
