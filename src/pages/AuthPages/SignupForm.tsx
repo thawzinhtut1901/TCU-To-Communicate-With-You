@@ -5,7 +5,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useSignUp } from "../../hooks";
 import { useEffect, useState } from "react";
-import { AuthData } from "../../types/type";
+import { useAuthContext } from "@/context/authContext";
 
 interface Errors {
   email?: string;
@@ -15,13 +15,10 @@ interface Errors {
 
 const SignupForm = () => {
     const navigate = useNavigate();
-    const [accountData, setAccountData] = useState<AuthData>({
-        email: "",
-        password: ""
-    });
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [errors, setErrors] = useState<Errors>({});
     const createAccount = useSignUp();
+    const {OTPBoxHandler, accountData, setAccountData} = useAuthContext();
 
     useEffect(() => {
         if(createAccount.isSuccess) {
@@ -58,6 +55,7 @@ const SignupForm = () => {
             createAccount.mutate(accountData);
             console.log(accountData);
         }
+        OTPBoxHandler();
     }
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
