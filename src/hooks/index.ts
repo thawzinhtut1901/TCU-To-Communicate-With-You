@@ -1,5 +1,4 @@
 import { useSignUp } from "./useAuth";
+import { useSignIn } from "./useAuth";
 
-export {
-    useSignUp,
-}
+export { useSignUp, useSignIn };
