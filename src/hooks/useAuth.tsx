@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AuthData, VerifyData } from "../types/type";
 import { SignUpAPI } from "../API";
-import { ResendOtpAPI, VerifyEmailAPI } from "@/API/AuthAPI";
+import { ResendOtpAPI, SignInAPI, VerifyEmailAPI } from "@/API/AuthAPI";
 
 export const useSignUp = () =>
   useMutation({
