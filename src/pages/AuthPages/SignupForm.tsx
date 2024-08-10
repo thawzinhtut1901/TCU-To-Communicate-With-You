@@ -5,7 +5,6 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useSignUp } from "../../hooks";
 import { useEffect, useState } from "react";
-import { AuthData } from "../../types/type";
 import { useAuthContext } from "@/context/authContext";
 
 interface Errors {
@@ -16,14 +15,10 @@ interface Errors {
 
 const SignupForm = () => {
     const navigate = useNavigate();
-    const [accountData, setAccountData] = useState<AuthData>({
-        email: "",
-        password: ""
-    });
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [errors, setErrors] = useState<Errors>({});
     const createAccount = useSignUp();
-    const {OTPBoxHandler} = useAuthContext();
+    const {OTPBoxHandler, accountData, setAccountData} = useAuthContext();
 
     useEffect(() => {
         if(createAccount.isSuccess) {
@@ -31,38 +26,35 @@ const SignupForm = () => {
         }
     }, [createAccount.isSuccess, navigate]);
 
-    // const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    //     e.preventDefault();
+    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
 
-    //     const validationErrors: Errors = {};     
+        const validationErrors: Errors = {};     
           
-    //     if (!accountData.email) {
-    //         validationErrors.email = "* Email is required !";
-    //     } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
-    //         validationErrors.email = "Invalid Email !";
-    //     }
+        if (!accountData.email) {
+            validationErrors.email = "* Email is required !";
+        } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
+            validationErrors.email = "Invalid Email !";
+        }
 
-    //     if (!accountData.password) {
-    //         validationErrors.password = "* Password is required !";
-    //     } else if (accountData.password.length < 8) {
-    //         validationErrors.password = "Password must be at least 8 characters !";
-    //     }
+        if (!accountData.password) {
+            validationErrors.password = "* Password is required !";
+        } else if (accountData.password.length < 8) {
+            validationErrors.password = "Password must be at least 8 characters !";
+        }
         
-    //     if (!confirmPassword) {
-    //         validationErrors.confirmPassword = "* Confirm Password is required !";
-    //     } else if (confirmPassword !== accountData.password) {
-    //         validationErrors.confirmPassword = "Password does not match !";
-    //     }
+        if (!confirmPassword) {
+            validationErrors.confirmPassword = "* Confirm Password is required !";
+        } else if (confirmPassword !== accountData.password) {
+            validationErrors.confirmPassword = "Password does not match !";
+        }
 
-    //     setErrors(validationErrors);
+        setErrors(validationErrors);
 
-    //     if(Object.keys(validationErrors).length === 0) {
-    //         createAccount.mutate(accountData);
-    //         console.log(accountData);
-    //     }
-    // }
-
-    const handleOTPBox = () => {
+        if(Object.keys(validationErrors).length === 0) {
+            createAccount.mutate(accountData);
+            console.log(accountData);
+        }
         OTPBoxHandler();
     }
 
@@ -192,7 +184,7 @@ const SignupForm = () => {
 
             <h2 className="md:flex mx-auto mt-[24px] w-[350px] md:w-[550px] font-poppins font-thin text-[12px] text-white md:text-[14px]">By creating an account, you agree to the <a href="#" className="pl-[2px] md:pl-1 border-b"> Term of use and Privacy Policy.</a></h2>
 
-            <Button onClick={handleOTPBox} type="button" className="flex bg-slate-50 hover:bg-slate-300 mt-[24px] ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
+            <Button onClick={handleSubmit} type="button" className="flex bg-slate-50 hover:bg-slate-300 mt-[24px] ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
                 Create An Account
             </Button>
 
