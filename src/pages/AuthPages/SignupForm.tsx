@@ -23,7 +23,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (createAccount.isSuccess) {
-      navigate("");
+      navigate("/profile-setup");
     }
   }, [createAccount.isSuccess, navigate]);
 
@@ -44,10 +44,11 @@ const SignupForm = () => {
       validationErrors.password = "Password must be at least 8 characters !";
     }
 
-    if (!confirmPassword) {
-      validationErrors.confirmPassword = "* Confirm Password is required !";
-    } else if (confirmPassword !== accountData.password) {
+    if (confirmPassword !== accountData.password) {
       validationErrors.confirmPassword = "Password does not match !";
+      
+    } else if (!confirmPassword) {
+      validationErrors.confirmPassword = " ";
     }
 
     setErrors(validationErrors);
@@ -63,33 +64,12 @@ const SignupForm = () => {
     const email = event.target.value;
     setAccountData((prev) => ({ ...prev, email }));
     setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
-
-    if (!email) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: "* Email is required !",
-      }));
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid Email !" }));
-    }
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const password = event.target.value;
     setAccountData((prev) => ({ ...prev, password }));
     setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
-
-    if (!password) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "* Password is required !",
-      }));
-    } else if (password.length < 8) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "Password must be at least 8 characters !",
-      }));
-    }
   };
 
   const handleConfirmPasswordChange = (
@@ -98,18 +78,6 @@ const SignupForm = () => {
     const confirmPassword = event.target.value;
     setConfirmPassword(confirmPassword);
     setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
-
-    if (!confirmPassword) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        confirmPassword: "* Confirm Password is required !",
-      }));
-    } else if (confirmPassword !== accountData.password) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        confirmPassword: "Password does not match !",
-      }));
-    }
   };
 
   return (

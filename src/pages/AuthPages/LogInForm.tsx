@@ -1,13 +1,75 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { divider, googleLog } from "../../assets";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import logoMobile from "../../assets/LogoMobile.png";
+import { useEffect, useState } from "react";
+import { useSignIn } from "@/hooks";
+import { AuthData } from "@/types/type";
+import { login } from "@/services/authService";
+
+interface Errors {
+  email?: string;
+  password?: string;
+}
 
 const LogInForm = () => {
-   
+  const navigate = useNavigate();
+  const LoginAccount = useSignIn();
+  const [errors, setErrors] = useState<Errors>({});
+  const [loginData, setLoginData] = useState<AuthData>({
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if(LoginAccount.isSuccess){
+      const authToken =LoginAccount.data.accessToken;
+      delete LoginAccount.data.accessToken;
+      login(authToken);
+      navigate("")
+    };
+  }, [LoginAccount.isSuccess]);
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+
+    const validationErrors: Errors = {};
+
+    if (!loginData.email) {
+      validationErrors.email = "* Email is required !";
+    } else if (!/\S+@\S+\.\S+/.test(loginData.email)) {
+      validationErrors.email = "Invalid Email !";
+    }
+
+    if (!loginData.password) {
+      validationErrors.password = "* Password is required !";
+    } else if (loginData.password.length < 8) {
+      validationErrors.password = "Password must be at least 8 characters !";
+    }
+    
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      LoginAccount.mutate(loginData);
+      console.log(LoginAccount);
+    }
+  };
+
+  const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const email = event.target.value;
+    setLoginData((prev) => ({ ...prev, email }));
+    setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+  };
+
+  const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const password = event.target.value;
+    setLoginData((prev) => ({...prev, password}));
+    setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+  };
+
   return (
     <div className="flex flex-col items-center py-5 md:py-16 h-screen">
             <div className="flex flex-col justify-center gap-2 md:hidden md:py-0 text-center">
@@ -23,9 +85,17 @@ const LogInForm = () => {
       <div className="flex-col mx-auto mt-[30px] md:mt-[20px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
         <Label htmlFor="email">Email Address or Username</Label>
         <Input
+          type="email"
           id="email"
+          value={loginData.email}
+          onChange={emailHandler}
           className="rounded-[8px]"
         />
+        {
+          errors.email && (
+            <span className="my-2 font-bold text-red-500 text-xs">{errors.email}</span>
+          )
+        }
       </div>
 
       <div className="flex-col mx-auto mt-[20px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
@@ -36,10 +106,17 @@ const LogInForm = () => {
           Password
         </Label>
         <Input
+          type = "password"
           id="password"
+          value={loginData.password}
+          onChange={passwordHandler}
           className="rounded-[8px]"
-          type="password"
         />
+        {
+          errors.password && (
+            <span className="my-2 font-bold text-red-500 text-xs">{errors.password}</span>
+          )
+        }
 
         <div className="md:block hidden">
             <NavLink to="/forget-password">
@@ -60,7 +137,7 @@ const LogInForm = () => {
         </div>
         </div>
 
-        <Button className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
+        <Button type="button" onClick={handleSubmit} className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
             Log In
         </Button>
 
