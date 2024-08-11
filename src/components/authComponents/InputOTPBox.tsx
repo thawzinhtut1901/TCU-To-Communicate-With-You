@@ -9,6 +9,7 @@ import gmailLogo from "../../assets/gmail-logo.png";
 import { useState } from "react";
 import { VerifyData } from "@/types/type";
 import { useResendOtp, useVerifyEmail } from "@/hooks/useAuth";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const InputOTPBox = () => {
   const { OTPBoxHandler, accountData } = useAuthContext();
@@ -18,7 +19,7 @@ const InputOTPBox = () => {
 
   const handleSubmit = () => {
     const verifyData: VerifyData = {
-      email: accountData?.email || '',
+      email: accountData?.email || "",
       otp: otpCode,
     };
     console.log("Verify Data:", verifyData);
@@ -30,33 +31,53 @@ const InputOTPBox = () => {
     const resendEmail = accountData?.email;
     console.log("Resend email:", resendEmail);
     resendOtp.mutate(resendEmail);
-  }
+  };
 
   return (
     <>
-      <div className="absolute top-0 left-0 flex items-center justify-center w-screen h-screen bg-black opacity-50"></div>
-      <div className="absolute rounded w-[400px] p-4 h-auto z-10 bg-white opacity-100 flex flex-col justify-center items-center gap-4">
-        <img src={gmailLogo} className="w-[100px] py-2" alt="" />
-        <h3 className="text-xl font-bold">Verify your email address</h3>
+      <div className="top-0 left-0 items-center justify-center hidden w-screen h-screen bg-black opacity-50 md:absolute md:flex"></div>
+      <div className="absolute top-[100px] left-[50px] md:left-[500px] rounded w-[300px] md:w-[400px] p-2 md:p-4 h-auto z-10 bg-white opacity-100 flex flex-col justify-center items-center gap-4">
+        <div
+          onClick={() => OTPBoxHandler()}
+          className="flex justify-end w-full "
+        >
+          <IoMdCloseCircleOutline color="#8566FF" />
+        </div>
+        <img src={gmailLogo} className=" w-[50px] md:w-[100px] py-2" alt="" />
+        <h3 className="text-lg font-bold md:text-xl">Verify your email address</h3>
         <p className="pb-2 text-xs font-semibold">
           Please enter the 6 digit code sent to your{" "}
           <span className="text-main">email example.com</span>{" "}
         </p>
-        <InputOTP
-          maxLength={6}
-          value={otpCode}
-          onChange={setOtpCode}
-        >
+        <InputOTP maxLength={6} value={otpCode} onChange={setOtpCode}>
           <InputOTPGroup className="flex gap-2">
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={0} />
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={1} />
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={2} />
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={3} />
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={4} />
-            <InputOTPSlot className="text-white border-none rounded bg-main2" index={5} />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={0}
+            />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={1}
+            />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={2}
+            />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={3}
+            />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={4}
+            />
+            <InputOTPSlot
+              className="text-white border-none rounded bg-main2"
+              index={5}
+            />
           </InputOTPGroup>
         </InputOTP>
-        <p className="font-extralight">
+        <p className="text-sm font-extralight md:text-base">
           OTP code will expire within{" "}
           <span className="underline text-main">05:00</span>
         </p>
@@ -64,11 +85,14 @@ const InputOTPBox = () => {
           <Button onClick={handleSubmit} variant="otp">
             Confirm
           </Button>
-          <button onClick={handleResentOtp} className="font-semibold underline cursor-pointer text-main">
+          <button
+            onClick={handleResentOtp}
+            className="text-xs font-semibold underline cursor-pointer md:text-base text-main"
+          >
             Resend Code Again
           </button>
         </div>
-        <p className="font-semibold">
+        <p className="py-2 text-xs font-semibold md:py-0 md:text-base">
           Have question?{" "}
           <span className="cursor-pointer text-main"> Email us</span>
         </p>
