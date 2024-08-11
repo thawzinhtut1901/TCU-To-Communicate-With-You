@@ -89,14 +89,8 @@ const SignupForm = () => {
         const confirmPassword = event.target.value;
         setConfirmPassword(confirmPassword);
         setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
-
-        if (!confirmPassword) {
-            setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "* Confirm Password is required !" }));
-        } else if (confirmPassword !== accountData.password) {
-            setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "Password does not match !" }));
-        }
     };
-
+    
   return (
     <div>
         <h2 className="md:flex md:justify-center hidden md:mt-[30px] md:font-medium md:font-poppins md:text-2xl md:text-white">Sign in</h2>

@@ -22,3 +22,19 @@ export const SignUpAPI = async({
             }
             return result;
 };
+
+export const forgetPasswordAPI = async(email: string) => {
+    const response: Response = await fetch(`${BaseURL}/auth/forget-password/${email}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        mode: "cors",
+        method: "PATCH",
+    });
+    const result = await response.json();
+    if(!response.ok) {
+        throw new Error(result.message);
+    };
+    return result;
+};

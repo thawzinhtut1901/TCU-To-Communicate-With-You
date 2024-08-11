@@ -12,11 +12,11 @@ const LogInForm = () => {
         <h2 className="md:flex md:justify-center hidden md:mt-[30px] md:font-medium md:font-poppins md:text-2xl md:text-white">Log in</h2>
 
         <div className="flex-col mx-auto mt-[30px] md:mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
-        <Label htmlFor="email">
-            Email Address or Username
-        </Label>
+            <Label htmlFor="email">
+                Email Address or Username
+            </Label>
 
-        <Input className="rounded-[8px]"/>
+            <Input className="rounded-[8px]"/>
         </div>
 
         <div className="flex-col mx-auto mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
@@ -27,9 +27,11 @@ const LogInForm = () => {
         <Input className="rounded-[8px]"/>
 
         <div className="md:block hidden">
-            <div className="flex justify-end mt-[5px]">
-                <h1 className="border-b w-fit text-[12px] cursor-pointer">Forget Password</h1>
-            </div>
+            <NavLink to="/forget-password">
+                <div className="flex justify-end mt-[5px]">
+                    <h1 className="border-b w-fit text-[12px] cursor-pointer">Forget Password</h1>
+                </div>
+            </NavLink>
 
             <div className="flex space-x-1 md:space-x-2 md:text-[12px]">
                 <Checkbox id="remember" className="rounded-[5px]"/>
@@ -58,7 +60,9 @@ const LogInForm = () => {
                 </Label>
             </div>
 
-            <h1 className="border-b w-fit text-[14px] cursor-pointer">Forget Password</h1>
+            <NavLink to="/forget-password">
+                <h1 className="border-b w-fit text-[14px] cursor-pointer">Forget Password</h1>
+            </NavLink>
         </div>
 
         <div className="flex mx-auto mt-[12px] md:mt-[50px] w-[450px] md:w-[550px]">
@@ -74,7 +78,7 @@ const LogInForm = () => {
             <hr className="flex-grow border-t-2" />
         </div>
 
-        <h2 className="flex justify-center mt-[10px] md:mt-[20px] pb-[10px] md:pb-0 font-poppins font-thin text-[14px] text-white md:text-[18px]">Don't have an account? <span className="flex hover:border-[#D24DF3] md:hidden ml-1 border-transparent border-b-0 hover:border-b-2 w-fit text-[#D24DF3]">Sign In </span></h2>
+        <h2 className="flex justify-center mt-[10px] md:mt-[20px] pb-[10px] md:pb-0 font-poppins font-thin text-[14px] text-white md:text-[18px] cursor-default">Don't have an account? <span className="flex hover:border-[#D24DF3] md:hidden ml-1 border-transparent border-b-0 hover:border-b-2 w-fit text-[#D24DF3] cursor-pointer">Sign In </span></h2>
 
         <NavLink to="/sign-up">
             <Button className="md:flex justify-center hidden hover:bg-slate-100 mx-auto mt-[20px] border rounded-full w-[550px] font-poppins font-thin text-[14px] text-slate-50 hover:text-black">

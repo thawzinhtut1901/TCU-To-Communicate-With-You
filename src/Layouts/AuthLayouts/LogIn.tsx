@@ -2,7 +2,7 @@ import { LoginDesign, LogInForm } from "../../pages/AuthPages"
 
 const LogIn = () => {
   return (
-    <div className="md:flex h-full overflow-hidden">
+    <div className="md:flex h-screen cursor-default overflow-x-hidden">
       <div className="md:block hidden md:bg-slate-50 md:w-1/2">
         <LoginDesign/>
       </div>
