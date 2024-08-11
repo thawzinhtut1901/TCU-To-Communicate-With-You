@@ -6,4 +6,9 @@ export type AuthData = {
 export type VerifyData = {
   email: string;
   otp: string;
-}  
+};
+
+export type NewPswData = {
+  password: string;
+  key: string;
+}

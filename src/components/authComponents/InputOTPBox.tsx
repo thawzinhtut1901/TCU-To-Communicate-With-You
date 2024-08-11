@@ -35,66 +35,66 @@ const InputOTPBox = () => {
 
   return (
     <>
-      <div className="top-0 left-0 items-center justify-center hidden w-screen h-screen bg-black opacity-50 md:absolute md:flex"></div>
-      <div className="absolute top-[100px] left-[50px] md:left-[500px] rounded w-[300px] md:w-[400px] p-2 md:p-4 h-auto z-10 bg-white opacity-100 flex flex-col justify-center items-center gap-4">
+      <div className="top-0 left-0 md:absolute md:flex justify-center items-center hidden bg-black opacity-50 w-screen h-screen"></div>
+      <div className="top-[100px] left-[50px] md:left-[500px] z-10 absolute flex flex-col justify-center items-center gap-4 bg-white opacity-100 p-2 md:p-4 rounded w-[300px] md:w-[400px] h-auto">
         <div
           onClick={() => OTPBoxHandler()}
-          className="flex justify-end w-full "
+          className="flex justify-end w-full"
         >
           <IoMdCloseCircleOutline color="#8566FF" />
         </div>
-        <img src={gmailLogo} className=" w-[50px] md:w-[100px] py-2" alt="" />
-        <h3 className="text-lg font-bold md:text-xl">Verify your email address</h3>
-        <p className="pb-2 text-xs font-semibold">
+        <img src={gmailLogo} className="py-2 w-[50px] md:w-[100px]" alt="" />
+        <h3 className="font-bold text-lg md:text-xl">Verify your email address</h3>
+        <p className="pb-2 font-semibold text-xs">
           Please enter the 6 digit code sent to your{" "}
           <span className="text-main">email example.com</span>{" "}
         </p>
         <InputOTP maxLength={6} value={otpCode} onChange={setOtpCode}>
           <InputOTPGroup className="flex gap-2">
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={0}
             />
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={1}
             />
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={2}
             />
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={3}
             />
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={4}
             />
             <InputOTPSlot
-              className="text-white border-none rounded bg-main2"
+              className="bg-main2 border-none rounded text-white"
               index={5}
             />
           </InputOTPGroup>
         </InputOTP>
-        <p className="text-sm font-extralight md:text-base">
+        <p className="font-extralight text-sm md:text-base">
           OTP code will expire within{" "}
-          <span className="underline text-main">05:00</span>
+          <span className="text-main underline">05:00</span>
         </p>
-        <div className="flex flex-col items-center justify-center gap-2">
+        <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={handleSubmit} variant="otp">
             Confirm
           </Button>
           <button
             onClick={handleResentOtp}
-            className="text-xs font-semibold underline cursor-pointer md:text-base text-main"
+            className="font-semibold text-main text-xs md:text-base underline cursor-pointer"
           >
             Resend Code Again
           </button>
         </div>
-        <p className="py-2 text-xs font-semibold md:py-0 md:text-base">
+        <p className="py-2 md:py-0 font-semibold text-xs md:text-base">
           Have question?{" "}
-          <span className="cursor-pointer text-main"> Email us</span>
+          <span className="text-main cursor-pointer"> Email us</span>
         </p>
       </div>
     </>

@@ -2,8 +2,8 @@ import { TCULogCom, textHeader } from "../../assets";
 
 const LoginDesign = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="hidden text-center md:block">
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="md:block hidden text-center">
         <h1 className="font-extrabold text-[50px]">
           Welcome To <span className="text-[#D24DF3]">TCU</span>
         </h1>

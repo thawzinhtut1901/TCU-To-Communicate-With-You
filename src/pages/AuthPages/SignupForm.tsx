@@ -113,9 +113,9 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen ">
-      <div className="flex flex-col justify-center gap-2 text-center md:py-0 md:hidden">
-        <h1 className=" font-extrabold text-start px-10 font-poppins text-[24px] text-white">
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center gap-2 md:hidden md:py-0 text-center">
+        <h1 className="px-10 font-extrabold font-poppins text-[24px] text-start text-white">
           TCU
         </h1>
         <img
@@ -124,7 +124,7 @@ const SignupForm = () => {
           className="w-[300px] h-fit ms-20"
         />
       </div>
-      <h2 className="flex justify-center pt-3 text-lg font-medium text-white md:pt-0 md:text-2xl font-poppins">
+      <h2 className="flex justify-center pt-3 md:pt-0 font-medium font-poppins text-lg text-white md:text-2xl">
         Sign up
       </h2>
       <div className="flex-col mx-auto mt-[20px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
@@ -137,7 +137,7 @@ const SignupForm = () => {
           className="rounded-[8px]"
         />
         {errors.email && (
-          <span className="my-2 text-xs font-bold text-red-500">
+          <span className="my-2 font-bold text-red-500 text-xs">
             {errors.email}
           </span>
         )}
@@ -159,7 +159,7 @@ const SignupForm = () => {
           className="rounded-[8px]"
         />
         {errors.password && (
-          <span className="my-2 text-xs font-bold text-red-500">
+          <span className="my-2 font-bold text-red-500 text-xs">
             {errors.password}
           </span>
         )}
@@ -177,7 +177,7 @@ const SignupForm = () => {
         />
 
         {errors.confirmPassword && (
-          <span className="my-2 text-xs font-bold text-red-500">
+          <span className="my-2 font-bold text-red-500 text-xs">
             {errors.confirmPassword}
           </span>
         )}
