@@ -7,7 +7,7 @@ import { Label } from "../../components/ui/label";
 import { useSignIn } from "../../hooks";
 import { useEffect, useState } from "react";
 import { AuthData } from "../../types/type";
-
+import logoMobile from "../../assets/LogoMobile.png";
 interface Errors {
   email?: string;
   password?: string;
@@ -87,24 +87,35 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h2 className="flex justify-center text-2xl font-medium text-white font-poppins">Log in</h2>
+    <div className="flex flex-col items-center h-screen py-5 md:py-16">
+            <div className="flex flex-col justify-center gap-2 text-center md:py-0 md:hidden">
+        <h1 className=" font-extrabold text-start px-10 font-poppins text-[24px] text-white">
+          TCU
+        </h1>
+          <img src={logoMobile} alt="Mobile Logo" className="w-[300px] h-fit ms-20"/>
+      </div>
+      <h2 className="flex justify-center text-lg font-medium text-white md:text-2xl font-poppins">
+        Log in
+      </h2>
 
-      <div className="flex-col mx-auto mt-[30px] md:mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
-        <Label htmlFor="email">
-          Email Address or Username
-        </Label>
+      <div className="flex-col mx-auto mt-[30px] md:mt-[20px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
+        <Label htmlFor="email">Email Address or Username</Label>
         <Input
           id="email"
           className="rounded-[8px]"
           value={accountData.email}
           onChange={handleEmailChange}
         />
-        {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+        {errors.email && (
+          <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+        )}
       </div>
 
-      <div className="flex-col mx-auto mt-[20px] w-[350px] lg:w-[550px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
-        <Label htmlFor="password" className="font-poppins font-thin text-[14px]">
+      <div className="flex-col mx-auto mt-[20px] font-poppins md:font-thin text-[10px] text-white md:text-[14px]">
+        <Label
+          htmlFor="password"
+          className="font-poppins font-thin text-[14px]"
+        >
           Password
         </Label>
         <Input
@@ -114,19 +125,20 @@ const LogInForm = () => {
           value={accountData.password}
           onChange={handlePasswordChange}
         />
-        {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
+        {errors.password && (
+          <p className="mt-1 text-xs text-red-500">{errors.password}</p>
+        )}
 
         <div className="hidden md:block">
           <div className="flex justify-end mt-[5px]">
-            <h1 className="border-b w-fit text-[12px] cursor-pointer">Forget Password</h1>
+            <h1 className="border-b w-fit text-[12px] cursor-pointer">
+              Forget Password
+            </h1>
           </div>
 
           <div className="flex space-x-1 md:space-x-2 md:text-[12px]">
             <Checkbox id="remember" className="rounded-[5px]" />
-            <Label
-              htmlFor="remember"
-              className="cursor-pointer"
-            >
+            <Label htmlFor="remember" className="cursor-pointer">
               Remember Me
             </Label>
           </div>
@@ -140,25 +152,22 @@ const LogInForm = () => {
         Log In
       </Button>
 
-      <div className="flex justify-between md:hidden mx-auto mt-[30px] w-[350px] font-poppins text-white">
+      <div className="flex justify-between items-center md:hidden mx-auto mt-[30px] w-[350px] font-poppins text-white">
         <div className="flex space-x-1 text-[12px]">
           <Checkbox id="remember" className="rounded-[5px]" />
-          <Label
-            htmlFor="remember"
-            className="cursor-pointer"
-          >
+          <Label htmlFor="remember" className="cursor-pointer">
             Remember Me
           </Label>
         </div>
 
-        <h1 className="border-b w-fit text-[14px] cursor-pointer">Forget Password</h1>
+        <h1 className="w-fit text-[14px] cursor-pointer">
+          Forget Password
+        </h1>
       </div>
 
-      <h1 className="border-b w-fit text-[14px] cursor-pointer">
-        Forget Password
-      </h1>
+  
 
-      <div className="flex mx-auto mt-[12px] md:mt-[50px] w-[450px] md:w-[550px]">
+      <div className="flex mx-auto mt-[12px] md:mt-[50px] w-full md:w-[550px]">
         <img src={divider} alt="" />
       </div>
 
@@ -167,7 +176,7 @@ const LogInForm = () => {
         Continue with Google
       </Button>
 
-      <div className="flex items-center mx-auto mt-[20px] md:mt-[50px] w-[450px] md:w-[550px]">
+      <div className="flex items-center mx-auto mt-[20px] md:mt-[50px] w-full md:w-[550px]">
         <hr className="flex-grow border-t-2" />
       </div>
 
@@ -181,7 +190,7 @@ const LogInForm = () => {
       </h2>
 
       <NavLink to="/sign-up">
-        <Button className="md:flex justify-center hidden hover:bg-slate-100 mx-auto mt-[20px] border rounded-full w-[550px] font-poppins font-thin text-[14px] text-slate-50 hover:text-black">
+        <Button className="md:flex justify-center hidden hover:bg-slate-100 duration-300 mx-auto mt-[20px] border rounded-full w-[550px] font-poppins font-thin text-[14px] text-slate-50 hover:text-black">
           Sign Up
         </Button>
       </NavLink>
