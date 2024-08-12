@@ -5,12 +5,11 @@ import InputOTPBox from "@/components/authComponents/InputOTPBox";
 const SignUpLayout = () => {
   const { openOTPBox } = useAuthContext();
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-custom-gradient w-1/2">
+    <div className="block md:flex justify-center items-center h-screen">
+      <div className="bg-custom-gradient w-screen md:w-1/2">
         <SignupForm />
       </div>
-
-      <div className="bg-slate-50 w-1/2">
+      <div className="md:block hidden bg-slate-50 w-0 md:w-1/2">
         <SignupDesign />
       </div>
       {openOTPBox && <InputOTPBox />}

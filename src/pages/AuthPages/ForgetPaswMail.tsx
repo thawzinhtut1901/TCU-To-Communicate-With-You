@@ -59,7 +59,7 @@ const ForgetPaswMail = () => {
             className="md:bg-slate-200 mt-[5px] md:mt-[10px] rounded-[8px] md:text-black md:text-[16px]"
         />
 
-        <div className="flex justify-center md:justify-start">
+        
           <Button
             type="submit"
             onClick={handleContinue}
@@ -67,7 +67,7 @@ const ForgetPaswMail = () => {
           >
             Continue
           </Button>
-        </div>
+        
         {showOtpBox && <ForgetPswOTP onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode}/>}
     </div>
   )
