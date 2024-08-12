@@ -1,7 +1,11 @@
 import { useSignUp } from "./useAuth";
+import { useSignIn } from "./useAuth";
 import { useForgetPassword } from "./useAuth";
+import { useResetPassword } from "./useAuth";
 
-export {
-    useSignUp,
+export { 
+    useSignUp, 
+    useSignIn,
     useForgetPassword,
-}
+    useResetPassword,
+};

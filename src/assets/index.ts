@@ -4,7 +4,8 @@ import divider from "./Divider.png"
 import googleLog from "./googleLogo.png";
 import reverseLogoCom from "./reverseLogoCom.png";
 import logoMobile from "./LogoMobile.png";
-import forgetPswLogo from "./ForgetPswLogo.png"
+import forgetPswLogo from "./ForgetPswLogo.png";
+import gmailLogo from "./gmail-logo.png";
 
 export {
     TCULogCom,
@@ -14,4 +15,5 @@ export {
     reverseLogoCom,
     logoMobile,
     forgetPswLogo,
+    gmailLogo,
 }

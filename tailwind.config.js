@@ -9,10 +9,6 @@ module.exports = {
   ],
   prefix: "",
   theme: {
-    fontFamily: {
-      inter: ['Inter', 'sans-serif'],
-      poppins: ['Poppins', 'sans-serif'],
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -22,9 +18,11 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(90deg, #051960 0%, #591DA9 90%)',
+        'custom-gradient':'linear-gradient(90deg, #051960 0%, #591DA9 90%)'
       },
       colors: {
+        main: "#8566FF",
+        main2: "#591DA9",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -65,6 +63,10 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -75,6 +77,7 @@ module.exports = {
         },
       },
       animation: {
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
