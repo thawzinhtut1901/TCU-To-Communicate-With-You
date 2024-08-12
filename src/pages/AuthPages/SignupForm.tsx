@@ -23,7 +23,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (createAccount.isSuccess) {
-      navigate("");
+      navigate("/profile-setup");
     }
   }, [createAccount.isSuccess, navigate]);
 

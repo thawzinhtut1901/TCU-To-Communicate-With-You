@@ -5,6 +5,7 @@ import SignupForm from "./SignupForm";
 import ForgetPaswMail from "./ForgetPaswMail";
 import ResetPassword from "./ResetPassword";
 import ForgetPswOTP from "./ForgetPswOTP";
+import ProfileSetup from "./ProfileSetup";
 
 export {
     LoginDesign,
@@ -14,4 +15,5 @@ export {
     ForgetPaswMail,
     ResetPassword,
     ForgetPswOTP,
+    ProfileSetup,
 }

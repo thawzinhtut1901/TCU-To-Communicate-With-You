@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from "react-router-dom"
-import { ForgetPassLayout, LogIn, SignUpLayout } from "../Layouts/AuthLayouts"
+import { ForgetPassLayout, LogIn, ProfileSetupLayout, SignUpLayout } from "../Layouts/AuthLayouts"
 import { ForgetPaswMail, ResetPassword } from "../pages/AuthPages"
 
 const UserRouter: RouteObject[] = [
@@ -10,6 +10,10 @@ const UserRouter: RouteObject[] = [
     {
         path: "/sign-up",
         element: <SignUpLayout/>
+    },
+    {
+        path: "/profile-setup",
+        element: <ProfileSetupLayout/>
     },
     {
         path: "/forget-password",
@@ -30,7 +34,7 @@ const UserRouter: RouteObject[] = [
 
             // mail/:email
         ]
-    }
+    },
     
 ]
 
