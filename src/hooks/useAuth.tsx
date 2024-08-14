@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AuthData, NewPswData, VerifyData } from "../types/type";
+import { AuthData, NewPswData, profileSetupData, VerifyData } from "../types/type";
 import { SignUpAPI } from "../API";
-import { forgetPasswordAPI, newPasswordAPI, ResendOtpAPI, resetPswAPI, SignInAPI, VerifyEmailAPI } from "@/API/AuthAPI";
+import { forgetPasswordAPI, newPasswordAPI, profileSetupAPI, ResendOtpAPI, resetPswAPI, SignInAPI, VerifyEmailAPI } from "@/API/AuthAPI";
 
 export const useSignUp = () =>
   useMutation({
@@ -12,6 +12,7 @@ export const useSignIn = () =>
   useMutation({
     mutationFn: (data: AuthData) => SignInAPI({ data }),
   });
+  
 export const useVerifyEmail = () =>
   useMutation({
     mutationFn: (data: VerifyData) => VerifyEmailAPI({ data }),
@@ -35,4 +36,9 @@ export const useResetPassword = () =>
 export const useNewPassword = () => 
   useMutation({
     mutationFn: (data: NewPswData) => newPasswordAPI({data}),
+  });
+
+export const useProfileSetUp = () => 
+  useMutation({
+    mutationFn: (data: profileSetupData) => profileSetupAPI({data}),
   });

@@ -1,6 +1,6 @@
 import { getToken } from "@/services/authService";
 import BaseURL from "../services/ApiEndPoint";
-import { AuthData, NewPswData, VerifyData } from "../types/type";
+import { AuthData, NewPswData, profileSetupData, VerifyData } from "../types/type";
 
 export const SignUpAPI = async ({ data }: { data: AuthData }) => {
   const response: Response = await fetch(`${BaseURL}/auth/signup`, {
@@ -39,7 +39,7 @@ export const SignInAPI = async ({ data }: { data: AuthData }) => {
 };
 
 export const VerifyEmailAPI = async ({ data }: { data: VerifyData }) => {
-  const response: Response = await fetch(`${BaseURL}/auth/verify-email`, {
+  const response: Response = await fetch(`${BaseURL}/auth/signup/email-verify`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const VerifyEmailAPI = async ({ data }: { data: VerifyData }) => {
 };
 
 export const ResendOtpAPI = async ({email} : {email : string}) => {
-    const response : Response = await fetch(`${BaseURL}/auth/resend-email-otp/${email}`,{
+    const response : Response = await fetch(`${BaseURL}/auth/signup/otp-resend/${email}`,{
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const ResendOtpAPI = async ({email} : {email : string}) => {
 }
 
 export const forgetPasswordAPI = async(email: string) => {
-  const response: Response = await fetch(`${BaseURL}/auth/forget-password/${email}`, {
+  const response: Response = await fetch(`${BaseURL}/auth/password/forget/${email}`, {
       headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export const resetPswAPI = async({
 } : {
   data: VerifyData
 }) => {
-  const response: Response = await fetch(`${BaseURL}/auth/reset-password`, {
+  const response: Response = await fetch(`${BaseURL}/auth/password/reset`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export const newPasswordAPI = async({
   data : NewPswData
 }) => {
   const token = getToken();
-  const response: Response = await fetch(`${BaseURL}/auth/change-password`, {
+  const response: Response = await fetch(`${BaseURL}/auth/password/change`, {
     headers:{
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -134,3 +134,48 @@ export const newPasswordAPI = async({
   }
   return result;
 };
+
+export const profileSetupAPI = async({
+  data
+} : {
+  data : profileSetupData
+}) => {
+  const token = getToken();
+  const formData = new FormData();
+  formData.append("userName", data.userName);
+  formData.append("dispalyName", data.dispalyName);
+
+  if(data.profilePicture) {
+    formData.append("profilePicture", data.profilePicture);
+  };
+
+  if(data.bio){
+    formData.append("bio", data.bio)
+  };
+
+  if(data.dateOfBirth) {
+    formData.append("dateOfBirth", data.dateOfBirth);
+  };
+  
+  if(data.gender) {
+    formData.append("gender", data.gender)
+  };
+
+
+  const response: Response = await fetch(`${BaseURL}/users/profile-setup`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    redirect: "follow",
+    body: formData,
+  });
+
+  const result = await response.json();
+  if(!response.json) {
+    throw new Error(result.message);
+  }
+  return result;
+}

@@ -6,6 +6,7 @@ import reverseLogoCom from "./reverseLogoCom.png";
 import logoMobile from "./LogoMobile.png";
 import forgetPswLogo from "./ForgetPswLogo.png";
 import gmailLogo from "./gmail-logo.png";
+import Avatar from "./avatar.jpg";
 
 export {
     TCULogCom,
@@ -16,4 +17,5 @@ export {
     logoMobile,
     forgetPswLogo,
     gmailLogo,
+    Avatar,
 }

@@ -12,3 +12,12 @@ export type NewPswData = {
   password: string;
   key: string;
 }
+
+export type profileSetupData = {
+  userName: string;
+  dispalyName: string;
+  profilePicture?: File | string;
+  bio?: string;
+  dateOfBirth?: string;
+  gender: string;
+}
