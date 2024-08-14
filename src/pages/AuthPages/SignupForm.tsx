@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useSignUp } from "../../hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import logoMobile from "../../assets/LogoMobile.png";
 
@@ -15,17 +14,10 @@ interface Errors {
 }
 
 const SignupForm = () => {
-  const navigate = useNavigate();
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [errors, setErrors] = useState<Errors>({});
   const createAccount = useSignUp();
   const { OTPBoxHandler, accountData, setAccountData } = useAuthContext();
-
-  useEffect(() => {
-    if (createAccount.isSuccess) {
-      navigate("/profile-setup");
-    }
-  }, [createAccount.isSuccess, navigate]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
