@@ -166,14 +166,11 @@ const ProfileSetup = () => {
                   <option value="" disabled className="bg-white m-1 p-1 text-black">
                     Select an option
                   </option>
-                  <option value="male" className="m-1 p-1 text-black">
+                  <option value="Male" className="m-1 p-1 text-black">
                     Male
                   </option>
-                  <option value="female" className="m-1 p-1 text-black">
+                  <option value="Female" className="m-1 p-1 text-black">
                     Female
-                  </option>
-                  <option value="Rather not say" className="m-1 p-1 text-black">
-                    Rather not to say
                   </option>
                 </select>
               </div>

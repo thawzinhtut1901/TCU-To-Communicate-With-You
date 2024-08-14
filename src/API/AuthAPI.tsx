@@ -140,6 +140,7 @@ export const profileSetupAPI = async({
 } : {
   data : profileSetupData
 }) => {
+  const token = getToken();
   const formData = new FormData();
   formData.append("userName", data.userName);
   formData.append("dispalyName", data.dispalyName);
@@ -164,6 +165,7 @@ export const profileSetupAPI = async({
   const response: Response = await fetch(`${BaseURL}/users/profile-setup`, {
     headers: {
       Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     },
     mode: "cors",
     method: "PATCH",
