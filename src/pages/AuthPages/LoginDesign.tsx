@@ -2,13 +2,13 @@ import { TCULogCom, textHeader } from "../../assets";
 
 const LoginDesign = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div className="md:block hidden text-center">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <div className="hidden text-center md:block">
         <h1 className="font-extrabold text-[50px]">
           Welcome To <span className="text-[#D24DF3]">TCU</span>
         </h1>
         <img src={textHeader} alt="Text Header" className="mt-[15px] w-[170px]" />
-        <img src={TCULogCom} alt="TCU Logo Composition" className="w-[550px] h-[550px]" />
+        <img src={TCULogCom} alt="TCU Logo Composition" className="w-[450px] h-[450px]" />
       </div>
     </div>
   );
