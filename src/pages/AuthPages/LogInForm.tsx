@@ -164,9 +164,9 @@ const LogInForm = () => {
         <h2 className="flex justify-center mt-[10px] md:mt-[20px] pb-[10px] md:pb-0 font-poppins font-thin text-[14px] text-white md:text-[18px] cursor-default">
           Don't have an account?{" "}
           <NavLink to="/sign-up">
-          <span className="flex hover:border-[#D24DF3] md:hidden ml-1 border-transparent border-b-0 hover:border-b-2 w-fit text-[#D24DF3] cursor-pointer">
-            Sign Up{" "}
-          </span>
+            <span className="flex hover:border-[#D24DF3] md:hidden ml-1 border-transparent border-b-0 hover:border-b-2 w-fit text-[#D24DF3] cursor-pointer">
+              Sign Up{" "}
+            </span>
           </NavLink>
         </h2>
         <NavLink to="/sign-up">
