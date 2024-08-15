@@ -3,7 +3,7 @@ import { Checkbox } from "../../components/ui/checkbox";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useSignUp } from "../../hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import MobileImage from "@/components/authComponents/MobileImage";
 import { ButtonLoading } from "@/components/ui/buttonLoading";
@@ -22,7 +22,26 @@ const SignupForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const createAccount = useSignUp();
+  console.log(createAccount)
   const { OTPBoxHandler, accountData, setAccountData } = useAuthContext();
+
+  useEffect(() => {
+    if(createAccount.isSuccess) {
+      console.log(createAccount.data)
+      OTPBoxHandler();
+    }
+  }, [createAccount.isSuccess]);
+
+  useEffect(() => {
+    if(createAccount.isError) {
+      const backendError = createAccount.error.message || "An unexpected error";
+
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: backendError,
+      }))
+    }
+  })
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -33,10 +52,7 @@ const SignupForm = () => {
       validationErrors.email = "* Email is required !";
     } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
       validationErrors.email = "Invalid Email !";
-    } else {
-      validationErrors.email = createAccount.error?.message;
     }
-
     if (!accountData.password) {
       validationErrors.password = "* Password is required !";
     } else if (accountData.password.length < 8) {
@@ -54,7 +70,7 @@ const SignupForm = () => {
     if (Object.keys(validationErrors).length === 0) {
       createAccount.mutate(accountData);
       console.log(accountData);
-      OTPBoxHandler();
+      // OTPBoxHandler();
     }
   };
 

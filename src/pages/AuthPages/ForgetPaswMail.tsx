@@ -12,13 +12,16 @@ const ForgetPaswMail = () => {
   const [email, setEmail] = useState<string>("");
   const [showOtpBox, setShowOtpBox] = useState<boolean>(false);
   const [otp, setOtpCode] = useState<string>("");
+  const [timeLeft, setTimeLeft] = useState<number>(180);
   const navigate = useNavigate();
   const sendEmail = useForgetPassword(email);
   const ResetPsw = useResetPassword();
+  console.log(ResetPsw)
 
   useEffect(() => {
     if(sendEmail.isSuccess){
       setShowOtpBox(true);
+      setTimeLeft(180);
     }
   }, [sendEmail.isSuccess]);
 
@@ -43,6 +46,16 @@ const ForgetPaswMail = () => {
       });
     };
   }, [ResetPsw.isError])
+
+  useEffect(() => {
+    if (showOtpBox && timeLeft > 0) {
+      const countdown = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+
+      return () => clearInterval(countdown);
+    }
+  }, [showOtpBox, timeLeft]);
 
   const handleContinue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -84,7 +97,7 @@ const ForgetPaswMail = () => {
             Continue
           </Button>
         
-        {showOtpBox && <ForgetPswOTP onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
+        {showOtpBox && <ForgetPswOTP timeLeft={timeLeft} onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
     </div>
   )
 }
