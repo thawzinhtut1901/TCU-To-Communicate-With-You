@@ -6,6 +6,7 @@ import { useSignUp } from "../../hooks";
 import { useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import MobileImage from "@/components/authComponents/MobileImage";
+import { ButtonLoading } from "@/components/ui/buttonLoading";
 
 interface Errors {
   email?: string;
@@ -28,6 +29,8 @@ const SignupForm = () => {
       validationErrors.email = "* Email is required !";
     } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
       validationErrors.email = "Invalid Email !";
+    } else {
+      validationErrors.email = createAccount.error?.message;
     }
 
     if (!accountData.password) {
@@ -72,10 +75,10 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen">
       <MobileImage />
-      <div className="flex flex-col items-center justify-center ">
-        <h2 className="flex justify-center pt-3 text-lg font-medium text-white lg:pt-0 font-poppins lg:text-2xl">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="flex justify-center pt-3 lg:pt-0 font-medium font-poppins text-lg text-white lg:text-2xl">
           Sign up
         </h2>
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-poppins lg:font-thin text-[10px] text-white lg:text-[14px]">
@@ -88,7 +91,7 @@ const SignupForm = () => {
             className="rounded-[8px]"
           />
           {errors.email && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.email}
             </span>
           )}
@@ -110,7 +113,7 @@ const SignupForm = () => {
             className="rounded-[8px]"
           />
           {errors.password && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.password}
             </span>
           )}
@@ -128,7 +131,7 @@ const SignupForm = () => {
           />
 
           {errors.confirmPassword && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.confirmPassword}
             </span>
           )}
@@ -153,13 +156,21 @@ const SignupForm = () => {
           </a>
         </h2>
 
-        <Button
-          onClick={handleSubmit}
-          type="button"
-          className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 lg:ml-[55px] border rounded-full font-poppins font-thin text-[#6b47fb] text-[12px] lg:text-[14px]"
-        >
-          Create An Account
-        </Button>
+        {
+        !createAccount.isPending ? (
+          <Button
+            onClick={handleSubmit}
+            type="button"
+            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]"
+          >
+            Create An Account
+          </Button>
+        ) : (
+          <div className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
+            <ButtonLoading/>
+          </div>
+        )
+      }
 
         <h2 className="flex justify-center mx-auto mt-[14px] lg:mt-[24px] pb-[20px] lg:pb-0 w-full lg:w-[550px] font-poppins font-thin text-[12px] text-white lg:text-[14px]">
           Already have an account?{" "}

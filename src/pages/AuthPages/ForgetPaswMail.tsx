@@ -6,6 +6,7 @@ import { useForgetPassword, useResetPassword } from "../../hooks"
 import { useEffect, useState } from "react"
 import ForgetPswOTP from "./ForgetPswOTP"
 import { login } from "@/services/authService"
+import Swal from "sweetalert2"
 
 const ForgetPaswMail = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,7 +18,7 @@ const ForgetPaswMail = () => {
 
   useEffect(() => {
     if(sendEmail.isSuccess){
-      setShowOtpBox(true)
+      setShowOtpBox(true);
     }
   }, [sendEmail.isSuccess]);
 
@@ -32,6 +33,17 @@ const ForgetPaswMail = () => {
     }
   }, [ResetPsw.isSuccess])
 
+  useEffect(() => {
+    if(ResetPsw.isError) {
+      Swal.fire({
+        icon: "error",
+        title: "Wrong OTP code",
+        text: ResetPsw.error.message,
+        timer: 2000,
+      });
+    };
+  }, [ResetPsw.isError])
+
   const handleContinue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     sendEmail.mutate();
@@ -42,6 +54,10 @@ const ForgetPaswMail = () => {
     setShowOtpBox(false);
     ResetPsw.mutate({ email, otp });
   }
+
+  const onClose = () => {
+    setShowOtpBox(false);
+  };
 
   return (
     <div className="md:my-[150px] md:ml-[120px] w-[350px] md:w-[450px] font-poppins text-white">
@@ -68,7 +84,7 @@ const ForgetPaswMail = () => {
             Continue
           </Button>
         
-        {showOtpBox && <ForgetPswOTP onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode}/>}
+        {showOtpBox && <ForgetPswOTP onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
     </div>
   )
 }

@@ -2,14 +2,16 @@ import { gmailLogo } from "@/assets"
 import { Button } from "@/components/ui/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
 import { useEffect, useState } from "react";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 interface OTPBoxProps {
     onSubmit: () => void;
     onResend: () => void;
     setOtpCode: (code: string) => void;
+    onClose: () => void;
   }
 
-const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode }) => {
+const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose }) => {
     const [otpCode, setLocalOtpCode] = useState<string>("");
 
     useEffect(() => {
@@ -19,12 +21,16 @@ const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode })
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
       <div className="md:z-10 absolute flex flex-col justify-center items-center gap-4 bg-white opacity-100 p-4 rounded w-[400px] h-auto">
+        <Button  onClick={onClose}  className="top-2 right-2 absolute text-black hover:text-gray-700">
+          <IoMdCloseCircleOutline color="#8566FF" />
+        </Button>
         <img src={gmailLogo} className="py-2 w-[50px] md:w-[100px]" alt="" />
         <h3 className="font-bold text-[18px] text-black md:text-xl">Verify your email address</h3>
         <p className="pb-2 font-semibold text-black text-xs">
           Please enter the 6 digit code sent to your{" "}
           <span className="text-main">email example.com</span>{" "}
         </p>
+
         <InputOTP
           maxLength={6}
           value={otpCode}

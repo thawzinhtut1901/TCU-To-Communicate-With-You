@@ -12,6 +12,7 @@ import { useResendOtp, useVerifyEmail } from "@/hooks/useAuth";
 import gmailLogo from "../../assets/gmail-logo.png";
 import { VerifyData } from "@/types/type";
 import { login } from "@/services/authService";
+import Swal from "sweetalert2";
 
 const InputOTPBox = () => {
   const { OTPBoxHandler, accountData } = useAuthContext();
@@ -29,6 +30,17 @@ const InputOTPBox = () => {
     }
   }, [verifyEmail.isSuccess])
 
+  useEffect(() => {
+    if(verifyEmail.isError) {
+      Swal.fire({
+        icon: "error",
+        title: "Wrong OTP",
+        text: verifyEmail.error?.message,
+        timer: 2000,
+      });
+    }
+  })
+
   const handleSubmit = () => {
     const verifyData: VerifyData = {
       email: accountData?.email || "",
@@ -37,10 +49,10 @@ const InputOTPBox = () => {
     console.log("Verify Data:", verifyData);
     verifyEmail.mutate(verifyData);
     
-    if (verifyEmail.isSuccess) {
-      OTPBoxHandler();
-      navigate("/profile-setup");
-    }
+    // if (verifyEmail.isSuccess) {
+    //   OTPBoxHandler();
+    //   navigate("/profile-setup");
+    // }
   };
 
   const handleResendOtp = () => {
