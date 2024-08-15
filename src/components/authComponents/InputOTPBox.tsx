@@ -17,21 +17,22 @@ import Swal from "sweetalert2";
 const InputOTPBox = () => {
   const { OTPBoxHandler, accountData } = useAuthContext();
   const [otpCode, setOtpCode] = useState<string>("");
+  const [timeLeft, setTimeLeft] = useState<number>(180); 
   const verifyEmail = useVerifyEmail();
   const resendOtp = useResendOtp();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(verifyEmail.isSuccess) {
+    if (verifyEmail.isSuccess) {
       const authToken = verifyEmail.data.accessToken;
       delete verifyEmail.data.accessToken;
       login(authToken);
-      navigate("/profile-setup")
+      navigate("/profile-setup");
     }
-  }, [verifyEmail.isSuccess])
+  }, [verifyEmail.isSuccess, navigate]);
 
   useEffect(() => {
-    if(verifyEmail.isError) {
+    if (verifyEmail.isError) {
       Swal.fire({
         icon: "error",
         title: "Wrong OTP",
@@ -39,7 +40,29 @@ const InputOTPBox = () => {
         timer: 2000,
       });
     }
-  })
+  }, [verifyEmail.isError]);
+
+  useEffect(() => {
+    // Start the countdown
+    const countdown = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(countdown);
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, []);
+
+  // Format time in MM:SS format
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  };
 
   const handleSubmit = () => {
     const verifyData: VerifyData = {
@@ -48,11 +71,11 @@ const InputOTPBox = () => {
     };
     console.log("Verify Data:", verifyData);
     verifyEmail.mutate(verifyData);
-    
-    // if (verifyEmail.isSuccess) {
-    //   OTPBoxHandler();
-    //   navigate("/profile-setup");
-    // }
+
+    if (verifyEmail.isSuccess) {
+      OTPBoxHandler();
+      navigate("/profile-setup");
+    }
   };
 
   const handleResendOtp = () => {
@@ -90,7 +113,7 @@ const InputOTPBox = () => {
         </InputOTP>
         <p className="font-extralight text-sm md:text-base">
           OTP code will expire within{" "}
-          <span className="text-main underline">05:00</span>
+          <span className="text-main underline">{formatTime(timeLeft)}</span>
         </p>
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={handleSubmit} variant="otp">
