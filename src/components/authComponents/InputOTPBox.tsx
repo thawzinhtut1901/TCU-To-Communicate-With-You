@@ -49,10 +49,10 @@ const InputOTPBox = () => {
     console.log("Verify Data:", verifyData);
     verifyEmail.mutate(verifyData);
     
-    if (verifyEmail.isSuccess) {
-      OTPBoxHandler();
-      navigate("/profile-setup");
-    }
+    // if (verifyEmail.isSuccess) {
+    //   OTPBoxHandler();
+    //   navigate("/profile-setup");
+    // }
   };
 
   const handleResendOtp = () => {
