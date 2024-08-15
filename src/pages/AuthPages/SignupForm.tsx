@@ -6,6 +6,7 @@ import { useSignUp } from "../../hooks";
 import { useState } from "react";
 import { useAuthContext } from "@/context/authContext";
 import logoMobile from "../../assets/LogoMobile.png";
+import { ButtonLoading } from "@/components/ui/buttonLoading";
 
 interface Errors {
   email?: string;
@@ -162,13 +163,22 @@ const SignupForm = () => {
         </a>
       </h2>
 
-      <Button
-        onClick={handleSubmit}
-        type="button"
-        className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]"
-      >
-        Create An Account
-      </Button>
+      {
+        !createAccount.isPending ? (
+          <Button
+            onClick={handleSubmit}
+            type="button"
+            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]"
+          >
+            Create An Account
+          </Button>
+        ) : (
+          <div className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
+            <ButtonLoading/>
+          </div>
+          
+        )
+      }
 
       <h2 className="flex justify-center mx-auto mt-[14px] md:mt-[24px] pb-[20px] md:pb-0 w-full md:w-[550px] font-poppins font-thin text-[12px] text-white md:text-[14px]">
         Already have an account?{" "}

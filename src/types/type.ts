@@ -3,6 +3,11 @@ export type AuthData = {
     password: string;
   };
 
+export type LoginData = {
+  emailOrUserName: string;
+  password: string;
+}
+
 export type VerifyData = {
   email: string;
   otp: string;

@@ -1,5 +1,6 @@
 import { Avatar } from "@/assets"
 import { Button } from "@/components/ui/button"
+import { Creating } from "@/components/ui/buttonLoading"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useProfileSetUp } from "@/hooks"
@@ -7,10 +8,14 @@ import { profileSetupData } from "@/types/type"
 import { useEffect, useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 
+interface Errors {
+  userName?: string;
+}
 
 const ProfileSetup = () => {
   const navigate = useNavigate();
-  const ProfileSetup = useProfileSetUp()
+  const [errors, setErrors] = useState<Errors>({});
+  const ProfileSetup = useProfileSetUp();
   const [formData, setFormData] = useState<profileSetupData>({
     userName: "",
     dispalyName: "",
@@ -30,11 +35,7 @@ const ProfileSetup = () => {
   const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userName = event.target.value;
     setFormData((prev) => ({...prev, userName}));
-  };
-
-  const handleDisplayName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const dispalyName = event.target.value;
-    setFormData((prev) => ({...prev, dispalyName}));
+    setErrors((prevErrors) => ({...prevErrors, userEmail: ""}));
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +43,6 @@ const ProfileSetup = () => {
       const profilePicture = event?.target?.files[0];
       setFormData((prev) => ({...prev, profilePicture}))
     }
-  };
-
-  const handleBio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const bio = event.target.value;
-    setFormData((prev) => ({...prev, bio}));
   };
   
   const handleBirth = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +57,18 @@ const ProfileSetup = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    ProfileSetup.mutate(formData);
-    console.log(ProfileSetup);
+
+    const validationErrors: Errors = {};
+
+    if(!formData.userName) {
+      validationErrors.userName = "* Please Enter Your Username!"
+    }
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      ProfileSetup.mutate(formData);
+    }
   };
 
   return (
@@ -100,7 +106,6 @@ const ProfileSetup = () => {
               type="file"
               className="hidden"
               id="fileInput"
-              required
             />
           </div>
           </div>
@@ -116,10 +121,18 @@ const ProfileSetup = () => {
                 onChange={handleUserName}
                 className="border-white rounded-[8px] w-full text-white"
               />
+
+              {
+                errors.userName && (
+                  <span className="my-2 font-bold text-red-500 text-xs">
+                    {errors.userName}
+                  </span>
+                ) 
+              }
             </div>
           </div>
 
-          {/* Name */}
+          {/* Name
           <div className="sm:col-span-4 mt-5">
             <Label className="text-white">Your Full Name</Label>
 
@@ -132,10 +145,10 @@ const ProfileSetup = () => {
                 className="border-white rounded-[8px] w-full text-white"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Bio */}
-          <div className="sm:col-span-4 mt-5">
+          {/* <div className="sm:col-span-4 mt-5">
             <Label className="text-white">Bio</Label>
 
             <div className="mt-1">
@@ -147,7 +160,7 @@ const ProfileSetup = () => {
                 className="border-white rounded-[8px] w-full text-white"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Gender and Date of Birth */}
           <div className="flex flex-wrap justify-center mt-5">
@@ -194,12 +207,20 @@ const ProfileSetup = () => {
           </div>
 
           <div className="flex justify-center mt-5">
-            <Button
-              type="submit"
-              className="flex justify-center hover:border-white hover:border-2 bg-white hover:bg-blue-500 shadow-md px-4 py-2 border-none rounded-xl w-10/12 font-medium text-black text-lg"
-            >
-              Log In
-            </Button>
+            {
+              !ProfileSetup.isPending ? (
+                <Button
+                  type="submit"
+                  className="flex justify-center hover:border-white hover:border-2 bg-white hover:bg-slate-200 shadow-md px-4 py-2 border-none rounded-xl w-10/12 font-medium text-black text-lg"
+                >
+                  Get Start
+                </Button>
+              ): (
+                <div className="flex justify-center hover:border-white hover:border-2 bg-white hover:bg-slate-200 shadow-md px-4 py-2 border-none rounded-xl w-10/12 font-medium text-black text-lg">
+                  <Creating/>
+                </div>
+              )
+            }
           </div>
 
           <div className="mt-2 text-center">

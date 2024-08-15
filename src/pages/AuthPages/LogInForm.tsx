@@ -7,11 +7,12 @@ import { Label } from "../../components/ui/label";
 import logoMobile from "../../assets/LogoMobile.png";
 import { useEffect, useState } from "react";
 import { useSignIn } from "@/hooks";
-import { AuthData } from "@/types/type";
+import { LoginData } from "@/types/type";
 import { login } from "@/services/authService";
+import { ButtonLoading } from "@/components/ui/buttonLoading";
 
 interface Errors {
-  email?: string;
+  emailOrUserName?: string;
   password?: string;
 }
 
@@ -19,8 +20,8 @@ const LogInForm = () => {
   const navigate = useNavigate();
   const LoginAccount = useSignIn();
   const [errors, setErrors] = useState<Errors>({});
-  const [loginData, setLoginData] = useState<AuthData>({
-    email: "",
+  const [loginData, setLoginData] = useState<LoginData>({
+    emailOrUserName: "",
     password: "",
   });
 
@@ -38,10 +39,8 @@ const LogInForm = () => {
 
     const validationErrors: Errors = {};
 
-    if (!loginData.email) {
-      validationErrors.email = "* Email is required !";
-    } else if (!/\S+@\S+\.\S+/.test(loginData.email)) {
-      validationErrors.email = "Invalid Email !";
+    if (!loginData.emailOrUserName) {
+      validationErrors.emailOrUserName = "* Email Or Username is required !";
     }
 
     if (!loginData.password) {
@@ -59,9 +58,9 @@ const LogInForm = () => {
   };
 
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const email = event.target.value;
-    setLoginData((prev) => ({ ...prev, email }));
-    setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+    const emailOrUserName = event.target.value;
+    setLoginData((prev) => ({ ...prev, emailOrUserName }));
+    setErrors((prevErrors) => ({ ...prevErrors, emailOrUserName: "" }));
   };
 
   const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +77,7 @@ const LogInForm = () => {
         </h1>
           <img src={logoMobile} alt="Mobile Logo" className="w-[300px] h-fit ms-20"/>
       </div>
-      <h2 className="flex justify-center font-medium font-poppins text-lg text-white md:text-2xl">
+      <h2 className="md:flex justify-center hidden font-medium font-poppins text-lg text-white md:text-2xl">
         Log in
       </h2>
 
@@ -87,13 +86,13 @@ const LogInForm = () => {
         <Input
           type="email"
           id="email"
-          value={loginData.email}
+          value={loginData.emailOrUserName}
           onChange={emailHandler}
           className="rounded-[8px]"
         />
         {
-          errors.email && (
-            <span className="my-2 font-bold text-red-500 text-xs">{errors.email}</span>
+          errors.emailOrUserName && (
+            <span className="my-2 font-bold text-red-500 text-xs">{errors.emailOrUserName}</span>
           )
         }
       </div>
@@ -137,10 +136,18 @@ const LogInForm = () => {
         </div>
         </div>
 
-        <Button type="button" onClick={handleSubmit} className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
-            Log In
-        </Button>
+        {
+          !LoginAccount.isPending ? (
+            <Button type="button" onClick={handleSubmit} className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-white md:text-black">
+              Log In
+            </Button>
 
+          ) : (
+            <div className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-[20px] md:border rounded-full w-[250px] md:w-[550px] font-poppins font-thin text-[14px] text-black">
+              <ButtonLoading/>
+            </div>
+          )
+        }
       <div className="flex justify-between items-center md:hidden mx-auto mt-[30px] w-[350px] font-poppins text-white">
         <div className="flex space-x-1 text-[12px]">
           <Checkbox id="remember" className="rounded-[5px]" />

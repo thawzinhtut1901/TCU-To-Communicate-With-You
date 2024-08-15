@@ -5,7 +5,8 @@ import { Label } from "../../components/ui/label"
 import { useNewPassword } from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
 import { NewPswData } from "@/types/type"
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface Errors {
     password?: string;
@@ -21,6 +22,7 @@ const ResetPassword = () => {
     })
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [errors, setErrors] = useState<Errors>({});
+    
 
     useEffect(() => {
         const key = location?.state?.key;
@@ -31,7 +33,12 @@ const ResetPassword = () => {
 
     useEffect(() => {
         if(NewPassword.isSuccess) {
-            console.log(NewPassword.data)
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Your Password changed successfully",
+                timer: 2000,
+            });
         }
     }, [NewPassword.isSuccess]);
 
@@ -77,6 +84,13 @@ const ResetPassword = () => {
     <div className="md:mt-[120px] md:ml-[120px] w-[350px] md:w-[450px] font-poppins text-white">
         <h1 className="flex justify-center md:hidden mt-[24px] font-semibold text-[20px]">Reset Password</h1>
         <h2 className="md:hidden my-[10px]">Please type something you’ll remember</h2>
+
+        {/* {successMessage && (
+            <div className="mb-[100px] text-[21px] text-blue-500 text-center">
+                {successMessage}
+            </div>
+        )} */}
+
         <Label htmlFor="password" className="md:text-[18px]">
             Enter New Password *
         </Label>
@@ -115,7 +129,7 @@ const ResetPassword = () => {
         </div>
 
        <div className="flex justify-center md:justify-start">
-        <Button
+            <Button
                 type="button"
                 onClick={handleSubmit}
                 className="bg-slate-200 md:bg-[#8566FF] md:hover:bg-purple-500 hover:bg-slate-400 mt-[30px] md:mt-[40px] px-auto rounded-full md:rounded-[10px] w-[200px] text-[#393ED0] md:text-white"
@@ -123,6 +137,8 @@ const ResetPassword = () => {
                 Confirm
             </Button>
        </div>
+
+       
     </div>
   )
 }
