@@ -9,14 +9,21 @@ interface OTPBoxProps {
     onResend: () => void;
     setOtpCode: (code: string) => void;
     onClose: () => void;
+    timeLeft: number;
   }
 
-const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose }) => {
+const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose, timeLeft }) => {
     const [otpCode, setLocalOtpCode] = useState<string>("");
 
     useEffect(() => {
         setOtpCode(otpCode); 
       }, [otpCode, setOtpCode]);
+
+      const formatTime = (time: number) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      };
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -47,7 +54,7 @@ const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, o
         </InputOTP>
         <p className="font-extralight text-[14px] text-black md:text-[18px]">
           OTP code will expire within{" "}
-          <span className="text-main underline">05:00</span>
+          <span className="text-main underline">{formatTime(timeLeft)}</span>
         </p>
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={onSubmit} variant="otp">
