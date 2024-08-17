@@ -2,7 +2,7 @@ const PrivancyPolicy = () => {
   return (
     <section className="  bg-custom-gradient  h-screen ">
       <h1 className=" p-4 ml-5	 text-4xl font-bold text-white md:text-start text-center">
-        TCU
+        <a href="/sign-up">TCU</a>
       </h1>
       <div className="grid justify-items-center">
         <div className="overflow-hidden overflow-none overflow-x-hidden overflow-y-hidden h-[500px] rounded h-full  bg-transparent shadow-xl border-slate-800 border w-4/5 h-64 overflow-y-scroll p-4  rounded shadow-md md:w-7/12">

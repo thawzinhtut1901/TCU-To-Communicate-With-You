@@ -150,9 +150,19 @@ const SignupForm = () => {
 
         <h2 className="md:flex mx-auto mt-[24px] w-[350px] lg:w-[550px] font-poppins font-thin text-[12px] text-white lg:text-[14px]">
           By creating an account, you agree to the{" "}
-          <a href="#" className="pl-[2px] lg:pl-1 border-b">
+          <a
+            href="/term-of-use"
+            className="text-blue-500 font-bold text-md  underline"
+          >
+            Terms{" "}
+          </a>
+          and
+          <a
+            href="/privancy-policy"
+            className="text-blue-500 font-bold text-md underline"
+          >
             {" "}
-            Term of use and Privacy Policy.
+            Privancy Policy
           </a>
         </h2>
 

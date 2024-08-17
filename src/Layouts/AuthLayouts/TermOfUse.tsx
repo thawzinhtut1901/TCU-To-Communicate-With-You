@@ -2,7 +2,7 @@ const TermOfUse = () => {
   return (
     <section className="  bg-custom-gradient  h-screen ">
       <h1 className=" p-4 ml-5	 text-4xl font-bold text-white md:text-start text-center">
-        TCU
+        <a href="/sign-up">TCU</a>
       </h1>
       <div className="grid justify-items-center">
         <div
