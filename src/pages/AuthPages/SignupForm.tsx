@@ -156,8 +156,7 @@ const SignupForm = () => {
           </a>
         </h2>
 
-        {
-        !createAccount.isPending ? (
+        {!createAccount.isPending ? (
           <Button
             onClick={handleSubmit}
             type="button"
@@ -167,10 +166,9 @@ const SignupForm = () => {
           </Button>
         ) : (
           <div className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] ml-0 md:ml-[55px] border rounded-full font-poppins font-thin text-[#8566FF] text-[12px] md:text-[14px]">
-            <ButtonLoading/>
+            <ButtonLoading />
           </div>
-        )
-      }
+        )}
 
         <h2 className="flex justify-center mx-auto mt-[14px] lg:mt-[24px] pb-[20px] lg:pb-0 w-full lg:w-[550px] font-poppins font-thin text-[12px] text-white lg:text-[14px]">
           Already have an account?{" "}
