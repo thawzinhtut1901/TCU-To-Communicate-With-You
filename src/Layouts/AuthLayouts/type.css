@@ -1,3 +1,18 @@
 .bg-custom-gradient {
-  background: linear-gradient(90deg, #051960 0%, #051960 100%, #591DA9 99%, #591DA9 100%);
+  background: linear-gradient(
+    90deg,
+    #051960 0%,
+    #051960 100%,
+    #591da9 99%,
+    #591da9 100%
+  );
+}
+
+.scrollable-box {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollable-box::-webkit-scrollbar {
+  display: none; /* WebKit browsers */
 }

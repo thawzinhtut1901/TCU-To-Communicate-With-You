@@ -6,7 +6,15 @@ import { Label } from "@/components/ui/label"
 import { useProfileSetUp } from "@/hooks"
 import { profileSetupData } from "@/types/type"
 import { useEffect, useState } from "react"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 interface Errors {
   userName?: string;
@@ -50,9 +58,8 @@ const ProfileSetup = () => {
     setFormData((prev) => ({...prev, dateOfBirth}));
   };
 
-  const handleGender = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const gender = event.target.value;
-    setFormData((prev) => ({...prev, gender}));
+  const handleGender = (value: string) => {
+    setFormData((prev) => ({ ...prev, gender: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -169,7 +176,19 @@ const ProfileSetup = () => {
                 Gender
               </Label>
               <div className="mt-1">
-                <select
+                <Select value={formData.gender} onValueChange={handleGender}>
+                  <SelectTrigger className="rounded-xl w-[160px] md:w-full text-white">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-200 rounded-xl">
+                    <SelectGroup>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Others">Others</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                {/* <select
                   id="gender"
                   name="gender"
                   value={formData.gender}
@@ -185,7 +204,7 @@ const ProfileSetup = () => {
                   <option value="Female" className="m-1 p-1 text-black">
                     Female
                   </option>
-                </select>
+                </select> */}
               </div>
             </div>
 
@@ -200,12 +219,12 @@ const ProfileSetup = () => {
                   value={formData.dateOfBirth}
                   onChange={handleBirth}
                   type="date"
-                  className="block border-white bg-transparent shadow-sm px-4 py-2 rounded-xl ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-600 ring-inset focus:ring-inset w-full text-white placeholder:text-gray-400"
+                  className="block border-white bg-transparent shadow-sm px-4 py-2 rounded-xl ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-600 ring-inset focus:ring-inset w-full text-white placeholder:text-white"
                 />
               </div>
             </div>
           </div>
-
+{/* block border-white bg-transparent shadow-sm px-4 py-2 rounded-xl ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-600 ring-inset focus:ring-inset w-full text-white placeholder:text-white */}
           <div className="flex justify-center mt-5">
             {
               !ProfileSetup.isPending ? (
@@ -229,7 +248,7 @@ const ProfileSetup = () => {
               <span>
                 <NavLink
                   to={""}
-                  className="font-bold text-lg text-purple-600 underline ms-1"
+                  className="font-bold text-[14px] text-purple-600 md:text-lg underline ms-1"
                 >
                   Email Us
                 </NavLink>
