@@ -17,7 +17,8 @@ import Swal from "sweetalert2";
 const InputOTPBox = () => {
   const { OTPBoxHandler, accountData } = useAuthContext();
   const [otpCode, setOtpCode] = useState<string>("");
-  const [timeLeft, setTimeLeft] = useState<number>(180); 
+  const [timeLeft, setTimeLeft] = useState<number>(180);
+  const [showError, setShowError] = useState<boolean>(false);
   const verifyEmail = useVerifyEmail();
   const resendOtp = useResendOtp();
   const navigate = useNavigate();
@@ -43,6 +44,29 @@ const InputOTPBox = () => {
   }, [verifyEmail.isError]);
 
   useEffect(() => {
+    if(timeLeft === 0) {
+      setShowError(true)
+    }
+  }, [timeLeft])
+
+  useEffect(() => {
+    // let countdown: NodeJS.Timeout;
+
+    // if (timeLeft > 0) { 
+    //   countdown = setInterval(() => {
+    //     setTimeLeft((prevTime) => {
+    //       if (prevTime <= 1) {
+    //         clearInterval(countdown);
+    //         return 0;
+    //       }
+    //       return prevTime - 1;
+    //     });
+    //   }, 1000); 
+    // } else {
+    //   setShowError(true);
+    // }
+
+    // return () => clearInterval(countdown);
     // Start the countdown
     const countdown = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -55,7 +79,7 @@ const InputOTPBox = () => {
     }, 1000);
 
     return () => clearInterval(countdown);
-  }, []);
+  }, [timeLeft]);
 
   // Format time in MM:SS format
   const formatTime = (time: number) => {
@@ -72,16 +96,18 @@ const InputOTPBox = () => {
     console.log("Verify Data:", verifyData);
     verifyEmail.mutate(verifyData);
 
-    if (verifyEmail.isSuccess) {
-      OTPBoxHandler();
-      navigate("/profile-setup");
-    }
+    // if (verifyEmail.isSuccess) {
+    //   OTPBoxHandler();
+    //   navigate("/profile-setup");
+    // }
   };
 
   const handleResendOtp = () => {
     const resendEmail = accountData?.email;
     console.log("Resend email:", resendEmail);
     resendOtp.mutate(resendEmail);
+    setShowError(false);
+    setTimeLeft(180);
   };
 
   return (
@@ -111,10 +137,19 @@ const InputOTPBox = () => {
             ))}
           </InputOTPGroup>
         </InputOTP>
-        <p className="font-extralight text-sm md:text-base">
-          OTP code will expire within{" "}
-          <span className="text-main underline">{formatTime(timeLeft)}</span>
-        </p>
+        {
+          showError ? (
+            <p className="font-semibold text-red-500 text-sm md:text-base">
+              Time is up! Please request a new OTP.
+            </p>
+          ) : (
+            <p className="font-extralight text-sm md:text-base">
+              OTP code will expire within{" "}
+              <span className="text-main underline">{formatTime(timeLeft)}</span>
+            </p>
+          )
+        }
+        
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={handleSubmit} variant="otp">
             Confirm

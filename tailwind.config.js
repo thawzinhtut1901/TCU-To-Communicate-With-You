@@ -19,9 +19,17 @@ export default {
     extend: {
       backgroundImage: {
         "custom-gradient": "linear-gradient(90deg, #051960 0%, #591DA9 90%)",
+        "glass": 'rgba(255, 255, 255, 0.1)',
+      },
+      backdropBlur: {
+        'glass': '20px', 
+      },
+      borderColor: {
+        'glass-border': 'rgba(255, 255, 255, 0.4)',
       },
       fontFamily: {
         primary: ["Prompt", "sans-serif"],
+        roman: ["Cormorant Garamond", "serif"],
       },
       colors: {
         main: "#8566FF",
@@ -87,5 +95,7 @@ export default {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate")
+  ],
 };

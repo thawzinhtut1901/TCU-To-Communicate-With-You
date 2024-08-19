@@ -14,10 +14,19 @@ interface OTPBoxProps {
 
 const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose, timeLeft }) => {
     const [otpCode, setLocalOtpCode] = useState<string>("");
+    const [showError, setShowError] = useState<boolean>(false);
 
     useEffect(() => {
         setOtpCode(otpCode); 
       }, [otpCode, setOtpCode]);
+
+    useEffect(() => {
+      if(timeLeft === 0) {
+        setShowError(true)
+      }
+    }, [timeLeft]);
+
+
 
       const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
@@ -52,10 +61,20 @@ const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, o
             <InputOTPSlot className="bg-main2 border-none rounded text-white" index={5} />
           </InputOTPGroup>
         </InputOTP>
-        <p className="font-extralight text-[14px] text-black md:text-[18px]">
-          OTP code will expire within{" "}
-          <span className="text-main underline">{formatTime(timeLeft)}</span>
-        </p>
+
+        {
+          showError ? (
+            <p className="font-semibold text-[14px] text-red-500 md:text-[18px]">
+              Time's up! Please try again.
+            </p>
+          ) : (
+            <p className="font-extralight text-[14px] text-black md:text-[18px]">
+              OTP code will expire within{" "}
+              <span className="text-main underline">{formatTime(timeLeft)}</span>
+            </p>
+          )
+        }
+        
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={onSubmit} variant="otp">
             Confirm

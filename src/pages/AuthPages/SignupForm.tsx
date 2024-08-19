@@ -103,18 +103,18 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen ">
-       <h1 className=" absolute lg:hidden top-0 left-0 px-10 font-extrabold font-poppins text-[18px] py-4 lg:text-[24px] text-start text-white">
+    <div className="relative flex flex-col justify-center items-center h-screen">
+       <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
         TCU
       </h1>
       <MobileImage />
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="flex justify-center pt-3 text-lg font-medium text-white lg:pt-0 font-primary lg:text-2xl">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="flex justify-center pt-3 lg:pt-0 font-medium font-primary text-lg text-white lg:text-2xl">
           Sign up
         </h2>
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-primary lg:font-thin text-[10px] text-white lg:text-[14px]">
           <Label htmlFor="email">Email *</Label>
-          <div className="relative ">
+          <div className="relative">
             <Input
               type="email"
               id="email"
@@ -123,11 +123,11 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             {errors.email && (
-              <span className="my-2 text-xs font-bold text-red-500">
+              <span className="my-2 font-bold text-red-500 text-xs">
                 {errors.email}
               </span>
             )}
-            <MdOutlineAlternateEmail className="absolute top-3 right-3" />
+            <MdOutlineAlternateEmail className="top-3 right-3 absolute" />
           </div>
         </div>
 
@@ -137,7 +137,7 @@ const SignupForm = () => {
           >
             Password *
           </Label>
-          <div className="relative ">
+          <div className="relative">
             <Input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -146,7 +146,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="absolute right-5 top-3"
+              className="top-3 right-5 absolute"
               onClick={toggleShowPassword}
             >
               {showPassword ? (
@@ -157,7 +157,7 @@ const SignupForm = () => {
             </button>
           </div>
           {errors.password && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.password}
             </span>
           )}
@@ -165,7 +165,7 @@ const SignupForm = () => {
 
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-primary lg:font-thin text-[10px] text-white lg:text-[14px]">
           <Label htmlFor="confirm">Confirm Your Password *</Label>
-          <div className="relative ">
+          <div className="relative">
             <Input
               type={showConfirmPassword ? "text" : "password"}
               id="confirm"
@@ -174,7 +174,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="absolute right-5 top-3"
+              className="top-3 right-5 absolute"
               onClick={toggleShowConfirmPassword}
             >
               {showConfirmPassword ? (
@@ -186,7 +186,7 @@ const SignupForm = () => {
           </div>
 
           {errors.confirmPassword && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.confirmPassword}
             </span>
           )}
@@ -205,9 +205,19 @@ const SignupForm = () => {
 
         <h2 className="md:flex mx-auto mt-[24px] ms-0 lg:ms-20 w-[350px] lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[12px]">
           By creating an account, you agree to the{" "}
-          <a href="#" className="pl-[2px] lg:pl-1 border-b">
+          <a
+            href="/term-of-use"
+            className="px-1 font-bold text-blue-500 text-md underline"
+          >
+            Terms{" "}
+          </a>
+          and
+          <a
+            href="/privacy-policy"
+            className="px-1 font-bold text-blue-500 text-md underline"
+          >
             {" "}
-            Term of use and Privacy Policy.
+            Privacy Policy
           </a>
         </h2>
 
@@ -224,6 +234,7 @@ const SignupForm = () => {
             <ButtonLoading />
           </div>
         )}
+
 
         <h2 className="flex justify-center mx-auto mt-[14px] lg:mt-[18px] pb-[20px] lg:pb-0 w-full lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[14px]">
           Already have an account?{" "}
