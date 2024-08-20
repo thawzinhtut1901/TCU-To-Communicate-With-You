@@ -8,6 +8,7 @@ import {
 import { ForgetPaswMail, ResetPassword } from "../pages/AuthPages";
 import TermOfUse from "@/Layouts/AuthLayouts/TermOfUse";
 import PrivancyPolicy from "@/Layouts/AuthLayouts/PrivancyPolicy";
+import { HomeLayout } from "@/Layouts/UserLayouts";
 
 const UserRouter: RouteObject[] = [
   {
@@ -48,6 +49,10 @@ const UserRouter: RouteObject[] = [
       },
     ],
   },
+  {
+    path: "/home",
+    element: <HomeLayout/>
+  }
 ];
 
 export default UserRouter;

@@ -33,9 +33,25 @@ const LogInForm = () => {
       const authToken = LoginAccount.data.accessToken;
       delete LoginAccount.data.accessToken;
       login(authToken);
-      navigate("");
+      navigate("/home");
     }
   }, [LoginAccount.isSuccess]);
+
+  useEffect(() => {
+    if(LoginAccount.isError) {
+      let backendError = LoginAccount.error.message;
+
+      if (backendError.includes("Credential Error")) {
+        backendError = "Email or Password is incorrect";
+      }
+
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        emailOrUserName: backendError,
+        password: backendError,
+      }));
+    }
+  })
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -77,18 +93,18 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen gap-10 px-2">
-      <h1 className=" absolute lg:hidden top-0 left-0 px-10 font-extrabold font-poppins text-[18px] py-4 lg:text-[24px] text-start text-white">
+    <div className="relative flex flex-col justify-center items-center gap-10 px-2 h-screen">
+      <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
         TCU
       </h1>
       <MobileImage />
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="flex justify-center text-lg font-medium text-white font-primary lg:text-2xl">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="flex justify-center font-medium font-primary text-lg text-white lg:text-2xl">
           Log in
         </h2>
         <div className="flex-col mx-auto mt-[20px] lg:mt-[20px] font-primary text-[10px] text-white md:text-[14px]">
           <Label htmlFor="email">Email Address or Username</Label>
-    <div className="relative ">
+          <div className="relative">
           <Input
             type="email"
             id="email"
@@ -96,11 +112,11 @@ const LogInForm = () => {
             onChange={emailHandler}
             className="rounded-[8px]"
           />
-          <IoPerson  className="absolute top-3 right-4"/>
+          <IoPerson  className="top-3 right-4 absolute"/>
           </div>
 
           {errors.emailOrUserName && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 ml-2 font-bold text-red-500 text-xs">
               {errors.emailOrUserName}
             </span>
           )}
@@ -112,7 +128,7 @@ const LogInForm = () => {
           >
             Password
           </Label>
-          <div className="relative ">
+          <div className="relative">
             <Input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -122,24 +138,25 @@ const LogInForm = () => {
             />
             <button onClick={toggleShowPassword}>
               {showPassword ? (
-                <PiEyeBold color="slate" className="absolute right-5 top-3" />
+                <PiEyeBold color="slate" className="top-3 right-5 absolute" />
               ) : (
                 <PiEyeClosedBold
                   color="slate"
-                  className="absolute right-5 top-3"
+                  className="top-3 right-5 absolute"
                 />
               )}
             </button>
-          </div>
-          {errors.password && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            {errors.password && (
+            <span className="ml-2 pb-2 font-bold text-red-500 text-xs">
               {errors.password}
             </span>
           )}
+          </div>
+          
 
-          <div className="items-center justify-between hidden md:flex">
+          <div className="md:flex justify-between items-center hidden">
             <NavLink to="/forget-password">
-              <h1 className=" underline w-fit text-[12px] cursor-pointe font-primary">
+              <h1 className="w-fit font-primary text-[12px] underline cursor-pointe">
                 Forget Password
               </h1>
             </NavLink>
@@ -147,7 +164,7 @@ const LogInForm = () => {
               <Checkbox id="remember" className="rounded-[5px]" />
               <Label
                 htmlFor="remember"
-                className="cursor-pointer font-primary text-[12px]"
+                className="font-primary text-[12px] cursor-pointer"
               >
                 Remember Me
               </Label>
@@ -158,7 +175,7 @@ const LogInForm = () => {
           <Button
             type="button"
             onClick={handleSubmit}
-            className=" flex flex-col justify-center order-1 md:order-none bg-[#8566FF] mt-0 lg:mt-[20px] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto md:border rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-white md:text-black"
+            className="flex flex-col justify-center order-1 md:order-none bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-0 lg:mt-[20px] md:border rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-white md:text-black"
           >
             Log In
           </Button>
@@ -168,19 +185,19 @@ const LogInForm = () => {
           </div>
         )}
 
-        <div className="flex justify-between items-center md:hidden px-4 mx-auto mt-[10px] w-[350px] font-primary text-white">
+        <div className="flex justify-between items-center md:hidden mx-auto mt-[10px] px-4 w-[350px] font-primary text-white">
           <div className="flex items-center gap-2">
             <Checkbox id="remember" className="rounded-[5px]" />
             <Label
               htmlFor="remember"
-              className="cursor-pointer text-[12px] font-primary"
+              className="font-primary text-[12px] cursor-pointer"
             >
               Remember Me
             </Label>
           </div>
 
           <NavLink to="/forget-password">
-            <h1 className="w-fit text-[12px] cursor-pointer font-primary">
+            <h1 className="w-fit font-primary text-[12px] cursor-pointer">
               Forget Password
             </h1>
           </NavLink>

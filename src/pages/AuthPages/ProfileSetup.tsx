@@ -36,9 +36,9 @@ const ProfileSetup = () => {
 
   useEffect(() => {
     if(ProfileSetup.isSuccess) {
-      navigate("")
+      navigate("/home")
     }
-  });
+  }, [ProfileSetup.isSuccess]);
 
   const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userName = event.target.value;

@@ -5,7 +5,7 @@ import { Label } from "../../components/ui/label"
 import { useNewPassword } from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
 import { NewPswData } from "@/types/type"
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 interface Errors {
@@ -16,6 +16,7 @@ interface Errors {
 const ResetPassword = () => {
     const NewPassword = useNewPassword();
     const location = useLocation();
+    const navigate = useNavigate();
     const [passwordChange, setPasswordChange] = useState<NewPswData>({
         password: "",
         key: "",
@@ -39,6 +40,7 @@ const ResetPassword = () => {
                 text: "Your Password changed successfully",
                 timer: 2000,
             });
+            navigate("/home")
         }
     }, [NewPassword.isSuccess]);
 
