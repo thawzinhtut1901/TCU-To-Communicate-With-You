@@ -152,9 +152,7 @@ const ForgetPaswMail = () => {
             </div>
           )
         }
-        
-          
-        
+
         {!sendEmail.isPending && showOtpBox && <ForgetPswOTP timeLeft={timeLeft} onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
     </div>
   )
