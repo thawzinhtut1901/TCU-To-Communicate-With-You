@@ -209,14 +209,13 @@ const SignupForm = () => {
             href="/term-of-use"
             className="px-1 font-bold text-blue-500 text-md underline"
           >
-            Terms{" "}
+            Terms
           </a>
           and
           <a
             href="/privacy-policy"
             className="px-1 font-bold text-blue-500 text-md underline"
           >
-            {" "}
             Privacy Policy
           </a>
         </h2>
