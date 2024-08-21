@@ -4,10 +4,9 @@ import {
   LogInLayout,
   ProfileSetupLayout,
   SignUpLayout,
+  TermsPolicyLayout,
 } from "../Layouts/AuthLayouts";
-import { ForgetPaswMail, ResetPassword } from "../pages/AuthPages";
-import TermOfUse from "@/Layouts/AuthLayouts/TermOfUse";
-import PrivancyPolicy from "@/Layouts/AuthLayouts/PrivancyPolicy";
+import { ForgetPaswMail, Policies, ResetPassword, Terms } from "../pages/AuthPages";
 import { HomeLayout } from "@/Layouts/UserLayouts";
 
 const UserRouter: RouteObject[] = [
@@ -24,12 +23,22 @@ const UserRouter: RouteObject[] = [
     element: <ProfileSetupLayout />,
   },
   {
-    path: "/term-of-use",
-    element: <TermOfUse />,
-  },
-  {
-    path: "/privacy-policy",
-    element: <PrivancyPolicy />,
+    path: "/howtcuwork",
+    element: <TermsPolicyLayout/>,
+    children: [
+      {
+        index: true,
+        element: <Navigate to={"terms"}/>,
+      },
+      {
+        path: "terms",
+        element: <Terms />,
+      },
+      {
+        path: "policies",
+        element: <Policies />,
+      },
+    ]
   },
   {
     path: "/forget-password",

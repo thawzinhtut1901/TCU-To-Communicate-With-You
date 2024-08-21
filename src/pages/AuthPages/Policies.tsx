@@ -1,10 +1,7 @@
-const PrivancyPolicy = () => {
+
+const Policies = () => {
   return (
-    <section className="bg-custom-gradient h-screen overflow-hidden">
-      <h1 className="md:ml-[80px] p-4 font-bold font-roman text-[28px] text-center text-white md:text-[50px] md:text-start">
-        <a href="/sign-up">TCU</a>
-      </h1>
-      <div className="justify-items-center grid font-primary text-slate-100">
+    <div className="justify-items-center grid font-primary text-slate-100">
         <div className="bg-glass bg-transparent shadow-2xl backdrop-blur-glass rounded-[8px] w-4/5 md:w-7/12 h-full max-h-[80vh] md:max-h-[70vh] overflow-auto scrollbar-hide">
           <h1 className="pt-4 font-bold text-[19px] text-center md:text-[26px]">
             Privacy Policy
@@ -164,10 +161,8 @@ const PrivancyPolicy = () => {
         <h1 className="grid my-4 md:my-0 mt-0 md:mt-5 p-4 font-bold text-center text-white">
           To Communicate With You
         </h1>
-      </div>
-    </section>
-  );
-};
+    </div>
+  )
+}
 
-export default PrivancyPolicy;
-
+export default Policies
