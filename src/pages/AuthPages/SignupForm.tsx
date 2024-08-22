@@ -215,7 +215,7 @@ const SignupForm = () => {
           </p>
           and
           <p
-            onClick={() => navigate("/policies")}
+            onClick={() => navigate("/howtcuwork/policies")}
             className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
           >
             Privacy Policy
