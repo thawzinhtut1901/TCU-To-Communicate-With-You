@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { useSignUp } from "../../hooks";
-import { useEffect, useState } from "react";
-import { useAuthContext } from "@/context/authContext";
-import MobileImage from "@/components/authComponents/MobileImage";
 import { ButtonLoading } from "@/components/ui/buttonLoading";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
+import MobileImage from "@/components/authComponents/MobileImage";
+import { useSignUp } from "../../hooks";
+import { useAuthContext } from "@/context/authContext";
 
 interface Errors {
   email?: string;
@@ -24,26 +24,23 @@ const SignupForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const createAccount = useSignUp();
-  console.log(createAccount)
   const { OTPBoxHandler, accountData, setAccountData } = useAuthContext();
 
   useEffect(() => {
-    if(createAccount.isSuccess) {
-      console.log(createAccount.data)
+    if (createAccount.isSuccess) {
       OTPBoxHandler();
     }
   }, [createAccount.isSuccess]);
 
   useEffect(() => {
-    if(createAccount.isError) {
+    if (createAccount.isError) {
       const backendError = createAccount.error.message || "An unexpected error";
-
       setErrors((prevErrors) => ({
         ...prevErrors,
         email: backendError,
-      }))
+      }));
     }
-  })
+  }, [createAccount.isError]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -51,18 +48,19 @@ const SignupForm = () => {
     const validationErrors: Errors = {};
 
     if (!accountData.email) {
-      validationErrors.email = "* Email is required !";
+      validationErrors.email = "* Email is required!";
     } else if (!/\S+@\S+\.\S+/.test(accountData.email)) {
-      validationErrors.email = "Invalid Email !";
+      validationErrors.email = "Invalid Email!";
     }
+
     if (!accountData.password) {
-      validationErrors.password = "* Password is required !";
+      validationErrors.password = "* Password is required!";
     } else if (accountData.password.length < 8) {
-      validationErrors.password = "Password must be at least 8 characters !";
+      validationErrors.password = "Password must be at least 8 characters!";
     }
 
     if (confirmPassword !== accountData.password) {
-      validationErrors.confirmPassword = "Password does not match !";
+      validationErrors.confirmPassword = "Password does not match!";
     } else if (!confirmPassword) {
       validationErrors.confirmPassword = " ";
     }
@@ -71,8 +69,6 @@ const SignupForm = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       createAccount.mutate(accountData);
-      console.log(accountData);
-      // OTPBoxHandler();
     }
   };
 
@@ -96,22 +92,17 @@ const SignupForm = () => {
     setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
   return (
-    <div className="relative flex flex-col justify-center items-center h-screen">
-       <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
+    <div className="relative flex flex-col items-center justify-center h-screen">
+      <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
         TCU
       </h1>
       <MobileImage />
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="flex justify-center pt-3 lg:pt-0 font-medium font-primary text-lg text-white lg:text-2xl">
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="flex justify-center pt-3 text-lg font-medium text-white lg:pt-0 font-primary lg:text-2xl">
           Sign up
         </h2>
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-primary lg:font-thin text-[10px] text-white lg:text-[14px]">
@@ -125,20 +116,16 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             {errors.email && (
-              <span className="my-2 font-bold text-red-500 text-xs">
+              <span className="my-2 text-xs font-bold text-red-500">
                 {errors.email}
               </span>
             )}
-            <MdOutlineAlternateEmail className="top-3 right-3 absolute" />
+            <MdOutlineAlternateEmail className="absolute top-3 right-3" />
           </div>
         </div>
 
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-primary lg:font-thin text-[10px] text-white lg:text-[14px]">
-          <Label
-            htmlFor="password"
-          >
-            Password *
-          </Label>
+          <Label htmlFor="password">Password *</Label>
           <div className="relative">
             <Input
               type={showPassword ? "text" : "password"}
@@ -148,7 +135,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="top-3 right-5 absolute"
+              className="absolute top-3 right-5"
               onClick={toggleShowPassword}
             >
               {showPassword ? (
@@ -159,7 +146,7 @@ const SignupForm = () => {
             </button>
           </div>
           {errors.password && (
-            <span className="my-2 font-bold text-red-500 text-xs">
+            <span className="my-2 text-xs font-bold text-red-500">
               {errors.password}
             </span>
           )}
@@ -176,7 +163,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="top-3 right-5 absolute"
+              className="absolute top-3 right-5"
               onClick={toggleShowConfirmPassword}
             >
               {showConfirmPassword ? (
@@ -186,37 +173,36 @@ const SignupForm = () => {
               )}
             </button>
           </div>
-
           {errors.confirmPassword && (
-            <span className="my-2 font-bold text-red-500 text-xs">
+            <span className="my-2 text-xs font-bold text-red-500">
               {errors.confirmPassword}
             </span>
           )}
         </div>
 
         <div className="flex space-x-2 mx-auto mt-[20px] lg:mt-[50px] w-[350px] lg:w-[550px] font-primary font-thin text-[9px] text-white">
-          <Checkbox id="recieve-email" className="mt-1 rounded-[5px]" />
+          <Checkbox id="receive-email" className="mt-1 rounded-[5px]" />
           <Label
-            htmlFor="recieve-email"
-            className="text-[12px] lg:text-[14px] cursor-pointer"
+            htmlFor="receive-email"
+            className="text-[10px] lg:text-[14px] cursor-pointer"
           >
-            I want to receive emails about the product, feature updates, event
-            and marketing promotion.
+            I want to receive emails about the product, feature updates, events,
+            and marketing promotions.
           </Label>
         </div>
 
-        <h2 className="md:flex mx-auto mt-[24px] ms-0 lg:ms-20 w-[350px] lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[12px]">
+        <h2 className="flex mx-auto mt-[24px] ms-10 lg:ms-20 w-[350px] lg:w-[550px] font-primary font-thin text-[10px] text-white lg:text-[12px]">
           By creating an account, you agree to the{" "}
           <p
             onClick={() => navigate("/howtcuwork")}
-            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
+            className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
           >
             Terms
           </p>
           and
           <p
             onClick={() => navigate("/howtcuwork/policies")}
-            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
+            className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
           >
             Privacy Policy
           </p>
@@ -226,24 +212,23 @@ const SignupForm = () => {
           <Button
             onClick={handleSubmit}
             type="button"
-            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] border rounded-full font-primary font-thin text-[#8566FF] text-[12px] md:text-[14px]"
+            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] border rounded-full px-4 font-primary text-[#8566FF] text-[12px] lg:text-[14px]"
           >
             Create An Account
           </Button>
         ) : (
-          <div className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] border rounded-full font-primary font-thin text-[#8566FF] text-[12px] md:text-[14px]">
+          <div className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] border rounded-full font-primary text-[#8566FF] text-[12px] lg:text-[14px]">
             <ButtonLoading />
           </div>
         )}
 
-
         <h2 className="flex justify-center mx-auto mt-[14px] lg:mt-[18px] pb-[20px] lg:pb-0 w-full lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[14px]">
           Already have an account?{" "}
           <a
-            href="/"
-            className="md:hover:border-slate-50 hover:border-[#D24DF3] pl-1 border-transparent border-b-0 hover:border-b-2 text-[#D24DF3] lg:text-white"
+            href="/signin"
+            className="pl-1 font-bold text-[#1DA1F2] underline cursor-pointer"
           >
-            Log in
+            Log In
           </a>
         </h2>
       </div>
