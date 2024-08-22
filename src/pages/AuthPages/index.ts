@@ -6,6 +6,8 @@ import ForgetPaswMail from "./ForgetPaswMail";
 import ResetPassword from "./ResetPassword";
 import ForgetPswOTP from "./ForgetPswOTP";
 import ProfileSetup from "./ProfileSetup";
+import Terms from "./Terms";
+import Policies from "./Policies";
 
 export {
     LoginDesign,
@@ -16,4 +18,6 @@ export {
     ResetPassword,
     ForgetPswOTP,
     ProfileSetup,
+    Terms,
+    Policies,
 }

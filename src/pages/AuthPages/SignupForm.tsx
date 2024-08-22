@@ -9,6 +9,7 @@ import MobileImage from "@/components/authComponents/MobileImage";
 import { ButtonLoading } from "@/components/ui/buttonLoading";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 interface Errors {
   email?: string;
@@ -17,6 +18,7 @@ interface Errors {
 }
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -205,20 +207,19 @@ const SignupForm = () => {
 
         <h2 className="md:flex mx-auto mt-[24px] ms-0 lg:ms-20 w-[350px] lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[12px]">
           By creating an account, you agree to the{" "}
-          <a
-            href="/term-of-use"
-            className="px-1 font-bold text-blue-500 text-md underline"
+          <p
+            onClick={() => navigate("/howtcuwork")}
+            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
           >
-            Terms{" "}
-          </a>
+            Terms
+          </p>
           and
-          <a
-            href="/privacy-policy"
-            className="px-1 font-bold text-blue-500 text-md underline"
+          <p
+            onClick={() => navigate("/policies")}
+            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
           >
-            {" "}
             Privacy Policy
-          </a>
+          </p>
         </h2>
 
         {!createAccount.isPending ? (
