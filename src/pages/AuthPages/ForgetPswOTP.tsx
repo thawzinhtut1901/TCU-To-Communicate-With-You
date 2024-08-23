@@ -9,24 +9,40 @@ interface OTPBoxProps {
     onResend: () => void;
     setOtpCode: (code: string) => void;
     onClose: () => void;
-    timeLeft: number;
+    // timeLeft: number;
   }
 
-const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose, timeLeft }) => {
+// timeLeft
+
+const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, onClose }) => {
     const [otpCode, setLocalOtpCode] = useState<string>("");
-    const [showError, setShowError] = useState<boolean>(false);
+    // const [showError, setShowError] = useState<boolean>(false);
+    const [resendCoolDown, setResendCoolDown] = useState<number>(60);
 
     useEffect(() => {
         setOtpCode(otpCode); 
       }, [otpCode, setOtpCode]);
 
+    // useEffect(() => {
+    //   if(timeLeft === 0) {
+    //     setShowError(true)
+    //   }
+    // }, [timeLeft]);
+
     useEffect(() => {
-      if(timeLeft === 0) {
-        setShowError(true)
+      if(resendCoolDown > 0) {
+        const cooldownTimer = setInterval(() => {
+          setResendCoolDown((prev) => prev - 1);
+      }, 1000);
+
+      return () => clearInterval(cooldownTimer);
       }
-    }, [timeLeft]);
+    }, [resendCoolDown]);
 
-
+    const handleResend = () => {
+      onResend();
+      setResendCoolDown(60);
+  };
 
       const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
@@ -62,7 +78,7 @@ const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, o
           </InputOTPGroup>
         </InputOTP>
 
-        {
+        {/* {
           showError ? (
             <p className="font-semibold text-[14px] text-red-500 md:text-[18px]">
               Time's up! Please try again.
@@ -73,16 +89,20 @@ const ForgetPswOTP: React.FC<OTPBoxProps> = ({ onSubmit, onResend, setOtpCode, o
               <span className="text-main underline">{formatTime(timeLeft)}</span>
             </p>
           )
-        }
+        } */}
         
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={onSubmit} variant="otp">
             Confirm
           </Button>
-          <button onClick={onResend} className="font-semibold text-[14px] text-main md:text-[16px] underline cursor-pointer">
-            Resend Code Again
-          </button>
+          <div className="flex">
+            <button onClick={handleResend} disabled={resendCoolDown > 0} className={`font-semibold text-[14px] md:text-[16px] underline cursor-pointer ${resendCoolDown > 0 ? 'text-gray-400 cursor-not-allowed' : 'text-main'}`}>
+              Resend Code Again 
+            </button>
+            <p className="mt-[2px] md:mt-1 ml-1 font-bold text-[12px] text-slate-600 md:text-[14px]">{resendCoolDown > 0 && `(${formatTime(resendCoolDown)})`}</p>
+          </div>
         </div>
+
         <p className="font-semibold text-[14px] text-black md:text-[16px]">
           Have question?{" "}
           <span className="text-main cursor-pointer"> Email us</span>
