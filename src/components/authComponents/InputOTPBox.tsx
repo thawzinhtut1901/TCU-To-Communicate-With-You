@@ -17,8 +17,9 @@ import Swal from "sweetalert2";
 const InputOTPBox = () => {
   const { OTPBoxHandler, accountData } = useAuthContext();
   const [otpCode, setOtpCode] = useState<string>("");
-  const [timeLeft, setTimeLeft] = useState<number>(180);
-  const [showError, setShowError] = useState<boolean>(false);
+  const [resendCooldown, setResendCooldown] = useState<number>(60);
+  // const [timeLeft, setTimeLeft] = useState<number>(180);
+  // const [showError, setShowError] = useState<boolean>(false);
   const verifyEmail = useVerifyEmail();
   const resendOtp = useResendOtp();
   const navigate = useNavigate();
@@ -43,43 +44,36 @@ const InputOTPBox = () => {
     }
   }, [verifyEmail.isError]);
 
+  // useEffect(() => {
+  //   if(timeLeft === 0) {
+  //     setShowError(true)
+  //   }
+  // }, [timeLeft])
+
+  // useEffect(() => {
+  //   // Start the countdown
+  //   const countdown = setInterval(() => {
+  //     setTimeLeft((prevTime) => {
+  //       if (prevTime <= 1) {
+  //         clearInterval(countdown);
+  //         return 0;
+  //       }
+  //       return prevTime - 1;
+  //     });
+  //   }, 1000);
+
+  //   return () => clearInterval(countdown);
+  // }, [timeLeft]);
+
   useEffect(() => {
-    if(timeLeft === 0) {
-      setShowError(true)
+    if (resendCooldown > 0) {
+      const cooldownTimer = setInterval(() => {
+        setResendCooldown((prev) => prev - 1);
+      }, 1000);
+
+      return () => clearInterval(cooldownTimer);
     }
-  }, [timeLeft])
-
-  useEffect(() => {
-    // let countdown: NodeJS.Timeout;
-
-    // if (timeLeft > 0) { 
-    //   countdown = setInterval(() => {
-    //     setTimeLeft((prevTime) => {
-    //       if (prevTime <= 1) {
-    //         clearInterval(countdown);
-    //         return 0;
-    //       }
-    //       return prevTime - 1;
-    //     });
-    //   }, 1000); 
-    // } else {
-    //   setShowError(true);
-    // }
-
-    // return () => clearInterval(countdown);
-    // Start the countdown
-    const countdown = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(countdown);
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(countdown);
-  }, [timeLeft]);
+  }, [resendCooldown]);
 
   // Format time in MM:SS format
   const formatTime = (time: number) => {
@@ -106,8 +100,7 @@ const InputOTPBox = () => {
     const resendEmail = accountData?.email;
     console.log("Resend email:", resendEmail);
     resendOtp.mutate(resendEmail);
-    setShowError(false);
-    setTimeLeft(180);
+    setResendCooldown(60);
   };
 
   return (
@@ -137,7 +130,7 @@ const InputOTPBox = () => {
             ))}
           </InputOTPGroup>
         </InputOTP>
-        {
+        {/* {
           showError ? (
             <p className="font-semibold text-red-500 text-sm md:text-base">
               Time is up! Please request a new OTP.
@@ -148,18 +141,22 @@ const InputOTPBox = () => {
               <span className="text-main underline">{formatTime(timeLeft)}</span>
             </p>
           )
-        }
+        } */}
         
         <div className="flex flex-col justify-center items-center gap-2">
           <Button onClick={handleSubmit} variant="otp">
             Confirm
           </Button>
+          <div className="flex">
           <button
             onClick={handleResendOtp}
-            className="font-semibold text-main text-xs md:text-base underline cursor-pointer"
+            disabled={resendCooldown > 0}
+            className={`font-semibold text-[14px] md:text-[16px] underline cursor-pointer ${resendCooldown > 0 ? 'text-gray-400 cursor-not-allowed' : 'text-main'}`}
           >
             Resend Code Again
           </button>
+          <p className="mt-[2px] md:mt-1 ml-1 font-bold text-[12px] text-slate-600 md:text-[14px]">{resendCooldown > 0 && `(${formatTime(resendCooldown)})`}</p>
+          </div>
         </div>
         <p className="py-2 md:py-0 font-semibold text-xs md:text-base">
           Have questions?{" "}
