@@ -18,16 +18,15 @@ const ForgetPaswMail = () => {
   const [showOtpBox, setShowOtpBox] = useState<boolean>(false);
   const [otp, setOtpCode] = useState<string>("");
   const [errors, setErrors] = useState<Errors>({});
-  const [timeLeft, setTimeLeft] = useState<number>(180);
+  // const [timeLeft, setTimeLeft] = useState<number>(180);
   const navigate = useNavigate();
   const sendEmail = useForgetPassword(email);
   const ResetPsw = useResetPassword();
-  console.log(ResetPsw)
 
   useEffect(() => {
     if(sendEmail.isSuccess){
       setShowOtpBox(true);
-      setTimeLeft(180);
+      // setTimeLeft(180);
     }
   }, [sendEmail.isSuccess]);
 
@@ -71,15 +70,15 @@ const ForgetPaswMail = () => {
     };
   }, [ResetPsw.isError])
 
-  useEffect(() => {
-    if (showOtpBox && timeLeft > 0) {
-      const countdown = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
+  // useEffect(() => {
+  //   if (showOtpBox && timeLeft > 0) {
+  //     const countdown = setInterval(() => {
+  //       setTimeLeft((prevTime) => prevTime - 1);
+  //     }, 1000);
 
-      return () => clearInterval(countdown);
-    }
-  }, [showOtpBox, timeLeft]);
+  //     return () => clearInterval(countdown);
+  //   }
+  // }, [showOtpBox, timeLeft]);
 
   const handleContinue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -118,7 +117,7 @@ const ForgetPaswMail = () => {
   return (
     <div className="md:my-[150px] md:ml-[120px] w-[350px] md:w-[450px] font-poppins text-white">
         <h1 className="flex justify-center md:hidden my-[32px] font-semibold text-[20px]">Forgot Password</h1>
-
+        
         <Label htmlFor="email" className="md:text-[18px]">
             Enter Your Email Address
         </Label>
@@ -153,9 +152,11 @@ const ForgetPaswMail = () => {
           )
         }
 
-        {!sendEmail.isPending && showOtpBox && <ForgetPswOTP timeLeft={timeLeft} onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
+        {!sendEmail.isPending && showOtpBox && <ForgetPswOTP  onSubmit={handleOtpSubmit} onResend={sendEmail.mutate} setOtpCode={setOtpCode} onClose={onClose}/>}
     </div>
   )
 }
 
 export default ForgetPaswMail;
+
+// timeLeft={timeLeft}
