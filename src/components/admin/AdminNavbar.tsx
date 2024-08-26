@@ -6,16 +6,16 @@ import profile from "../../assets/avatar.jpg";
 
 const AdminNavbar: React.FC = () => {
   return (
-    <div className="flex items-center justify-between w-full px-20 py-4 bg-main">
+    <div className="sticky top-0 right-0 z-10 flex items-center justify-between w-full px-20 py-4 bg-main">
       <div className="relative">
         <IoIosSearch
-          className="absolute top-[7px] left-2"
+          className="absolute top-[7px] right-2"
           size="20px"
           color="gray"
         />
         <input
           className="w-[300px] rounded-full px-4 py-1"
-          placeholder="    Search"
+          placeholder="Search"
         />
       </div>
       <div className="flex items-center justify-center gap-4">

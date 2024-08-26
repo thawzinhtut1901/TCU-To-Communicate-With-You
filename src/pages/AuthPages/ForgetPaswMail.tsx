@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from "react-router-dom"
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
@@ -67,7 +68,7 @@ const ForgetPaswMail = () => {
         text: ResetPsw.error.message,
         timer: 2000,
       });
-    };
+    }
   }, [ResetPsw.isError])
 
   // useEffect(() => {
@@ -131,7 +132,7 @@ const ForgetPaswMail = () => {
         />
 
             {errors.email && (
-              <span className="flex mt-1 ml-3 font-bold text-red-500 text-xs">
+              <span className="flex mt-1 ml-3 text-xs font-bold text-red-500">
                 {errors.email}
               </span>
             )}
