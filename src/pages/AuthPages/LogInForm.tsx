@@ -116,7 +116,7 @@ const LogInForm = () => {
               onChange={emailHandler}
               className="rounded-[8px]"
             />
-            <IoPerson className="absolute top-3 right-4" />
+            <IoPerson className="absolute top-3 right-4" color="gray" />
           </div>
           {errors.emailOrUserName && (
             <span className="my-2 ml-2 text-xs font-bold text-red-500">
@@ -142,10 +142,10 @@ const LogInForm = () => {
             />
             <button onClick={toggleShowPassword}>
               {showPassword ? (
-                <PiEyeBold color="slate" className="absolute top-3 right-5" />
+                <PiEyeBold color="gray" className="absolute top-3 right-5" />
               ) : (
                 <PiEyeClosedBold
-                  color="slate"
+                  color="gray"
                   className="absolute top-3 right-5"
                 />
               )}
@@ -157,7 +157,7 @@ const LogInForm = () => {
             </span>
           )}
           <div className="flex items-center justify-between">
-            <NavLink to="/forget-password">
+            <NavLink to="/auth/forget-password">
               <h1 className="w-fit font-primary text-[12px] underline cursor-pointer">
                 Forget Password
               </h1>
@@ -201,7 +201,7 @@ const LogInForm = () => {
         </div>
         <h2 className="flex justify-center mt-[12px] md:mt-[20px] pb-[10px] md:pb-0 font-primary font-thin text-[14px] text-white md:text-[16px] cursor-default">
           Don't have an account?{" "}
-          <NavLink to="/sign-up">
+          <NavLink to="/auth/sign-up">
             <span className="flex hover:border-[#D24DF3] ml-1 border-transparent border-b-0 hover:border-b-2 w-fit text-[#D24DF3] cursor-pointer">
               Sign Up{" "}
             </span>

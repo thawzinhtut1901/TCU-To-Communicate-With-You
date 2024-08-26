@@ -120,7 +120,7 @@ const SignupForm = () => {
                 {errors.email}
               </span>
             )}
-            <MdOutlineAlternateEmail className="absolute top-3 right-3" />
+            <MdOutlineAlternateEmail className="absolute top-3 right-3" color="gray" />
           </div>
         </div>
 
@@ -139,9 +139,9 @@ const SignupForm = () => {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <PiEyeBold color="slate" />
+                <PiEyeBold color="gray" />
               ) : (
-                <PiEyeClosedBold color="slate" />
+                <PiEyeClosedBold color="gray" />
               )}
             </button>
           </div>
@@ -167,9 +167,9 @@ const SignupForm = () => {
               onClick={toggleShowConfirmPassword}
             >
               {showConfirmPassword ? (
-                <PiEyeBold color="slate" />
+                <PiEyeBold color="gray" />
               ) : (
-                <PiEyeClosedBold color="slate" />
+                <PiEyeClosedBold color="gray" />
               )}
             </button>
           </div>
@@ -194,14 +194,14 @@ const SignupForm = () => {
         <h2 className="flex mx-auto mt-[24px] ms-10 lg:ms-20 w-[350px] lg:w-[550px] font-primary font-thin text-[10px] text-white lg:text-[12px]">
           By creating an account, you agree to the{" "}
           <p
-            onClick={() => navigate("/howtcuwork")}
+            onClick={() => navigate("/auth/howtcuwork")}
             className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
           >
             Terms
           </p>
           and
           <p
-            onClick={() => navigate("/howtcuwork/policies")}
+            onClick={() => navigate("/auth/howtcuwork/policies")}
             className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
           >
             Privacy Policy
@@ -225,7 +225,7 @@ const SignupForm = () => {
         <h2 className="flex justify-center mx-auto mt-[14px] lg:mt-[18px] pb-[20px] lg:pb-0 w-full lg:w-[550px] font-primary font-thin text-[12px] text-white lg:text-[14px]">
           Already have an account?{" "}
           <a
-            href="/signin"
+            href="/auth/login"
             className="pl-1 font-bold text-[#1DA1F2] underline cursor-pointer"
           >
             Log In
