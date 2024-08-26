@@ -31,6 +31,9 @@ export default {
         primary: ["Prompt", "sans-serif"],
         roman: ["Cormorant Garamond", "serif"],
       },
+      borderRadius: {
+        'custom-top': '20px 20px 0 0', // Custom radius for rounded top corners
+      },
       colors: {
         main: "#8566FF",
         main2: "#591DA9",

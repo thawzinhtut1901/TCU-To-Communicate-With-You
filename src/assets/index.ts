@@ -7,6 +7,13 @@ import logoMobile from "./LogoMobile.png";
 import forgetPswLogo from "./ForgetPswLogo.png";
 import gmailLogo from "./gmail-logo.png";
 import Avatar from "./avatar.jpg";
+import Chat from "./Chat.png";
+import findFri from "./Find_Friend.png"
+import groupChat from "./GroupChats.png";
+import Profile from "./Profile.png";
+import Relationship from "./Relation.png";
+import Setting from "./Settings.png";
+import suggestionFrame from "./SuggestionFrame.png";
 
 export {
     TCULogCom,
@@ -18,4 +25,11 @@ export {
     forgetPswLogo,
     gmailLogo,
     Avatar,
+    Chat,
+    findFri,
+    groupChat,
+    Profile,
+    Relationship,
+    Setting,
+    suggestionFrame,
 }
