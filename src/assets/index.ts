@@ -14,6 +14,10 @@ import Profile from "./Profile.png";
 import Relationship from "./Relation.png";
 import Setting from "./Settings.png";
 import suggestionFrame from "./SuggestionFrame.png";
+import Fliter from "./filter.png";
+import statusIcon from "./statusIcon.png";
+import accountType from "./AccountType.png";
+import dropDown from "./Back.png";
 
 export {
     TCULogCom,
@@ -32,4 +36,8 @@ export {
     Relationship,
     Setting,
     suggestionFrame,
+    Fliter,
+    statusIcon,
+    accountType,
+    dropDown,
 }
