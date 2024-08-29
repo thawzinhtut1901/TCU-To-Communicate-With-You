@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom"
 
 const AdminDashboardLayout = () => {
   return (
-    <div className="flex w-screen h-screen overflow-y-hidden">
+    <div className="flex w-screen h-screen overflow-hidden">
         <AdminSidebar/>
-        <div className="flex flex-col w-4/5 h-screen bg-gray-50">
+        <div className="flex flex-col bg-gray-100 w-4/5">
             <AdminNavbar/>
             <Outlet/>
         </div>

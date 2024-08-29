@@ -82,10 +82,10 @@ const data = [
 const ActiveUserChart = () => {
   const [position, setPosition] = React.useState("bottom");
   return (
-    <div className="w-[640px] px-4 py-8 flex flex-col rounded shadow-lg bg-white">
-      <div className="flex items-center justify-between pb-10">
+    <div className="flex flex-col bg-white shadow-lg px-4 py-8 rounded w-[640px]">
+      <div className="flex justify-between items-center pb-10">
         <div className="flex items-center gap-2 px-10">
-          <p className="w-2 h-2 rounded-full bg-main"></p>
+          <p className="bg-main rounded-full w-2 h-2"></p>
           <p className="text-sm">Active Users</p>
         </div>
         <DropdownMenu>
@@ -95,7 +95,7 @@ const ActiveUserChart = () => {
               <IoIosArrowDown />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-8 bg-white rounded">
+          <DropdownMenuContent className="bg-white rounded w-8">
             <DropdownMenuRadioGroup
               className="text-main"
               value={position}

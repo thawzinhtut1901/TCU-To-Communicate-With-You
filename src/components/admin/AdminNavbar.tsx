@@ -6,32 +6,32 @@ import profile from "../../assets/avatar.jpg";
 
 const AdminNavbar: React.FC = () => {
   return (
-    <div className="sticky top-0 right-0 z-10 flex items-center justify-between w-full px-20 py-4 bg-main">
+    <div className="top-0 right-0 z-10 sticky flex justify-between items-center bg-main px-20 py-4 w-full">
       <div className="relative">
         <IoIosSearch
-          className="absolute top-[7px] right-2"
+          className="top-[7px] right-2 absolute"
           size="20px"
           color="gray"
         />
         <input
-          className="w-[300px] rounded-full px-4 py-1"
+          className="px-4 py-1 rounded-full w-[300px]"
           placeholder="Search"
         />
       </div>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex justify-center items-center gap-4">
         <div className="relative">
-          <span className="absolute w-[14px] h-[14px] top-[-5px] right-[-2px] text-center text-[10px] text-white bg-red-500 rounded-full">
+          <span className="top-[-5px] right-[-2px] absolute bg-red-500 rounded-full w-[14px] h-[14px] text-[10px] text-center text-white">
             12
           </span>
           <FaBell color="white" size="24px" />
         </div>
         <LanguageSwitcher />
         <div className="flex items-center gap-3">
-          <img src={profile} className="w-10 h-10 rounded-full" alt="Profile" />
-          <div className="flex flex-col items-start justify-center gap-1">
+          <img src={profile} className="rounded-full w-10 h-10" alt="Profile" />
+          <div className="flex flex-col justify-center items-start gap-1">
             <h3 className="text-white">John Doe</h3>
           </div>
-          <button className="text-white border rounded-full">
+          <button className="border rounded-full text-white">
             <MdKeyboardArrowDown size="20px" />
           </button>
         </div>

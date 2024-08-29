@@ -20,12 +20,12 @@ const gender = [
 
 const GenderPieChart = () => {
   return (
-    <div className="flex flex-col items-center bg-white w-[390px] shadow-lg">
+    <div className="flex flex-col items-center bg-white shadow-lg w-[390px]">
       <div className="flex gap-2">
         {gender.map((data, index) => (
           <div key={index} className="flex items-center gap-2 py-2">
             <p
-              className="w-2 h-2 rounded-full"
+              className="rounded-full w-2 h-2"
               style={{ backgroundColor: data.color }}
             ></p>
             <p className="text-sm">{data.name}</p>

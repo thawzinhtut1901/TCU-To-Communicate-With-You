@@ -93,16 +93,16 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen gap-10 px-2">
+    <div className="relative flex flex-col justify-center items-center gap-10 px-2 h-screen">
       {/* Title */}
       <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
         TCU
       </h1>
       {/* Mobile image */}
       <MobileImage />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col justify-center items-center">
         {/* sub title */}
-        <h2 className="flex justify-center text-lg font-medium text-white font-primary lg:text-2xl">
+        <h2 className="flex justify-center font-medium font-primary text-lg text-white lg:text-2xl">
           Log in
         </h2>
         {/* email or username */}
@@ -116,10 +116,10 @@ const LogInForm = () => {
               onChange={emailHandler}
               className="rounded-[8px]"
             />
-            <IoPerson className="absolute top-3 right-4" color="gray" />
+            <IoPerson className="top-3 right-4 absolute" color="gray" />
           </div>
           {errors.emailOrUserName && (
-            <span className="my-2 ml-2 text-xs font-bold text-red-500">
+            <span className="my-2 ml-2 font-bold text-red-500 text-xs">
               {errors.emailOrUserName}
             </span>
           )}
@@ -142,21 +142,21 @@ const LogInForm = () => {
             />
             <button onClick={toggleShowPassword}>
               {showPassword ? (
-                <PiEyeBold color="gray" className="absolute top-3 right-5" />
+                <PiEyeBold color="gray" className="top-3 right-5 absolute" />
               ) : (
                 <PiEyeClosedBold
                   color="gray"
-                  className="absolute top-3 right-5"
+                  className="top-3 right-5 absolute"
                 />
               )}
             </button>
           </div>
           {errors.password && (
-            <span className="pb-2 ml-2 text-xs font-bold text-red-500">
+            <span className="ml-2 pb-2 font-bold text-red-500 text-xs">
               {errors.password}
             </span>
           )}
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between items-center">
             <NavLink to="/auth/forget-password">
               <h1 className="w-fit font-primary text-[12px] underline cursor-pointer">
                 Forget Password
@@ -178,12 +178,12 @@ const LogInForm = () => {
           <Button
             type="button"
             onClick={handleSubmit}
-            className="flex flex-col justify-center bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-5 lg:mt-[20px] md:border rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-white md:text-black"
+            className="flex flex-col justify-center bg-[#8566FF] hover:bg-purple-500 mx-auto mt-5 lg:mt-[20px] rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-white"
           >
             Log In
           </Button>
         ) : (
-          <div className="flex flex-col justify-center bg-[#8566FF] md:bg-slate-50 md:hover:bg-slate-300 hover:bg-purple-500 mx-auto mt-5 lg:mt-[20px]] md:border rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-black">
+          <div className="flex flex-col justify-center bg-[#8566FF] hover:bg-purple-500 mx-auto mt-5 lg:mt-[20px] rounded-full w-[250px] lg:w-[500px] font-primary font-thin text-[14px] text-white">
             <ButtonLoading />
           </div>
         )}
@@ -196,7 +196,7 @@ const LogInForm = () => {
           Continue with Google
         </Button>
         {/* Google */}
-        <div className=" hidden lg:flex items-center mx-auto mt-[20px] md:mt-[50px] w-full md:w-[550px]">
+        <div className="lg:flex items-center hidden mx-auto mt-[20px] md:mt-[50px] w-full md:w-[550px]">
           <hr className="flex-grow border-t-2" />
         </div>
         <h2 className="flex justify-center mt-[12px] md:mt-[20px] pb-[10px] md:pb-0 font-primary font-thin text-[14px] text-white md:text-[16px] cursor-default">

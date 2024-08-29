@@ -1,6 +1,6 @@
 import { ForgetPassLayout, LogInLayout, ProfileSetupLayout, SignUpLayout, TermsPolicyLayout } from "@/Layouts/AuthLayouts";
 import AuthLayout from "@/Layouts/AuthLayouts/AuthLayout";
-import { ForgetPaswMail, Policies, ResetPassword, Terms } from "@/pages/AuthPages";
+import { ForgetPaswMail, FriendSuggestion, Policies, ResetPassword, Terms } from "@/pages/AuthPages";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const AuthRouter: RouteObject[] = [
@@ -41,6 +41,10 @@ const AuthRouter: RouteObject[] = [
       {
         path: "profile-setup",
         element: <ProfileSetupLayout />,
+      },
+      {
+        path: "people-you-may-know",
+        element: <FriendSuggestion/>
       },
       {
         path: "howtcuwork",

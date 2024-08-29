@@ -30,9 +30,15 @@ export default {
       fontFamily: {
         primary: ["Prompt", "sans-serif"],
         roman: ["Cormorant Garamond", "serif"],
+        roboto: ['Roboto', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        luxuriousRoman: ['"Playfair Display"', 'serif'],
       },
       borderRadius: {
         'custom-top': '20px 20px 0 0', // Custom radius for rounded top corners
+      },
+      boxShadow: {
+        'custom-grey-inner': 'inset 3px 2px 4px 4px rgba(156, 163, 175, 0.5)', // Custom gray-400 inner shadow
       },
       colors: {
         main: "#8566FF",
