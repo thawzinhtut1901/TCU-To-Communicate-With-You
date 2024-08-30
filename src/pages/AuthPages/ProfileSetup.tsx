@@ -36,7 +36,7 @@ const ProfileSetup = () => {
 
   useEffect(() => {
     if(ProfileSetup.isSuccess) {
-      navigate("/home")
+      navigate("/auth/people-you-may-know")
     }
   }, [ProfileSetup.isSuccess]);
 
@@ -126,7 +126,7 @@ const ProfileSetup = () => {
                 id="username"
                 value={formData.userName}
                 onChange={handleUserName}
-                className="border-white rounded-[8px] w-full text-white"
+                className="border-white rounded-[8px] w-full"
               />
 
               {
@@ -177,7 +177,7 @@ const ProfileSetup = () => {
               </Label>
               <div className="mt-1">
                 <Select value={formData.gender} onValueChange={handleGender}>
-                  <SelectTrigger className="rounded-xl w-[160px] md:w-full text-white">
+                  <SelectTrigger className="rounded-xl w-[160px] md:w-full">
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                   <SelectContent className="bg-slate-200 rounded-xl">

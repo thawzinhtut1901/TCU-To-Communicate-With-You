@@ -8,6 +8,7 @@ import ForgetPswOTP from "./ForgetPswOTP";
 import ProfileSetup from "./ProfileSetup";
 import Terms from "./Terms";
 import Policies from "./Policies";
+import FriendSuggestion from "./FriendSuggestion";
 
 export {
     LoginDesign,
@@ -20,4 +21,5 @@ export {
     ProfileSetup,
     Terms,
     Policies,
+    FriendSuggestion,
 }

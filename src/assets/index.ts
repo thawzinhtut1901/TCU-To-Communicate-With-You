@@ -18,6 +18,7 @@ import Fliter from "./filter.png";
 import statusIcon from "./statusIcon.png";
 import accountType from "./AccountType.png";
 import dropDown from "./Back.png";
+import friSuggestionProfile from "./friendSuggestion.png";
 
 export {
     TCULogCom,
@@ -40,4 +41,5 @@ export {
     statusIcon,
     accountType,
     dropDown,
+    friSuggestionProfile,
 }
