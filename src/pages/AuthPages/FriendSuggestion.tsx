@@ -97,6 +97,22 @@ const FriendSuggestion = () => {
             </div>
 
           </div>
+          
+          <div className="bg-[#007AFF] bg-opacity-75 rounded-[10px] w-[350px] h-[90px] md:h-[120px]">
+            <div className="flex mt-[12px] md:mt-[18px]">
+              <img src={friSuggestionProfile} alt="" className="ml-[18px] rounded-[8px] w-[40px] md:w-[60px] h-[40px] md:h-[60px]"/>
+              <div className="flex flex-col mx-auto font-poppins">
+                <h1 className="text-[18px] text-white md:text-[24px]">Toli Moli</h1>
+                <p className="font-light text-[10px] text-slate-200 md:text-[12px]">Followed by 312</p>
+
+                <div className="flex gap-x-4">
+                  <Button className="bg-blue-600 hover:bg-blue-500 rounded-[8px] w-[100px] h-[30px] md:h-[40px] text-[12px] text-white hover:text-slate-100">Confirm</Button>
+                  <Button className="bg-white hover:bg-slate-100 rounded-[8px] w-[100px] h-[30px] md:h-[40px] text-[12px] text-red-600 hover:text-red-300">Delete</Button>
+                </div>
+              </div>
+            </div>
+
+          </div>
 
           
         </div>

@@ -314,7 +314,7 @@ const Users = () => {
           <li>totomomolili@gmail.com</li>
         </ul>
 
-        <ul onClick={() => handleClick(9)} className={`items-center gap-x-5 grid grid-cols-10 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[9] ? "bg-blue-200" : ""}`}> 
+        <ul onClick={() => handleClick(9)} className={`items-center gap-x-5 grid grid-cols-10 py-[15px] font-roboto text-[14px] text-center ${isChecked[9] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
               type="checkbox"
