@@ -1,23 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { Chat, findFri, groupChat, Profile, Setting, Relationship } from "@/assets";
 import "./type.css";
-import { useGetPublishQuotes } from "@/hooks";
+import { useGetMe, useGetPublishQuotes } from "@/hooks";
+import { Button } from "@/components/ui/button";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const HomePages = () => {
   const navigate = useNavigate();
   const  {data: getPublishQuotes} = useGetPublishQuotes();
+  const {data: getMe} = useGetMe();
 
-  
   return (
     <div className="flex flex-col">
       {/* TCU Heading */}
-      <h1 className="md:my-[20px] md:ml-[87px] font-roman text-[35px] text-center text-white md:text-start md:text-[50px]">
-        TCU
-      </h1>
-
+      <div className="flex justify-between">
+        <h1 className="md:my-[20px] md:ml-[87px] font-roman text-[35px] text-center text-white md:text-start md:text-[50px]">
+          TCU
+        </h1>
+        {
+          getMe?.role === "Admin" && (
+            <div onClick={() => navigate("/admin-dashboard")} className="flex">
+              <Button className="gap-x-1 font-poppins font-semibold text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
+            </div>
+          )
+        }
+      </div>
       <div className="flex flex-col items-center">
               {/* Top Bar */}
-
         {
           getPublishQuotes?.map((quotes:any) => (
             <div key={quotes.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
@@ -31,37 +40,37 @@ const HomePages = () => {
       <div className="flex md:flex-row flex-col md:gap-4 md:gap-x-6 mt-[20px] md:mt-[40px] md:w-full md:max-w-[70rem]">
         <div className="flex-1 gap-4 grid grid-cols-3">
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/chats")}
             src={Chat}
             alt="Chats"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"
           />
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("")}
             src={findFri}
             alt="Find Friends"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"
           />
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("")}
             src={groupChat}
             alt="Group Chats"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"
           />
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/profile")}
             src={Profile}
             alt="Profile"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"
           />
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("")}
             src={Setting}
             alt="Settings"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"
           />
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("")}
             src={Relationship}
             alt="Relationship"
             className="shadow-lg shadow-slate-800 w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"

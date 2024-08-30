@@ -1,6 +1,6 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import UserLayout from "@/Layouts/UserLayout";
-import { HomeLayout } from "@/Layouts/UserLayouts";
+import { ChatLayouts, HomeLayout, UserProfileLayout } from "@/Layouts/UserLayouts";
 
 const UserRouter: RouteObject[] = [
   {
@@ -16,6 +16,14 @@ const UserRouter: RouteObject[] = [
         element: <HomeLayout />,
       },
     ],
+  },
+  {
+    path: "/profile",
+    element: <UserProfileLayout/>
+  },
+  {
+    path: "/chats",
+    element: <ChatLayouts/>
   },
 ];
 
