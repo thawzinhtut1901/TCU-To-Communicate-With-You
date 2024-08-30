@@ -26,3 +26,7 @@ export type profileSetupData = {
   dateOfBirth?: string;
   gender: string;
 }
+
+export type userPublicQuotesData = {
+  quote: string;
+}
