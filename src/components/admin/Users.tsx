@@ -75,7 +75,7 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] w-full text-white">
             Confirm
             <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
@@ -101,10 +101,10 @@ const Users = () => {
             <span className="text-[#E10101]">Private</span>
           </li>
           <li className="flex justify-center gap-x-1">
-          <BiSolidCircle className="border-[#A83434] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#E10101]"/>
+            <BiSolidCircle className="border-[#A83434] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#E10101]"/>
             <span className="text-[#E10101]">Poor</span>
           </li>
-          <li className="flex gap-x-2 bg-[#E10101] p-2 rounded-[10px] text-white">
+          <li className="flex gap-x-1 bg-[#E10101] p-2 rounded-[10px] w-full text-white">
             Delete
             <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
@@ -130,12 +130,13 @@ const Users = () => {
             <span className="text-[#34A853]">Public</span>
           </li>
           <li className="flex justify-center gap-x-1">
-          <BiSolidCircle className="border-[#914F08] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#FC970A]"/>
+            <BiSolidCircle className="border-[#914F08] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#FC970A]"/>
             <span className="text-[#F98100]">Risk</span>
           </li>
-          <li className="flex gap-x-[2px] bg-[#FC970A] p-2 rounded-[10px] text-[11px] text-white">
+          
+          <li className="flex bg-[#FC970A] p-2 rounded-[10px] text-[11px] text-white">
             Suspended
-            <AiOutlineDown className="border-slate-50 mt-[2px] border rounded-[3px] w-[12px] h-[12px]"/>
+            <AiOutlineDown className="border-slate-50 mt-[2px] border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -345,17 +346,17 @@ const Users = () => {
 
       </div>
 
-      <div className="flex gap-x-2 my-[30px]">
+      <div className="flex justify-center gap-x-2 my-[30px]">
         <div className="flex gap-x-3 mt-1 font-roboto text-[#9054DE]">
           <h1 className="font-bold text-[16px] uppercase">page</h1>
-          <p className="flex gap-x-1 bg-[#9054DE] px-1 py-[2px] rounded-[4px] h-[27px] text-[16px] text-white">
+          <p className="flex gap-x-1 bg-[#9054DE] px-1 rounded-[4px] h-[20px] text-[14px] text-white">
             1 <AiOutlineDown className="mt-[5px] w-[12px] h-[12px]"/>
           </p>
           <h1 className="font-bold text-[16px] uppercase">of</h1>
           <p className="font-bold text-[16px]">10</p>
         </div>
 
-        <div className="flex ml-24 text-[16px]">
+        <div className="flex ml-[20px] text-[16px]">
           <h1 className="flex gap-x-1 mt-1 font-bold font-roboto text-[#9054DE] uppercase"><BsChevronDoubleLeft className="mt-1"/>First</h1>
           <Stack spacing={1}>
             <Pagination 

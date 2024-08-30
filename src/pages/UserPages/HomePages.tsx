@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Chat, findFri, groupChat, Profile, Setting, Relationship } from "@/assets";
 import "./type.css";
+import { useGetPublishQuotes } from "@/hooks";
 
 const HomePages = () => {
   const navigate = useNavigate();
+  const  {data: getPublishQuotes} = useGetPublishQuotes();
+
   
   return (
     <div className="flex flex-col">
@@ -14,9 +17,15 @@ const HomePages = () => {
 
       <div className="flex flex-col items-center">
               {/* Top Bar */}
-      <div className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
-        Nah, I will win!
-      </div>
+
+        {
+          getPublishQuotes?.map((quotes:any) => (
+            <div key={quotes.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
+                {quotes.quote}
+            </div>
+          ))
+        }
+      
 
       {/* Main Content */}
       <div className="flex md:flex-row flex-col md:gap-4 md:gap-x-6 mt-[20px] md:mt-[40px] md:w-full md:max-w-[70rem]">
