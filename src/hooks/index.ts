@@ -4,6 +4,7 @@ import { useForgetPassword } from "./useAuth";
 import { useResetPassword } from "./useAuth";
 import { useProfileSetUp } from "./useAuth";
 import { useGetPublishQuotes } from "./useHome";
+import { useGetMe } from "./useUser";
 
 export { 
     useSignUp, 
@@ -12,4 +13,5 @@ export {
     useResetPassword,
     useProfileSetUp,
     useGetPublishQuotes,
+    useGetMe,
 };
