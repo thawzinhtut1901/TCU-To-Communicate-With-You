@@ -75,14 +75,14 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] w-full text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] w-full h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
 
-        <ul onClick={() => handleClick(1)} className={`items-center gap-x-5 grid grid-cols-10 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[1] ? "bg-blue-200" : ""}`}> 
+        {/* <ul onClick={() => handleClick(1)} className={`items-center gap-x-5 grid grid-cols-10 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[1] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
                   type="checkbox"
@@ -104,9 +104,9 @@ const Users = () => {
             <BiSolidCircle className="border-[#A83434] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#E10101]"/>
             <span className="text-[#E10101]">Poor</span>
           </li>
-          <li className="flex gap-x-1 bg-[#E10101] p-2 rounded-[10px] w-full text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#E10101] rounded-[10px] w-full h-[40px] text-white">
             Delete
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -134,9 +134,9 @@ const Users = () => {
             <span className="text-[#F98100]">Risk</span>
           </li>
           
-          <li className="flex bg-[#FC970A] p-2 rounded-[10px] text-[11px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#FC970A] rounded-[10px] h-[40px] text-[12px] text-white">
             Suspended
-            <AiOutlineDown className="border-slate-50 mt-[2px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -163,9 +163,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -192,9 +192,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -221,9 +221,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -250,9 +250,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -279,9 +279,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -308,9 +308,9 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
         </ul>
@@ -337,12 +337,12 @@ const Users = () => {
           <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
             <span className="text-[#34A853]">Good</span>
           </li>
-          <li className="flex gap-x-1 bg-[#4B9A52] p-2 rounded-[10px] text-white">
+          <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
             Confirm
-            <AiOutlineDown className="border-slate-50 mt-[5px] border rounded-[3px] w-[11px] h-[11px]"/>
+            <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
           </li>
           <li>totomomolili@gmail.com</li>
-        </ul>
+        </ul> */}
 
       </div>
 

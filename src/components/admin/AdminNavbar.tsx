@@ -3,8 +3,11 @@ import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import LanguageSwitcher from "./LanguageSwitcher";
 import profile from "../../assets/avatar.jpg";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const AdminNavbar: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="top-0 right-0 z-10 sticky flex justify-between items-center bg-main px-20 py-4 w-full">
       <div className="relative">
@@ -19,6 +22,9 @@ const AdminNavbar: React.FC = () => {
         />
       </div>
       <div className="flex justify-center items-center gap-4">
+        <div>
+          <Button onClick={() => navigate("/home")} className="text-white">Go back to user account</Button>
+        </div>
         <div className="relative">
           <span className="top-[-5px] right-[-2px] absolute bg-red-500 rounded-full w-[14px] h-[14px] text-[10px] text-center text-white">
             12

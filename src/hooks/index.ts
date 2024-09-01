@@ -5,6 +5,7 @@ import { useResetPassword } from "./useAuth";
 import { useProfileSetUp } from "./useAuth";
 import { useGetPublishQuotes } from "./useHome";
 import { useGetMe } from "./useUser";
+import { getUserAccountType } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -14,4 +15,5 @@ export {
     useProfileSetUp,
     useGetPublishQuotes,
     useGetMe,
+    getUserAccountType,
 };

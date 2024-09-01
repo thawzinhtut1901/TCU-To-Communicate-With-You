@@ -44,7 +44,7 @@ const Groups = () => {
           <li>group name</li>
           <li>group owner</li>
           <li>total members</li>
-          <li>account type</li>
+          <li>group type</li>
           <li>group status</li>
           <li>action</li>
         </ul>
@@ -122,11 +122,11 @@ const Groups = () => {
           </li>
         </ul>
 
-        <ul onClick={() => handleClick(0)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[0] ? "bg-blue-200" : ""}`}> 
+        <ul onClick={() => handleClick(3)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[3] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
                 type="checkbox"
-                checked={isChecked[0]}
+                checked={isChecked[3]}
             />
           </li>
           <li className="text-slate-500">Pok Lok Pel Sar</li>
@@ -146,11 +146,11 @@ const Groups = () => {
           </li>
         </ul>
         
-        <ul onClick={() => handleClick(0)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[0] ? "bg-blue-200" : ""}`}> 
+        <ul onClick={() => handleClick(4)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[4] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
                 type="checkbox"
-                checked={isChecked[0]}
+                checked={isChecked[4]}
             />
           </li>
           <li className="text-slate-500">Pok Lok Pel Sar</li>
@@ -170,11 +170,11 @@ const Groups = () => {
           </li>
         </ul>
 
-        <ul onClick={() => handleClick(1)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[1] ? "bg-blue-200" : ""}`}> 
+        <ul onClick={() => handleClick(5)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[5] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
                   type="checkbox"
-                  checked={isChecked[1]}
+                  checked={isChecked[5]}
             />
           </li>
           <li className="text-slate-500">Toli Moli</li>
@@ -194,11 +194,11 @@ const Groups = () => {
           </li>
         </ul>
 
-        <ul onClick={() => handleClick(2)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[2] ? "bg-blue-200" : ""}`}> 
+        <ul onClick={() => handleClick(6)} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${isChecked[6] ? "bg-blue-200" : ""}`}> 
           <li className="mx-auto">
             <input
               type="checkbox"
-              checked={isChecked[2]}
+              checked={isChecked[6]}
             />
           </li>
           <li className="text-slate-500">Toli Moli</li>

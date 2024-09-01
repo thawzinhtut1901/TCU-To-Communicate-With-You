@@ -41,3 +41,8 @@ export type UserData = {
   dateOfBirth: string;
   gender: string;
 }
+
+export type UserAccountStatusData = {
+  privateUser: number;
+  publicUser: number;
+}

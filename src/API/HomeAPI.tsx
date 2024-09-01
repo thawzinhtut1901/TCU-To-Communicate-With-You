@@ -6,6 +6,8 @@ export const getPublishQuotes = async() => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/quotes/published`, {
         headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
         mode: "cors",
