@@ -10,6 +10,7 @@ const HomePages = () => {
   const  {data: getPublishQuotes} = useGetPublishQuotes();
   const {data: getMe} = useGetMe();
   console.log(getPublishQuotes)
+  console.log(getMe)
 
   return (
     <div className="flex flex-col">

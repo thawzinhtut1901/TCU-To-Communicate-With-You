@@ -41,7 +41,7 @@ const AdminSidebar = () => {
       <Logo />
       <div className="flex flex-col justify-center items-center gap-3">
         <SidebarLink to="/admin-dashboard/dashboard" icon={MdSpaceDashboard} label="Dashboard" />
-        <SidebarLink to="/admin-dashboard/users" icon={FaUser} label="Users" />
+        <SidebarLink to="/admin-dashboard/user-data" icon={FaUser} label="Users" />
         <SidebarLink to="/admin-dashboard/groups" icon={FaUserGroup} label="Groups" />
       </div>
       <Divider />

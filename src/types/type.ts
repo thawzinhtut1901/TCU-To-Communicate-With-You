@@ -42,6 +42,27 @@ export type UserData = {
   gender: string;
 }
 
+export type Users = {
+  userName: string;
+  displayName: string;
+  email: string;
+  gender: string;
+  status: {
+    active: string;
+    showMe: string;
+};
+}
+
+export type UsersAccountData = {
+  items: Users[];
+  meta: {
+    totalItems: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+};
+}
 export type UserAccountStatusData = {
   privateUser: number;
   publicUser: number;
