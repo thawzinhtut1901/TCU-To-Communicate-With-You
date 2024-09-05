@@ -9,6 +9,8 @@ const HomePages = () => {
   const navigate = useNavigate();
   const  {data: getPublishQuotes} = useGetPublishQuotes();
   const {data: getMe} = useGetMe();
+  console.log(getPublishQuotes)
+  console.log(getMe)
 
   return (
     <div className="flex flex-col">
@@ -20,20 +22,16 @@ const HomePages = () => {
         {
           getMe?.role === "Admin" && (
             <div onClick={() => navigate("/admin-dashboard")} className="flex">
-              <Button className="gap-x-1 font-poppins font-semibold text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
+              <Button className="gap-x-1 font-poppins font-semibold md:text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
             </div>
           )
         }
       </div>
       <div className="flex flex-col items-center">
               {/* Top Bar */}
-        {
-          getPublishQuotes?.map((quotes:any) => (
-            <div key={quotes.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
-                {quotes.quote}
+            <div key={getPublishQuotes?.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
+                {getPublishQuotes?.quote}
             </div>
-          ))
-        }
       
 
       {/* Main Content */}

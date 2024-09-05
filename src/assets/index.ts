@@ -13,12 +13,16 @@ import groupChat from "./GroupChats.png";
 import Profile from "./Profile.png";
 import Relationship from "./Relation.png";
 import Setting from "./Settings.png";
-import suggestionFrame from "./SuggestionFrame.png";
 import Fliter from "./filter.png";
-import statusIcon from "./statusIcon.png";
 import accountType from "./AccountType.png";
 import dropDown from "./Back.png";
 import friSuggestionProfile from "./friendSuggestion.png";
+import Cover from "./Cover.png";
+import SettingsIcon from "./settingsIcon.png";
+import PersonEdit from "./person_edit.png";
+import Facebook from "./Facebook.png";
+import Instagram from "./Instagram.png";
+import Twitter from "./Twitter.png";
 
 export {
     TCULogCom,
@@ -36,10 +40,14 @@ export {
     Profile,
     Relationship,
     Setting,
-    suggestionFrame,
     Fliter,
-    statusIcon,
     accountType,
     dropDown,
     friSuggestionProfile,
+    Cover,
+    SettingsIcon,
+    PersonEdit,
+    Facebook,
+    Instagram,
+    Twitter,
 }

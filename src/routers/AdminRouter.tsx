@@ -24,7 +24,7 @@ const AdminRouter: RouteObject[] = [
         element: <Dashboard />,
       },
       {
-        path: "users",
+        path: "user-data",
         element: <Users />,
       },
       {

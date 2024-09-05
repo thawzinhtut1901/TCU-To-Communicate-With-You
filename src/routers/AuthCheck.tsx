@@ -7,7 +7,10 @@ const AuthCheck = ({ children }: { children: ReactNode }) => {
 
     if (token) {
         return <Navigate to="/home"/>;
-      }
+      } 
+      // else if(!token) {
+      //   return <Navigate to="/auth/login"/>
+      // }
     
       return children;
 

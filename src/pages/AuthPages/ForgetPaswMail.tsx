@@ -56,7 +56,7 @@ const ForgetPaswMail = () => {
       login(authToken);
 
       const key = ResetPsw?.data?.resetKey;
-      navigate("/forget-password/change-password", { state: {key}});
+      navigate("/auth/forget-password/change-password", { state: {key}});
     }
   }, [ResetPsw.isSuccess])
 
@@ -132,7 +132,7 @@ const ForgetPaswMail = () => {
         />
 
             {errors.email && (
-              <span className="flex mt-1 ml-3 text-xs font-bold text-red-500">
+              <span className="flex mt-1 ml-3 font-bold text-red-500 text-xs">
                 {errors.email}
               </span>
             )}
