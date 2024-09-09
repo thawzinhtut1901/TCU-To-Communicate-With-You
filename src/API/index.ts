@@ -8,6 +8,9 @@ import { getPublishQuotes } from "./HomeAPI";
 import { getMe } from "./UserAPI";
 import { usersAccount } from "./AdminAPI";
 import { usersGroups } from "./AdminAPI";
+import { addAdmins } from "./AdminAPI";
+import { getAdminsData } from "./AdminAPI";
+import { updateMe } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -20,4 +23,7 @@ export {
     getMe,
     usersAccount,
     usersGroups,
+    addAdmins,
+    getAdminsData,
+    updateMe,
 };

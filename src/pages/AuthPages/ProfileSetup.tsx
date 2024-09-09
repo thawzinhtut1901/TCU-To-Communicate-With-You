@@ -26,7 +26,7 @@ const ProfileSetup = () => {
   const ProfileSetup = useProfileSetUp();
   const [formData, setFormData] = useState<profileSetupData>({
     userName: "",
-    dispalyName: "",
+    displayName: "",
     profilePicture: "",
     bio: "",
     dateOfBirth: "",

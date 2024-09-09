@@ -1,5 +1,6 @@
-import { usersAccount, usersGroups } from "@/API";
-import { useQuery } from "@tanstack/react-query";
+import { addAdmins, getAdminsData, usersAccount, usersGroups } from "@/API";
+import { AddAdminsData } from "@/types/type";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface getUserAccountParams {
     // sortBy?: string;
@@ -17,3 +18,15 @@ interface getUserGroupParams {
 
 export const useFetchUsersGroups = (params: getUserGroupParams) => 
     useQuery({queryKey:["groups", params], queryFn: () => usersGroups(params)});
+
+export const useAddAdmins = () => 
+    useMutation({
+        mutationFn: (data: AddAdminsData) => addAdmins({data}),
+    })
+
+interface getAdminsParams {
+    pageCount?: number;
+    limit?: number;
+}
+export const useFetchAdmins = (params: getAdminsParams) => 
+    useQuery({queryKey: ["admins", params], queryFn:() => getAdminsData(params)});

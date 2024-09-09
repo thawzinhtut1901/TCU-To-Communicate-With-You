@@ -7,9 +7,9 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 
 const HomePages = () => {
   const navigate = useNavigate();
-  const  {data: getPublishQuotes} = useGetPublishQuotes();
+  // const  {data: getPublishQuotes} = useGetPublishQuotes();
   const {data: getMe} = useGetMe();
-  console.log(getPublishQuotes)
+  // console.log(getPublishQuotes)
   console.log(getMe)
 
   return (
@@ -29,9 +29,9 @@ const HomePages = () => {
       </div>
       <div className="flex flex-col items-center">
               {/* Top Bar */}
-            <div key={getPublishQuotes?.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
+            {/* <div key={getPublishQuotes?.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
                 {getPublishQuotes?.quote}
-            </div>
+            </div> */}
       
 
       {/* Main Content */}

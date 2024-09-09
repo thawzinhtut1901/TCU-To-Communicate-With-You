@@ -6,8 +6,68 @@ import { Button } from "../ui/button"
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs"
 import { Pagination, Stack } from "@mui/material";
 import { BsPlusLg } from "react-icons/bs";
+import { useAddAdmins, useFetchAdmins } from "@/hooks"
+import { useSearchParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { AddAdminsData } from "@/types/type"
 
 const Admins = () => {
+  const [isAddEdit, setIsAddEdit] = useState(false);
+  const [addAdminsData, setAddAdminsData] = useState<AddAdminsData>({
+    userNameOrEmail: ""
+  });
+  const addOtherAdmins = useAddAdmins();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pageCount, setPageCount] = useState<number>(
+    parseInt(searchParams.get("page") || "1", 10)
+  );
+  const [limit] = useState<number>(10);
+  const {data: getAdmins, isLoading} = useFetchAdmins({
+    pageCount,
+    limit,
+  });
+  
+  if(!isLoading) {
+    console.log(getAdmins);
+  }
+
+  useEffect(() => {
+    const params: any = {};
+    if(limit) {
+      params.limit = limit.toString();
+    }
+    if(pageCount) {
+      params.page = pageCount.toString();
+    }
+    setSearchParams(params)
+  }, [pageCount, limit]);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    event.preventDefault();
+    setPageCount(value);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAddAdminsData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  const handleAddAdmin = () => {
+    if(addAdminsData.userNameOrEmail) {
+      addOtherAdmins.mutate(addAdminsData)
+    }
+  }
+
+  const handleEdit = () => {
+    setIsAddEdit(true)
+  };
+  
   return (
     <div className="overflow-auto vertical-scrollbar">
       <div className="flex flex-col mx-[40px]">
@@ -31,8 +91,26 @@ const Admins = () => {
           </div>
 
           <div className="flex gap-x-1 bg-[#591DA9] ml-auto p-2 rounded-[8px] text-[14px] text-white">
-            <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/>
-            <h1>Add Admin</h1>
+            {/* <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/> */}
+            {
+              isAddEdit ? (
+                <div className="flex gap-x-1">
+                  <input 
+                  type="text" 
+                  name="userNameOrEmail"
+                  className="px-1 py-[2px] text-black"
+                  value={addAdminsData.userNameOrEmail}
+                  onChange={handleInputChange}
+                  />
+                  <BsPlusLg onClick={handleAddAdmin} className="mt-[2px] w-[15px] h-[15px]"/>
+                </div>
+              ) : (
+                <div className="flex gap-x-1">
+                  <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/>
+                  <h1 onClick={handleEdit}>Add Admin</h1>
+                </div>
+              )
+            }
           </div>
         </div>
 
@@ -47,7 +125,9 @@ const Admins = () => {
             <li>action</li>
           </ul>
 
-              <ul  className="items-center gap-x-5 grid grid-cols-7 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center"> 
+          {
+            getAdmins?.items.map((admin:any)=> (
+              <ul key={admin?.id} id={admin?.id} className="items-center gap-x-5 grid grid-cols-7 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center"> 
                 <li className="mx-auto">
                   <img src={friSuggestionProfile} alt="" className="rounded-[8px] w-[40px] h-[40px]"/>
                 </li>
@@ -70,6 +150,8 @@ const Admins = () => {
                   <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
                 </li>
               </ul>
+            ))
+          }
          
         </div>
 
@@ -87,9 +169,9 @@ const Admins = () => {
                 <Button className="flex font-bold font-roboto text-[#9054DE] uppercase"><BsChevronDoubleLeft/>First</Button>
                 <Stack spacing={1}>
                   <Pagination 
-                    // count={getGroups?.meta.totalPages} 
-                    // page = {pageCount}
-                    // onChange={handlePageChange}
+                    count={getAdmins?.meta.totalPages} 
+                    page = {pageCount}
+                    onChange={handlePageChange}
                     defaultPage={1}
                     boundaryCount={1}
                     variant="outlined" 

@@ -143,7 +143,7 @@ export const profileSetupAPI = async({
   const token = getToken();
   const formData = new FormData();
   formData.append("userName", data.userName);
-  formData.append("dispalyName", data.dispalyName);
+  formData.append("dispalyName", data.displayName);
 
   if(data.profilePicture) {
     formData.append("profilePicture", data.profilePicture);

@@ -20,10 +20,18 @@ export type NewPswData = {
 
 export type profileSetupData = {
   userName: string;
-  dispalyName: string;
+  displayName: string;
   profilePicture?: File | string;
   bio?: string;
   dateOfBirth?: string;
+  gender: string;
+}
+
+export type updateProfileData = {
+  userName: string;
+  displayName: string;
+  profilePicture?: File;
+  bio?: string;
   gender: string;
 }
 
@@ -63,7 +71,7 @@ export type UsersAccountData = {
     currentPage: number;
 };
 }
-export type UserAccountStatusData = {
-  privateUser: number;
-  publicUser: number;
+
+export type AddAdminsData = {
+  userNameOrEmail: string;
 }
