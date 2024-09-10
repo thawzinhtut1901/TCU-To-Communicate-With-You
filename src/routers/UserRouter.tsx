@@ -1,6 +1,7 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import UserLayout from "@/Layouts/UserLayout";
 import { ChatLayouts, HomeLayout, UserProfileLayout } from "@/Layouts/UserLayouts";
+import { ProfileView } from "@/components/users";
 
 const UserRouter: RouteObject[] = [
   {
@@ -25,6 +26,10 @@ const UserRouter: RouteObject[] = [
     path: "/chats",
     element: <ChatLayouts/>
   },
+  {
+    path: "/view-my-profile",
+    element: <ProfileView/>
+  }
 ];
 
 export default UserRouter;

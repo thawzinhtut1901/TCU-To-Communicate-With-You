@@ -6,6 +6,9 @@ import { useProfileSetUp } from "./useAuth";
 import { useGetPublishQuotes } from "./useHome";
 import { useGetMe } from "./useUser";
 import { useFetchUsersAccountDetails } from "./useAdmin";
+import { useAddAdmins } from "./useAdmin";
+import { useFetchAdmins } from "./useAdmin";
+import { useUpdateMe } from "./useUser";
 
 export { 
     useSignUp, 
@@ -16,4 +19,7 @@ export {
     useGetPublishQuotes,
     useGetMe,
     useFetchUsersAccountDetails,
+    useAddAdmins,
+    useFetchAdmins,
+    useUpdateMe,
 };
