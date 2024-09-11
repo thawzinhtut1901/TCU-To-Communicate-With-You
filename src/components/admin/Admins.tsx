@@ -1,4 +1,4 @@
-import { friSuggestionProfile, Fliter } from "@/assets"
+import { Fliter } from "@/assets"
 import { AiOutlineDown } from "react-icons/ai"
 import { BiSolidCircle } from "react-icons/bi"
 import { IoIosSearch } from "react-icons/io"
@@ -129,11 +129,11 @@ const Admins = () => {
             getAdmins?.items.map((admin:any)=> (
               <ul key={admin?.id} id={admin?.id} className="items-center gap-x-5 grid grid-cols-7 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center"> 
                 <li className="mx-auto">
-                  <img src={friSuggestionProfile} alt="" className="rounded-[8px] w-[40px] h-[40px]"/>
+                  <img src={admin.profile} alt="" className="rounded-[8px] w-[40px] h-[40px]"/>
                 </li>
                 <li className="flex flex-col text-slate-700 text-start">
-                  <h1>Thaw Gyi</h1>
-                  <p className="text-[12px] text-slate-500">thaw@gmail.com</p>
+                  <h1>{admin.displayName}</h1>
+                  <p className="text-[12px] text-slate-500">{admin.userName}</p>
                 </li>
                 <li className="text-slate-500">Manager</li>
                 <li className="flex justify-center gap-x-1">
@@ -144,7 +144,13 @@ const Admins = () => {
                 <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
                   <span className="text-[#34A853]">Good</span>
                 </li>
-                <li>18/03/2014</li>
+                <li>
+                  {new Date(admin.createdAt).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })}
+                </li>
                 <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] mr-2 rounded-[10px] h-[40px] text-white">
                   Confirm
                   <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>

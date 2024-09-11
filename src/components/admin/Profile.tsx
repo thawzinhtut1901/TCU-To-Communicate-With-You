@@ -6,13 +6,18 @@ import { BiPencil } from "react-icons/bi";
 import { VscSettingsGear } from "react-icons/vsc";
 import { LiaUserEditSolid } from "react-icons/lia";
 import { useGetMe, useUpdateMe } from "@/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateProfileData } from "@/types/type";
 import { IoClose } from "react-icons/io5";
 import { FiCheck } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [preview, setPreview] = useState<string | undefined>(undefined);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const {data: getMyProfile} = useGetMe();
   const updateProfileData = useUpdateMe();
   const [updateProfile, setUpdateProfile] = useState<updateProfileData> ({
@@ -35,42 +40,110 @@ const Profile = () => {
     }
   }, [getMyProfile]);
 
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if(file) {
-  //     setUpdateProfile((prev) => ({
-  //       ...prev,
-  //       profilePicture: file,
-  //     }));
-  //   }
-  // };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if(file) {
+      setUpdateProfile((prev) => ({
+        ...prev,
+        profilePicture: file,
+      }));
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleEditProfileClick = () => {
+    setIsModalOpen(false);
+    fileInputRef.current?.click();
+  };
 
   const handleSubmit =(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateProfileData.mutate(updateProfile, {
       onSuccess: () => {
-        setIsEditing(false)
+        setIsEditing(false);
+        setIsModalOpen(false);
+        setPreview(undefined);
       }
     });
   }
 
   const handleEditClick = () => {
-    setIsEditing(true)
+    setIsEditing(true);
+    if (!isEditing) {
+      setUpdateProfile({
+        bio: getMyProfile?.bio || '',
+        displayName: getMyProfile?.displayName || '',
+        gender: getMyProfile?.gender || '',
+        userName: getMyProfile?.userName || '',
+      });
+    }
   };
 
+  const handleProfileClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleProfileView = () => {
+    navigate("/view-my-profile")
+  };
+
+  const handleEditProfileClose = () => {
+      setIsModalOpen(false);
+      setPreview(undefined);
+  }
+
   return (
-    <div className="flex flex-col w-full overflow-auto vertical-scrollbar">
-      <div className="relative mx-auto mt-[4px] rounded-[10px] w-11/12 h-[180px]">
+    <div className={`flex flex-col w-full overflow-auto vertical-scrollbar ${preview ? 'bg-black bg-opacity-20' : ''}`}>
+      {preview && (
+        <div className="relative w-full h-screen">
+          <img src={preview} alt="Preview" className="absolute rounded-[4px] shadow-md shadow-black mt-24 mx-auto inset-0 w-4/5 h-[600px] object-cover z-50" />
+          <h1 className="text-[18px] font-semibold text-slate-700 flex justify-center">View Your Profile</h1>
+          <form onSubmit={handleSubmit} className="flex">
+            <button type="submit" className="mr-auto hover:bg-blue-300 flex bg-blue-500 p-2 rounded-[6px] text-white ml-5 gap-x-1"><FiCheck className="w-[24px] text-green-500 h-[24px]"/>Upload This Photo</button>
+            <button onClick={handleEditProfileClose} className="flex mr-4 ml-auto"><IoClose className="w-[24px] h-[24px]"/></button>
+          </form>
+        </div>
+                
+        )}
+      <div className={`relative mx-auto mt-[4px] rounded-[10px] w-11/12 h-[180px] ${preview ? 'opacity-20' : ''}`}>
         <img src={Cover} alt="" className="rounded-[10px] w-full h-full object-cover"/>
         <BiPencil className="absolute top-2 right-2 w-[24px] h-[24px] text-[24px] cursor-pointer"/>
 
         <div className="bottom-0 absolute inset-x-0 border-white/20 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter mx-auto border rounded-[10px] w-4/5 h-[130px] transform translate-y-1/2">
           <div className="flex mt-[20px]">
-          <img 
-            src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
-            alt="" 
-            className="ml-[32px] rounded-[10px] w-[80px] h-[80px]"
-          />
+            <div>
+              <img 
+                src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
+                alt="" 
+                className="ml-[32px] rounded-[10px] w-[80px] h-[80px]"
+                onClick={handleProfileClick}
+              />
+
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleFileChange} 
+                className="hidden"
+                ref={fileInputRef}
+              />
+            
+            {isModalOpen && (
+              <div className="absolute flex top-[90px] left-[32px] bg-white border rounded-md shadow-lg p-4 w-[200px] z-10">
+                <ul className="font-poppins">
+                  <li onClick={handleProfileView} className="py-2 hover:bg-gray-100 cursor-pointer">View Your Profile</li>
+                  <li onClick={handleEditProfileClick} className="py-2 hover:bg-gray-100 cursor-pointer">Edit Your Profile</li>
+                </ul>
+              </div>
+            )}
+            </div>
+
+            
+
             <div className="flex flex-col my-auto ml-[17px] font-poppins">
               <h1 className="text-[21px]">{getMyProfile?.displayName}</h1>
               <p className="opacity-80 text-[16px]">Founder of TCU</p>
@@ -84,14 +157,14 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="flex mb-4 justify-center gap-x-5 mt-[100px]">
+      <div className={`flex mb-4 justify-center gap-x-5 mt-[140px] ${preview ? 'opacity-20' : ''}`}>
         <form onSubmit={handleSubmit} className="flex flex-col border-white/20 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter px-[30px] border rounded-[20px] w-[480px] h-[448px] font-poppins">
           <div className="flex mt-[17px]">
             <h1 className="text-[24px]">Profile Information</h1>
             {
               isEditing ? (
-                <div className="flex ml-auto gap-x-2 cursor-pointer">
-                  <IoClose className=" w-[24px] text-red-600 h-[24px]"/>
+                <div className="flex ml-auto cursor-pointer">
+                  <Button> <IoClose className=" w-[24px] text-red-600 h-[24px]"/></Button>
                   <Button type="submit"><FiCheck className="w-[24px] text-green-500 h-[24px]"/></Button>
                 </div>
               ) : (

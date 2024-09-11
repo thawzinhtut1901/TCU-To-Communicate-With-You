@@ -77,7 +77,7 @@ export const addAdmins = async({data}: {data: AddAdminsData}) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        method: "POST",
+        method: "PATCH",
         mode: "cors",
         redirect: "follow",
         body: JSON.stringify(data),
