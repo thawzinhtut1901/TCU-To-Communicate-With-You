@@ -179,3 +179,24 @@ export const profileSetupAPI = async({
   }
   return result;
 }
+
+export const googleLogin = async() => {
+  const response: Response = await fetch(`${BaseURL}/auth/google`, {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  });
+
+  if(response.redirected) {
+    console.log( response.url)
+    window.location.href = response.url;
+  } else {
+    const result = await response.json();
+    if(!response.json) {
+      throw new Error(result.message);
+    }
+    return result;
+  }
+
+ 
+}

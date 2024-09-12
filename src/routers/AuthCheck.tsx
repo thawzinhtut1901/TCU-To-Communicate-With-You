@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const AuthCheck = ({ children }: { children: ReactNode }) => {
     const token = getToken();
 
-    if (token) {
+    if (!token) {
         return <Navigate to="/home"/>;
       } 
       // else if(!token) {

@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 import { IoPerson } from "react-icons/io5";
-import { useSignIn } from "@/hooks";
+import { useFetchGoogleLogIn, useSignIn } from "@/hooks";
 import { login } from "@/services/authService";
 import { LoginData } from "@/types/type";
 import { divider, googleLog } from "../../assets";
@@ -12,6 +12,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import MobileImage from "@/components/authComponents/MobileImage";
 import { ButtonLoading } from "@/components/ui/buttonLoading";
+import { GoogleLogin } from "@react-oauth/google";
 
 interface Errors {
   emailOrUserName?: string;
@@ -23,6 +24,7 @@ const LogInForm = () => {
   const LoginAccount = useSignIn();
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
+  const {data: googleLogin} = useFetchGoogleLogIn()
 
   const [loginData, setLoginData] = useState<LoginData>({
     emailOrUserName: "",
@@ -53,6 +55,12 @@ const LogInForm = () => {
       }));
     }
   }, [LoginAccount.isError]);
+
+  const handleGoogleLogin = () => {
+    if (googleLogin) {
+      window.location.href = googleLogin.url;  // Redirect to Google login page
+    }
+  };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -191,11 +199,15 @@ const LogInForm = () => {
         <div className="flex mx-auto mt-[12px] lg:mt-[20px] w-full md:w-[550px]">
           <img src={divider} alt="" />
         </div>
-        <Button className="flex justify-center bg-slate-50 hover:bg-slate-300 mx-auto mt-[12px] md:mt-[20px] border rounded-full w-[250px] md:w-[500px] font-primary font-thin md:text-[14px]">
+
+        <GoogleLogin
+          onSuccess={handleGoogleLogin}
+        />
+        {/* <Button onClick={handleGoogleLogin} className="flex justify-center bg-slate-50 hover:bg-slate-300 mx-auto mt-[12px] md:mt-[20px] border rounded-full w-[250px] md:w-[500px] font-primary font-thin md:text-[14px]">
           <img src={googleLog} alt="" className="mx-2 w-[15px] h-[15px]" />
           Continue with Google
-        </Button>
-        {/* Google */}
+        </Button> */}
+
         <div className="lg:flex items-center hidden mx-auto mt-[20px] md:mt-[50px] w-full md:w-[550px]">
           <hr className="flex-grow border-t-2" />
         </div>
