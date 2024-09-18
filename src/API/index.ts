@@ -11,6 +11,8 @@ import { usersGroups } from "./AdminAPI";
 import { addAdmins } from "./AdminAPI";
 import { getAdminsData } from "./AdminAPI";
 import { updateMe } from "./UserAPI";
+import { googleLogin } from "../API/AuthAPI";
+import { removeAdmin } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -26,4 +28,6 @@ export {
     addAdmins,
     getAdminsData,
     updateMe,
+    googleLogin,
+    removeAdmin,
 };

@@ -1,5 +1,4 @@
 import { Fliter } from "@/assets"
-import { AiOutlineDown } from "react-icons/ai"
 import { BiSolidCircle } from "react-icons/bi"
 import { IoIosSearch } from "react-icons/io"
 import { Button } from "../ui/button"
@@ -10,6 +9,7 @@ import { useAddAdmins, useFetchAdmins } from "@/hooks"
 import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { AddAdminsData } from "@/types/type"
+import { MdDeleteForever } from "react-icons/md"
 
 const Admins = () => {
   const [isAddEdit, setIsAddEdit] = useState(false);
@@ -151,9 +151,9 @@ const Admins = () => {
                     year: 'numeric',
                   })}
                 </li>
-                <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] mr-2 rounded-[10px] h-[40px] text-white">
-                  Confirm
-                  <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
+                <li className="flex justify-center items-center gap-x-1 bg-red-600 mr-2 rounded-[10px] h-[40px] text-white">
+                  Remove
+                  <MdDeleteForever className="w-[18px] h-[18px]"/>
                 </li>
               </ul>
             ))

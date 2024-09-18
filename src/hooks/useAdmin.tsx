@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, usersAccount, usersGroups } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, usersAccount, usersGroups } from "@/API";
 import { AddAdminsData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -30,3 +30,8 @@ interface getAdminsParams {
 }
 export const useFetchAdmins = (params: getAdminsParams) => 
     useQuery({queryKey: ["admins", params], queryFn:() => getAdminsData(params)});
+
+export const useRemoveAdmin = () => 
+    useMutation({
+        mutationFn: (data: AddAdminsData) => removeAdmin({data})
+    })
