@@ -5,7 +5,7 @@ import { IoPerson } from "react-icons/io5";
 import { useFetchGoogleLogIn, useSignIn } from "@/hooks";
 import { login } from "@/services/authService";
 import { LoginData } from "@/types/type";
-import { divider, googleLog } from "../../assets";
+import { divider } from "../../assets";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "../../components/ui/checkbox";
 import { Input } from "../../components/ui/input";

@@ -10,6 +10,7 @@ import { useAddAdmins } from "./useAdmin";
 import { useFetchAdmins } from "./useAdmin";
 import { useUpdateMe } from "./useUser";
 import { useFetchGoogleLogIn } from "./useAuth";
+import { useRemoveAdmin } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -24,4 +25,5 @@ export {
     useFetchAdmins,
     useUpdateMe,
     useFetchGoogleLogIn,
+    useRemoveAdmin,
 };

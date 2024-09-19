@@ -121,3 +121,26 @@ export const getAdminsData = async(params: getAdminsParams = {}) => {
         }
         return result;
 }
+
+export const removeAdmin = async(
+    {data} :
+    {data: AddAdminsData}
+) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/admin-dashboard/remove-admin`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            body: JSON.stringify(data)
+        },
+        mode: "cors",
+        method: "PATCH",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
