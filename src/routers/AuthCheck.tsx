@@ -1,8 +1,9 @@
 import { getToken } from "@/services/authService"
 import { ReactNode, useEffect } from "react"
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthCheck = ({ children }: { children: ReactNode }) => {
+    const navigate = useNavigate();
     const token = getToken();
 
     useEffect(() => {
@@ -10,6 +11,13 @@ const AuthCheck = ({ children }: { children: ReactNode }) => {
           window.location.reload(); 
       }
   }, [token]);
+
+
+  useEffect(() => {
+    if(token) {
+      navigate("/home");
+    }
+  }, [token])
 
     if (!token) {
         return <Navigate to="/auth/login"/>;

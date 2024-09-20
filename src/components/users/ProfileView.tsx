@@ -18,7 +18,7 @@ const ProfileView = () => {
             <img 
                 src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
                 alt=""
-                className="border-slate-700 shadow-black shadow-lg rounded-[4px] w-5/12 h-[600px]" 
+                className="border-slate-700 shadow-black shadow-lg rounded-[4px] w-1/3 h-[600px]" 
             />
         </div>
     </div>
