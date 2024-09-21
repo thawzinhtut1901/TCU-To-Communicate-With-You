@@ -24,8 +24,6 @@ const LogInForm = () => {
   const LoginAccount = useSignIn();
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
-  const clientId = '316123631212-nida97529lc0v0lgj1670vla7a40amc1.apps.googleusercontent.com';
-
   const [loginData, setLoginData] = useState<LoginData>({
     emailOrUserName: "",
     password: "",
