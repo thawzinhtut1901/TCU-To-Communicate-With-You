@@ -75,3 +75,9 @@ export type UsersAccountData = {
 export type AddAdminsData = {
   userNameOrEmail: string;
 }
+
+export type GoogleLogInData = {
+  email: "",
+  displayName: "",
+  profile: ""
+}

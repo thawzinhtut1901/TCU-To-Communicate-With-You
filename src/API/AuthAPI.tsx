@@ -1,6 +1,6 @@
 import { getToken } from "@/services/authService";
 import BaseURL from "../services/ApiEndPoint";
-import { AuthData, LoginData, NewPswData, profileSetupData, VerifyData } from "../types/type";
+import { AuthData, GoogleLogInData, LoginData, NewPswData, profileSetupData, VerifyData } from "../types/type";
 
 export const SignUpAPI = async ({ data }: { data: AuthData }) => {
   const response: Response = await fetch(`${BaseURL}/auth/signup`, {
@@ -180,11 +180,19 @@ export const profileSetupAPI = async({
   return result;
 }
 
-export const googleLogin = async() => {
+export const googleLogin = async(
+  {data}:
+  {data: GoogleLogInData}
+) => {
   const response: Response = await fetch(`${BaseURL}/auth/google`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },    
     mode: "cors",
-    method: "GET",
+    method: "POST",
     redirect: "follow",
+    body: JSON.stringify(data)
   });
 
   if(response.redirected) {
