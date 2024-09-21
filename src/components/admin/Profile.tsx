@@ -120,7 +120,7 @@ const Profile = () => {
               <img 
                 src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
                 alt="" 
-                className="ml-[32px] rounded-[10px] w-[80px] h-[80px]"
+                className="ml-[32px] rounded-[10px] w-[75px] h-[80px]"
                 onClick={handleProfileClick}
               />
 

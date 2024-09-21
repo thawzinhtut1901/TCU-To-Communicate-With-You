@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 import { IoPerson } from "react-icons/io5";
-import { useFetchGoogleLogIn, useSignIn } from "@/hooks";
+import {  useSignIn } from "@/hooks";
 import { login } from "@/services/authService";
 import { LoginData } from "@/types/type";
 import { divider } from "../../assets";
@@ -12,7 +12,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import MobileImage from "@/components/authComponents/MobileImage";
 import { ButtonLoading } from "@/components/ui/buttonLoading";
-import { GoogleLogin } from "@react-oauth/google";
+import GoogleLoginButton from "@/components/authComponents/GoogleLogInButton";
 
 interface Errors {
   emailOrUserName?: string;
@@ -24,7 +24,7 @@ const LogInForm = () => {
   const LoginAccount = useSignIn();
   const [errors, setErrors] = useState<Errors>({});
   const [showPassword, setShowPassword] = useState(false);
-  const {data: googleLogin} = useFetchGoogleLogIn()
+  const clientId = '316123631212-nida97529lc0v0lgj1670vla7a40amc1.apps.googleusercontent.com';
 
   const [loginData, setLoginData] = useState<LoginData>({
     emailOrUserName: "",
@@ -39,6 +39,7 @@ const LogInForm = () => {
       navigate("/home");
     }
   }, [LoginAccount.isSuccess]);
+
 
   useEffect(() => {
     if (LoginAccount.isError) {
@@ -56,11 +57,7 @@ const LogInForm = () => {
     }
   }, [LoginAccount.isError]);
 
-  const handleGoogleLogin = () => {
-    if (googleLogin) {
-      window.location.href = googleLogin.url;  // Redirect to Google login page
-    }
-  };
+
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -200,9 +197,11 @@ const LogInForm = () => {
           <img src={divider} alt="" />
         </div>
 
-        <GoogleLogin
+        <button><GoogleLoginButton /></button>
+
+        {/* <GoogleLogin
           onSuccess={handleGoogleLogin}
-        />
+        /> */}
         {/* <Button onClick={handleGoogleLogin} className="flex justify-center bg-slate-50 hover:bg-slate-300 mx-auto mt-[12px] md:mt-[20px] border rounded-full w-[250px] md:w-[500px] font-primary font-thin md:text-[14px]">
           <img src={googleLog} alt="" className="mx-2 w-[15px] h-[15px]" />
           Continue with Google
