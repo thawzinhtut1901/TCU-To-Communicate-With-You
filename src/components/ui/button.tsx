@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "text-primary-foreground",
         dropdown: "bg-white border text-main",
         adminSidebar: "bg-background text-black hover:bg-main2 hover:text-white active:bg-main2 active:text-white",
         destructive:

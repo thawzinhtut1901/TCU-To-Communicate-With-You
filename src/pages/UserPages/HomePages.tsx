@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Chat, findFri, groupChat, Profile, Setting, Relationship } from "@/assets";
 import "./type.css";
-import { useGetMe, useGetPublishQuotes } from "@/hooks";
+import { useGetAllFriends, useGetMe, useGetPublishQuotes } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
@@ -9,14 +9,15 @@ const HomePages = () => {
   const navigate = useNavigate();
   const  {data: getPublishQuotes} = useGetPublishQuotes();
   const {data: getMe} = useGetMe();
-  console.log(getPublishQuotes)
-  console.log(getMe)
+  const {data: getAllFris} = useGetAllFriends();
+  console.log(getAllFris);
+  console.log(getMe);
 
   return (
     <div className="flex flex-col">
       {/* TCU Heading */}
       <div className="flex justify-between">
-        <h1 className="md:my-[20px] md:ml-[87px] font-roman text-[35px] text-center text-white md:text-start md:text-[50px]">
+        <h1 className="my-[10px] md:my-[20px] ml-[20px] md:ml-[87px] font-roman text-[30px] text-center text-white md:text-start md:text-[50px]">
           TCU
         </h1>
         {
@@ -29,13 +30,13 @@ const HomePages = () => {
       </div>
       <div className="flex flex-col items-center">
               {/* Top Bar */}
-            <div key={getPublishQuotes?.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] text-white">
+            <div key={getPublishQuotes?.id} className="inline-block bg-slate-300 bg-opacity-25 shadow-md shadow-slate-500 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 rounded-[10px] max-w-[24rem] md:max-w-[40rem] text-[12px] text-white md:text-[16px]">
                 {getPublishQuotes?.quote}
             </div>
       
 
       {/* Main Content */}
-      <div className="flex md:flex-row flex-col md:gap-4 md:gap-x-6 mt-[20px] md:mt-[40px] md:w-full md:max-w-[70rem]">
+      <div className="flex md:flex-row flex-col md:gap-4 md:gap-x-6 mt-[30px] md:mt-[40px] md:w-full md:max-w-[70rem]">
         <div className="flex-1 gap-4 grid grid-cols-3">
           <img
             onClick={() => navigate("/chats")}
@@ -77,28 +78,29 @@ const HomePages = () => {
 
         {/* Right: Friends List or Additional Content */}
         <div className="flex-1 bg-white shadow-black shadow-md mt-4 md:mt-0 p-2 rounded-[8px]">
-          {/* You can add your Friends list or any content here */}
           <div className="bg-custom-gradient rounded-b-full h-[30px] md:h-[50px] text-[16px] text-white md:text-[24px]">
             <h1 className="flex justify-center items-center pt-1 md:pt-2">Friend List</h1>
           </div>
+
           <div className="bg-custom-gradient mt-2 md:mt-4 rounded-b-[8px] rounded-t-[20px] md:rounded-b-[10px] md:rounded-t-[30px] max-h-[35vh] md:max-h-[50vh] overflow-auto scrollbar-hide">
             <ul>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
-              <li className="bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white">Bao</li>
+              {getAllFris?.items.map((fri: any) => {
+                const isUserOne = getMe.id === fri.userOneId;
+                const user = isUserOne ? fri.userTwo : fri.userOne; 
+
+                return (
+                  <li
+                    key={fri.id}
+                    className="flex bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white"
+                  >
+                    <img src={user.profile} className="my-1 md:my-0 mr-[12px] md:mr-[17px] rounded-[5px] w-[24px] md:w-[34px] h-[24px] md:h-[34px]" />
+                    <h1 className="mt-1 text-[16px] md:text-[18px]">{user.displayName}</h1>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/* Add more content here as needed */}
         </div>
       </div>
       </div>
@@ -107,82 +109,3 @@ const HomePages = () => {
 };
 
 export default HomePages;
-
-// import React from 'react';
-
-// const App: React.FC = () => {
-//   return (
-//     <div className="flex justify-center items-center bg-gradient-to-b from-indigo-900 to-purple-900 min-h-screen">
-//       <div className="bg-purple-800 shadow-md p-8 rounded-lg w-full max-w-3xl">
-//         {/* Header */}
-//         <div className="mb-8 text-center">
-//           <h1 className="font-bold text-4xl text-white">TCU</h1>
-//           <div className="inline-block bg-purple-700 mt-2 px-4 py-2 rounded-full text-white">
-//             Nah, I will win!
-//           </div>
-//         </div>
-
-//         {/* Main Content */}
-//         <div className="gap-6 grid grid-cols-3 mb-8">
-//           {/* Chats */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Chats</div>
-//             </div>
-//           </div>
-//           {/* Find Friends */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Find Friends</div>
-//             </div>
-//           </div>
-//           {/* Profile */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Profile</div>
-//             </div>
-//           </div>
-//           {/* Group Chats */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Group Chats</div>
-//             </div>
-//           </div>
-//           {/* Settings */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Settings</div>
-//             </div>
-//           </div>
-//           {/* Relationships */}
-//           <div className="bg-purple-600 shadow-md p-4 rounded-lg">
-//             <div className="bg-purple-700 p-2 rounded-md">
-//               {/* Icon Placeholder */}
-//               <div className="text-center text-white">Relationship</div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Friends List */}
-//         <div className="bg-purple-700 shadow-md p-4 rounded-lg">
-//           <h2 className="mb-4 text-white text-xl">Friends</h2>
-//           <ul>
-//             <li className="mb-2 text-white">New Friends</li>
-//             <li className="mb-2 text-white">Boo Bei</li>
-//             <li className="mb-2 text-white">小明</li>
-//             <li className="mb-2 text-white">小红</li>
-//             <li className="mb-2 text-white">Cha Chio</li>
-//             {/* Add more friends here */}
-//           </ul>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default App;
