@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService";
-import { updateProfileData, UserData } from "@/types/type"
+import { updateProfileData } from "@/types/type"
 
 export const getMe = async() => {
     const token = getToken();
@@ -18,7 +18,7 @@ export const getMe = async() => {
     if(!response.ok) {
         throw new Error(result.message);
     }
-    return result as UserData;
+    return result;
 };
 
 export const updateMe = async(
@@ -55,6 +55,25 @@ export const updateMe = async(
     const result = await response.json();
     if(!response.json) {
         throw new Error(result.message)
+    }
+    return result;
+}
+
+export const getAllFriendsAPI = async() => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/friends`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.ok){
+        throw new Error(result.message);
     }
     return result;
 }

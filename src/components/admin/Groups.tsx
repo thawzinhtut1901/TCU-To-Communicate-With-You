@@ -54,14 +54,6 @@ const Groups = () => {
     setPageCount(getGroups?.meta.totalPages || 1);
   };
 
-  // const [isChecked, setIsChecked] = useState<boolean[]>(Array(10).fill(false));
-//   const handleClick = (index:number) => {
-//    const updatedCheckedState = isChecked.map((item: boolean, idx: number) =>
-//      idx === index ? !item : item
-//    );
-//    setIsChecked(updatedCheckedState);
-//  };
-
   return (
     <div className="overflow-auto vertical-scrollbar">
       <div className="flex flex-col mx-[40px]">

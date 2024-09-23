@@ -13,6 +13,7 @@ import { getAdminsData } from "./AdminAPI";
 import { updateMe } from "./UserAPI";
 import { googleLogin } from "../API/AuthAPI";
 import { removeAdmin } from "./AdminAPI";
+import { getAllFriendsAPI } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -30,4 +31,5 @@ export {
     updateMe,
     googleLogin,
     removeAdmin,
+    getAllFriendsAPI,
 };
