@@ -85,7 +85,7 @@ const HomePages = () => {
           <div className="bg-custom-gradient mt-2 md:mt-4 rounded-b-[8px] rounded-t-[20px] md:rounded-b-[10px] md:rounded-t-[30px] max-h-[35vh] md:max-h-[50vh] overflow-auto scrollbar-hide">
             <ul>
               {getAllFris?.items.map((fri: any) => {
-                const isUserOne = getMe.id === fri.userOneId;
+                const isUserOne = getMe?.id === fri.userOneId;
                 const user = isUserOne ? fri.userTwo : fri.userOne; 
 
                 return (

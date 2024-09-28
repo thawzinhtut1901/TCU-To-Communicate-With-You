@@ -3,19 +3,29 @@ import { getToken } from "@/services/authService"
 import { AddAdminsData } from "@/types/type";
 
 interface getUserAccountParams {
-    // sortBy?: string;
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number;
 }
 
 export const usersAccount = async(params: getUserAccountParams = {}) => {
-    const {pageCount, limit = 10} = params;
+    const {search, sortBy, pageCount, limit = 10} = params;
 
     const queryParams = new URLSearchParams();
 
     if(pageCount) {
         queryParams.append("page", pageCount.toString())
-    }
+    };
+
+    if(search) {
+        queryParams.append("search", search);
+    };
+
+    if(sortBy) {
+        queryParams.append("sortBy" , sortBy)
+    };
+
     queryParams.append("limit", limit.toString());
 
     const token = getToken();
@@ -37,17 +47,25 @@ export const usersAccount = async(params: getUserAccountParams = {}) => {
 }
 
 interface getUserGroupParams {
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number;
 }
 
 export const usersGroups = async(params: getUserGroupParams = {}) => {
-    const {pageCount, limit = 10} = params;
+    const {search, sortBy, pageCount, limit = 10} = params;
 
     const queryParams = new URLSearchParams();
 
     if(pageCount) {
         queryParams.append("page", pageCount.toString())
+    }
+    if(search) {
+        queryParams.append("search", search)
+    }
+    if(sortBy) {
+        queryParams.append("sortBy", sortBy)
     }
     queryParams.append("limit", limit.toString());
 
@@ -90,17 +108,25 @@ export const addAdmins = async({data}: {data: AddAdminsData}) => {
 }
 
 interface getAdminsParams {
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number
 }
 
 export const getAdminsData = async(params: getAdminsParams = {}) => {
-    const {pageCount, limit = 10} = params;
+    const {search, sortBy, pageCount, limit = 10} = params;
 
     const queryParams = new URLSearchParams();
 
     if(pageCount) {
         queryParams.append("page", pageCount.toString())
+    }
+    if(search) {
+        queryParams.append("search", search)
+    }
+    if(sortBy) {
+        queryParams.append("sortBy", sortBy)
     }
     queryParams.append("limit", limit.toString());
 
@@ -122,17 +148,14 @@ export const getAdminsData = async(params: getAdminsParams = {}) => {
         return result;
 }
 
-export const removeAdmin = async(
-    {data} :
-    {data: AddAdminsData}
-) => {
+
+export const removeAdmin = async({userId} : {userId: number}) => {  
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/remove-admin`, {
+    const response:Response = await fetch(`${BaseURL}/admin-dashboard/remove-admin/${userId}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-            body: JSON.stringify(data)
         },
         mode: "cors",
         method: "PATCH",

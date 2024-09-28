@@ -17,12 +17,12 @@ const AuthCheck = ({ children }: { children: ReactNode }) => {
     if(token) {
       navigate("/home");
     }
-  }, [token])
+  }, [token]);
 
     if (!token) {
-        return <Navigate to="/auth/login"/>;
+        return <Navigate to="/auth/login" replace/>;
       } 
       return <>{children}</>;
 }
 
-export default AuthCheck
+export default AuthCheck;

@@ -5,11 +5,22 @@ import { Button } from "../ui/button"
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs"
 import { Pagination, Stack } from "@mui/material";
 import { BsPlusLg } from "react-icons/bs";
-import { useAddAdmins, useFetchAdmins } from "@/hooks"
+import { useAddAdmins, useFetchAdmins, useRemoveAdmin } from "@/hooks"
 import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { AddAdminsData } from "@/types/type"
 import { MdDeleteForever } from "react-icons/md"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const Admins = () => {
   const [isAddEdit, setIsAddEdit] = useState(false);
@@ -17,22 +28,49 @@ const Admins = () => {
     userNameOrEmail: ""
   });
   const addOtherAdmins = useAddAdmins();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({
+    search: "",
+    sortBy: "Latest"
+  });
   const [pageCount, setPageCount] = useState<number>(
     parseInt(searchParams.get("page") || "1", 10)
   );
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [limit] = useState<number>(10);
-  const {data: getAdmins, isLoading} = useFetchAdmins({
+  const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "Latest")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const {data: getAdmins, isLoading, refetch} = useFetchAdmins({
+    search,
+    sortBy,
     pageCount,
     limit,
   });
+  const removeAdmin = useRemoveAdmin();
   
   if(!isLoading) {
     console.log(getAdmins);
   }
 
   useEffect(() => {
+    if(addOtherAdmins.isSuccess) {
+      refetch()
+    }
+  }, [addOtherAdmins.isSuccess, refetch])
+
+  useEffect(() => {
+    if(removeAdmin.isSuccess) {
+      refetch()
+    }
+  }, [removeAdmin.isSuccess, refetch])
+
+  useEffect(() => {
     const params: any = {};
+    if(search) {
+      params.search = search;
+    }
+    if(sortBy) {
+      params.sortBy = sortBy;
+    }
     if(limit) {
       params.limit = limit.toString();
     }
@@ -40,7 +78,7 @@ const Admins = () => {
       params.page = pageCount.toString();
     }
     setSearchParams(params)
-  }, [pageCount, limit]);
+  }, [search, sortBy, pageCount, limit]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -67,6 +105,28 @@ const Admins = () => {
   const handleEdit = () => {
     setIsAddEdit(true)
   };
+
+  const handleRemoveAdmin = (userId: number) => {
+    removeAdmin.mutate(userId); 
+  }
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPageCount(1); // Reset to the first page whenever a new search is made
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+  }
+
+  const handleSortChange = (sortOption : string) => {
+    setSortBy(sortOption);
+    setIsDropdownOpen(false)
+  }
   
   return (
     <div className="overflow-auto vertical-scrollbar">
@@ -74,11 +134,30 @@ const Admins = () => {
         <h1 className="my-[20px] font-bold font-roboto text-[28px]">Admins</h1>
 
         <div className="flex">
-          <div className="bg-white shadow-md mr-2 p-2 rounded-[10px]">
-            <img src={Fliter} alt="" className="w-[18px] h-[18px]"/>
+          <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px]">
+            <img onClick={toggleDropdown} src={Fliter} alt="" className="w-[18px] h-[18px]"/>
+
+            {
+              isDropdownOpen && (
+                <div className="top-full left-0 z-10 absolute bg-white shadow-lg mt-2 py-2 rounded-md w-48">
+                  <button onClick={() => handleSortChange("A-Z")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    A-Z
+                  </button>
+                  <button onClick={() => handleSortChange("Z-A")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Z-A
+                  </button>
+                  <button onClick={() => handleSortChange("Latest")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Latest
+                  </button>
+                  <button onClick={() => handleSortChange("Oldest")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Oldest
+                  </button>
+                </div>
+              )
+            }
           </div>
 
-          <div className="relative">
+          <form onSubmit={handleSearchSubmit} className="relative">
               <IoIosSearch
                 className="top-[7px] right-2 absolute"
                 size="20px"
@@ -87,8 +166,10 @@ const Admins = () => {
               <input
                 className="shadow-md px-4 py-1 rounded-[6px] w-[320px] h-[34px]"
                 placeholder="Search..."
+                value={search}
+                onChange={handleSearchChange}
               />
-          </div>
+          </form>
 
           <div className="flex gap-x-1 bg-[#591DA9] ml-auto p-2 rounded-[8px] text-[14px] text-white">
             {/* <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/> */}
@@ -151,10 +232,25 @@ const Admins = () => {
                     year: 'numeric',
                   })}
                 </li>
-                <li className="flex justify-center items-center gap-x-1 bg-red-600 mr-2 rounded-[10px] h-[40px] text-white">
+                <AlertDialog>
+                  <AlertDialogTrigger className="flex justify-center items-center gap-x-1 bg-red-600 mr-2 rounded-[10px] h-[40px] text-white">Remove <MdDeleteForever className="w-[18px] h-[18px]"/></AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure to Remove?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you sure to remove this admin from Admin Team?
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction className="bg-blue-600" onClick={() => handleRemoveAdmin(admin.id)}>Yes</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+                {/* <li onClick={() => handleRemoveAdmin(admin.id)} className="flex justify-center items-center gap-x-1 bg-red-600 mr-2 rounded-[10px] h-[40px] text-white">
                   Remove
                   <MdDeleteForever className="w-[18px] h-[18px]"/>
-                </li>
+                </li> */}
               </ul>
             ))
           }

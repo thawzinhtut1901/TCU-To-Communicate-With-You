@@ -3,7 +3,8 @@ import { AddAdminsData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface getUserAccountParams {
-    // sortBy?: string;
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number;
 }
@@ -12,6 +13,8 @@ export const useFetchUsersAccountDetails = (params: getUserAccountParams) =>
     useQuery({queryKey:["accounts", params], queryFn: () => usersAccount(params)});
 
 interface getUserGroupParams {
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number;
 }
@@ -25,13 +28,16 @@ export const useAddAdmins = () =>
     })
 
 interface getAdminsParams {
+    sortBy?: string;
+    search?: string;
     pageCount?: number;
     limit?: number;
 }
 export const useFetchAdmins = (params: getAdminsParams) => 
     useQuery({queryKey: ["admins", params], queryFn:() => getAdminsData(params)});
 
+
 export const useRemoveAdmin = () => 
     useMutation({
-        mutationFn: (data: AddAdminsData) => removeAdmin({data})
+        mutationFn: (userId : number) => removeAdmin({userId})
     })
