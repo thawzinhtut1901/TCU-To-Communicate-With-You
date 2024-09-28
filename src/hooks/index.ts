@@ -12,6 +12,8 @@ import { useUpdateMe } from "./useUser";
 import { useFetchGoogleLogIn } from "./useAuth";
 import { useRemoveAdmin } from "./useAdmin";
 import { useGetAllFriends } from "./useUser";
+import { useGetUserStatus } from "./useAdmin";
+import { useGetUserGender } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -28,4 +30,6 @@ export {
     useFetchGoogleLogIn,
     useRemoveAdmin,
     useGetAllFriends,
+    useGetUserStatus,
+    useGetUserGender,
 };
