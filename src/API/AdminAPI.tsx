@@ -203,3 +203,75 @@ export const userGenderAPI = async () => {
     };
     return result;
 }
+
+export const totalGroupsCountAPI = async () => {
+    const token = getToken();
+    const response : Response = await fetch(`${BaseURL}/admin-dashboard/total-groups`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
+
+export const totalUsersCountAPI = async() => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/admin-dashboard/validated-users?getCount=true`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
+
+export const newUsersCountAPI = async() => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/admin-dashboard/new-user-count`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
+
+export const newGroupsCountAPI = async() => {
+    const token = getToken();
+    const response : Response = await fetch(`${BaseURL}/admin-dashboard/new-group-count`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
