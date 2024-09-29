@@ -14,6 +14,8 @@ import { updateMe } from "./UserAPI";
 import { googleLogin } from "../API/AuthAPI";
 import { removeAdmin } from "./AdminAPI";
 import { getAllFriendsAPI } from "./UserAPI";
+import { userStatusAPI } from "./AdminAPI";
+import { userGenderAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -32,4 +34,6 @@ export {
     googleLogin,
     removeAdmin,
     getAllFriendsAPI,
+    userStatusAPI,
+    userGenderAPI,
 };
