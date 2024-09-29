@@ -166,7 +166,7 @@ const LogInForm = () => {
               </h1>
             </NavLink>
             <div className="flex items-center space-x-1">
-              <Checkbox id="remember" className="rounded-[5px]" />
+              <Checkbox id="remember" className="border-white rounded-[5px]" />
               <Label
                 htmlFor="remember"
                 className="font-primary text-[12px] cursor-pointer"

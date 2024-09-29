@@ -19,6 +19,7 @@ const gender = [
 ];
 
 const GenderPieChart = () => {
+  
   return (
     <div className="flex flex-col items-center bg-white shadow-lg w-[390px]">
       <div className="flex gap-2">
@@ -53,3 +54,5 @@ const GenderPieChart = () => {
 };
 
 export default GenderPieChart;
+
+

@@ -96,13 +96,13 @@ const SignupForm = () => {
   const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen">
+    <div className="relative flex flex-col justify-center items-center h-screen">
       <h1 className="top-0 left-0 absolute lg:hidden px-10 py-4 font-extrabold font-poppins text-[18px] text-start text-white lg:text-[24px]">
         TCU
       </h1>
       <MobileImage />
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="flex justify-center pt-3 text-lg font-medium text-white lg:pt-0 font-primary lg:text-2xl">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="flex justify-center pt-3 lg:pt-0 font-medium font-primary text-lg text-white lg:text-2xl">
           Sign up
         </h2>
         <div className="flex-col mx-auto mt-[10px] lg:mt-[20px] font-primary lg:font-thin text-[10px] text-white lg:text-[14px]">
@@ -116,11 +116,11 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             {errors.email && (
-              <span className="my-2 text-xs font-bold text-red-500">
+              <span className="my-2 font-bold text-red-500 text-xs">
                 {errors.email}
               </span>
             )}
-            <MdOutlineAlternateEmail className="absolute top-3 right-3" color="gray" />
+            <MdOutlineAlternateEmail className="top-3 right-3 absolute" color="gray" />
           </div>
         </div>
 
@@ -135,7 +135,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="absolute top-3 right-5"
+              className="top-3 right-5 absolute"
               onClick={toggleShowPassword}
             >
               {showPassword ? (
@@ -146,7 +146,7 @@ const SignupForm = () => {
             </button>
           </div>
           {errors.password && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.password}
             </span>
           )}
@@ -163,7 +163,7 @@ const SignupForm = () => {
               className="rounded-[8px]"
             />
             <button
-              className="absolute top-3 right-5"
+              className="top-3 right-5 absolute"
               onClick={toggleShowConfirmPassword}
             >
               {showConfirmPassword ? (
@@ -174,14 +174,14 @@ const SignupForm = () => {
             </button>
           </div>
           {errors.confirmPassword && (
-            <span className="my-2 text-xs font-bold text-red-500">
+            <span className="my-2 font-bold text-red-500 text-xs">
               {errors.confirmPassword}
             </span>
           )}
         </div>
 
         <div className="flex space-x-2 mx-auto mt-[20px] lg:mt-[50px] w-[350px] lg:w-[550px] font-primary font-thin text-[9px] text-white">
-          <Checkbox id="receive-email" className="mt-1 rounded-[5px]" />
+          <Checkbox id="receive-email" className="border-white mt-1 rounded-[5px]" />
           <Label
             htmlFor="receive-email"
             className="text-[10px] lg:text-[14px] cursor-pointer"
@@ -195,14 +195,14 @@ const SignupForm = () => {
           By creating an account, you agree to the{" "}
           <p
             onClick={() => navigate("/auth/howtcuwork")}
-            className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
+            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
           >
             Terms
           </p>
           and
           <p
             onClick={() => navigate("/auth/howtcuwork/policies")}
-            className="px-1 font-bold text-blue-500 underline cursor-pointer text-md"
+            className="px-1 font-bold text-blue-500 text-md underline cursor-pointer"
           >
             Privacy Policy
           </p>
@@ -212,7 +212,7 @@ const SignupForm = () => {
           <Button
             onClick={handleSubmit}
             type="button"
-            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] border rounded-full px-4 font-primary text-[#8566FF] text-[12px] lg:text-[14px]"
+            className="flex justify-center bg-slate-50 hover:bg-slate-300 mt-[24px] px-4 border rounded-full font-primary text-[#8566FF] text-[12px] lg:text-[14px]"
           >
             Create An Account
           </Button>

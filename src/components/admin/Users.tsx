@@ -12,19 +12,33 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const Users = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({
+    search: "",
+    sortBy: "Latest",
+  });
   const [pageCount, setPageCount] = useState<number>(
     parseInt(searchParams.get("page") || "1", 10)
   );
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [limit] = useState<number>(10);
+  const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "Latest");
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {data: getAccounts} = useFetchUsersAccountDetails({
+    search,
     pageCount, 
     limit,
+    sortBy,
   });
 
   useEffect(() => {
     const params: any = {};
+    if(search) {
+      params.search = search;
+    }
+    if(sortBy) {
+      params.sortBy = sortBy;
+    }
     if(limit) {
       params.limit = limit.toString();
     }
@@ -32,7 +46,7 @@ const Users = () => {
       params.page = pageCount.toString();
     }
     setSearchParams(params)
-  }, [pageCount, limit]);
+  }, [search, sortBy, pageCount, limit]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -54,17 +68,54 @@ const Users = () => {
     setPageCount(getAccounts?.meta.totalPages || 1);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPageCount(1); // Reset to the first page whenever a new search is made
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleSortChange = (sortOption : string) => {
+    setSortBy(sortOption);
+    setIsDropdownOpen(false)
+  }
+
   return(
     <div className="overflow-auto vertical-scrollbar">
       <div className="flex flex-col mx-[40px]">
         <h1 className="my-[20px] font-bold font-roboto text-[28px]">User Details</h1>
         
         <div className="flex">
-          <div className="bg-white shadow-md mr-2 p-2 rounded-[10px]">
-            <img src={Fliter} alt="" className="w-[18px] h-[18px]"/>
+          <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px]">
+            <img onClick={toggleDropdown} src={Fliter} alt="" className="w-[18px] h-[18px]"/>
+
+            {
+              isDropdownOpen && (
+                <div className="top-full left-0 z-10 absolute bg-white shadow-lg mt-2 py-2 rounded-md w-48">
+                  <button onClick={() => handleSortChange("A-Z")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    A-Z
+                  </button>
+                  <button onClick={() => handleSortChange("Z-A")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Z-A
+                  </button>
+                  <button onClick={() => handleSortChange("Latest")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Latest
+                  </button>
+                  <button onClick={() => handleSortChange("Oldest")} className="block hover:bg-gray-100 px-4 py-2 w-full text-left">
+                    Oldest
+                  </button>
+                </div>
+              )
+            }
           </div>
 
-          <div className="relative">
+          <form onSubmit={handleSearchSubmit} className="relative">
               <IoIosSearch
                 className="top-[7px] right-2 absolute"
                 size="20px"
@@ -73,8 +124,10 @@ const Users = () => {
               <input
                 className="shadow-md px-4 py-1 rounded-[6px] w-[320px] h-[34px]"
                 placeholder="Search..."
+                value={search}
+                onChange={handleSearchChange}
               />
-          </div>
+          </form>
         </div>
 
         <div className="bg-white shadow-custom-grey-inner mt-[24px] rounded-[8px] w-full cursor-pointer overflow-x-auto horizontal-scrollbar">

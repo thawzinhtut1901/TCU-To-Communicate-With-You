@@ -81,3 +81,9 @@ export type GoogleLogInData = {
   displayName: "",
   profile: ""
 }
+
+export type GenderCountData = {
+  male : number,
+  female: number,
+  ratherNotSay: number,
+}

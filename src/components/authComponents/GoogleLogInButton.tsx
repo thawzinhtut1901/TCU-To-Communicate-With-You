@@ -5,6 +5,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode'; 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ButtonLoading } from '../ui/buttonLoading';
 
 const GoogleLoginButton = () => {
   const navigate = useNavigate();
@@ -51,12 +52,18 @@ const GoogleLoginButton = () => {
 
   return (
     <div>
-      <GoogleLogin
-        onSuccess={handleGoogleLoginSuccess}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />
+      {
+        !GoogleLogInAccount.isPending ? (
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+        ) : (
+          <ButtonLoading/>
+        )
+      }
     </div>
   );
 };
