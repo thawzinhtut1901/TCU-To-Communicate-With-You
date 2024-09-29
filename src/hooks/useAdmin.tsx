@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, removeAdmin, userGenderAPI, usersAccount, usersGroups, userStatusAPI } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI } from "@/API";
 import { AddAdminsData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -50,4 +50,24 @@ export const useGetUserStatus = () =>
 export const useGetUserGender = () => 
     useQuery({
         queryKey: ["user-gender"], queryFn:() => userGenderAPI()
+    })
+
+export const useGetTotalGroupsCount = () => 
+    useQuery({
+        queryKey: ["total-groups"], queryFn:() => totalGroupsCountAPI()
+    })
+
+export const useGetTotalUsersCount = () => 
+    useQuery({
+        queryKey: ["total-users"], queryFn:() => totalUsersCountAPI()
+    })
+
+export const useGetNewUsersCount = () => 
+    useQuery({
+        queryKey: ["new-users"], queryFn:() => newUsersCountAPI()
+    })
+
+export const useGetNewGroupsCount = () => 
+    useQuery({
+        queryKey: ["new-groups"], queryFn:() => newGroupsCountAPI()
     })

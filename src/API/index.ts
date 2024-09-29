@@ -16,6 +16,10 @@ import { removeAdmin } from "./AdminAPI";
 import { getAllFriendsAPI } from "./UserAPI";
 import { userStatusAPI } from "./AdminAPI";
 import { userGenderAPI } from "./AdminAPI";
+import { totalGroupsCountAPI } from "./AdminAPI";
+import { totalUsersCountAPI } from "./AdminAPI";
+import { newUsersCountAPI } from "./AdminAPI";
+import { newGroupsCountAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -36,4 +40,8 @@ export {
     getAllFriendsAPI,
     userStatusAPI,
     userGenderAPI,
+    totalGroupsCountAPI,
+    totalUsersCountAPI,
+    newUsersCountAPI,
+    newGroupsCountAPI,
 };

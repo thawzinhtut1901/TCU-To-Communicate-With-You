@@ -14,6 +14,10 @@ import { useRemoveAdmin } from "./useAdmin";
 import { useGetAllFriends } from "./useUser";
 import { useGetUserStatus } from "./useAdmin";
 import { useGetUserGender } from "./useAdmin";
+import { useGetTotalGroupsCount } from "./useAdmin";
+import { useGetTotalUsersCount } from "./useAdmin";
+import { useGetNewUsersCount } from "./useAdmin";
+import { useGetNewGroupsCount } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -32,4 +36,8 @@ export {
     useGetAllFriends,
     useGetUserStatus,
     useGetUserGender,
+    useGetTotalGroupsCount,
+    useGetTotalUsersCount,
+    useGetNewUsersCount,
+    useGetNewGroupsCount,
 };
