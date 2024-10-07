@@ -144,7 +144,7 @@ const Users = () => {
           </ul>
 
           {
-            getAccounts?.items.map((user:any) => (
+            getAccounts?.items?.map((user:any) => (
               <ul onClick={() => handleRowClick(user?.id)} key={user?.id} id={user?.id} className={`items-center gap-x-8 grid grid-cols-10 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${selectedId === user?.id ? 'bg-blue-300' : ''}`}> 
               <li className="mx-auto">
                 <input
@@ -190,7 +190,7 @@ const Users = () => {
             <Button onClick={handleFirstPage} className="flex font-bold font-roboto text-[#9054DE] uppercase"><BsChevronDoubleLeft/>First</Button>
             <Stack spacing={1}>
               <Pagination 
-                count={getAccounts?.meta.totalPages} 
+                count={getAccounts?.meta?.totalPages} 
                 page = {pageCount}
                 onChange={handlePageChange}
                 defaultPage={1}

@@ -20,6 +20,7 @@ import { totalGroupsCountAPI } from "./AdminAPI";
 import { totalUsersCountAPI } from "./AdminAPI";
 import { newUsersCountAPI } from "./AdminAPI";
 import { newGroupsCountAPI } from "./AdminAPI";
+import { createAdminAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -44,4 +45,5 @@ export {
     totalUsersCountAPI,
     newUsersCountAPI,
     newGroupsCountAPI,
+    createAdminAPI,
 };
