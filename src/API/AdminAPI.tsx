@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
-import { AddAdminsData, AuthData } from "@/types/type";
+import { AuthData } from "@/types/type";
 
 interface getUserAccountParams {
     sortBy?: string;
@@ -29,7 +29,7 @@ export const usersAccount = async(params: getUserAccountParams = {}) => {
     queryParams.append("limit", limit.toString());
 
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/user-data? ${queryParams.toString()}`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/users? ${queryParams.toString()}`, {
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export const usersGroups = async(params: getUserGroupParams = {}) => {
     queryParams.append("limit", limit.toString());
 
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/group-data? ${queryParams.toString()}`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/groups? ${queryParams.toString()}`, {
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -87,9 +87,9 @@ export const usersGroups = async(params: getUserGroupParams = {}) => {
         return result;
 }
 
-export const addAdmins = async({data}: {data: AddAdminsData}) => {
+export const addAdmins = async({userId} : {userId: number}) => {
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/user-to-admin`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/user-to-admin/${userId}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -98,7 +98,6 @@ export const addAdmins = async({data}: {data: AddAdminsData}) => {
         method: "PATCH",
         mode: "cors",
         redirect: "follow",
-        body: JSON.stringify(data),
     });
     const result = await response.json();
     if(!response.json) {
@@ -151,7 +150,7 @@ export const getAdminsData = async(params: getAdminsParams = {}) => {
     queryParams.append("limit", limit.toString());
 
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/admin-data? ${queryParams.toString()}`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/admins? ${queryParams.toString()}`, {
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -171,7 +170,7 @@ export const getAdminsData = async(params: getAdminsParams = {}) => {
 
 export const removeAdmin = async({userId} : {userId: number}) => {  
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/admin-dashboard/remove-admin/${userId}`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/admins/remove/${userId}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -190,7 +189,7 @@ export const removeAdmin = async({userId} : {userId: number}) => {
 
 export const userStatusAPI = async () => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/admin-dashboard/user-status`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users/status/count`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -208,7 +207,7 @@ export const userStatusAPI = async () => {
 
 export const userGenderAPI = async () => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/admin-dashboard/user-genders`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users/gender/count`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -226,7 +225,7 @@ export const userGenderAPI = async () => {
 
 export const totalGroupsCountAPI = async () => {
     const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/admin-dashboard/total-groups`, {
+    const response : Response = await fetch(`${BaseURL}/dashboard/groups/total/count`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -244,7 +243,7 @@ export const totalGroupsCountAPI = async () => {
 
 export const totalUsersCountAPI = async() => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/admin-dashboard/validated-users?getCount=true`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users?getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -262,7 +261,7 @@ export const totalUsersCountAPI = async() => {
 
 export const newUsersCountAPI = async() => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/admin-dashboard/new-user-count`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users/new/count`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -280,7 +279,7 @@ export const newUsersCountAPI = async() => {
 
 export const newGroupsCountAPI = async() => {
     const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/admin-dashboard/new-group-count`, {
+    const response : Response = await fetch(`${BaseURL}/dashboard/groups/new/count`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
