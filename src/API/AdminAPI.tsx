@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
-import { AddAdminsData } from "@/types/type";
+import { AddAdminsData, AuthData } from "@/types/type";
 
 interface getUserAccountParams {
     sortBy?: string;
@@ -104,6 +104,26 @@ export const addAdmins = async({data}: {data: AddAdminsData}) => {
     if(!response.json) {
         throw new Error(result.message);
     }
+    return result;
+}
+
+export const createAdminAPI = async ({data}: {data: AuthData}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/dashboard`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        method: "POST",
+        mode: "cors",
+        redirect: "follow",
+        body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+        throw new Error(result.message);
+    };
     return result;
 }
 

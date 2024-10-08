@@ -18,6 +18,7 @@ import { useGetTotalGroupsCount } from "./useAdmin";
 import { useGetTotalUsersCount } from "./useAdmin";
 import { useGetNewUsersCount } from "./useAdmin";
 import { useGetNewGroupsCount } from "./useAdmin";
+import { useCreateAdmin } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -40,4 +41,5 @@ export {
     useGetTotalUsersCount,
     useGetNewUsersCount,
     useGetNewGroupsCount,
+    useCreateAdmin,
 };

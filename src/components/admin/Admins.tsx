@@ -21,6 +21,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { CreateNewAdmin } from "../adminUI"
 
 const Admins = () => {
   const [isAddEdit, setIsAddEdit] = useState(false);
@@ -171,6 +172,12 @@ const Admins = () => {
               />
           </form>
 
+          <div className="flex ml-auto">
+          <div className="mr-3">
+            <CreateNewAdmin/>
+          </div>
+          
+
           <div className="flex gap-x-1 bg-[#591DA9] ml-auto p-2 rounded-[8px] text-[14px] text-white">
             {/* <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/> */}
             {
@@ -193,6 +200,7 @@ const Admins = () => {
               )
             }
           </div>
+          </div>
         </div>
 
         <div className="bg-white shadow-custom-grey-inner mt-[24px] rounded-[8px] cursor-pointer">
@@ -207,7 +215,7 @@ const Admins = () => {
           </ul>
 
           {
-            getAdmins?.items.map((admin:any)=> (
+            getAdmins?.items?.map((admin:any)=> (
               <ul key={admin?.id} id={admin?.id} className="items-center gap-x-5 grid grid-cols-7 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center"> 
                 <li className="mx-auto">
                   <img src={admin.profile} alt="" className="rounded-[8px] w-[40px] h-[40px]"/>
@@ -271,7 +279,7 @@ const Admins = () => {
                 <Button className="flex font-bold font-roboto text-[#9054DE] uppercase"><BsChevronDoubleLeft/>First</Button>
                 <Stack spacing={1}>
                   <Pagination 
-                    count={getAdmins?.meta.totalPages} 
+                    count={getAdmins?.meta?.totalPages} 
                     page = {pageCount}
                     onChange={handlePageChange}
                     defaultPage={1}
