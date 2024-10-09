@@ -32,7 +32,12 @@ const GenderPieChart = () => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
+  
+  
+    const percentage = gender[index].percentage;
+    const formattedPercentage =
+      percentage % 1 === 0 ? percentage.toFixed(0) : percentage.toFixed(1); 
+  
     return (
       <text
         x={x}
@@ -43,10 +48,11 @@ const GenderPieChart = () => {
         fontSize={12}
         fontWeight="medium"
       >
-        {`${gender[index].percentage.toFixed(1)}%`}
+        {`${formattedPercentage}%`}
       </text>
     );
   };
+  
 
   return (
     <div className="flex flex-col items-center bg-[#007AFF] bg-opacity-15 shadow-gray-400 shadow-lg ml-auto rounded-[20px] w-[340px]">
