@@ -1,5 +1,5 @@
 import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI } from "@/API";
-import { AddAdminsData, AuthData } from "@/types/type";
+import { AuthData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface getUserAccountParams {
@@ -24,14 +24,13 @@ export const useFetchUsersGroups = (params: getUserGroupParams) =>
 
 export const useAddAdmins = () => 
     useMutation({
-        mutationFn: (data: AddAdminsData) => addAdmins({data}),
+        mutationFn: (userId : number) => addAdmins({userId}),
     })
 
 export const useCreateAdmin = () => 
     useMutation({
         mutationFn: (data: AuthData) => createAdminAPI({data}),
-})
-    
+    })
 
 interface getAdminsParams {
     sortBy?: string;

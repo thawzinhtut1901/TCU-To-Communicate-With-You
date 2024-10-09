@@ -4,11 +4,9 @@ import { IoIosSearch } from "react-icons/io"
 import { Button } from "../ui/button"
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs"
 import { Pagination, Stack } from "@mui/material";
-import { BsPlusLg } from "react-icons/bs";
 import { useAddAdmins, useFetchAdmins, useRemoveAdmin } from "@/hooks"
 import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { AddAdminsData } from "@/types/type"
 import { MdDeleteForever } from "react-icons/md"
 import {
   AlertDialog,
@@ -21,13 +19,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { CreateNewAdmin } from "../adminUI"
+import { AddAdmin, CreateNewAdmin } from "../adminUI"
 
 const Admins = () => {
-  const [isAddEdit, setIsAddEdit] = useState(false);
-  const [addAdminsData, setAddAdminsData] = useState<AddAdminsData>({
-    userNameOrEmail: ""
-  });
   const addOtherAdmins = useAddAdmins();
   const [searchParams, setSearchParams] = useSearchParams({
     search: "",
@@ -87,24 +81,6 @@ const Admins = () => {
   ) => {
     event.preventDefault();
     setPageCount(value);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setAddAdminsData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
-
-  const handleAddAdmin = () => {
-    if(addAdminsData.userNameOrEmail) {
-      addOtherAdmins.mutate(addAdminsData)
-    }
-  }
-
-  const handleEdit = () => {
-    setIsAddEdit(true)
   };
 
   const handleRemoveAdmin = (userId: number) => {
@@ -178,9 +154,10 @@ const Admins = () => {
           </div>
           
 
-          <div className="flex gap-x-1 bg-[#591DA9] ml-auto p-2 rounded-[8px] text-[14px] text-white">
+          <div className="flex">
+            <AddAdmin/>
             {/* <BsPlusLg className="mt-[2px] w-[15px] h-[15px]"/> */}
-            {
+            {/* {
               isAddEdit ? (
                 <div className="flex gap-x-1">
                   <input 
@@ -198,7 +175,7 @@ const Admins = () => {
                   <h1 onClick={handleEdit}>Add Admin</h1>
                 </div>
               )
-            }
+            } */}
           </div>
           </div>
         </div>
