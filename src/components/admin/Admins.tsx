@@ -20,6 +20,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { AddAdmin, CreateNewAdmin } from "../adminUI"
+import Swal from "sweetalert2"
 
 const Admins = () => {
   const addOtherAdmins = useAddAdmins();
@@ -54,6 +55,12 @@ const Admins = () => {
 
   useEffect(() => {
     if(removeAdmin.isSuccess) {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Admin Removed Successfully!",
+        timer: 2000,
+      })
       refetch()
     }
   }, [removeAdmin.isSuccess, refetch])
@@ -82,6 +89,7 @@ const Admins = () => {
     event.preventDefault();
     setPageCount(value);
   };
+
 
   const handleRemoveAdmin = (userId: number) => {
     removeAdmin.mutate(userId); 
