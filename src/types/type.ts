@@ -87,3 +87,7 @@ export type GenderCountData = {
   female: number,
   ratherNotSay: number,
 }
+
+export type quoteAdminUpdateData = {
+  status: string;
+}

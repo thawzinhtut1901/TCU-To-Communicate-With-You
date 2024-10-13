@@ -79,6 +79,20 @@ const DialogFooter = ({
 )
 DialogFooter.displayName = "DialogFooter"
 
+const QuoteDialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex sm:justify-center sm:items-center",
+      className
+    )}
+    {...props}
+  />
+)
+QuoteDialogFooter.displayName = "QuoteDialogFooter"
+
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -115,6 +129,7 @@ export {
   DialogContent,
   DialogHeader,
   DialogFooter,
+  QuoteDialogFooter,
   DialogTitle,
   DialogDescription,
 }

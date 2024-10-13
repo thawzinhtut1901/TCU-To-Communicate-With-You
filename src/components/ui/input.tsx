@@ -41,3 +41,23 @@ const CardInput = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "CardInput"
 
 export { Input, CardInput }
+
+const QuotePublishInput = React.forwardRef<HTMLInputElement, InputProps>(
+  ({className, type, ...props}, ref) => {
+    return(
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 md:h-10 mx-auto w-[350px] mt-4 rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 text-black focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref = {ref}
+        {...props}
+      />
+    )
+  }
+)
+
+Input.displayName = "QuotePublishInput"
+
+export { QuotePublishInput }

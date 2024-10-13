@@ -19,6 +19,10 @@ import { useGetTotalUsersCount } from "./useAdmin";
 import { useGetNewUsersCount } from "./useAdmin";
 import { useGetNewGroupsCount } from "./useAdmin";
 import { useCreateAdmin } from "./useAdmin";
+import { useCreateQuoteAdmin } from "./useAdmin";
+import { useGetAllQuotes } from "./useAdmin";
+import { useDeleteQuote } from "./useAdmin";
+import { useAdminUpdateQuote } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -42,4 +46,8 @@ export {
     useGetNewUsersCount,
     useGetNewGroupsCount,
     useCreateAdmin,
+    useCreateQuoteAdmin,
+    useGetAllQuotes,
+    useDeleteQuote,
+    useAdminUpdateQuote,
 };
