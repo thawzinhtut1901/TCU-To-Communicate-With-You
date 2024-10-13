@@ -1,5 +1,5 @@
-import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI } from "@/API";
-import { AuthData } from "@/types/type";
+import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI } from "@/API";
+import { AuthData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface getUserAccountParams {
@@ -76,3 +76,24 @@ export const useGetNewGroupsCount = () =>
     useQuery({
         queryKey: ["new-groups"], queryFn:() => newGroupsCountAPI()
     })
+
+export const useCreateQuoteAdmin = () => 
+    useMutation({
+        mutationFn: (data: userPublicQuotesData) => createQuoteAdminAPI({data})
+    })
+
+interface getAdminQuoteParams {
+    pageCount?: number;
+    limit?: number;
+}
+
+export const useGetAllQuotes = (params: getAdminQuoteParams) => 
+    useQuery({
+        queryKey: ["all-quotes", params],
+        queryFn: () => getAllQuoteAdminAPI(params)
+    })
+
+export const useDeleteQuote = () => 
+    useMutation({
+        mutationFn: (quoteId: number) => quoteDeleteAPI({quoteId})
+    });

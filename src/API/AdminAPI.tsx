@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
-import { AuthData } from "@/types/type";
+import { AuthData, userPublicQuotesData } from "@/types/type";
 
 interface getUserAccountParams {
     sortBy?: string;
@@ -294,3 +294,96 @@ export const newGroupsCountAPI = async() => {
     };
     return result;
 }
+
+export const createQuoteAdminAPI = async(
+    {data} : {data: userPublicQuotesData}
+) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/quotes`, {
+        headers:{
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        mode: "cors",
+        method: "POST",
+        redirect: "follow",
+        body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    if(!result.ok){
+        throw new Error(result.message);
+    }
+    return result;
+}
+
+interface getAdminQuoteParams {
+    pageCount?: number;
+    limit?: number
+}
+
+export const getAllQuoteAdminAPI = async(params : getAdminQuoteParams=({})) => {
+    const {pageCount, limit=10} = params;
+
+    const queryParams = new URLSearchParams();
+
+    if(pageCount) {
+        queryParams.append("page", pageCount.toString())
+    }
+    queryParams.append("limit", limit.toString());
+
+    const token = getToken();
+    const response : Response = await fetch(`${BaseURL}/quotes?${queryParams}`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message);
+    };
+    return result;
+}
+
+
+// export const getAllQuoteAdminAPI = async () => {
+//     const token = getToken();
+//     const response:Response = await fetch(`${BaseURL}/quotes`, {
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${token}`,
+//         },
+//         mode: "cors",
+//         method: "GET",
+//     });
+//     const result = await response.json();
+//     if(!result.ok){
+//         throw new Error(result.message)
+//     }
+//     return result;
+// }
+
+export const quoteDeleteAPI = async ({quoteId} : {quoteId: number}) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/quotes/${quoteId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "DELETE",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!result.ok) {
+        throw new Error(result.message);
+    }
+    return result;
+};
+

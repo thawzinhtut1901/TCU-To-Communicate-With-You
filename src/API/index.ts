@@ -21,6 +21,9 @@ import { totalUsersCountAPI } from "./AdminAPI";
 import { newUsersCountAPI } from "./AdminAPI";
 import { newGroupsCountAPI } from "./AdminAPI";
 import { createAdminAPI } from "./AdminAPI";
+import { createQuoteAdminAPI } from "./AdminAPI";
+import { getAllQuoteAdminAPI } from "./AdminAPI";
+import { quoteDeleteAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -46,4 +49,7 @@ export {
     newUsersCountAPI,
     newGroupsCountAPI,
     createAdminAPI,
+    createQuoteAdminAPI,
+    getAllQuoteAdminAPI,
+    quoteDeleteAPI,
 };
