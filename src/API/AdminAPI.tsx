@@ -465,3 +465,22 @@ export const validateUsersApi = async(params: validateUserParams=({})) => {
     };
     return result;
 }
+
+export const adminDeleteUsersAPI = async({userId} : {userId:number}) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/dashboard/users/delete/${userId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type" : "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "DELETE",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!result.ok) {
+        throw new Error(result.message)
+    };
+    return result;
+}

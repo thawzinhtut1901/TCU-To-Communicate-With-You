@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi, adminDeleteUsersAPI } from "@/API";
 import { AuthData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -126,3 +126,8 @@ export const useValidateUsers = (params: validateUserParams) =>
         queryKey: ["validated", params],
         queryFn: () => validateUsersApi(params)
     });
+
+export const useAdminDeleteUser = () => 
+    useMutation({
+        mutationFn: (userId: number) => adminDeleteUsersAPI({userId})
+    })
