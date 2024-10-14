@@ -22,6 +22,7 @@ import { useCreateAdmin } from "./useAdmin";
 import { useCreateQuoteAdmin } from "./useAdmin";
 import { useGetAllQuotes } from "./useAdmin";
 import { useDeleteQuote } from "./useAdmin";
+import { useAdminUpdateQuote } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -48,4 +49,5 @@ export {
     useCreateQuoteAdmin,
     useGetAllQuotes,
     useDeleteQuote,
+    useAdminUpdateQuote,
 };

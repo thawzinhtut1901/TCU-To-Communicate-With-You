@@ -24,6 +24,7 @@ import { createAdminAPI } from "./AdminAPI";
 import { createQuoteAdminAPI } from "./AdminAPI";
 import { getAllQuoteAdminAPI } from "./AdminAPI";
 import { quoteDeleteAPI } from "./AdminAPI";
+import { quoteApproveAdminAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -52,4 +53,5 @@ export {
     createQuoteAdminAPI,
     getAllQuoteAdminAPI,
     quoteDeleteAPI,
+    quoteApproveAdminAPI,
 };
