@@ -34,7 +34,7 @@ export const SignInAPI = async ({ data }: { data: LoginData }) => {
   const result = await response.json();
   if (!response.ok) {
     throw new Error(result.message);
-  };
+  }
   return result;
 };
 
@@ -85,7 +85,7 @@ export const forgetPasswordAPI = async(email: string) => {
   const result = await response.json();
   if(!response.ok) {
       throw new Error(result.message);
-  };
+  }
   return result;
 };
 
@@ -106,7 +106,7 @@ export const resetPswAPI = async({
   const result = await response.json();
   if(!response.ok) {
     throw new Error(result.message);
-  };
+  }
   return result;
 };
 
@@ -147,19 +147,19 @@ export const profileSetupAPI = async({
 
   if(data.profilePicture) {
     formData.append("profilePicture", data.profilePicture);
-  };
+  }
 
   if(data.bio){
     formData.append("bio", data.bio)
-  };
+  }
 
   if(data.dateOfBirth) {
     formData.append("dateOfBirth", data.dateOfBirth);
-  };
+  }
   
   if(data.gender) {
     formData.append("gender", data.gender)
-  };
+  }
 
 
   const response: Response = await fetch(`${BaseURL}/users/profile-setup`, {
