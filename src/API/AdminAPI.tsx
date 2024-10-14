@@ -399,3 +399,40 @@ export const quoteDeleteAPI = async ({quoteId} : {quoteId: number}) => {
     return result;
 };
 
+export const getOneQuoeAdminAPI = async ({quoteId} : {quoteId: number}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/quotes/${quoteId}`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error (result.message);
+    };
+    return result
+}
+
+export const publishQuoteAPI = async({quoteId} : {quoteId: number}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/quotes/publish/${quoteId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization : `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "PATCH",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
+

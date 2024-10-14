@@ -13,7 +13,7 @@ import { BiSolidCircle } from "react-icons/bi"
 import { RiFilter2Fill } from "react-icons/ri";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import { Pagination, Stack } from "@mui/material";
-import { CreateAdminQuote } from "../adminUI";
+import { CreateAdminQuote, PublishQuote } from "../adminUI";
 import { useAdminUpdateQuote, useDeleteQuote, useGetAllQuotes } from "@/hooks";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -37,6 +37,8 @@ const QuoteManagement = () => {
   });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedQuoteId, setSelectedQuoteId] = useState<number | null>(null);
   const approveQuote = useAdminUpdateQuote();
   const deleteQuote = useDeleteQuote();
 
@@ -100,6 +102,16 @@ const QuoteManagement = () => {
 
   const handleDropDown = () => {
     setIsDropdownOpen(!isDropdownOpen)
+  }
+
+  const handleRowClick = (quoteId: number) => {
+    setSelectedQuoteId(quoteId); 
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+    setSelectedQuoteId(null);
   }
 
   const handleSortChange = (sortOption: string) => {
@@ -178,7 +190,7 @@ const QuoteManagement = () => {
             {
               getAllQuote?.items?.map((quote:any) => (
                 <TableBody key={quote?.id}>
-                <TableRow >
+                <TableRow onClick={() => handleRowClick(quote?.id)}>
                   <TableCell></TableCell>
                   <TableCell key={quote?.user?.id} className="text-[#007AFF] text-[14px]">{quote?.user?.userName}</TableCell>
                   <TableCell className="text-[14px] text-slate-700">{quote?.quote}</TableCell>
@@ -239,6 +251,7 @@ const QuoteManagement = () => {
             </div>
         </div>
       </div>
+      {isDialogOpen && selectedQuoteId !== null && <PublishQuote quoteId={selectedQuoteId} open={isDialogOpen} onClose={handleDialogClose} />}
     </div>
   )
 }

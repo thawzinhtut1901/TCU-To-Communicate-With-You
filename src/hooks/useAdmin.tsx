@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI } from "@/API";
 import { AuthData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -104,3 +104,14 @@ export const useDeleteQuote = () =>
     useMutation({
         mutationFn: (quoteId: number) => quoteDeleteAPI({quoteId})
     });
+
+export const useGetOneQuote = ({quoteId} : {quoteId:number}) => 
+    useQuery({
+        queryKey: ["one-quote", quoteId], 
+        queryFn: () => getOneQuoeAdminAPI({quoteId})
+    })
+
+export const usePublishQuote = () => 
+    useMutation({
+        mutationFn: (quoteId : number) => publishQuoteAPI({quoteId})
+    })
