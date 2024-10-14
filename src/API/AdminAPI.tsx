@@ -436,3 +436,32 @@ export const publishQuoteAPI = async({quoteId} : {quoteId: number}) => {
     return result;
 }
 
+interface validateUserParams {
+    pageCount?: number;
+    limit?: number;
+}
+
+export const validateUsersApi = async(params: validateUserParams=({})) => {
+    const {pageCount, limit = 10} = params;
+
+    const queryParams = new URLSearchParams();
+    if(pageCount){
+        queryParams.append("page" , pageCount.toString())
+    };
+    queryParams.append("limit", limit.toString())
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/dashboard/users/validated?${queryParams}`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error (result.message)
+    };
+    return result;
+}
