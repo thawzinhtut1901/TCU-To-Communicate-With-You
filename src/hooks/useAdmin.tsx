@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi } from "@/API";
 import { AuthData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -115,3 +115,14 @@ export const usePublishQuote = () =>
     useMutation({
         mutationFn: (quoteId : number) => publishQuoteAPI({quoteId})
     })
+
+interface validateUserParams {
+    pageCount?: number;
+    limit?: number;
+}
+
+export const useValidateUsers = (params: validateUserParams) => 
+    useQuery({
+        queryKey: ["validated", params],
+        queryFn: () => validateUsersApi(params)
+    });

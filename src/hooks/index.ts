@@ -25,6 +25,7 @@ import { useDeleteQuote } from "./useAdmin";
 import { useAdminUpdateQuote } from "./useAdmin";
 import { useGetOneQuote } from "./useAdmin";
 import { usePublishQuote } from "./useAdmin";
+import { useValidateUsers } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -54,4 +55,5 @@ export {
     useAdminUpdateQuote,
     useGetOneQuote,
     usePublishQuote,
+    useValidateUsers,
 };
