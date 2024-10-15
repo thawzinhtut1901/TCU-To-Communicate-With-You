@@ -28,6 +28,7 @@ import { quoteApproveAdminAPI } from "./AdminAPI";
 import { getOneQuoeAdminAPI } from "./AdminAPI";
 import { publishQuoteAPI } from "./AdminAPI";
 import { validateUsersApi } from "./AdminAPI";
+import { adminDeleteUsersAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -60,4 +61,5 @@ export {
     getOneQuoeAdminAPI,
     publishQuoteAPI,
     validateUsersApi,
+    adminDeleteUsersAPI,
 };

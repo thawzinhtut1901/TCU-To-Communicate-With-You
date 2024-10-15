@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Pagination, Stack } from "@mui/material";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
+import { AdminDeleteUser } from "../adminUI";
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -28,7 +29,7 @@ const ValidateUsers = () => {
     parseInt(searchParams.get("page") || "1", 10)
   );
   const [limit] = useState<number>(10);
-  const {data: getValidateUser} = useValidateUsers({
+  const {data: getValidateUser, refetch} = useValidateUsers({
     pageCount,
     limit
   });
@@ -59,6 +60,8 @@ const ValidateUsers = () => {
   const handleLastPage = () => {
     setPageCount(getValidateUser?.meta?.totalPages || 1)
   }
+
+
   return (
     <div className="overflow-auto vertical-scrollbar">
       <div className="flex flex-col mx-[40px]">
@@ -84,7 +87,8 @@ const ValidateUsers = () => {
                       <TableCell className="text-center">{formatDate(validate?.createdAt)}</TableCell>
                       <TableCell className="flex justify-center gap-x-5 mx-auto">
                         <Button className="bg-green-500 hover:bg-green-400">Approve</Button>
-                        <Button className="bg-red-500 hover:bg-red-400">Delete</Button>
+                        <AdminDeleteUser userId={validate?.id} refetch={refetch}/>
+                        {/* <Button className="bg-red-500 hover:bg-red-400">Delete</Button> */}
                       </TableCell>
                     </TableRow>
                   ))
