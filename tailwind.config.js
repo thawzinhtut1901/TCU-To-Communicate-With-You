@@ -38,7 +38,7 @@ export default {
         'custom-top': '20px 20px 0 0', // Custom radius for rounded top corners
       },
       boxShadow: {
-        'custom-grey-inner': 'inset 3px 2px 4px 4px rgba(156, 163, 175, 0.5)', // Custom gray-400 inner shadow
+        'custom-grey-inner': 'inset 2px 0px 2px 2px rgba(156, 163, 175, 0.5)', // Custom gray-400 inner shadow
       },
       colors: {
         main: "#8566FF",

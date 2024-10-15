@@ -12,9 +12,9 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/*" element={UserRouting}/>
-        <Route path="/auth/*" element={<AuthCheck>{AuthRouting}</AuthCheck>}/>
-        <Route path="/admin-dashboard/*" element={AdminRouting}/>
+        <Route path="/*" element={<AuthCheck>{UserRouting}</AuthCheck>}/>
+        <Route path="/auth/*" element={AuthRouting}/>
+        <Route path="/admin-dashboard/*" element={<AuthCheck>{AdminRouting}</AuthCheck>}/>
       </Routes>
     </div>
   )

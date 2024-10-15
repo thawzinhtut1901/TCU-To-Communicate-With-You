@@ -20,10 +20,18 @@ export type NewPswData = {
 
 export type profileSetupData = {
   userName: string;
-  dispalyName: string;
+  displayName: string;
   profilePicture?: File | string;
   bio?: string;
   dateOfBirth?: string;
+  gender: string;
+}
+
+export type updateProfileData = {
+  userName: string;
+  displayName: string;
+  profilePicture?: File;
+  bio?: string;
   gender: string;
 }
 
@@ -40,4 +48,46 @@ export type UserData = {
   bio: string;
   dateOfBirth: string;
   gender: string;
+}
+
+export type Users = {
+  userName: string;
+  displayName: string;
+  email: string;
+  gender: string;
+  status: {
+    active: string;
+    showMe: string;
+};
+}
+
+export type UsersAccountData = {
+  items: Users[];
+  meta: {
+    totalItems: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+};
+}
+
+export type AddAdminsData = {
+  userNameOrEmail: string;
+}
+
+export type GoogleLogInData = {
+  email: "",
+  displayName: "",
+  profile: ""
+}
+
+export type GenderCountData = {
+  male : number,
+  female: number,
+  ratherNotSay: number,
+}
+
+export type quoteAdminUpdateData = {
+  status: string;
 }

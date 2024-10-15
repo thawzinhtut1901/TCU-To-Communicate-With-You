@@ -1,16 +1,28 @@
 import { getToken } from "@/services/authService"
-import { ReactNode } from "react"
-import { Navigate } from "react-router-dom";
+import { ReactNode, useEffect } from "react"
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthCheck = ({ children }: { children: ReactNode }) => {
+    const navigate = useNavigate();
     const token = getToken();
 
-    if (token) {
-        return <Navigate to="/home"/>;
+    useEffect(() => {
+      if (!token) {
+          window.location.reload(); 
       }
-    
-      return children;
+  }, [token]);
 
+
+  useEffect(() => {
+    if(token) {
+      navigate("/home");
+    }
+  }, [token]);
+
+    if (!token) {
+        return <Navigate to="/auth/login" replace/>;
+      } 
+      return <>{children}</>;
 }
 
-export default AuthCheck
+export default AuthCheck;

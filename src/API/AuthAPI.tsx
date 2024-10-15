@@ -1,6 +1,6 @@
 import { getToken } from "@/services/authService";
 import BaseURL from "../services/ApiEndPoint";
-import { AuthData, LoginData, NewPswData, profileSetupData, VerifyData } from "../types/type";
+import { AuthData, GoogleLogInData, LoginData, NewPswData, profileSetupData, VerifyData } from "../types/type";
 
 export const SignUpAPI = async ({ data }: { data: AuthData }) => {
   const response: Response = await fetch(`${BaseURL}/auth/signup`, {
@@ -143,7 +143,7 @@ export const profileSetupAPI = async({
   const token = getToken();
   const formData = new FormData();
   formData.append("userName", data.userName);
-  formData.append("dispalyName", data.dispalyName);
+  formData.append("dispalyName", data.displayName);
 
   if(data.profilePicture) {
     formData.append("profilePicture", data.profilePicture);
@@ -178,4 +178,33 @@ export const profileSetupAPI = async({
     throw new Error(result.message);
   }
   return result;
+}
+
+export const googleLogin = async(
+  {data}:
+  {data: GoogleLogInData}
+) => {
+  const response: Response = await fetch(`${BaseURL}/auth/google`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },    
+    mode: "cors",
+    method: "POST",
+    redirect: "follow",
+    body: JSON.stringify(data)
+  });
+
+  if(response.redirected) {
+    console.log( response.url)
+    window.location.href = response.url;
+  } else {
+    const result = await response.json();
+    if(!response.json) {
+      throw new Error(result.message);
+    }
+    return result;
+  }
+
+ 
 }
