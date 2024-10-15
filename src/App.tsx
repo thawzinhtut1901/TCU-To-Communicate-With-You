@@ -1,8 +1,6 @@
 import { Route, Routes, useRoutes } from "react-router-dom"
 import { AdminRouter, UserRouter } from "./routers"
 import AuthRouter from "./routers/AuthRouter";
-import AuthCheck from "./routers/AuthCheck";
-
 
 const App = () => {
   const UserRouting = useRoutes(UserRouter);
@@ -12,9 +10,9 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/*" element={<AuthCheck>{UserRouting}</AuthCheck>}/>
+        <Route path="/*" element={UserRouting}/>
         <Route path="/auth/*" element={AuthRouting}/>
-        <Route path="/admin-dashboard/*" element={<AuthCheck>{AdminRouting}</AuthCheck>}/>
+        <Route path="/admin-dashboard/*" element={AdminRouting}/>
       </Routes>
     </div>
   )
