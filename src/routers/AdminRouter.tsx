@@ -1,5 +1,8 @@
 import Admins from "@/components/admin/Admins";
 import Dashboard from "@/components/admin/Dashboard";
+import DashboardSetting from "@/components/admin/dashboardComponents/DashboardSetting";
+import NotificationSound from "@/components/admin/dashboardComponents/NotificationSound";
+import PrivacySecurity from "@/components/admin/dashboardComponents/PrivacySecurity";
 import Groups from "@/components/admin/Groups";
 import Profile from "@/components/admin/Profile";
 import QuoteManagement from "@/components/admin/QuoteManagement";
@@ -71,6 +74,24 @@ const AdminRouter: RouteObject[] = [
       {
         path: "setting",
         element: <Setting />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={"dashboard-setting"} />,
+          },
+          {
+            path: "dashboard-setting",
+            element: <DashboardSetting/>
+          },
+          {
+            path: "privacy-security",
+            element: <PrivacySecurity/>
+          },
+          {
+            path: "notification-sound",
+            element: <NotificationSound/>
+          }
+        ]
       },
     ],
   },

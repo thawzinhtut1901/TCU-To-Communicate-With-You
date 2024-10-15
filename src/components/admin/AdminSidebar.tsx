@@ -58,13 +58,13 @@ const AdminSidebar = () => {
   return (
     <div className="flex flex-col items-center gap-6 py-8 w-1/5 max-h-[100vh] overflow-auto scrollbar-hide">
       <Logo />
-      <div className="flex flex-col justify-center items-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3">
         <SidebarLink to="/admin-dashboard/dashboard" icon={MdSpaceDashboard} label="Dashboard" />
         <SidebarLink to="/admin-dashboard/user-data" icon={FaUser} label="Users" />
         <SidebarLink to="/admin-dashboard/groups" icon={FaUserGroup} label="Groups" />
       </div>
       <Divider />
-      <div className="flex flex-col justify-center items-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3">
         <SidebarLink to="/admin-dashboard/admins" icon={RiAdminFill} label="Admins" />
         <SidebarLink to="/admin-dashboard/profile" icon={CgProfile} label="Profile" />
         <SidebarLink to="/admin-dashboard/quote-management" icon={BsChatQuoteFill} label="Quotes Management" />
@@ -72,7 +72,7 @@ const AdminSidebar = () => {
         <SidebarLink to="/admin-dashboard/user-reports" icon={TbReportAnalytics} label="User Reports" />
       </div>
       <Divider />
-      <div className="flex flex-col justify-center items-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3">
         <SidebarLink to="/admin-dashboard/setting" icon={IoIosSettings} label="Setting" />
         <Button onClick={logoutHandler} variant="adminSidebar" size="adminSidebar">
           <MdOutlineLogout />
@@ -82,7 +82,7 @@ const AdminSidebar = () => {
 
       </div>
       {showLogoutDialog && (
-          <div className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white shadow-lg p-6 rounded-[5px] w-[450px]">
               <h2 className="font-semibold text-[18px]">
                 Are you sure you want to log out?
