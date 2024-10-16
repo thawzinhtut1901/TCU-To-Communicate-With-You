@@ -36,7 +36,7 @@ const HomePages = () => {
       
 
       {/* Main Content */}
-      <div className="flex md:flex-row flex-col md:gap-4 md:gap-x-6 mt-[30px] md:mt-[40px] md:w-full md:max-w-[70rem]">
+      <div className="flex md:flex-row flex-col gap-4 md:gap-4 mt-[30px] md:mt-[40px] md:w-full md:max-w-[70rem]">
         <div className="flex-1 gap-4 grid grid-cols-3">
           <img
             onClick={() => navigate("/chats")}
@@ -84,7 +84,7 @@ const HomePages = () => {
 
           <div className="bg-custom-gradient mt-2 md:mt-4 rounded-b-[8px] rounded-t-[20px] md:rounded-b-[10px] md:rounded-t-[30px] max-h-[35vh] md:max-h-[50vh] overflow-auto scrollbar-hide">
             <ul>
-              {getAllFris?.items.map((fri: any) => {
+              {getAllFris?.items?.length > 0 && getAllFris?.items.map((fri: any) => {
                 const isUserOne = getMe?.id === fri.userOneId;
                 const user = isUserOne ? fri.userTwo : fri.userOne; 
 
