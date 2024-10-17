@@ -44,7 +44,7 @@ const AuthCheck = ({ children }: { children: ReactNode }) => {
 
       if (!token && !location.pathname.startsWith("/auth")) {
         navigate("/auth/login", { replace: true });
-      } else if (token && location.pathname.startsWith("/auth")) {
+      } else if (token && location.pathname.startsWith("/auth/login")) {
         navigate("/home", { replace: true });
       }
 

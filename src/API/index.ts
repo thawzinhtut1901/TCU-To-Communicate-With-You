@@ -29,6 +29,7 @@ import { getOneQuoeAdminAPI } from "./AdminAPI";
 import { publishQuoteAPI } from "./AdminAPI";
 import { validateUsersApi } from "./AdminAPI";
 import { adminDeleteUsersAPI } from "./AdminAPI";
+import { getSuggestedFriAPI } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -62,4 +63,5 @@ export {
     publishQuoteAPI,
     validateUsersApi,
     adminDeleteUsersAPI,
+    getSuggestedFriAPI,
 };

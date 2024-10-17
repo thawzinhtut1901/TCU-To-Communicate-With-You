@@ -1,4 +1,4 @@
-import { getAllFriendsAPI, getMe, updateMe } from "@/API";
+import { getAllFriendsAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
 import { updateProfileData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -12,3 +12,9 @@ export const useUpdateMe = () =>
 
 export const useGetAllFriends = () => 
     useQuery({queryKey: ["friends"], queryFn: () => getAllFriendsAPI()});
+
+export const useGetAllSuggestedFri = () => 
+    useQuery({
+        queryKey: ["suggest-fr"],
+        queryFn: () => getSuggestedFriAPI()
+    });
