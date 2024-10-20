@@ -28,6 +28,7 @@ import { usePublishQuote } from "./useAdmin";
 import { useValidateUsers } from "./useAdmin";
 import { useAdminDeleteUser } from "./useAdmin";
 import { useGetAllSuggestedFri } from "./useUser";
+import { useAddFriend } from "./useUser";
 
 export { 
     useSignUp, 
@@ -60,4 +61,5 @@ export {
     useValidateUsers,
     useAdminDeleteUser,
     useGetAllSuggestedFri,
+    useAddFriend,
 };

@@ -1,4 +1,4 @@
-import { getAllFriendsAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
+import { addFriendAPI, getAllFriendsAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
 import { updateProfileData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -18,3 +18,8 @@ export const useGetAllSuggestedFri = () =>
         queryKey: ["suggest-fr"],
         queryFn: () => getSuggestedFriAPI()
     });
+
+export const useAddFriend = () => 
+    useMutation({
+        mutationFn: (friendId: number) => addFriendAPI({friendId})
+    })

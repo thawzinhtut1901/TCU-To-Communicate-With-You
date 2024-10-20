@@ -96,3 +96,23 @@ export const getSuggestedFriAPI = async() => {
     };
     return result;
 }
+
+export const addFriendAPI = async ({friendId}: {friendId:number}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/friends`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "POST",
+        redirect: "follow",
+        body: JSON.stringify({friendId})
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message)
+    }
+    return result;
+}
