@@ -21,10 +21,10 @@ import { useSearchParams } from "react-router-dom";
 const QuoteManagement = () => {
   const [searchParams , setSearchParams] = useSearchParams({
     search : "",
-    status : "pending",
+    status : "",
   });
   const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [status, setStatus] = useState(searchParams.get("status") || "pending");
+  const [status, setStatus] = useState(searchParams.get("status") || "");
   const [pageCount, setPageCount] = useState<number>(
     parseInt(searchParams.get("page") || "1", 10)
   );
@@ -39,7 +39,7 @@ const QuoteManagement = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedQuoteId, setSelectedQuoteId] = useState<number | null>(null);
-  const approveQuote = useAdminUpdateQuote();
+  const updateQuote = useAdminUpdateQuote();
   const deleteQuote = useDeleteQuote();
 
   if(!isLoading) {
@@ -64,10 +64,10 @@ const QuoteManagement = () => {
   }, [search, status, pageCount, limit]);
 
   useEffect(() => {
-    if(approveQuote.isSuccess) {
+    if(updateQuote.isSuccess) {
       refetch();
     }
-  }, [approveQuote.isSuccess, refetch]);
+  }, [updateQuote.isSuccess, refetch]);
 
   useEffect(() => {
     if(deleteQuote.isSuccess) {
@@ -120,7 +120,11 @@ const QuoteManagement = () => {
   }
 
   const handleApprove = (quoteId: number) => {
-    approveQuote.mutate(quoteId)
+    updateQuote.mutate({quoteId, status: "accept"})
+  } 
+
+  const handleReject = (quoteId: number ) => {
+    updateQuote.mutate({quoteId, status: "reject"})
   }
 
   const handleDelete = (quoteId:number) => {
@@ -181,10 +185,19 @@ const QuoteManagement = () => {
               <TableRow className="font-primary text-[16px]">
                 <TableHead></TableHead>
                 {/* <TableHead></TableHead> */}
-                <TableHead>Username</TableHead>
-                <TableHead>Quotes</TableHead>
+                <TableHead className="text-center">Username</TableHead>
+                <TableHead className="text-center">Quotes</TableHead>
+                {
+                  status === "accept" && (
+                    <TableHead className="text-center">Published Time</TableHead>
+                  )
+                }
                 <TableHead className="text-center">Status</TableHead>
-                <TableHead className="mx-auto text-center">Action</TableHead>
+                {
+                  status && (
+                    <TableHead className="mx-auto text-center">Action</TableHead>
+                  )
+                }
               </TableRow>
             </TableHeader>
             {
@@ -192,18 +205,28 @@ const QuoteManagement = () => {
                 <TableBody key={quote?.id}>
                 <TableRow onClick={() => handleRowClick(quote?.id)}>
                   <TableCell></TableCell>
-                  <TableCell key={quote?.user?.id} className="text-[#007AFF] text-[14px]">{quote?.user?.userName}</TableCell>
-                  <TableCell className="text-[14px] text-slate-700">{quote?.quote}</TableCell>
+                  <TableCell key={quote?.user?.id} className="text-[#007AFF] text-[14px] text-center">{quote?.user?.userName}</TableCell>
+                  <TableCell className="text-[14px] text-center text-slate-700">{quote?.quote}</TableCell>
+                  {
+                    status === "accept" && (
+                      <TableCell className="text-[14px] text-center text-slate-700">Now Published</TableCell>
+                    )
+                  }
                   <TableCell>
-                    <div className={`flex justify-center items-center gap-x-2  text-[14px] ${quote?.status === "accept" ? "text-[#34A853]" : "text-[#F98100]"}`}>
-                      <BiSolidCircle className={` border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : "text-[#FC970A] border-[#914F08]"}`} /> 
+                    <div className={`flex justify-center items-center gap-x-2  text-[14px] ${quote?.status === "accept" ? "text-[#34A853]" : quote?.status === "pending" ? "text-[#F98100]" : "text-[#E10101]"}`}>
+                      <BiSolidCircle className={` border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : quote?.status === "pending" ? "text-[#FC970A] border-[#914F08]" : "border-[#A83434] text-[#E10101]"}`} /> 
                       {quote?.status}
                     </div>
                   </TableCell>
-                  <TableCell className="flex justify-center gap-x-5 mx-auto">
-                    <Button onClick={() => handleApprove(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" ? "hidden" : ""}`}>Approve</Button>
-                    <Button onClick={() => handleDelete(quote?.id)} className="bg-red-500 hover:bg-red-400">Delete</Button>
-                  </TableCell>
+                  {
+                    status && (
+                      <TableCell className="flex justify-center gap-x-5 mx-auto">
+                      <Button onClick={() => handleApprove(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Approve</Button>
+                      <Button onClick={() => handleReject(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Reject</Button>
+                      <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" ? "hidden" : ""}`}>Delete</Button>
+                    </TableCell>
+                    )
+                  }
                 </TableRow>
             </TableBody>
               ))
@@ -256,4 +279,4 @@ const QuoteManagement = () => {
   )
 }
 
-export default QuoteManagement
+export default QuoteManagement;

@@ -30,6 +30,7 @@ import { publishQuoteAPI } from "./AdminAPI";
 import { validateUsersApi } from "./AdminAPI";
 import { adminDeleteUsersAPI } from "./AdminAPI";
 import { getSuggestedFriAPI } from "./UserAPI";
+import { addFriendAPI } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -64,4 +65,5 @@ export {
     validateUsersApi,
     adminDeleteUsersAPI,
     getSuggestedFriAPI,
+    addFriendAPI,
 };

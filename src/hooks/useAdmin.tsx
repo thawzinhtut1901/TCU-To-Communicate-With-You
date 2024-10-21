@@ -97,7 +97,7 @@ export const useGetAllQuotes = (params: getAdminQuoteParams) =>
 
 export const useAdminUpdateQuote = () => 
     useMutation({
-        mutationFn: (quoteId: number) => quoteApproveAdminAPI({quoteId} ,{data: {status : "accept"}})
+        mutationFn: ({quoteId, status} : {quoteId: number, status: string}) => quoteApproveAdminAPI({quoteId} ,{data: {status}})
     })
 
 export const useDeleteQuote = () => 
