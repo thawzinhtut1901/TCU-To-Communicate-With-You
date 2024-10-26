@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pie, PieChart, Cell } from "recharts";
 import { useGetUserStatus } from "@/hooks";
 
@@ -43,12 +44,12 @@ const UsersPieChart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-[#007AFF] bg-opacity-15 shadow-gray-400 shadow-lg mt-[24px] ml-auto rounded-[20px] w-[340px]">
+    <div className="flex flex-col items-center bg-[#007AFF] bg-opacity-15 shadow-gray-400 shadow-lg rounded-[20px] w-[280px] md:w-[340px]">
       <div className="flex gap-2">
         {users.map((data, index) => (
           <div key={index} className="flex items-center gap-2 py-2">
             <p
-              className="rounded-full w-2 h-2"
+              className="w-2 h-2 rounded-full"
               style={{ backgroundColor: data.color }}
             ></p>
             <p className="text-[#393939] text-[14px]">{data.name}</p>
