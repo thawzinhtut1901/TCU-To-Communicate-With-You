@@ -5,7 +5,7 @@ import UsersPieChart from "./dashboardComponents/UsersPieChart";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col w-screen py-4 overflow-auto md:w-auto md:px-10 bg-slate-50 vertical-scrollbar">
+    <div className="flex flex-col w-screen py-10 overflow-auto md:w-auto md:px-10 bg-slate-50 vertical-scrollbar">
       <h4 className="text-2xl font-semibold font-main">Dashboard</h4>
       <UsersCountSection />
       <div className="flex flex-col items-start w-screen md:w-auto md:items-center md:gap-4 md:flex-row">

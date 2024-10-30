@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "text-primary-foreground",
         dropdown: "bg-white border text-main",
-        adminSidebar: "bg-background text-black hover:bg-main2 hover:text-white active:bg-main2 active:text-white",
+        adminSidebar: "bg-background flex gap-4 item-center text-black hover:bg-main2 hover:text-white active:bg-main2 active:text-white",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

@@ -1,32 +1,14 @@
+// Import statements
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { 
-  FaUser, 
-  FaUserGroup 
-} from "react-icons/fa6";
-import { 
-  MdSpaceDashboard, 
-  MdOutlineLogout, 
-  MdMenu 
-} from "react-icons/md";
-import { 
-  RiAdminFill 
-} from "react-icons/ri";
-import { 
-  CgProfile 
-} from "react-icons/cg";
-import { 
-  BsChatQuoteFill 
-} from "react-icons/bs";
-import { 
-  GrValidate 
-} from "react-icons/gr";
-import { 
-  TbReportAnalytics 
-} from "react-icons/tb";
-import { 
-  IoIosSettings 
-} from "react-icons/io";
+import { FaUser, FaUserGroup } from "react-icons/fa6";
+import { MdSpaceDashboard, MdOutlineLogout, MdMenu } from "react-icons/md";
+import { RiAdminFill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { BsChatQuoteFill } from "react-icons/bs";
+import { GrValidate } from "react-icons/gr";
+import { TbReportAnalytics } from "react-icons/tb";
+import { IoIosSettings } from "react-icons/io";
 import { IconType } from "react-icons/lib";
 
 import { Button } from "../ui/button";
@@ -47,12 +29,12 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({ to, icon: Icon, label }) => (
       <Button
         variant="adminSidebar"
         size="adminSidebar"
-        className={`flex items-center gap-2 ${
+        className={`flex items-center justify-between px-5 gap-2 ${
           isActive ? "bg-main text-white" : "bg-background"
         }`}
       >
-        <Icon className="text-xl" aria-hidden="true" />
         {label}
+        <Icon className="text-xl" aria-hidden="true" />
       </Button>
     )}
   </NavLink>
@@ -83,24 +65,27 @@ const LogoutDialog: React.FC<{ onCancel: () => void; onConfirm: () => void }> = 
   </div>
 );
 
-const AdminSidebar = () => {
+const SidebarOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden" onClick={onClick} aria-label="Close sidebar overlay" />
+);
+
+const AdminSidebar: React.FC = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => setSidebarOpen(prev => !prev);
+  const openLogoutDialog = () => setShowLogoutDialog(true);
+  const closeLogoutDialog = () => setShowLogoutDialog(false);
 
-  const logoutHandler = () => setShowLogoutDialog(true);
   const confirmLogout = () => {
-    setShowLogoutDialog(false);
     logout();
     navigate("/");
+    closeLogoutDialog();
   };
-  const cancelLogout = () => setShowLogoutDialog(false);
 
   return (
     <>
-      {/* Hamburger Icon for Mobile */}
       <div className="h-full p-4 bg-main md:hidden">
         <MdMenu 
           className="text-3xl text-white cursor-pointer" 
@@ -109,15 +94,15 @@ const AdminSidebar = () => {
         />
       </div>
 
-      {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 bg-white shadow-lg transform transition-transform duration-300 
+        className={`flex h-screen top-0 inset-y-0 left-0 z-40 bg-white shadow-lg transform transition-transform duration-300 
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0 md:static md:w-1/5`}
       >
-        <div className="flex flex-col items-center min-h-screen gap-6 px-4 py-8 overflow-auto md:min-h-0 md:h-auto">
+        <div className="flex flex-col items-center min-h-screen gap-6 px-4 py-8 md:min-h-0 md:h-auto">
           <Logo />
 
+          {/* Primary Links */}
           <div className="flex flex-col items-center gap-3">
             <SidebarLink to="/admin-dashboard/dashboard" icon={MdSpaceDashboard} label="Dashboard" />
             <SidebarLink to="/admin-dashboard/user-data" icon={FaUser} label="Users" />
@@ -126,6 +111,7 @@ const AdminSidebar = () => {
 
           <Divider />
 
+          {/* Management Links */}
           <div className="flex flex-col items-center gap-3">
             <SidebarLink to="/admin-dashboard/admins" icon={RiAdminFill} label="Admins" />
             <SidebarLink to="/admin-dashboard/profile" icon={CgProfile} label="Profile" />
@@ -136,28 +122,27 @@ const AdminSidebar = () => {
 
           <Divider />
 
+          {/* Settings and Logout */}
           <div className="flex flex-col items-center gap-3">
-            <SidebarLink to="/admin-dashboard/setting" icon={IoIosSettings} label="Setting" />
-            <Button onClick={logoutHandler} variant="adminSidebar" size="adminSidebar">
+            <NavLink to="/admin-dashboard/setting">
+            <Button variant="adminSidebar" size="adminSidebar">
+              <IoIosSettings className="text-xl" aria-hidden="true" />
+             Setting
+            </Button>
+            </NavLink>
+            <Button onClick={openLogoutDialog} variant="adminSidebar" size="adminSidebar">
               <MdOutlineLogout className="text-xl" aria-hidden="true" />
               Log Out
             </Button>
           </div>
 
           {showLogoutDialog && (
-            <LogoutDialog onCancel={cancelLogout} onConfirm={confirmLogout} />
+            <LogoutDialog onCancel={closeLogoutDialog} onConfirm={confirmLogout} />
           )}
         </div>
       </div>
 
-      {/* Overlay for Mobile Sidebar */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
-          onClick={toggleSidebar}
-          aria-label="Close sidebar overlay"
-        />
-      )}
+      {isSidebarOpen && <SidebarOverlay onClick={toggleSidebar} />}
     </>
   );
 };
