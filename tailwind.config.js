@@ -19,6 +19,7 @@ export default {
     extend: {
       backgroundImage: {
         "custom-gradient": "linear-gradient(90deg, #051960 0%, #591DA9 90%)",
+        "radial-custom-gradient": "radial-gradient(circle at top left, #007AFF 0%, #1D8BA9 25%, #8566FF 50%, #8566FF 75%)",
         "glass": 'rgba(255, 255, 255, 0.1)',
       },
       backdropBlur: {

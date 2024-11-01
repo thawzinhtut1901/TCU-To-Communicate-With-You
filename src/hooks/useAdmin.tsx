@@ -119,6 +119,7 @@ export const usePublishQuote = () =>
 interface validateUserParams {
     pageCount?: number;
     limit?: number;
+    search?: string;
 }
 
 export const useValidateUsers = (params: validateUserParams) => 

@@ -439,14 +439,18 @@ export const publishQuoteAPI = async({quoteId} : {quoteId: number}) => {
 interface validateUserParams {
     pageCount?: number;
     limit?: number;
+    search?: string;
 }
 
 export const validateUsersApi = async(params: validateUserParams=({})) => {
-    const {pageCount, limit = 10} = params;
+    const {pageCount, search, limit = 10} = params;
 
     const queryParams = new URLSearchParams();
     if(pageCount){
         queryParams.append("page" , pageCount.toString())
+    };
+    if(search) {
+        queryParams.append("search", search)
     };
     queryParams.append("limit", limit.toString())
     const token = getToken();
