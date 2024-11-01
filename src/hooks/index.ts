@@ -29,6 +29,7 @@ import { useValidateUsers } from "./useAdmin";
 import { useAdminDeleteUser } from "./useAdmin";
 import { useGetAllSuggestedFri } from "./useUser";
 import { useAddFriend } from "./useUser";
+import { useInvalidateUsers } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -62,4 +63,5 @@ export {
     useAdminDeleteUser,
     useGetAllSuggestedFri,
     useAddFriend,
+    useInvalidateUsers,
 };

@@ -439,14 +439,18 @@ export const publishQuoteAPI = async({quoteId} : {quoteId: number}) => {
 interface validateUserParams {
     pageCount?: number;
     limit?: number;
+    search?: string;
 }
 
 export const validateUsersApi = async(params: validateUserParams=({})) => {
-    const {pageCount, limit = 10} = params;
+    const {pageCount, search, limit = 10} = params;
 
     const queryParams = new URLSearchParams();
     if(pageCount){
         queryParams.append("page" , pageCount.toString())
+    };
+    if(search) {
+        queryParams.append("search", search)
     };
     queryParams.append("limit", limit.toString())
     const token = getToken();
@@ -459,6 +463,35 @@ export const validateUsersApi = async(params: validateUserParams=({})) => {
         method: "GET",
         redirect: "follow",
     });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error (result.message)
+    };
+    return result;
+}
+
+export const invalidateUsersAPI = async(params: validateUserParams=({})) => {
+    const {pageCount, search, limit = 10} = params;
+
+    const queryParams = new URLSearchParams();
+    if(pageCount){
+        queryParams.append("page" , pageCount.toString())
+    };
+    if(search) {
+        queryParams.append("search", search)
+    };
+    queryParams.append("limit", limit.toString())
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/dashboard/users/invalidated`, {
+                headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+
     const result = await response.json();
     if(!response.json) {
         throw new Error (result.message)

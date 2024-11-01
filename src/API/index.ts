@@ -31,6 +31,7 @@ import { validateUsersApi } from "./AdminAPI";
 import { adminDeleteUsersAPI } from "./AdminAPI";
 import { getSuggestedFriAPI } from "./UserAPI";
 import { addFriendAPI } from "./UserAPI";
+import { invalidateUsersAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -66,4 +67,5 @@ export {
     adminDeleteUsersAPI,
     getSuggestedFriAPI,
     addFriendAPI,
+    invalidateUsersAPI,
 };

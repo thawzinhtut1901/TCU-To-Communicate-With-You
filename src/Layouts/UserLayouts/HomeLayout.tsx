@@ -2,7 +2,7 @@ import { HomePages } from "@/pages/UserPages"
 
 const HomeLayout = () => {
   return (
-    <div className="bg-custom-gradient w-full h-screen text-white overflow-hidden">
+    <div className="bg-radial-custom-gradient w-full h-screen overflow-hidden">
         <HomePages/>
     </div>
   )

@@ -44,7 +44,7 @@ const LogoutDialog: React.FC<{ onCancel: () => void; onConfirm: () => void }> = 
   onCancel,
   onConfirm,
 }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
     <div className="bg-white shadow-lg p-6 rounded-[5px] w-[450px]">
       <h2 className="font-semibold text-[18px]">Are you sure you want to log out?</h2>
       <div className="flex justify-end gap-4 mt-4">
@@ -66,7 +66,7 @@ const LogoutDialog: React.FC<{ onCancel: () => void; onConfirm: () => void }> = 
 );
 
 const SidebarOverlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
-  <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden" onClick={onClick} aria-label="Close sidebar overlay" />
+  <div className="fixed inset-0 md:hidden bg-black bg-opacity-50" onClick={onClick} aria-label="Close sidebar overlay" />
 );
 
 const AdminSidebar: React.FC = () => {
@@ -86,7 +86,7 @@ const AdminSidebar: React.FC = () => {
 
   return (
     <>
-      <div className="h-full p-4 bg-main md:hidden">
+      <div className="md:hidden bg-main p-4 h-full">
         <MdMenu 
           className="text-3xl text-white cursor-pointer" 
           onClick={toggleSidebar} 
@@ -99,7 +99,7 @@ const AdminSidebar: React.FC = () => {
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0 md:static md:w-1/5`}
       >
-        <div className="flex flex-col items-center min-h-screen gap-6 px-4 py-8 md:min-h-0 md:h-auto">
+        <div className="flex flex-col items-center gap-6 px-4 py-8 md:h-auto min-h-screen md:min-h-0 max-h-[100vh] overflow-auto scrollbar-hide">
           <Logo />
 
           {/* Primary Links */}

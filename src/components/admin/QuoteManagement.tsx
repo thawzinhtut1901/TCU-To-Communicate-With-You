@@ -137,7 +137,7 @@ const QuoteManagement = () => {
         <h1 className="my-[20px] font-bold font-roboto text-[28px]">Quotes Management</h1>
 
         <div className="flex">
-          <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px] h-[35px]">
+          <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px] h-[35px] cursor-pointer">
               <RiFilter2Fill onClick={handleDropDown} className="w-[18px] h-[18px]"/>
             {/* <img src={Fliter} alt="" /> */}
 
@@ -198,6 +198,12 @@ const QuoteManagement = () => {
                     <TableHead className="mx-auto text-center">Action</TableHead>
                   )
                 }
+                {/* {
+                  status === "accept" && (
+                    <TableHead className="text-center">Publish To All Users</TableHead>
+                  )
+                }
+                 */}
               </TableRow>
             </TableHeader>
             {
@@ -214,7 +220,7 @@ const QuoteManagement = () => {
                   }
                   <TableCell>
                     <div className={`flex justify-center items-center gap-x-2  text-[14px] ${quote?.status === "accept" ? "text-[#34A853]" : quote?.status === "pending" ? "text-[#F98100]" : "text-[#E10101]"}`}>
-                      <BiSolidCircle className={` border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : quote?.status === "pending" ? "text-[#FC970A] border-[#914F08]" : "border-[#A83434] text-[#E10101]"}`} /> 
+                      <BiSolidCircle className={`border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : quote?.status === "pending" ? "text-[#FC970A] border-[#914F08]" : "border-[#A83434] text-[#E10101]"}`} /> 
                       {quote?.status}
                     </div>
                   </TableCell>
