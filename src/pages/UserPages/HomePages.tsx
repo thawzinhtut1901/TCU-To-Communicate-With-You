@@ -14,9 +14,9 @@ const HomePages = () => {
   console.log(getMe);
 
   return (
-    <div className="">
+    <div>
       <div className="flex justify-between">
-        <img src={Logo} alt="" className="w-[120px] h-[60px]"/>
+        <img src={Logo} alt="" className="w-[200px] h-[100px]"/>
           {
             getMe?.role === "Admin" && (
               <div onClick={() => navigate("/admin-dashboard")} className="flex">
@@ -26,8 +26,8 @@ const HomePages = () => {
           }
       </div>
 
-      <div className="flex justify-center mt-[20px]">
-        <h1 key={getPublishQuotes?.id} className="border-[#591DA9] shadow-inner shadow-slate-600 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[#591DA9] text-[12px] md:text-[16px] cursor-default">
+      <div className="flex justify-center mt-[30px]">
+        <h1 key={getPublishQuotes?.id} className="border-slate-100 bg-black bg-opacity-25 shadow-md shadow-slate-600 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[12px] text-slate-50 md:text-[16px] cursor-default">
           {getPublishQuotes?.quote}
         </h1>
       </div>
@@ -43,11 +43,11 @@ const HomePages = () => {
           </div>
 
           <div className="flex flex-col mt-4 md:mt-0">
-            <div className="flex justify-center items-center bg-[#B895E7] bg-opacity-70 mx-auto md:mx-0 rounded-b-full w-[320px] md:w-[420px] h-[30px] md:h-[50px]">
-              <h1 className="font-medium font-poppins md:text-[26px]">Friends</h1>
+            <div className="flex justify-center items-center bg-black bg-opacity-25 mx-auto md:mx-0 rounded-b-full w-[320px] md:w-[420px] h-[30px] md:h-[50px]">
+              <h1 className="font-medium font-poppins text-white md:text-[26px]">Friends</h1>
             </div>
 
-            <div className="bg-[#B895E7] bg-opacity-70 mx-auto md:mx-0 mt-2 md:mt-4 rounded-b-[8px] rounded-t-[20px] md:rounded-b-[10px] md:rounded-t-[30px] w-[320px] md:w-[420px] max-h-[35vh] md:max-h-[50vh] overflow-auto scrollbar-hide">
+            <div className="bg-black bg-opacity-25 mx-auto md:mx-0 mt-2 md:mt-4 rounded-b-[8px] rounded-t-[20px] md:rounded-b-[10px] md:rounded-t-[30px] w-[320px] md:w-[420px] max-h-[35vh] md:max-h-[50vh] overflow-auto scrollbar-hide">
               <ul>
                {getAllFris?.items?.length > 0 && getAllFris?.items.map((fri: any) => {
                  const isUserOne = getMe?.id === fri.userOneId;
@@ -56,7 +56,7 @@ const HomePages = () => {
                  return (
                    <li
                      key={fri.id}
-                     className="flex bg-slate-50 bg-opacity-25 m-2 md:m-3 p-[2px] md:p-2 pl-2 rounded-[8px] text-white"
+                     className="flex border-slate-50 m-2 md:m-3 p-[2px] md:p-2 pl-2 border rounded-[4px] text-white"
                    >
                      <img src={user.profile} className="my-1 md:my-0 mr-[12px] md:mr-[17px] rounded-[5px] w-[24px] md:w-[34px] h-[24px] md:h-[34px]" />
                      <h1 className="mt-1 text-[16px] md:text-[18px]">{user.displayName}</h1>

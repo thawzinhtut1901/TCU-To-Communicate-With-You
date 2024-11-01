@@ -25,9 +25,9 @@ import Instagram from "./Instagram.png";
 import Twitter from "./Twitter.png";
 import LightChats from "./Light-Chat.png";
 import LightFindFri from "./Light-FindFri.png";
-import LightGroups from "./Light-Groups.png";
+import LightGroups from "./Light-Group.png";
 import LightProfile from "./Light-Profile.png";
-import LightRelation from "./Light-Relationship.png";
+import LightRelation from "./Light-Relation.png";
 import LightSetting from "./Light-Setting.png";
 import Logo from "./TCU-Logo.png"
 
