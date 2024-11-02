@@ -2,12 +2,19 @@ import { Fliter } from "@/assets";
 import { useFetchUsersGroups } from "@/hooks/useAdmin";
 import { Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
-import { BiSolidCircle } from "react-icons/bi";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "../ui/button";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const Groups = () => {
   const [searchParams, setSearchParams] = useSearchParams({
@@ -19,7 +26,6 @@ const Groups = () => {
   );
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [limit] = useState<number>(10);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "Latest");
   const {data: getGroups} = useFetchUsersGroups({
@@ -55,10 +61,6 @@ const Groups = () => {
   ) => {
     event.preventDefault();
     setPageCount(value);
-  };
-
-  const handleRowClick = (id: number) => {
-    setSelectedId(selectedId === id ? null : id);
   };
 
   const handleFirstPage = () => {
@@ -131,56 +133,42 @@ const Groups = () => {
           </form>
         </div>
 
-        <div className="bg-white shadow-custom-grey-inner mt-[24px] rounded-[8px] cursor-pointer">
-          <ul  className="gap-x-5 grid grid-cols-8 opacity-85 py-[15px] border-b border-b-slate-400 font-primary text-[16px] text-center uppercase">
-            <li className="mx-auto"></li>
-            <li>group name</li>
-            <li>group owner</li>
-            <li>total members</li>
-            <li>group type</li>
-            <li>group status</li>
-            <li>action</li>
-          </ul>
-
-          {
-            getGroups?.items?.map((group:any) => (
-              <ul onClick={() => handleRowClick(group?.id)} key={group?.id} id={group?.id} className={`items-center gap-x-5 grid grid-cols-8 py-[15px] border-b border-b-slate-400 font-roboto text-[14px] text-center ${selectedId === group?.id ? 'bg-blue-300' : ''}`}> 
-                <li className="mx-auto">
-                  <input
-                      type="checkbox"
-                      checked= {selectedId === group?.id}
-                  />
-                </li>
-                <li className="text-slate-500">{group?.groupName}</li>
-                <li className="text-[#34A853]">{group?.user?.userName}</li>
-                <li className="text-slate-500">46643</li>
-                <li className="flex justify-center gap-x-1">
-                  <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
-                  <span className="text-[#34A853]">{group?.status}</span>
-                </li>
-                <li className="flex justify-center gap-x-1">
-                <BiSolidCircle className="border-[#52825F] mt-[6.2px] border rounded-full w-[8px] h-[8px] text-[#34A853]"/>
-                  <span className="text-[#34A853]">Good</span>
-                </li>
-                <li className="flex justify-center items-center gap-x-1 bg-[#4B9A52] rounded-[10px] h-[40px] text-white">
-                  Confirm
-                  <AiOutlineDown className="border-slate-50 border rounded-[3px] w-[11px] h-[11px]"/>
-                </li>
-              </ul>
-            ))
-          }
+        <div className="bg-white shadow-inner shadow-slate-500 mt-[24px] rounded-[8px] cursor-pointer">
+          <Table>
+            <TableCaption>List of Groups.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead></TableHead>
+                <TableHead className="text-center">Group Name</TableHead>
+                <TableHead className="text-center">Group Owner</TableHead>
+                <TableHead className="text-center">Total Members</TableHead>
+                <TableHead className="text-center">Group Type</TableHead>
+                {/* <TableHead className="text-center">Group Status</TableHead> */}
+                {/* <TableHead className="text-center">Email</TableHead> */}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {
+                getGroups?.items?.map((group:any) => (
+                  <TableRow key={group?.id}>
+                    <TableCell></TableCell>
+                    <TableCell className="text-center">{group?.groupName}</TableCell>
+                    <TableCell className="text-[#007AFF] text-center">{group?.user?.userName}</TableCell>
+                    <TableCell className="text-center">4664</TableCell>
+                    <TableCell className="text-center">{group?.status}</TableCell>
+                    {/* <TableCell key={user?.status?.user_id} className="flex justify-center gap-x-2">
+                      <BiSolidCircle className={`mt-[6.2px] border rounded-full w-[8px] h-[8px] ${user?.status?.showMe === "Public" ? "text-[#34A853] border-[#52825F]" : user?.status?.showMe === "Private" ? "text-[#E10101] border-[#A83434]" : "hidden"}`}/>
+                      <span className={`${user?.status?.showMe === "Public" ? "text-[#34A853]" : "text-[#E10101]"}`}>{user?.status?.showMe}</span>
+                    </TableCell>
+                    <TableCell className="text-center">{user?.email}</TableCell> */}
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
         </div>
-
+        
         <div className="flex justify-center gap-x-2 my-[30px]">
-          {/* <div className="flex gap-x-3 mt-1 font-roboto text-[#9054DE]">
-            <h1 className="font-bold text-[16px] uppercase">page</h1>
-            <p className="flex gap-x-1 bg-[#9054DE] px-1 rounded-[4px] h-[20px] text-[14px] text-white">
-              1 <AiOutlineDown className="mt-[5px] w-[12px] h-[12px]"/>
-            </p>
-            <h1 className="font-bold text-[16px] uppercase">of</h1>
-            <p className="font-bold text-[16px]">10</p>
-          </div> */}
-
           {
             getGroups?.items?.length !== 0 && (
               <div className="flex ml-[20px] text-[16px]">

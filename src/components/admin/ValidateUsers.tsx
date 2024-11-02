@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { useValidateUsers } from "@/hooks";
+import { useInvalidateUsers } from "@/hooks";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Pagination, Stack } from "@mui/material";
@@ -33,7 +33,7 @@ const ValidateUsers = () => {
   );
   const [search, setSearch] = useState(searchParams.get("search") || "")
   const [limit] = useState<number>(10);
-  const {data: getValidateUser, refetch} = useValidateUsers({
+  const {data: getValidateUser, refetch} = useInvalidateUsers({
     pageCount,
     limit,
     search,
