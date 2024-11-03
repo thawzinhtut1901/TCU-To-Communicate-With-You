@@ -189,7 +189,7 @@ export const removeAdmin = async({userId} : {userId: number}) => {
 
 export const userStatusAPI = async () => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users/status/count`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users?publicAndPrivateCount=true&getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -207,7 +207,7 @@ export const userStatusAPI = async () => {
 
 export const userGenderAPI = async () => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users/gender/count`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users?genderCount=true&getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -225,7 +225,7 @@ export const userGenderAPI = async () => {
 
 export const totalGroupsCountAPI = async () => {
     const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/dashboard/groups/total/count`, {
+    const response : Response = await fetch(`${BaseURL}/dashboard/groups?getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -261,7 +261,7 @@ export const totalUsersCountAPI = async() => {
 
 export const newUsersCountAPI = async() => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users/new/count`, {
+    const response: Response = await fetch(`${BaseURL}/dashboard/users?newUsers=true&getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -279,7 +279,7 @@ export const newUsersCountAPI = async() => {
 
 export const newGroupsCountAPI = async() => {
     const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/dashboard/groups/new/count`, {
+    const response : Response = await fetch(`${BaseURL}/dashboard/groups?newGroup=true&getCount=true`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -483,7 +483,7 @@ export const invalidateUsersAPI = async(params: validateUserParams=({})) => {
     queryParams.append("limit", limit.toString())
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/dashboard/users/invalidated`, {
-                headers: {
+            headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
@@ -497,6 +497,25 @@ export const invalidateUsersAPI = async(params: validateUserParams=({})) => {
         throw new Error (result.message)
     };
     return result;
+}
+
+export const approveValidateUserAPI = async({userId} : {userId: number}) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/dashboard/validateuser/${userId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "PATCH",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json){
+        throw new Error(result.message)
+    };
+    return result
 }
 
 export const adminDeleteUsersAPI = async({userId} : {userId:number}) => {

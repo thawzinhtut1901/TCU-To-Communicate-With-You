@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pie, PieChart, Cell } from "recharts";
 import { useGetUserGender } from "@/hooks";
 
@@ -10,20 +9,20 @@ const GenderPieChart = () => {
   const gender = [
     {
       name: "Male",
-      value: getUserGender?.male || 0,
-      percentage: ((getUserGender?.male || 0) / total) * 100, 
+      value: getUserGender?.male,
+      percentage: Math.round(((getUserGender?.male) / total) * 100), 
       color: "#6929C4",
     },
     {
       name: "Female",
-      value: getUserGender?.female || 0,
-      percentage: ((getUserGender?.female || 0) / total) * 100, 
+      value: getUserGender?.female,
+      percentage: Math.round(((getUserGender?.female) / total) * 100), 
       color: "#1192E8",
     },
     {
       name: "Rather Not to Say",
-      value: getUserGender?.ratherNotSay || 0,
-      percentage: ((getUserGender?.ratherNotSay || 0) / total) * 100, 
+      value: getUserGender?.ratherNotSay,
+      percentage: Math.round(((getUserGender?.ratherNotSay) / total) * 100), 
       color: "#005D5D",
     },
   ];
@@ -33,7 +32,6 @@ const GenderPieChart = () => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
   
     const percentage = gender[index].percentage;
     const formattedPercentage =
@@ -61,7 +59,7 @@ const GenderPieChart = () => {
         {gender.map((data, index) => (
           <div key={index} className="flex items-center gap-2 py-2">
             <p
-              className="w-2 h-2 rounded-full"
+              className="rounded-full w-2 h-2"
               style={{ backgroundColor: data.color }}
             ></p>
             <p className="text-[#393939] text-[14px]">{data.name}</p>

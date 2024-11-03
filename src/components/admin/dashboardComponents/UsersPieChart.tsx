@@ -5,19 +5,19 @@ import { useGetUserStatus } from "@/hooks";
 const UsersPieChart = () => {
   const { data: getUserStatus } = useGetUserStatus();
 
-  const total = (getUserStatus?.publicUser || 0) + (getUserStatus?.privateUser || 0);
+  const total = (getUserStatus?.publicUser) + (getUserStatus?.privateUser);
 
   const users = [
     {
       name: "Public Users",
-      value: getUserStatus?.publicUser || 0,
-      percentage: total > 0 ? ((getUserStatus?.publicUser || 0) / total) * 100 : 0,
+      value: getUserStatus?.publicUser,
+      percentage: total > 0 ? Math.round((getUserStatus?.publicUser / total) * 100) : 0,
       color: "#6929C4",
     },
     {
       name: "Private Users",
-      value: getUserStatus?.privateUser || 0,
-      percentage: total > 0 ? ((getUserStatus?.privateUser || 0) / total) * 100 : 0,
+      value: getUserStatus?.privateUser,
+      percentage: total > 0 ? Math.round((getUserStatus?.privateUser / total) * 100) : 0,
       color: "#1192E8",
     },
   ];
@@ -27,6 +27,10 @@ const UsersPieChart = () => {
     const radius = outerRadius * 0.5; 
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    const percentage = users[index].percentage;
+    const formattedPercentage =
+      percentage % 1 === 0 ? percentage.toFixed(0) : percentage.toFixed(1); 
 
     return (
       <text
@@ -38,7 +42,7 @@ const UsersPieChart = () => {
         fontSize={12}
         fontWeight="medium"
       >
-        {`${users[index].percentage.toFixed(1)}%`}
+        {`${formattedPercentage}%`}
       </text>
     );
   };
@@ -49,7 +53,7 @@ const UsersPieChart = () => {
         {users.map((data, index) => (
           <div key={index} className="flex items-center gap-2 py-2">
             <p
-              className="w-2 h-2 rounded-full"
+              className="rounded-full w-2 h-2"
               style={{ backgroundColor: data.color }}
             ></p>
             <p className="text-[#393939] text-[14px]">{data.name}</p>

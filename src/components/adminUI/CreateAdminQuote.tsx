@@ -12,14 +12,22 @@ import { CardInput } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useCreateQuoteAdmin } from "@/hooks"
 import { userPublicQuotesData } from "@/types/type"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BsPlusLg } from "react-icons/bs"
 
 const CreateAdminQuote = () => {
     const createAdminQuote = useCreateQuoteAdmin();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [quoteData, setQuoteData] = useState<userPublicQuotesData>({
       quote: ""
     });
+
+    useEffect(() => {
+        if (createAdminQuote.isSuccess) {
+          setIsDialogOpen(false);
+          resetForm(); 
+        }
+      }, [createAdminQuote.isSuccess]);
 
     const handleCreate = (event: React.ChangeEvent<HTMLInputElement>) => {
         const quote = event.target.value;
@@ -29,6 +37,7 @@ const CreateAdminQuote = () => {
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         createAdminQuote.mutate(quoteData);
+        setIsDialogOpen(false);
     }
 
     const resetForm = () => {
@@ -37,7 +46,7 @@ const CreateAdminQuote = () => {
     
   return (
     <div>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
                 <Button onClick={() => resetForm()} className="gap-x-1 bg-purple-700 hover:bg-purple-600 text-white hover:text-white" variant="outline">
                     <BsPlusLg className="w-[15px] h-[15px]"/>
