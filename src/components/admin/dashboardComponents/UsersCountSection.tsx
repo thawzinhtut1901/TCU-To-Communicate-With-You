@@ -17,19 +17,18 @@ import {
     count: number;
     imageSrc: string;
   }) => (
-    <div className="flex flex-col items-start gap-3 bg-white shadow-md shadow-gray-400 
-                    p-4 rounded-xl w-full max-w-[200px] h-auto">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col items-start gap-3 bg-white shadow-gray-400 shadow-md p-4 rounded-xl w-full max-w-[200px] h-auto">
+      <div className="flex justify-between items-center">
         <p className="font-poppins text-[16px] text-black text-opacity-70">
           {title}
         </p>
         <img
           src={imageSrc}
-          className="h-auto p-1 bg-purple-200 rounded w-7"
+          className="bg-purple-200 p-1 rounded w-7 h-auto"
           alt={title}
         />
       </div>
-      <p className="text-2xl font-roboto text-main">{count}</p>
+      <p className="font-roboto text-2xl text-main">{count}</p>
       <p className="font-semibold text-[16px] text-green-500">
         +3% than yesterday
       </p>
@@ -42,14 +41,14 @@ import {
     const { data: getNewUsers } = useGetNewUsersCount();
     const { data: getNewGroups } = useGetNewGroupsCount();
   
-    const totalUsersCount = getTotalUsers?.data?.count || 0;
-    const totalGroupsCount = getTotalGroups?.data?.count || 0;
-    const newUsersCount = getNewUsers?.data?.count || 0;
-    const newGroupsCount = getNewGroups?.data?.count || 0;
+    const totalUsersCount = getTotalUsers?.allUserCount;
+    const totalGroupsCount = getTotalGroups?.allGroupCount;
+    const newUsersCount = getNewUsers?.newUsersCount;
+    const newGroupsCount = getNewGroups?.newGroupCount;
   
     return (
         <div className="flex-grow p-4">
-        <div className="grid grid-cols-1 gap-6 px-4 py-5 md:gap-3 md:grid-cols-4">
+        <div className="gap-6 md:gap-3 grid grid-cols-1 md:grid-cols-4 px-4 py-5">
           <StatCard title="Total Users" count={totalUsersCount} imageSrc={users} />
           <StatCard title="Total Groups" count={totalGroupsCount} imageSrc={groups} />
           <StatCard title="New Users" count={newUsersCount} imageSrc={users} />

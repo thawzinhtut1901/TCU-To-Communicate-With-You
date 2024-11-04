@@ -7,7 +7,6 @@ import {
 import { QuotePublishInput } from "@/components/ui/input"
 import { useGetOneQuote, usePublishQuote } from "@/hooks";
 import { DialogTitle } from "@mui/material";
-
 interface PublishQuoteProps {
   open: boolean,
   onClose: () => void;
@@ -24,7 +23,8 @@ const PublishQuote:React.FC<PublishQuoteProps> = ({open, onClose, quoteId}) => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    publishToAll.mutate(quoteId)
+    publishToAll.mutate(quoteId);
+    onClose();
   }
 
   return (

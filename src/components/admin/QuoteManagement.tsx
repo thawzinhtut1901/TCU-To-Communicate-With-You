@@ -139,7 +139,6 @@ const QuoteManagement = () => {
         <div className="flex">
           <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px] h-[35px] cursor-pointer">
               <RiFilter2Fill onClick={handleDropDown} className="w-[18px] h-[18px]"/>
-            {/* <img src={Fliter} alt="" /> */}
 
             {
               isDropdownOpen && (
@@ -173,18 +172,16 @@ const QuoteManagement = () => {
           </form>
 
           <div className="flex gap-x-6 ml-auto">
-            {/* <PublishQuote/> */}
             <CreateAdminQuote/>
           </div>
         </div>
 
         <div className="bg-white shadow-inner shadow-slate-500 mt-[24px] rounded-[8px] cursor-pointer">
           <Table>
-            <TableCaption>A list of Quotes.</TableCaption>
+            <TableCaption>List of Quotes.</TableCaption>
             <TableHeader>
               <TableRow className="font-primary text-[16px]">
                 <TableHead></TableHead>
-                {/* <TableHead></TableHead> */}
                 <TableHead className="text-center">Username</TableHead>
                 <TableHead className="text-center">Quotes</TableHead>
                 {
@@ -198,44 +195,54 @@ const QuoteManagement = () => {
                     <TableHead className="mx-auto text-center">Action</TableHead>
                   )
                 }
-                {/* {
-                  status === "accept" && (
-                    <TableHead className="text-center">Publish To All Users</TableHead>
-                  )
-                }
-                 */}
               </TableRow>
             </TableHeader>
             {
-              getAllQuote?.items?.map((quote:any) => (
-                <TableBody key={quote?.id}>
-                <TableRow onClick={() => handleRowClick(quote?.id)}>
-                  <TableCell></TableCell>
-                  <TableCell key={quote?.user?.id} className="text-[#007AFF] text-[14px] text-center">{quote?.user?.userName}</TableCell>
-                  <TableCell className="text-[14px] text-center text-slate-700">{quote?.quote}</TableCell>
-                  {
-                    status === "accept" && (
-                      <TableCell className="text-[14px] text-center text-slate-700">Now Published</TableCell>
-                    )
-                  }
-                  <TableCell>
-                    <div className={`flex justify-center items-center gap-x-2  text-[14px] ${quote?.status === "accept" ? "text-[#34A853]" : quote?.status === "pending" ? "text-[#F98100]" : "text-[#E10101]"}`}>
-                      <BiSolidCircle className={`border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : quote?.status === "pending" ? "text-[#FC970A] border-[#914F08]" : "border-[#A83434] text-[#E10101]"}`} /> 
-                      {quote?.status}
-                    </div>
-                  </TableCell>
-                  {
-                    status && (
-                      <TableCell className="flex justify-center gap-x-5 mx-auto">
-                      <Button onClick={() => handleApprove(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Approve</Button>
-                      <Button onClick={() => handleReject(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Reject</Button>
-                      <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" ? "hidden" : ""}`}>Delete</Button>
+              getAllQuote?.items?.map((quote:any) => {
+                const publishedAt = quote?.publishedAt ? new Date(quote.publishedAt) : null;
+                const now = new Date();
+                let timeDifferenceText = "Not Published";
+            
+                if (publishedAt) {
+                  const timeDifference = now.getTime() - publishedAt.getTime(); // difference in milliseconds
+                  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+                  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+                  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                  
+                  timeDifferenceText = `${days}d ${hours}h ${minutes}m ago`;
+                }
+                
+                return(
+                  <TableBody key={quote?.id}>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell key={quote?.user?.id} className="text-[#007AFF] text-[14px] text-center">{quote?.user?.userName}</TableCell>
+                    <TableCell className="text-[14px] text-center text-slate-700">{quote?.quote}</TableCell>
+                    {
+                      status === "accept" && (
+                        <TableCell className="text-[14px] text-center text-slate-700">{timeDifferenceText}</TableCell>
+                      )
+                    }
+                    <TableCell>
+                      <div className={`flex justify-center items-center gap-x-2  text-[14px] ${quote?.status === "accept" ? "text-[#34A853]" : quote?.status === "pending" ? "text-[#F98100]" : "text-[#E10101]"}`}>
+                        <BiSolidCircle className={`border rounded-full w-[12px] h-[12px] ${quote?.status === "accept" ? "border-[#52825F] text-[#4B9A52]" : quote?.status === "pending" ? "text-[#FC970A] border-[#914F08]" : "border-[#A83434] text-[#E10101]"}`} /> 
+                        {quote?.status}
+                      </div>
                     </TableCell>
-                    )
-                  }
-                </TableRow>
-            </TableBody>
-              ))
+                    {
+                      status && (
+                        <TableCell className="flex justify-center gap-x-5 mx-auto">
+                        <Button onClick={() => handleApprove(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Approve</Button>
+                        <Button onClick={() => handleReject(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Reject</Button>
+                        <Button onClick={() => handleRowClick(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" ? "" : "hidden"}`}>Public</Button>
+                        <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" ? "hidden" : ""}`}>Delete</Button>
+                      </TableCell>
+                      )
+                    }
+                  </TableRow>
+              </TableBody>
+                )
+            })
             }
           </Table>
         </div>

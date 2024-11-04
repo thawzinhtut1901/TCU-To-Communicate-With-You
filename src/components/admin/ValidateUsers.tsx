@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { useInvalidateUsers } from "@/hooks";
+import { useApproveValidateUser, useInvalidateUsers } from "@/hooks";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Pagination, Stack } from "@mui/material";
@@ -38,6 +38,8 @@ const ValidateUsers = () => {
     limit,
     search,
   });
+
+  const approve = useApproveValidateUser();
 
   useEffect(() => {
     const params:any = {};
@@ -76,6 +78,14 @@ const ValidateUsers = () => {
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPageCount(1);
+  }
+
+  const handleApprove = (userId:number) => {
+    approve.mutate(userId, {
+      onError: (error) => {
+        console.error("Error approving user:", error.message);
+    },
+    })
   }
 
   return (
@@ -118,7 +128,7 @@ const ValidateUsers = () => {
                       <TableCell className="text-center">{validate?.email}</TableCell>
                       <TableCell className="text-center">{formatDate(validate?.createdAt)}</TableCell>
                       <TableCell className="flex justify-center gap-x-5 mx-auto">
-                        <Button className="bg-green-500 hover:bg-green-400">Approve</Button>
+                        <Button onClick={() => handleApprove(validate?.id)} className="bg-green-500 hover:bg-green-400">Approve</Button>
                         <AdminDeleteUser userId={validate?.id} refetch={refetch}/>
                         {/* <Button className="bg-red-500 hover:bg-red-400">Delete</Button> */}
                       </TableCell>

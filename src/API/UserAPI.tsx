@@ -61,7 +61,8 @@ export const updateMe = async(
 
 export const getAllFriendsAPI = async() => {
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/friends`, {
+    const status = JSON.stringify(["Accepted"])
+    const response:Response = await fetch(`${BaseURL}/friends?status=${encodeURIComponent(status)}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

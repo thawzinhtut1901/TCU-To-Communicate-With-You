@@ -178,7 +178,7 @@ const Admins = () => {
 
         <div className="bg-white shadow-inner shadow-slate-500 mt-[24px] rounded-[8px] cursor-pointer">
           <Table>
-            <TableCaption>List of Groups.</TableCaption>
+            <TableCaption>List of Admins.</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead></TableHead>
@@ -253,7 +253,7 @@ const Admins = () => {
                       },
                       '& .MuiPaginationItem-root.Mui-selected': {
                         backgroundColor: '#6F1DCE',
-                        color: 'black'
+                        color: 'white'
                       },
                       '& .MuiPaginationItem-previousNext': {
                         backgroundColor: 'transparent',

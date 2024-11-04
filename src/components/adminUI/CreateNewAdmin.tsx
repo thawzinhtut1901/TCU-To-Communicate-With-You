@@ -36,7 +36,12 @@ const CreateNewAdmin = () => {
         email: backendError,
       }));
     }
-  }, [createAdmin.isError]);
+
+    if (createAdmin.isSuccess) {
+      setIsDialogOpen(false);
+      resetForm();
+    }
+  }, [createAdmin.isError, createAdmin.isSuccess]);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const email = event.target.value;
@@ -71,7 +76,8 @@ const CreateNewAdmin = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      createAdmin.mutate(createAdminData)
+      createAdmin.mutate(createAdminData);
+      setIsDialogOpen(false);
     }
   }
 
@@ -83,7 +89,7 @@ const CreateNewAdmin = () => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => resetForm()} className="hover:bg-gray-400 hover:text-slate-50" variant="outline">Create Admin</Button>
+        <Button onClick={() => resetForm()} className="hover:bg-gray-300 bg-gray-400 hover:text-slate-50" variant="outline">Create Admin</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -113,8 +119,6 @@ const CreateNewAdmin = () => {
               Password
             </Label>
             <CardInput id="password" onChange={handlePasswordChange} value={createAdminData.password} className="col-span-3" />
-
-            
           </div>
           
             {errors.password && (
@@ -122,6 +126,14 @@ const CreateNewAdmin = () => {
                 {errors.password}
               </span>
             )}
+
+          <div className="items-center gap-4 grid grid-cols-4">
+            <Label htmlFor="role" className="">
+              Role
+            </Label>
+            <CardInput id="role" className="col-span-3" />
+          </div>
+          
         </div>
         <DialogFooter>
           <Button className="bg-blue-500 hover:bg-blue-400"  onClick={handleSubmit}>Save changes</Button>

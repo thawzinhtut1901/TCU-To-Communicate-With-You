@@ -1,4 +1,4 @@
-import { Cover, Facebook, friSuggestionProfile, Instagram, Twitter } from "@/assets";
+import { Cover, friSuggestionProfile } from "@/assets";
 import "./type.css";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "../ui/button";
@@ -18,7 +18,7 @@ const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [preview, setPreview] = useState<string | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const {data: getMyProfile} = useGetMe();
+  const {data: getMyProfile, refetch} = useGetMe();
   const updateProfileData = useUpdateMe();
   const [updateProfile, setUpdateProfile] = useState<updateProfileData> ({
     userName: "",
@@ -39,6 +39,12 @@ const Profile = () => {
       }));
     }
   }, [getMyProfile]);
+
+  useEffect(() => {
+    if(updateProfileData.isSuccess){
+      refetch();
+    }
+  }, [updateProfileData.isSuccess, refetch])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -158,7 +164,7 @@ const Profile = () => {
       </div>
 
       <div className={`flex mb-4 justify-center gap-x-5 mt-[140px] ${preview ? 'opacity-20' : ''}`}>
-        <form onSubmit={handleSubmit} className="flex flex-col border-white/20 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter px-[30px] border rounded-[20px] w-[480px] h-[448px] font-poppins">
+        <form onSubmit={handleSubmit} className="flex flex-col border-white/20 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter px-[30px] border rounded-[20px] w-[480px] h-[320px] font-poppins">
           <div className="flex mt-[17px]">
             <h1 className="text-[24px]">Profile Information</h1>
             {
@@ -255,14 +261,14 @@ const Profile = () => {
               }
             </span>
           </h2>
-          <h2 className="mt-[30px] text-[20px]">Location : <span>Myanmar</span></h2>
+          {/* <h2 className="mt-[30px] text-[20px]">Location : <span>Myanmar</span></h2>
           <h2 className="flex gap-x-1 mt-[30px] text-[20px]">Social : 
             <span className="flex items-center gap-x-1">
               <img src={Facebook} alt="" className="w-[40px] h-[33px]"/>
               <img src={Instagram} alt="" className="w-[40px] h-[40px]"/>
               <img src={Twitter} alt="" className="w-[30px] h-[26px]"/>
             </span>
-          </h2>
+          </h2> */}
         </form>
 
         <div className="border-white/20 mb-4 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter border rounded-[20px] w-[480px]">
@@ -270,7 +276,7 @@ const Profile = () => {
             <h1 className="">Conversation</h1>
           </div>
 
-          <div className="flex flex-col md:max-h-[62vh] overflow-auto scrollbar-hide">
+          <div className="flex flex-col md:max-h-[38vh] overflow-auto scrollbar-hide">
             <div className="flex bg-white mx-[10px] mt-[10px] rounded-[10px] h-[80px]">
               <Avatar className="top-[5px] ml-[12px]">
                 <AvatarImage src={friSuggestionProfile} />
@@ -427,15 +433,11 @@ const Profile = () => {
                 <Button className="bg-[#B895E7] bg-opacity-40 rounded-[4px]">Reply</Button>
               </div>
             </div>
-
-
           </div>
-
-          
         </div>
       </div>
     </div>
   )
 }
 
-export default Profile
+export default Profile;
