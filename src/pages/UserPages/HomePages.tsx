@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LightChats, LightFindFri, LightProfile, LightGroups, LightSetting, LightRelation, Logo } from "@/assets";
+import { LightChats, LightFindFri, LightProfile, LightGroups, LightSetting, LightRelation } from "@/assets";
 import "./type.css";
 import { useGetAllFriends, useGetMe, useGetPublishQuotes } from "@/hooks";
 import { Button } from "@/components/ui/button";
@@ -15,31 +15,31 @@ const HomePages = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <img src={Logo} alt="" className="w-[100px] md:w-[200px] h-[50px] md:h-[100px]"/>
+      <div className="flex justify-end">
           {
             getMe?.role === "Admin" && (
               <div onClick={() => navigate("/admin-dashboard")} className="flex">
-                <Button className="gap-x-1 font-poppins font-semibold text-slate-50 md:text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
+                <Button className="font-poppins font-semibold text-slate-50 md:text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
               </div>
             )
           }
       </div>
 
-      <div className="flex justify-center mt-[30px]">
-        <h1 key={getPublishQuotes?.id} className="border-slate-100 bg-black bg-opacity-25 shadow-md shadow-slate-600 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[12px] text-slate-50 md:text-[16px] cursor-default">
-          {getPublishQuotes?.quote}
-        </h1>
+      <div className="relative mx-auto w-full max-w-md">
+          <div className="-top-[2px] left-6 absolute bg-black -mt-2 -ml-2 border border-blue-500 rounded-full w-5 h-5"></div>
+            <h1 key={getPublishQuotes?.id} className="bg-black bg-opacity-25 shadow-md shadow-slate-400 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border border-blue-500 rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[12px] text-center text-slate-50 md:text-[16px] cursor-default">
+              {getPublishQuotes?.quote}
+            </h1>
       </div>
 
       <div className="flex md:flex-row flex-col justify-center gap-x-8 mt-[30px] md:mt-[40px]">
           <div className="gap-4 grid grid-cols-3 mx-auto md:mx-0">
             <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img src={LightGroups} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/groups")} src={LightGroups} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
           </div>
 
           <div className="flex flex-col mt-4 md:mt-0">
