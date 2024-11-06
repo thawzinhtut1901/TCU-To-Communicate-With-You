@@ -30,6 +30,7 @@ import LightProfile from "./Light-Profile.png";
 import LightRelation from "./Light-Relation.png";
 import LightSetting from "./Light-Setting.png";
 import Logo from "./TCU-Logo.png"
+import QRCode from "./QRCode.png"
 
 export {
     TCULogCom,
@@ -64,4 +65,5 @@ export {
     LightRelation,
     LightSetting,
     Logo,
+    QRCode,
 }
