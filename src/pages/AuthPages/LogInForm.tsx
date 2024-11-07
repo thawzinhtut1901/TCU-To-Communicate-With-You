@@ -34,7 +34,7 @@ const LogInForm = () => {
       const authToken = LoginAccount.data.accessToken;
       delete LoginAccount.data.accessToken;
       login(authToken);
-      navigate("/home");
+      navigate("/user/home");
     }
   }, [LoginAccount.isSuccess]);
 

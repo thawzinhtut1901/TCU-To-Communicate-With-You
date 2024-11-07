@@ -3,18 +3,12 @@ import { BiSolidCircle } from "react-icons/bi"
 import { IoIosSearch } from "react-icons/io"
 import "./type.css"
 import { useGetAllFriends } from "@/hooks"
-import { useNavigate } from "react-router-dom"
-import { FaArrowLeft } from "react-icons/fa";
 
 const FindFriendsPage = () => {
-  const {data: getAllFris} = useGetAllFriends();
-  const navigate = useNavigate();
+  const {data: getAllFris} = useGetAllFriends();  
   
   return (
     <div className="flex flex-col">
-      <div onClick={() => navigate("/user/home")} className="flex md:hidden mx-2">
-        <FaArrowLeft className="w-[14px] text-white"/>
-      </div>
       <div className="flex justify-center items-center mt-2 md:mt-0">
         <div className="relative ml-4 md:ml-0">
             <div className="top-[3px] md:-top-[2px] left-6 absolute bg-blue-950 -mt-2 -ml-2 border border-blue-500 rounded-full w-3 md:w-5 h-3 md:h-5"></div>
