@@ -49,7 +49,7 @@ const ProfilePage = () => {
         <div className="md:flex md:justify-center mt-[80px]">
 
           {/* Profile Details */}
-          <div className="flex flex-col bg-white bg-opacity-50 mx-auto md:mx-0 rounded-[10px] w-[400px] md:w-[500px] md:h-[500px] font-poppins">
+          <div className="flex flex-col bg-white bg-opacity-50 mx-auto md:mx-0 rounded-[10px] w-[350px] md:w-[500px] md:h-[500px] font-poppins">
             <div className="flex mt-[17px] ml-[10px] md:ml-[19px]">
               <h1 className="font-medium text-[16px] md:text-[22px]">Personal Information</h1>
               <LiaUserEditSolid className="mt-[2px] md:mt-1 mr-3 ml-auto w-[18px] md:w-[24px] h-[18px] md:h-[24px] cursor-pointer"/>
@@ -62,7 +62,7 @@ const ProfilePage = () => {
                 <h1 className="mt-4">Full Name: <span className="ml-3">{getMyProfile?.displayName}</span></h1>
                 <h1 className="mt-4">Date of Birth: <span className="ml-3">{getMyProfile?.dateOfBirth}</span></h1>
                 <h1 className="mt-4">Gender: <span className="ml-3">{getMyProfile?.gender}</span></h1>
-                <h1 className="mt-4">Email: <span className="ml-3">{getMyProfile?.email}</span></h1>
+                <h1 className="mt-4 mb-2 md:mb-0">Email: <span className="ml-3">{getMyProfile?.email}</span></h1>
               </div>
             </div>
           </div>

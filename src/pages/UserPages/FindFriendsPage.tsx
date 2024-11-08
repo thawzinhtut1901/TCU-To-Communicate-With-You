@@ -22,7 +22,7 @@ const FindFriendsPage = () => {
               />
         </div>
 
-        <div className="flex">
+        <div className="md:flex hidden">
           <div className="flex gap-x-[2px] md:gap-x-1 ml-1 md:ml-3">
             <BiSolidCircle className="mt-[3px] border rounded-full w-[10px] md:w-[15px] h-[10px] md:h-[15px] text-[#591DA9]"/>
             <h1 className="text-[12px] text-white md:text-[16px]">Username</h1>

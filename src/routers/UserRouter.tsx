@@ -4,6 +4,25 @@ import { ChatLayouts, HomeLayout, UserProfileLayout } from "@/Layouts/UserLayout
 import { ProfileView } from "@/components/users";
 import { FindFriendsPage, GroupPage, ProfilePage, RelationPage, SettingsPage } from "@/pages/UserPages";
 import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Settings";
+// import { useEffect, useState } from "react";
+
+// const ResponsiveNavigate = ({ to } : {to:any}) => {
+//   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsDesktop(window.innerWidth >= 1024);
+//     };
+
+//     window.addEventListener("resize", handleResize);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//     };
+//   }, [to, setIsDesktop]);
+
+//   return isDesktop ? <Navigate to={to} /> : null;
+// };
 
 const UserRouter: RouteObject[] = [
   {
@@ -40,7 +59,7 @@ const UserRouter: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <Navigate to={"dashboard"}/>
+            element: <Navigate to={"dashboard"}/> ,
           },
           {
             path: "dashboard",
