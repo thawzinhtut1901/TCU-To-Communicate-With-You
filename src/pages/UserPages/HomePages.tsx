@@ -25,8 +25,8 @@ const HomePages = () => {
           }
       </div>
 
-      <div className="relative mx-auto w-full max-w-md">
-          <div className="-top-[2px] left-6 absolute bg-black -mt-2 -ml-2 border border-blue-500 rounded-full w-5 h-5"></div>
+      <div className="relative mx-auto w-full max-w-sm md:max-w-md">
+          <div className="-top-[2px] left-6 absolute bg-black -mt-[3px] md:-mt-2 -ml-2 border border-blue-500 rounded-full w-3 md:w-5 h-3 md:h-5"></div>
             <h1 key={getPublishQuotes?.id} className="bg-black bg-opacity-25 shadow-md shadow-slate-400 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border border-blue-500 rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[12px] text-center text-slate-50 md:text-[16px] cursor-default">
               {getPublishQuotes?.quote}
             </h1>

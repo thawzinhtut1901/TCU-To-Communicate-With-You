@@ -9,7 +9,7 @@ const ProfilePage = () => {
   const {data: getMyProfile} = useGetMe();
 
   return (
-    <div className="flex justify-center mt-[50px] md:mt-0">
+    <div className="flex justify-center">
       <div className="flex flex-col bg-white bg-opacity-40 rounded-[10px] w-11/12 md:w-9/12 h-[750px] md:h-[850px]">
         <div className="relative mx-auto mt-[14px] md:mt-[28px] rounded-[10px] w-11/12 h-[100px] md:h-[180px]">
           <img src={Cover} alt="" className="rounded-[10px] w-full h-full object-cover"/>

@@ -22,7 +22,7 @@ const GoogleLoginButton = () => {
       const authToken = GoogleLogInAccount.data.accessToken;
       delete GoogleLogInAccount.data.accessToken;
       login(authToken);
-      navigate("/home")
+      navigate("/user/home")
     }
   }, [GoogleLogInAccount.isSuccess]);
 
