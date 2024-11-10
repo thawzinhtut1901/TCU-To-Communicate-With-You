@@ -32,6 +32,7 @@ import LightSetting from "./Light-Setting.png";
 import Logo from "./TCU-Logo.png"
 import QRCode from "./QRCode.png"
 import ActiveStatus from "./activeStatus.png"
+import PersonBook from "./personBook.png"
 
 export {
     TCULogCom,
@@ -68,4 +69,5 @@ export {
     Logo,
     QRCode,
     ActiveStatus,
+    PersonBook,
 }

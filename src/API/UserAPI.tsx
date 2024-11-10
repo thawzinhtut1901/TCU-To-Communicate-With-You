@@ -61,23 +61,42 @@ export const updateMe = async(
 
 export const getAllFriendsAPI = async() => {
     const token = getToken();
-    const status = JSON.stringify(["Accepted"])
-    const response:Response = await fetch(`${BaseURL}/friends?status=${encodeURIComponent(status)}`, {
+    const response:Response = await fetch(`${BaseURL}/friends?status=Accepted`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`
         },
         mode: "cors",
         method: "GET",
-        redirect: "follow",
+        redirect: "follow"
     });
     const result = await response.json();
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error(result.message);
     }
+    
     return result;
 }
+
+// export const getAllFriendsAPI = async() => {
+//     const token = getToken();
+//     const response:Response = await fetch(`${BaseURL}/friends`, {
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${token}`,
+//         },
+//         mode: "cors",
+//         method: "GET",
+//         redirect: "follow",
+//     });
+//     const result = await response.json();
+//     if(!response.ok){
+//         throw new Error(result.message);
+//     }
+//     return result;
+// }
 
 export const getSuggestedFriAPI = async() => {
     const token = getToken();

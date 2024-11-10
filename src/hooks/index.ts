@@ -12,12 +12,6 @@ import { useUpdateMe } from "./useUser";
 import { useFetchGoogleLogIn } from "./useAuth";
 import { useRemoveAdmin } from "./useAdmin";
 import { useGetAllFriends } from "./useUser";
-import { useGetUserStatus } from "./useAdmin";
-import { useGetUserGender } from "./useAdmin";
-import { useGetTotalGroupsCount } from "./useAdmin";
-import { useGetTotalUsersCount } from "./useAdmin";
-import { useGetNewUsersCount } from "./useAdmin";
-import { useGetNewGroupsCount } from "./useAdmin";
 import { useCreateAdmin } from "./useAdmin";
 import { useCreateQuoteAdmin } from "./useAdmin";
 import { useGetAllQuotes } from "./useAdmin";
@@ -31,6 +25,7 @@ import { useGetAllSuggestedFri } from "./useUser";
 import { useAddFriend } from "./useUser";
 import { useInvalidateUsers } from "./useAdmin";
 import { useApproveValidateUser } from "./useAdmin";
+import { useGetAllDashboardCount } from "./useAdmin";
 
 export { 
     useSignUp, 
@@ -47,12 +42,6 @@ export {
     useFetchGoogleLogIn,
     useRemoveAdmin,
     useGetAllFriends,
-    useGetUserStatus,
-    useGetUserGender,
-    useGetTotalGroupsCount,
-    useGetTotalUsersCount,
-    useGetNewUsersCount,
-    useGetNewGroupsCount,
     useCreateAdmin,
     useCreateQuoteAdmin,
     useGetAllQuotes,
@@ -66,4 +55,5 @@ export {
     useAddFriend,
     useInvalidateUsers,
     useApproveValidateUser,
+    useGetAllDashboardCount,
 };

@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pie, PieChart, Cell } from "recharts";
-import { useGetUserStatus } from "@/hooks";
+import { useGetAllDashboardCount } from "@/hooks";
 
 const UsersPieChart = () => {
-  const { data: getUserStatus } = useGetUserStatus();
+  const { data: getUserStatus } = useGetAllDashboardCount();
 
-  const total = (getUserStatus?.publicUser) + (getUserStatus?.privateUser);
+  const total = (getUserStatus?.userStatusCount?.publicUser) + (getUserStatus?.userStatusCount?.privateUser);
 
   const users = [
     {
       name: "Public Users",
-      value: getUserStatus?.publicUser,
-      percentage: total > 0 ? Math.round((getUserStatus?.publicUser / total) * 100) : 0,
+      value: getUserStatus?.userStatusCount?.publicUser,
+      percentage: total > 0 ? Math.round((getUserStatus?.userStatusCount?.publicUser / total) * 100) : 0,
       color: "#6929C4",
     },
     {
       name: "Private Users",
-      value: getUserStatus?.privateUser,
-      percentage: total > 0 ? Math.round((getUserStatus?.privateUser / total) * 100) : 0,
+      value: getUserStatus?.userStatusCount?.privateUser,
+      percentage: total > 0 ? Math.round((getUserStatus?.userStatusCount?.privateUser / total) * 100) : 0,
       color: "#1192E8",
     },
   ];

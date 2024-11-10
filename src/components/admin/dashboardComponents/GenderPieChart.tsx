@@ -1,28 +1,28 @@
 import { Pie, PieChart, Cell } from "recharts";
-import { useGetUserGender } from "@/hooks";
+import { useGetAllDashboardCount } from "@/hooks";
 
 const GenderPieChart = () => {
-  const { data: getUserGender } = useGetUserGender();
+  const { data: getUserGender } = useGetAllDashboardCount();
 
-  const total = getUserGender?.male + getUserGender?.female + getUserGender?.ratherNotSay;
+  const total = getUserGender?.genderCounts?.male + getUserGender?.genderCounts?.female + getUserGender?.genderCounts?.ratherNotSay;
 
   const gender = [
     {
       name: "Male",
-      value: getUserGender?.male,
-      percentage: Math.round(((getUserGender?.male) / total) * 100), 
+      value: getUserGender?.genderCounts?.male,
+      percentage: Math.round(((getUserGender?.genderCounts?.male) / total) * 100), 
       color: "#6929C4",
     },
     {
       name: "Female",
-      value: getUserGender?.female,
-      percentage: Math.round(((getUserGender?.female) / total) * 100), 
+      value: getUserGender?.genderCounts?.female,
+      percentage: Math.round(((getUserGender?.genderCounts?.female) / total) * 100), 
       color: "#1192E8",
     },
     {
       name: "Rather Not to Say",
-      value: getUserGender?.ratherNotSay,
-      percentage: Math.round(((getUserGender?.ratherNotSay) / total) * 100), 
+      value: getUserGender?.genderCounts?.ratherNotSay,
+      percentage: Math.round(((getUserGender?.genderCounts?.ratherNotSay) / total) * 100), 
       color: "#005D5D",
     },
   ];
