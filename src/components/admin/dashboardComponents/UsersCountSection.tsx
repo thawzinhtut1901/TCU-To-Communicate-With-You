@@ -1,11 +1,7 @@
-import {
-    useGetNewGroupsCount,
-    useGetNewUsersCount,
-    useGetTotalGroupsCount,
-    useGetTotalUsersCount,
-  } from "@/hooks";
+
   
-  import users from "../../../assets/dashboardUser.png";
+  import { useGetAllDashboardCount } from "@/hooks";
+import users from "../../../assets/dashboardUser.png";
   import groups from "../../../assets/group.png";
   
   const StatCard = ({
@@ -36,15 +32,17 @@ import {
   );
   
   const UsersCountSection = () => {
-    const { data: getTotalUsers } = useGetTotalUsersCount();
-    const { data: getTotalGroups } = useGetTotalGroupsCount();
-    const { data: getNewUsers } = useGetNewUsersCount();
-    const { data: getNewGroups } = useGetNewGroupsCount();
+    const {data: getAllCount} = useGetAllDashboardCount()
+    console.log(getAllCount)
+    // const { data: getTotalUsers } = useGetTotalUsersCount();
+    // const { data: getTotalGroups } = useGetTotalGroupsCount();
+    // const { data: getNewUsers } = useGetNewUsersCount();
+    // const { data: getNewGroups } = useGetNewGroupsCount();
   
-    const totalUsersCount = getTotalUsers?.allUserCount;
-    const totalGroupsCount = getTotalGroups?.allGroupCount;
-    const newUsersCount = getNewUsers?.newUsersCount;
-    const newGroupsCount = getNewGroups?.newGroupCount;
+    const totalUsersCount = getAllCount?.totalUserCount;
+    const totalGroupsCount = getAllCount?.totalGroupCount;
+    const newUsersCount = getAllCount?.newUserCount;
+    const newGroupsCount = getAllCount?.newGroupCount;
   
     return (
         <div className="flex-grow p-4">

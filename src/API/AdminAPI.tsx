@@ -187,99 +187,9 @@ export const removeAdmin = async({userId} : {userId: number}) => {
     return result;
 }
 
-export const userStatusAPI = async () => {
+export const getAllDashboardCountAPI = async() => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users?publicAndPrivateCount=true&getCount=true`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        }, 
-        mode: "cors",
-        method: "GET",
-        redirect: "follow"
-    });
-    const result = await response.json();
-    if(!response.json){
-        throw new Error(result.message);
-    };
-    return result;
-}
-
-export const userGenderAPI = async () => {
-    const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users?genderCount=true&getCount=true`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        mode: "cors",
-        method: "GET",
-        redirect: "follow"
-    });
-    const result = await response.json();
-    if(!response.json){
-        throw new Error(result.message);
-    };
-    return result;
-}
-
-export const totalGroupsCountAPI = async () => {
-    const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/dashboard/groups?getCount=true`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        mode: "cors",
-        method: "GET",
-        redirect: "follow"
-    });
-    const result = await response.json();
-    if(!response.json){
-        throw new Error(result.message);
-    };
-    return result;
-}
-
-export const totalUsersCountAPI = async() => {
-    const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users?getCount=true`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        mode: "cors",
-        method: "GET",
-        redirect: "follow"
-    });
-    const result = await response.json();
-    if(!response.json){
-        throw new Error(result.message);
-    };
-    return result;
-}
-
-export const newUsersCountAPI = async() => {
-    const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/dashboard/users?newUsers=true&getCount=true`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        mode: "cors",
-        method: "GET",
-        redirect: "follow"
-    });
-    const result = await response.json();
-    if(!response.json){
-        throw new Error(result.message);
-    };
-    return result;
-}
-
-export const newGroupsCountAPI = async() => {
-    const token = getToken();
-    const response : Response = await fetch(`${BaseURL}/dashboard/groups?newGroup=true&getCount=true`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -515,7 +425,7 @@ export const approveValidateUserAPI = async({userId} : {userId: number}) => {
     if(!response.json){
         throw new Error(result.message)
     };
-    return result
+    return result;
 }
 
 export const adminDeleteUsersAPI = async({userId} : {userId:number}) => {

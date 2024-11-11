@@ -1,4 +1,4 @@
-import { addAdmins, getAdminsData, removeAdmin, totalGroupsCountAPI, userGenderAPI, usersAccount, usersGroups, userStatusAPI, totalUsersCountAPI, newUsersCountAPI, newGroupsCountAPI, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi, adminDeleteUsersAPI, invalidateUsersAPI, approveValidateUserAPI } from "@/API";
+import { addAdmins, getAdminsData, removeAdmin, usersAccount, usersGroups, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi, adminDeleteUsersAPI, invalidateUsersAPI, approveValidateUserAPI, getAllDashboardCountAPI } from "@/API";
 import { AuthData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -47,34 +47,10 @@ export const useRemoveAdmin = () =>
         mutationFn: (userId : number) => removeAdmin({userId})
     })
 
-export const useGetUserStatus = () => 
+export const useGetAllDashboardCount = () =>
     useQuery({
-        queryKey: ["user-status"], queryFn:() => userStatusAPI()
-    })
-
-export const useGetUserGender = () => 
-    useQuery({
-        queryKey: ["user-gender"], queryFn:() => userGenderAPI()
-    })
-
-export const useGetTotalGroupsCount = () => 
-    useQuery({
-        queryKey: ["total-groups"], queryFn:() => totalGroupsCountAPI()
-    })
-
-export const useGetTotalUsersCount = () => 
-    useQuery({
-        queryKey: ["total-users"], queryFn:() => totalUsersCountAPI()
-    })
-
-export const useGetNewUsersCount = () => 
-    useQuery({
-        queryKey: ["new-users"], queryFn:() => newUsersCountAPI()
-    })
-
-export const useGetNewGroupsCount = () => 
-    useQuery({
-        queryKey: ["new-groups"], queryFn:() => newGroupsCountAPI()
+        queryKey: ["dashboard-count"], 
+        queryFn:() => getAllDashboardCountAPI()
     })
 
 export const useCreateQuoteAdmin = () => 

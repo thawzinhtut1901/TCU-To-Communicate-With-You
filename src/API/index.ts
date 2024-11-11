@@ -14,12 +14,6 @@ import { updateMe } from "./UserAPI";
 import { googleLogin } from "../API/AuthAPI";
 import { removeAdmin } from "./AdminAPI";
 import { getAllFriendsAPI } from "./UserAPI";
-import { userStatusAPI } from "./AdminAPI";
-import { userGenderAPI } from "./AdminAPI";
-import { totalGroupsCountAPI } from "./AdminAPI";
-import { totalUsersCountAPI } from "./AdminAPI";
-import { newUsersCountAPI } from "./AdminAPI";
-import { newGroupsCountAPI } from "./AdminAPI";
 import { createAdminAPI } from "./AdminAPI";
 import { createQuoteAdminAPI } from "./AdminAPI";
 import { getAllQuoteAdminAPI } from "./AdminAPI";
@@ -33,6 +27,7 @@ import { getSuggestedFriAPI } from "./UserAPI";
 import { addFriendAPI } from "./UserAPI";
 import { invalidateUsersAPI } from "./AdminAPI";
 import { approveValidateUserAPI } from "./AdminAPI";
+import { getAllDashboardCountAPI } from "./AdminAPI";
 
 export { 
     SignUpAPI, 
@@ -51,12 +46,6 @@ export {
     googleLogin,
     removeAdmin,
     getAllFriendsAPI,
-    userStatusAPI,
-    userGenderAPI,
-    totalGroupsCountAPI,
-    totalUsersCountAPI,
-    newUsersCountAPI,
-    newGroupsCountAPI,
     createAdminAPI,
     createQuoteAdminAPI,
     getAllQuoteAdminAPI,
@@ -70,4 +59,5 @@ export {
     addFriendAPI,
     invalidateUsersAPI,
     approveValidateUserAPI,
+    getAllDashboardCountAPI,
 };

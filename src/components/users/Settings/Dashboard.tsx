@@ -20,7 +20,7 @@ const Dashboard = () => {
             </div>
 
              {/* Message Text Size */}
-            <div className="flex justify-between bg-white bg-opacity-90 mt-[16px] w-full h-[50px] cursor-pointer">
+            <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
                 <div className="flex items-center font-medium text-[14px]">
                     <TbTextSize className="border-[#591DA9] mx-[17px] border rounded-full w-[20px] h-[20px] text-[#591DA9]"/>
                     Message Text Size 
@@ -45,7 +45,7 @@ const Dashboard = () => {
             </div>
 
             {/* Dark Mode */}
-            <div className="flex justify-between bg-white bg-opacity-90 mt-[16px] w-full h-[50px] cursor-pointer">
+            <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
                 <div className="flex items-center font-medium text-[14px]">
                     <MdOutlineNightlight className="border-[#591DA9] mx-[17px] border rounded-full w-[20px] h-[20px] text-[#591DA9]"/>
                     Dark Mode
@@ -57,7 +57,7 @@ const Dashboard = () => {
             </div>
 
             {/* Active Status */}
-            <div className="flex justify-between bg-white bg-opacity-90 mt-[16px] w-full h-[50px] cursor-pointer">
+            <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
                 <div className="flex items-center font-medium text-[14px]">
                     <img src={ActiveStatus} alt="" className="mx-[17px] w-[20px] h-[20px]"/>
                     Active Status
