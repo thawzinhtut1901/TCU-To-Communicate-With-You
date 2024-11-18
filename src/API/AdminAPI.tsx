@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
-import { AuthData, quoteAdminUpdateData, userPublicQuotesData } from "@/types/type";
+import { CreateAdminData, quoteAdminUpdateData, userPublicQuotesData } from "@/types/type";
 
 interface getUserAccountParams {
     sortBy?: string;
@@ -106,7 +106,7 @@ export const addAdmins = async({userId} : {userId: number}) => {
     return result;
 }
 
-export const createAdminAPI = async ({data}: {data: AuthData}) => {
+export const createAdminAPI = async ({data}: {data: CreateAdminData}) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/dashboard`, {
         headers: {

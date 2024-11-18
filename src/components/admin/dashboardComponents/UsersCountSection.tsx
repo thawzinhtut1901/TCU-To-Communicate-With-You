@@ -13,7 +13,7 @@ import users from "../../../assets/dashboardUser.png";
     count: number;
     imageSrc: string;
   }) => (
-    <div className="flex flex-col items-start gap-3 bg-white shadow-gray-400 shadow-md p-4 rounded-xl w-full max-w-[200px] h-auto">
+    <div className="flex flex-col gap-3 bg-white shadow-gray-400 shadow-md p-4 rounded-xl w-full max-w-[200px] h-auto">
       <div className="flex justify-between items-center">
         <p className="font-poppins text-[16px] text-black text-opacity-70">
           {title}
@@ -24,20 +24,12 @@ import users from "../../../assets/dashboardUser.png";
           alt={title}
         />
       </div>
-      <p className="font-roboto text-2xl text-main">{count}</p>
-      <p className="font-semibold text-[16px] text-green-500">
-        +3% than yesterday
-      </p>
+      <p className="font-roboto text-[28px] text-main">{count}</p>
     </div>
   );
   
   const UsersCountSection = () => {
     const {data: getAllCount} = useGetAllDashboardCount()
-    console.log(getAllCount)
-    // const { data: getTotalUsers } = useGetTotalUsersCount();
-    // const { data: getTotalGroups } = useGetTotalGroupsCount();
-    // const { data: getNewUsers } = useGetNewUsersCount();
-    // const { data: getNewGroups } = useGetNewGroupsCount();
   
     const totalUsersCount = getAllCount?.totalUserCount;
     const totalGroupsCount = getAllCount?.totalGroupCount;

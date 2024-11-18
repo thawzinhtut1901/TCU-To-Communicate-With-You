@@ -261,14 +261,6 @@ const Profile = () => {
               }
             </span>
           </h2>
-          {/* <h2 className="mt-[30px] text-[20px]">Location : <span>Myanmar</span></h2>
-          <h2 className="flex gap-x-1 mt-[30px] text-[20px]">Social : 
-            <span className="flex items-center gap-x-1">
-              <img src={Facebook} alt="" className="w-[40px] h-[33px]"/>
-              <img src={Instagram} alt="" className="w-[40px] h-[40px]"/>
-              <img src={Twitter} alt="" className="w-[30px] h-[26px]"/>
-            </span>
-          </h2> */}
         </form>
 
         <div className="border-white/20 mb-4 bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter border rounded-[20px] w-[480px]">

@@ -125,7 +125,7 @@ const PrivacySecurity = () => {
           </div>
         </div>
     </div>
-</div>
+    </div>
   )
 }
 

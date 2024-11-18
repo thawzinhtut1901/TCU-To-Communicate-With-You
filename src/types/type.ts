@@ -3,6 +3,12 @@ export type AuthData = {
     password: string;
   };
 
+export type CreateAdminData = {
+    email: string;
+    password: string;
+    adminPosition: string;
+  };
+
 export type LoginData = {
   emailOrUserName: string;
   password: string;
@@ -31,6 +37,7 @@ export type updateProfileData = {
   userName: string;
   displayName: string;
   profilePicture?: File;
+  dateOfBirth?: string;
   bio?: string;
   gender: string;
 }
