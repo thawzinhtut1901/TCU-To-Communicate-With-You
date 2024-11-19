@@ -98,3 +98,7 @@ export type GenderCountData = {
 export type quoteAdminUpdateData = {
   status: string;
 }
+
+export type userDeleteAccountData = {
+  password: string;
+}

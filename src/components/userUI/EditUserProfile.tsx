@@ -8,7 +8,7 @@ import { updateProfileData } from "@/types/type";
 import { IoClose } from "react-icons/io5"
 
 
-const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : void, getMyProfile: updateProfileData;}) => {
+const EditUserProfile = ({toggleEditBox , getMyProfile, refetch} : {toggleEditBox() : void, getMyProfile: updateProfileData, refetch: any }) => {
   const updateProfileData = useUpdateMe();
   const [updateProfile, setUpdateProfile] = useState<updateProfileData> ({
     userName: getMyProfile.userName || "", 
@@ -23,8 +23,9 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
   useEffect(() => {
     if(updateProfileData.isSuccess) {
         toggleEditBox();
+        refetch();
     }
-  }, [updateProfileData.isSuccess, toggleEditBox])
+  }, [updateProfileData.isSuccess, toggleEditBox, refetch])
 
   const handleDisplayName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdateProfile((prev) => ({

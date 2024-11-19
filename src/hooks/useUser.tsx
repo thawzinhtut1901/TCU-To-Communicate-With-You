@@ -1,5 +1,5 @@
-import { addFriendAPI, getAllFriendsAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
-import { updateProfileData } from "@/types/type";
+import { addFriendAPI, deleteUserAccountAPI, getAllFriendsAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
+import { updateProfileData, userDeleteAccountData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetMe = () => 
@@ -22,4 +22,9 @@ export const useGetAllSuggestedFri = () =>
 export const useAddFriend = () => 
     useMutation({
         mutationFn: (friendId: number) => addFriendAPI({friendId})
+    })
+
+export const useDeleteUserAccount = () => 
+    useMutation({
+        mutationFn: (data: userDeleteAccountData) => deleteUserAccountAPI({data})
     })
