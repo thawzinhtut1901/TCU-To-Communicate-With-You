@@ -67,14 +67,14 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
   }
 
   return (
-    <div className="top-1/2 left-1/2 z-10 fixed inset-0 border-slate-100 bg-radial-custom-gradient border rounded-[8px] w-5/6 h-[550px] font-primary transform -translate-x-1/2 -translate-y-1/2">
+    <div className="top-1/2 left-1/2 z-10 fixed inset-0 border-slate-100 bg-radial-custom-gradient border rounded-[8px] w-5/6 h-[600px] md:h-[550px] font-primary transform -translate-x-1/2 -translate-y-1/2">
         <div className="flex justify-between pt-[30px]">
-            <h1 className="pl-[45px] text-[22px] text-white">Edit Profile Information</h1>
-            <IoClose onClick={toggleEditBox} className="mr-[45px] w-[20px] h-[20px]"/>
+            <h1 className="pl-[30px] md:pl-[45px] text-[18px] text-white md:text-[22px]">Edit Profile Information</h1>
+            <IoClose onClick={toggleEditBox} className="mr-4 md:mr-[45px] w-[20px] h-[20px]"/>
         </div>
 
         <form onSubmit={handleSubmit}>
-            <div className="flex gap-x-24 pt-[30px] pl-[45px]">
+            <div className="flex md:flex-row flex-col gap-x-24 pt-[15px] md:pt-[30px] pl-[30px] md:pl-[45px]">
                 <div className="flex flex-col gap-y-1">
                     <Label htmlFor="name" className="text-[15px]">Edit Your Name</Label>
 
@@ -88,7 +88,7 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
                     />
                 </div>
 
-                <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-1 mt-4 md:mt-0">
                     <Label htmlFor="birth" className="text-[15px]">Edit Your Date Of Birth</Label>
 
                     <CardInput 
@@ -101,7 +101,7 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
                     />
                 </div>
 
-                <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-1 mt-4 md:mt-0">
                     <Label htmlFor="gender" className="text-[15px]">Edit Your Gender</Label>
 
                     <CardInput 
@@ -115,7 +115,7 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
                 </div>
             </div>
 
-            <div className="flex gap-x-24 pt-[30px] pl-[45px]">
+            <div className="flex md:flex-row flex-col gap-x-24 mt-4 md:mt-0 md:pt-[30px] pl-[30px] md:pl-[45px]">
                 <div className="flex flex-col gap-y-1">
                     <Label htmlFor="username" className="text-[15px]">Edit Your Username</Label>
 
@@ -130,7 +130,7 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
                 </div>
             </div>
 
-            <div className="flex flex-col pt-[30px] pl-[45px]">
+            <div className="flex flex-col mt-4 md:mt-0 md:pt-[30px] pl-[30px] md:pl-[45px]">
                 <Label htmlFor="bio" className="text-[15px]">Bio</Label>
 
                 <CardTextarea
@@ -142,60 +142,10 @@ const EditUserProfile = ({toggleEditBox , getMyProfile} : {toggleEditBox() : voi
                 />
             </div>
 
-            <div className="flex justify-center my-[56px]">
+            <div className="flex justify-center my-[30px] md:my-[56px]">
                 <Button type="submit" className="bg-black bg-opacity-70">Save Changes</Button>
             </div>
         </form>
-
-        {/* <div className="flex gap-x-24 pt-[30px] pl-[45px]">
-            <div className="flex flex-col gap-y-1">
-                <Label htmlFor="name" className="text-[15px]">Edit Your Name</Label>
-
-                <CardInput 
-                    id="name"
-                    name="name"
-                    value={updateProfile.bio}
-                    type="text" 
-                    className="shadow-md shadow-slate-900"
-                />
-            </div>
-
-            <div className="flex flex-col gap-y-1">
-                <Label htmlFor="birth" className="text-[15px]">Edit Your Date Of Birth</Label>
-
-                <CardInput 
-                    id="birth"
-                    name="birth"
-                    type="date" 
-                    className="shadow-md shadow-slate-900"
-                />
-            </div>
-
-            <div className="flex flex-col gap-y-1">
-                <Label htmlFor="gender" className="text-[15px]">Edit Your Gender</Label>
-
-                <CardInput 
-                    id="gender"
-                    name="gender"
-                    type="text" 
-                    className="shadow-md shadow-slate-900"
-                />
-            </div>
-        </div>
-
-        <div className="flex flex-col pt-[30px] pl-[45px]">
-            <Label htmlFor="bio" className="text-[15px]">Bio</Label>
-
-            <CardTextarea
-                id="bio"
-                name="bio"
-                className="shadow-md shadow-slate-900"
-            />
-        </div>
-
-        <div className="flex justify-center my-[56px]">
-            <Button className="bg-black bg-opacity-70">Save Changes</Button>
-        </div> */}
     </div>
   )
 }
