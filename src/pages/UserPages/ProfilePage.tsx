@@ -1,12 +1,21 @@
 import { Cover, QRCode } from "@/assets"
+import { EditUserProfile } from "@/components/userUI"
 import { useGetMe } from "@/hooks"
+import { useState } from "react"
 import { BiPencil } from "react-icons/bi"
 import { FaRegCopy } from "react-icons/fa"
 import { LiaUserEditSolid } from "react-icons/lia"
 import { VscSettingsGear } from "react-icons/vsc"
+import { useNavigate } from "react-router-dom"
 
 const ProfilePage = () => {
   const {data: getMyProfile} = useGetMe();
+  const [isEditBoxVisible, setIsEditBoxVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleEditBox = () => {
+    setIsEditBoxVisible(!isEditBoxVisible);
+  };
 
   return (
     <div className="flex justify-center">
@@ -38,7 +47,7 @@ const ProfilePage = () => {
               <h1 className="text-[16px] md:text-[21px]">{getMyProfile?.displayName}</h1>
             </div>
 
-            <div className="flex gap-x-1 my-auto mr-[15px] md:mr-[30px] ml-auto font-poppins">
+            <div onClick={() => navigate("/user/settings")} className="flex gap-x-1 my-auto mr-[15px] md:mr-[30px] ml-auto font-poppins cursor-pointer">
               <VscSettingsGear className="mt-1 md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]"/>
               <h1 className="text-[14px] md:text-[20px]">Setting</h1>
             </div>
@@ -49,10 +58,10 @@ const ProfilePage = () => {
         <div className="md:flex md:justify-center mt-[80px]">
 
           {/* Profile Details */}
-          <div className="flex flex-col bg-white bg-opacity-50 mx-auto md:mx-0 rounded-[10px] w-[350px] md:w-[500px] md:h-[500px] font-poppins">
+          <div className="relative flex flex-col bg-white bg-opacity-50 mx-auto md:mx-0 rounded-[10px] w-[350px] md:w-[500px] md:h-[500px] font-poppins">
             <div className="flex mt-[17px] ml-[10px] md:ml-[19px]">
               <h1 className="font-medium text-[16px] md:text-[22px]">Personal Information</h1>
-              <LiaUserEditSolid className="mt-[2px] md:mt-1 mr-3 ml-auto w-[18px] md:w-[24px] h-[18px] md:h-[24px] cursor-pointer"/>
+              <LiaUserEditSolid onClick={toggleEditBox} className="mt-[2px] md:mt-1 mr-3 ml-auto w-[18px] md:w-[24px] h-[18px] md:h-[24px] cursor-pointer"/>
             </div>
 
             <div className="flex flex-col mt-1 ml-[10px] md:ml-[19px]">
@@ -66,6 +75,11 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
+
+          {/* Render EditBox if visible */}
+            {isEditBoxVisible && (
+              <EditUserProfile getMyProfile={getMyProfile} toggleEditBox={toggleEditBox}/>
+            )}
 
           {/* Username and QR code */}
           <div className="flex flex-col mt-6 md:mt-0">

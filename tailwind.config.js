@@ -17,6 +17,16 @@ export default {
       },
     },
     extend: {
+      keyframes: {
+        customAnimation: {
+          '0%': { transform: 'scale(0)', opacity: '0' },
+          '50%': { transform: 'scale(1.1)', opacity: '1' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+      },
+      animation: {
+        custom: 'customAnimation 1s ease-in-out',
+      },
       backgroundImage: {
         "custom-gradient": "linear-gradient(90deg, #051960 0%, #591DA9 90%)",
         "radial-custom-gradient": "radial-gradient(circle at top left, #007AFF 0%, #8566FF 25%, #1D8BA9 50%, #8566FF 75%)",
@@ -36,10 +46,10 @@ export default {
         luxuriousRoman: ['"Playfair Display"', 'serif'],
       },
       borderRadius: {
-        'custom-top': '20px 20px 0 0', // Custom radius for rounded top corners
+        'custom-top': '20px 20px 0 0', 
       },
       boxShadow: {
-        'custom-grey-inner': 'inset 2px 0px 2px 2px rgba(156, 163, 175, 0.5)', // Custom gray-400 inner shadow
+        'custom-grey-inner': 'inset 2px 0px 2px 2px rgba(156, 163, 175, 0.5)',
       },
       colors: {
         main: "#8566FF",

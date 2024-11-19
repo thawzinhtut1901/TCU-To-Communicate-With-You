@@ -43,6 +43,7 @@ const DashboardSetting = () => {
             </div>
           </div>
         </div>
+        
         <div className="flex w-[400px] items-center justify-between px-4 py-2 h-[60px] bg-white border-b border-gray-300 shadow">
           <div className="flex items-center">
             <div className="flex items-center justify-center w-8 h-8 mr-3 bg-purple-100 rounded-full">

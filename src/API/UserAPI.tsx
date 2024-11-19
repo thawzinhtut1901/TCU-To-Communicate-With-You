@@ -61,7 +61,8 @@ export const updateMe = async(
 
 export const getAllFriendsAPI = async() => {
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/friends?status=Accepted`, {
+    const status = "Accepted"
+    const response:Response = await fetch(`${BaseURL}/friends?status=${status}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -71,6 +72,7 @@ export const getAllFriendsAPI = async() => {
         method: "GET",
         redirect: "follow"
     });
+
     const result = await response.json();
     if (!response.ok) {
         throw new Error(result.message);

@@ -1,5 +1,5 @@
 import { addAdmins, getAdminsData, removeAdmin, usersAccount, usersGroups, createAdminAPI, createQuoteAdminAPI, getAllQuoteAdminAPI, quoteDeleteAPI, quoteApproveAdminAPI, getOneQuoeAdminAPI, publishQuoteAPI, validateUsersApi, adminDeleteUsersAPI, invalidateUsersAPI, approveValidateUserAPI, getAllDashboardCountAPI } from "@/API";
-import { AuthData, userPublicQuotesData } from "@/types/type";
+import { CreateAdminData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface getUserAccountParams {
@@ -29,7 +29,7 @@ export const useAddAdmins = () =>
 
 export const useCreateAdmin = () => 
     useMutation({
-        mutationFn: (data: AuthData) => createAdminAPI({data}),
+        mutationFn: (data: CreateAdminData) => createAdminAPI({data}),
     })
 
 interface getAdminsParams {

@@ -99,7 +99,7 @@ const AdminSidebar: React.FC = () => {
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0 md:static md:w-1/5`}
       >
-        <div className="flex flex-col items-center gap-6 px-4 py-8 md:h-auto min-h-screen md:min-h-0 max-h-[100vh] overflow-auto scrollbar-hide">
+        <div className="flex flex-col items-center gap-6 mx-auto px-4 py-8 md:h-auto min-h-screen md:min-h-0 max-h-[100vh] overflow-auto scrollbar-hide">
           <Logo />
 
           {/* Primary Links */}
