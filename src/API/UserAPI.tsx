@@ -42,6 +42,10 @@ export const updateMe = async(
         formData.append("gender", data.gender)
       };
 
+    if(data.dateOfBirth) {
+        formData.append("dateOfBirth", data.dateOfBirth);
+    }
+
     const response: Response = await fetch(`${BaseURL}/users`, {
         headers: {
             Accept: "application/json",
