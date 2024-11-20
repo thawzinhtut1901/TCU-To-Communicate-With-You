@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService";
-import { updateProfileData } from "@/types/type"
+import { updateProfileData, userDeleteAccountData } from "@/types/type"
 
 export const getMe = async() => {
     const token = getToken();
@@ -81,25 +81,6 @@ export const getAllFriendsAPI = async() => {
     return result;
 }
 
-// export const getAllFriendsAPI = async() => {
-//     const token = getToken();
-//     const response:Response = await fetch(`${BaseURL}/friends`, {
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`,
-//         },
-//         mode: "cors",
-//         method: "GET",
-//         redirect: "follow",
-//     });
-//     const result = await response.json();
-//     if(!response.ok){
-//         throw new Error(result.message);
-//     }
-//     return result;
-// }
-
 export const getSuggestedFriAPI = async() => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/users/suggested`, {
@@ -136,5 +117,28 @@ export const addFriendAPI = async ({friendId}: {friendId:number}) => {
     if(!response.json){
         throw new Error(result.message)
     }
+    return result;
+}
+
+export const deleteUserAccountAPI = async(
+    {data} :
+    {data: userDeleteAccountData}
+) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/users`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "DELETE",
+        redirect: "follow",
+        body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
     return result;
 }

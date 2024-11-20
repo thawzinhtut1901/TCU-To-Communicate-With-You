@@ -7,12 +7,6 @@ import logoMobile from "./LogoMobile.png";
 import forgetPswLogo from "./ForgetPswLogo.png";
 import gmailLogo from "./gmail-logo.png";
 import Avatar from "./avatar.jpg";
-import Chat from "./Chat.png";
-import findFri from "./Find_Friend.png"
-import groupChat from "./GroupChats.png";
-import Profile from "./Profile.png";
-import Relationship from "./Relation.png";
-import Setting from "./Settings.png";
 import Fliter from "./filter.png";
 import accountType from "./AccountType.png";
 import dropDown from "./Back.png";
@@ -25,7 +19,6 @@ import Instagram from "./Instagram.png";
 import Twitter from "./Twitter.png";
 import LightChats from "./Light-Chat.png";
 import LightFindFri from "./Light-FindFri.png";
-import LightGroups from "./Light-Group.png";
 import LightProfile from "./Light-Profile.png";
 import LightRelation from "./Light-Relation.png";
 import LightSetting from "./Light-Setting.png";
@@ -33,6 +26,7 @@ import Logo from "./TCU-Logo.png"
 import QRCode from "./QRCode.png"
 import ActiveStatus from "./activeStatus.png"
 import PersonBook from "./personBook.png"
+import CreateNewGroup from "./CreateNewGroup.png"
 
 export {
     TCULogCom,
@@ -44,12 +38,6 @@ export {
     forgetPswLogo,
     gmailLogo,
     Avatar,
-    Chat,
-    findFri,
-    groupChat,
-    Profile,
-    Relationship,
-    Setting,
     Fliter,
     accountType,
     dropDown,
@@ -62,7 +50,6 @@ export {
     Twitter,
     LightChats,
     LightFindFri,
-    LightGroups,
     LightProfile,
     LightRelation,
     LightSetting,
@@ -70,4 +57,5 @@ export {
     QRCode,
     ActiveStatus,
     PersonBook,
+    CreateNewGroup,
 }

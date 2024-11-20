@@ -9,7 +9,7 @@ import { VscSettingsGear } from "react-icons/vsc"
 import { useNavigate } from "react-router-dom"
 
 const ProfilePage = () => {
-  const {data: getMyProfile} = useGetMe();
+  const {data: getMyProfile, refetch} = useGetMe();
   const [isEditBoxVisible, setIsEditBoxVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ const ProfilePage = () => {
 
           {/* Render EditBox if visible */}
             {isEditBoxVisible && (
-              <EditUserProfile getMyProfile={getMyProfile} toggleEditBox={toggleEditBox}/>
+              <EditUserProfile refetch={refetch} getMyProfile={getMyProfile} toggleEditBox={toggleEditBox}/>
             )}
 
           {/* Username and QR code */}

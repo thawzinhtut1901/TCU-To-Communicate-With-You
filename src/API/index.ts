@@ -28,6 +28,7 @@ import { addFriendAPI } from "./UserAPI";
 import { invalidateUsersAPI } from "./AdminAPI";
 import { approveValidateUserAPI } from "./AdminAPI";
 import { getAllDashboardCountAPI } from "./AdminAPI";
+import { deleteUserAccountAPI } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -60,4 +61,5 @@ export {
     invalidateUsersAPI,
     approveValidateUserAPI,
     getAllDashboardCountAPI,
+    deleteUserAccountAPI,
 };

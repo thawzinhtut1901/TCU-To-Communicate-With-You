@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LightChats, LightFindFri, LightProfile, LightGroups, LightSetting, LightRelation } from "@/assets";
+import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, CreateNewGroup } from "@/assets";
 import "./type.css";
 import { useGetAllFriends, useGetMe, useGetPublishQuotes } from "@/hooks";
 import { Button } from "@/components/ui/button";
@@ -37,7 +37,7 @@ const HomePages = () => {
             <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
             <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
             <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/groups")} src={LightGroups} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/user/groups")} src={CreateNewGroup} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
             <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
             <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
           </div>
