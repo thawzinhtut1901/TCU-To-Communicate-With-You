@@ -19,7 +19,7 @@ const FriendSuggestion = () => {
   }, [addFriend.isSuccess, addFriend.variables])
 
   const handleSkip = () => {
-    navigate("/home");
+    navigate("/user/home");
   };
 
   const handleAddFriend = (friendId: number) => {
