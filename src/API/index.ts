@@ -29,6 +29,10 @@ import { invalidateUsersAPI } from "./AdminAPI";
 import { approveValidateUserAPI } from "./AdminAPI";
 import { getAllDashboardCountAPI } from "./AdminAPI";
 import { deleteUserAccountAPI } from "./UserAPI";
+import { getAllFriendsRequestAPI } from "./UserAPI";
+import { getFindUserAPI } from "./UserAPI";
+import { acceptRequestApi } from "./UserAPI";
+import { cancelRequestApi } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -62,4 +66,8 @@ export {
     approveValidateUserAPI,
     getAllDashboardCountAPI,
     deleteUserAccountAPI,
+    getAllFriendsRequestAPI,
+    getFindUserAPI,
+    acceptRequestApi,
+    cancelRequestApi,
 };

@@ -28,7 +28,7 @@ const ProfilePage = () => {
             <img 
               src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
               alt="" 
-              className="ml-[16px] md:ml-[125px] rounded-[10px] w-[60px] md:w-[150px] h-[60px] md:h-[150px]"
+              className="ml-[20px] md:ml-[125px] rounded-full md:rounded-[10px] w-[80px] md:w-[150px] h-[80px] md:h-[150px]"
               // onClick={handleProfileClick}
             />
 
@@ -41,19 +41,21 @@ const ProfilePage = () => {
             />
           </div>
 
-          <div className="flex flex-col ml-[30px] font-poppins">
-            <h1 className="mt-[10px] font-medium text-[16px] md:text-[24px]">{getMyProfile?.displayName}</h1>
+          <div className="flex flex-col ml-[15px] md:ml-[30px] font-poppins">
+            <div className="md:flex flex-col hidden">
+              <h1 className="md:mt-[10px] font-medium text-[18px] md:text-[24px]">{getMyProfile?.displayName}</h1>
 
-            <div className="flex gap-x-4 bg-clip-text bg-gradient-to-r from-[#9934D4] to-[#E365F3] mt-[5px] text-transparent">
-              {
-                getMyProfile?.role === "Admin" && (
-                  <h2 className="font-semibold text-[18px]">Founder Of TCU</h2>
-                ) 
-              }
-              <h2 className="font-semibold text-[18px]">{getMyProfile?.userName}</h2>
+              <div className="flex gap-x-4 bg-clip-text bg-gradient-to-r from-[#9934D4] to-[#E365F3] mt-[5px] text-transparent">
+                {
+                  getMyProfile?.role === "Admin" && (
+                    <h2 className="font-semibold text-[14px] md:text-[18px]">Founder Of TCU</h2>
+                  ) 
+                }
+                <h2 className="font-semibold text-[14px] md:text-[18px]">{getMyProfile?.userName}</h2>
+              </div>
             </div>
 
-            <div className="flex gap-x-6 mt-[15px] font-medium text-[16px]">
+            <div className="flex gap-x-3 md:gap-x-6 mt-[10px] md:mt-[15px] font-medium text-[12px] md:text-[16px]">
               <div className="flex flex-col">
                 <h3 className="text-center">3</h3>
                 <h3>Published quotes</h3>
@@ -71,8 +73,8 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div onClick={toggleQRBox} className="flex gap-x-1 border-slate-500 bg-black bg-opacity-15 my-auto mr-[15px] md:mr-[125px] ml-auto p-4 border rounded-[15px] font-poppins cursor-pointer">
-            <IoQrCode className="mt-1 md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]"/>
+          <div onClick={toggleQRBox} className="md:flex gap-x-1 border-slate-500 hidden bg-black bg-opacity-15 my-auto mr-[15px] md:mr-[125px] ml-auto p-4 border rounded-[15px] font-poppins cursor-pointer">
+            <IoQrCode className="md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]"/>
           </div>
 
            {isQRVisible && (
@@ -98,41 +100,22 @@ const ProfilePage = () => {
         )}
         </div>
 
-        <div className="border-slate-500 bg-black bg-opacity-15 mt-[27px] md:ml-[125px] border rounded-[10px] w-4/5">
-          <p className="p-4">{getMyProfile?.bio}</p>
-        </div>
-        {/* <div className="relative mx-auto mt-[14px] md:mt-[28px] rounded-[10px] w-11/12 h-[100px] md:h-[180px]">
-          <img src={Cover} alt="" className="rounded-[10px] w-full h-full object-cover"/>
-        <div className="bottom-1 absolute inset-x-0 border-white bg-slate-400 bg-opacity-30 backdrop-blur-md backdrop-filter mx-auto border rounded-[10px] w-11/12 md:w-4/5 h-[80px] md:h-[130px] transform translate-y-1/2">
-        <div className="flex mt-[10px] md:mt-[20px]">
-            <div>
-              <img 
-                src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
-                alt="" 
-                className="ml-[16px] md:ml-[32px] rounded-[10px] w-[60px] md:w-[75px] h-[60px] md:h-[80px]"
-                // onClick={handleProfileClick}
-              />
+        <div className="flex flex-col md:hidden ml-[30px]">
+          <h1 className="md:mt-[10px] font-medium text-[18px]">{getMyProfile?.displayName}</h1>
 
-              <input 
-                type="file" 
-                accept="image/*" 
-                // onChange={handleFileChange} 
-                className="hidden"
-                // ref={fileInputRef}
-              />
-            </div>
-
-            <div className="flex my-auto ml-[8.5px] md:ml-[17px] font-poppins">
-              <h1 className="text-[16px] md:text-[21px]">{getMyProfile?.displayName}</h1>
-            </div>
-
-            <div onClick={() => navigate("/user/settings")} className="flex gap-x-1 my-auto mr-[15px] md:mr-[30px] ml-auto font-poppins cursor-pointer">
-              <VscSettingsGear className="mt-1 md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]"/>
-              <h1 className="text-[14px] md:text-[20px]">Setting</h1>
-            </div>
+          <div className="flex gap-x-4 bg-clip-text bg-gradient-to-r from-[#9934D4] to-[#E365F3] mt-[5px] text-transparent">
+            {
+              getMyProfile?.role === "Admin" && (
+                <h2 className="font-semibold text-[14px] md:text-[18px]">Founder Of TCU</h2>
+              ) 
+            }
+            <h2 className="font-semibold text-[14px] md:text-[18px]">{getMyProfile?.userName}</h2>
           </div>
         </div>
-        </div> */}
+
+        <div className="border-slate-500 bg-black bg-opacity-15 mt-[27px] md:ml-[125px] border rounded-[10px] md:w-4/5">
+          <p className="md:p-4">{getMyProfile?.bio}</p>
+        </div>
 
         <div className="md:flex mt-[80px]">
           <div className="flex flex-col gap-y-9 ml-[125px] cursor-pointer">

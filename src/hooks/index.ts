@@ -27,6 +27,10 @@ import { useInvalidateUsers } from "./useAdmin";
 import { useApproveValidateUser } from "./useAdmin";
 import { useGetAllDashboardCount } from "./useAdmin";
 import { useDeleteUserAccount } from "./useUser";
+import { useGetAllFriendRequest } from "./useUser";
+import { useGetFindUsers } from "./useUser";
+import { useAcceptRequest } from "./useUser";
+import { useCancelRequest } from "./useUser";
 
 export { 
     useSignUp, 
@@ -58,4 +62,8 @@ export {
     useApproveValidateUser,
     useGetAllDashboardCount,
     useDeleteUserAccount,
+    useGetAllFriendRequest,
+    useGetFindUsers,
+    useAcceptRequest,
+    useCancelRequest,
 };

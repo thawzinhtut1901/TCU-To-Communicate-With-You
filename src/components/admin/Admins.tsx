@@ -200,7 +200,7 @@ const Admins = () => {
                       <h1 className="text-[14px]">{admin?.displayName}</h1>
                       <h3 className="text-[12px] text-slate-500">{admin?.userName}</h3>
                     </TableCell>
-                    <TableCell className="text-center">{admin?.adminPosition}</TableCell>
+                    <TableCell key={admin?.adminInfo?.id} className="text-center">{admin?.adminInfo?.adminPosition}</TableCell>
                     <TableCell className="text-center">Active</TableCell>
                     <TableCell className="text-center">
                       {new Date(admin?.createdAt).toLocaleDateString('en-GB', {

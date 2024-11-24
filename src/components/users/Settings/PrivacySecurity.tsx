@@ -1,6 +1,6 @@
 import { ActiveStatus, PersonBook } from "@/assets"
 import { AiOutlineStop } from "react-icons/ai"
-import { MdAutoDelete, MdMailOutline, MdOutlineCalendarMonth, MdOutlineDevices, MdPersonOutline } from "react-icons/md"
+import { MdAutoDelete, MdMailOutline, MdOutlineDevices, MdPersonOutline } from "react-icons/md"
 import "./type.css";
 import { useEffect, useState } from "react";
 import { CardInput } from "@/components/ui/input";
@@ -88,7 +88,7 @@ const PrivacySecurity = () => {
         <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
             <div className="flex items-center font-medium text-[14px]">
               <MdPersonOutline className="mx-[17px] w-[20px] h-[20px] text-[#591DA9]"/>
-              Profile Photos
+              Friends
             </div>
 
             <div className="flex items-center mr-5">
@@ -100,7 +100,7 @@ const PrivacySecurity = () => {
         <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
             <div className="flex items-center font-medium text-[14px]">
               <img src={PersonBook} alt="" className="mx-[19px] w-[16px] h-[20px]"/>
-              Bio
+              Groups
             </div>
 
             <div className="flex items-center mr-5">
@@ -124,7 +124,7 @@ const PrivacySecurity = () => {
         <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
             <div className="flex items-center font-medium text-[14px]">
               <MdMailOutline className="mx-[17px] w-[20px] h-[20px] text-[#591DA9]"/>
-              Forward Messages
+              Relationship
             </div>
 
             <div className="flex items-center mr-5">
@@ -133,7 +133,7 @@ const PrivacySecurity = () => {
         </div>
 
         {/* Date Of birth */}
-        <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
+        {/* <div className="flex justify-between bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[50px] cursor-pointer">
             <div className="flex items-center font-medium text-[14px]">
               <MdOutlineCalendarMonth className="mx-[17px] w-[20px] h-[20px] text-[#591DA9]"/>
               Date of Birth
@@ -142,7 +142,7 @@ const PrivacySecurity = () => {
             <div className="flex items-center mr-5">
               <h1 className="font-medium text-[#591DA9] text-[15px]">Nobody</h1>
             </div>
-        </div>
+        </div> */}
 
         {/* Deactivate */}
         <div onClick={handleDialog} className="flex bg-white shadow-inner shadow-slate-700 mt-[16px] w-full h-[70px] cursor-pointer">
@@ -152,13 +152,13 @@ const PrivacySecurity = () => {
                 Delete My Account
               </div>
 
-              <div className="flex gap-x-[185px] mt-[14px] text-[14px]">
+              {/* <div className="flex gap-x-[185px] mt-[14px] text-[14px]">
                 <h1 className="ml-[55px] font-normal">If away for</h1>
 
                 <div className="flex items-center">
                   <h1 className="font-medium text-[#591DA9] text-[15px]">12 months</h1>
                 </div>
-              </div>
+              </div> */}
           </div>
         </div>
 
