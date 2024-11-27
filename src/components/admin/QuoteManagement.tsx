@@ -199,17 +199,17 @@ const QuoteManagement = () => {
             </TableHeader>
             {
               getAllQuote?.items?.map((quote:any) => {
-                const publishedAt = quote?.publishedAt ? new Date(quote.publishedAt) : null;
-                const now = new Date();
-                let timeDifferenceText = "Not Published";
-            
-                if (publishedAt) {
-                  const timeDifference = now.getTime() - publishedAt.getTime();
-                  const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-                  const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-                  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                  
-                  timeDifferenceText = `${days}d ${hours}h ${minutes}m ago`;
+                let timeDifferenceText = "";
+                if(quote?.isPublished) {
+                  timeDifferenceText = "Publish Now";
+                } else if (quote?.publishAt) {
+                  const publishAt = new Date(quote.publishAt);
+                  const formattedDate = publishAt.toLocaleDateString("en-US", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  });
+                  timeDifferenceText = formattedDate;
                 }
                 
                 return(
@@ -220,7 +220,7 @@ const QuoteManagement = () => {
                     <TableCell className="text-[14px] text-center text-slate-700">{quote?.quote}</TableCell>
                     {
                       status === "accept" && (
-                        <TableCell className="text-[14px] text-center text-slate-700">{timeDifferenceText}</TableCell>
+                        <TableCell className={`text-[14px] text-center ${quote?.isPublished === true ? "text-blue-500" : "text-slate-700"} `}>{timeDifferenceText}</TableCell>
                       )
                     }
                     <TableCell>
@@ -234,8 +234,9 @@ const QuoteManagement = () => {
                         <TableCell className="flex justify-center gap-x-5 mx-auto">
                         <Button onClick={() => handleApprove(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Approve</Button>
                         <Button onClick={() => handleReject(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "accept" || quote?.status === "reject" ? "hidden" : ""}`}>Reject</Button>
-                        <Button onClick={() => handleRowClick(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" ? "" : "hidden"}`}>Public</Button>
-                        <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" ? "hidden" : ""}`}>Delete</Button>
+                        <Button onClick={() => handleRowClick(quote?.id)} className={`bg-green-500 hover:bg-green-400 ${quote?.status === "accept" && !quote?.isPublished === true ? "" : "hidden"}`}>Public</Button>
+                        <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" || quote?.status === "accept" ? "hidden" : quote?.isPublished === true ? "ml-auto mr-12" : ""}`}>Delete</Button>
+                        <Button onClick={() => handleDelete(quote?.id)} className={`bg-red-500 hover:bg-red-400 ${quote?.status === "pending" || quote?.status === "reject" ? "hidden" : quote?.isPublished === true ? "ml-auto mr-12" : ""}`}>Remove</Button>
                       </TableCell>
                       )
                     }
