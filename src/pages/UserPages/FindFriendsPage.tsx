@@ -19,7 +19,7 @@ const FindFriendsPage = () => {
     search,
   })
   const addFriend = useAddFriend();
-  const [isRequestSent, setIsRequestSent] = useState(false);
+  const [isRequestSent, setIsRequestSent] = useState<number[]>([]);
   const acceptRequest = useAcceptRequest();
   const cancelRequest = useCancelRequest();
 
@@ -49,18 +49,21 @@ const FindFriendsPage = () => {
   }
 
   const handleAddFriend = (id: number) => {
-    addFriend.mutate(id);
-    setIsRequestSent(true);
+    addFriend.mutate(id, {
+      onSuccess: () => {
+        setIsRequestSent((prev) => [...prev, id])
+      }
+    });
   }
 
   const handleAcceptRequest = (acceptId:number) => {
     acceptRequest.mutate(acceptId);
-    setIsRequestSent(false);
+    // setIsRequestSent(false);
   }
 
   const handleCancelRequest = (cancelId:number) => {
     cancelRequest.mutate(cancelId);
-    setIsRequestSent(false);
+    // setIsRequestSent(false);
   }
   
   return (
@@ -156,10 +159,10 @@ const FindFriendsPage = () => {
                 <div className="flex flex-col mt-[12px] ml-[14px]">
                   <h1 className="font-medium font-primary text-[18px]">{find?.displayName}</h1>
 
-                  <div className={`gap-x-6 ${isRequestSent} ? "flex flex-col" : "flex mt-[13px]"`}>
+                  <div className={`mt-3 ${isRequestSent} ? "flex flex-col" : "flex mt-[13px]"`}>
                     {
-                      !isRequestSent ? (
-                        <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins">Add Friend</Button>
+                      !isRequestSent.includes(find?.id) ? (
+                        <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-6 font-poppins">Add Friend</Button>
                       ) : (
                         <h1 className="text-[14px] text-slate-600">Request Sent</h1>
                       )

@@ -5,15 +5,14 @@ import UsersPieChart from "./dashboardComponents/UsersPieChart";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col w-screen py-10 overflow-auto md:w-auto md:px-10 bg-slate-50 vertical-scrollbar">
-      <h4 className="text-2xl font-semibold font-main">Dashboard</h4>
+    <div className="flex flex-col bg-slate-50 md:px-8 py-10 w-screen md:w-auto overflow-auto vertical-scrollbar">
+      <h4 className="px-8 font-main font-semibold text-2xl">Dashboard</h4>
       <UsersCountSection />
-      <div className="flex flex-col items-start w-screen md:w-auto md:items-center md:gap-4 md:flex-row">
-        <div className="w-screen px-4 overflow-x-scroll md:w-auto "> 
-
+      <div className="flex md:flex-row flex-col items-start md:items-center md:gap-x-1 w-screen md:w-auto">
+        <div className="px-4 w-screen md:w-auto"> 
         <ActiveUserChart />
         </div>
-        <div className="flex flex-col w-screen gap-4 my-6 md:w-auto md:my-0">
+        <div className="flex flex-col gap-4 my-6 md:my-0 w-screen md:w-auto">
         <GenderPieChart/>
         <UsersPieChart/>
         </div>

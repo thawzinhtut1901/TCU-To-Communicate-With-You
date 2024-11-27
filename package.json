@@ -41,7 +41,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.26.0",
     "react-world-flags": "^1.6.0",
-    "recharts": "^2.12.7",
+    "recharts": "^2.13.3",
     "sweetalert2": "^11.12.4",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
