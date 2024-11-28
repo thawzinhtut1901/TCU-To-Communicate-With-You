@@ -150,7 +150,7 @@ export const getAdminsData = async(params: getAdminsParams = {}) => {
     queryParams.append("limit", limit.toString());
 
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/dashboard/admins? ${queryParams.toString()}`, {
+    const response:Response = await fetch(`${BaseURL}/dashboard/admins?${queryParams.toString()}`, {
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${token}`,

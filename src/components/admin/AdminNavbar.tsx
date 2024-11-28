@@ -1,7 +1,6 @@
 import { FaBell } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -38,7 +37,9 @@ const AdminNavbar: React.FC = () => {
             <FaBell color="white" size="24px" />
           </div>
 
-          <LanguageSwitcher />
+          <div className="flex">
+            <h3 className="font-medium font-poppins text-[16px] text-slate-50">{getMe?.userName}</h3>
+          </div>
 
           {/* Profile and Dropdown Toggle */}
           <div className="relative">
@@ -55,6 +56,7 @@ const AdminNavbar: React.FC = () => {
             </button>
           </div>
         </div>
+
 
         {/* Profile + Dropdown for Mobile */}
         <div className="relative md:hidden">
@@ -86,11 +88,6 @@ const AdminNavbar: React.FC = () => {
                   12
                 </span>
                 <FaBell color="black" size="20px" />
-              </div>
-
-              {/* Language Switcher */}
-              <div className="block px-4 py-2">
-                <LanguageSwitcher />
               </div>
 
               <button
