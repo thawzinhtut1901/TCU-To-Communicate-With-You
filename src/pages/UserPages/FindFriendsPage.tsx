@@ -1,5 +1,4 @@
 import { HomeInput } from "@/components/ui/input"
-import { BiSolidCircle } from "react-icons/bi"
 import { IoIosSearch } from "react-icons/io"
 import "./type.css"
 import { useAcceptRequest, useAddFriend, useCancelRequest, useGetAllFriendRequest, useGetFindUsers, useGetMe } from "@/hooks"
@@ -82,17 +81,6 @@ const FindFriendsPage = () => {
                   onChange={handleSearchChange}
               />
         </form>
-
-        <div className="md:flex hidden">
-          <div className="flex gap-x-[2px] md:gap-x-1 ml-1 md:ml-3">
-            <BiSolidCircle className="mt-[3px] border rounded-full w-[10px] md:w-[15px] h-[10px] md:h-[15px] text-[#591DA9]"/>
-            <h1 className="text-[12px] text-white md:text-[16px]">Username</h1>
-          </div>
-          <div className="flex gap-x-[2px] md:gap-x-1 ml-1 md:ml-3">
-            <BiSolidCircle className="mt-[3px] border rounded-full w-[10px] md:w-[15px] h-[10px] md:h-[15px] text-slate-700"/>
-            <h1 className="text-[12px] text-white md:text-[16px]">Group Name</h1>
-          </div>
-        </div>
       </div>
 
       <div className="flex justify-center mt-[25px]">
@@ -131,7 +119,7 @@ const FindFriendsPage = () => {
                         <div className="flex gap-x-6 mt-[13px]">
                           <Button 
                             onClick={() => handleAcceptRequest(request?.id)}
-                            className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins">
+                            className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 font-poppins">
                             Accept
                           </Button>
                           <Button
@@ -157,16 +145,38 @@ const FindFriendsPage = () => {
                 <img src={find?.profile} alt="" className="mt-[12px] ml-[12px] rounded-full w-[54px] h-[54px]"/>
 
                 <div className="flex flex-col mt-[12px] ml-[14px]">
-                  <h1 className="font-medium font-primary text-[18px]">{find?.displayName}</h1>
+                  <h1 className="font-medium font-primary text-[18px]">{find?.displayName || "Unknown"}</h1>
 
                   <div className={`mt-3 ${isRequestSent} ? "flex flex-col" : "flex mt-[13px]"`}>
                     {
+                      find?.friendStatus === "Request" ? (
+                        <Button
+                        onClick={() => handleAcceptRequest(find?.id)}
+                        className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
+                      >
+                        Accept
+                      </Button>
+                      ) : find?.friendStatus === "Accepted" ? (
+                        <Button
+                          className="bg-green-500 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
+                        >
+                          Friend
+                        </Button>
+                      ) : (
+                        !isRequestSent.includes(find?.id) ? (
+                          <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-6 font-poppins">Add Friend</Button>
+                        ) : (
+                          <h1 className="text-[14px] text-slate-600">Request Sent</h1>
+                        )
+                      )
+                    }
+                    {/* {
                       !isRequestSent.includes(find?.id) ? (
                         <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-6 font-poppins">Add Friend</Button>
                       ) : (
                         <h1 className="text-[14px] text-slate-600">Request Sent</h1>
                       )
-                    }
+                    } */}
                     <Button className={`bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Cancel</Button>
                   </div>
                 </div>
