@@ -10,8 +10,6 @@ const HomePages = () => {
   const  {data: getPublishQuotes} = useGetPublishQuotes();
   const {data: getMe} = useGetMe();
   const {data: getAllFris} = useGetAllFriends();
-  console.log(getAllFris);
-  console.log(getMe);
 
   return (
     <div>

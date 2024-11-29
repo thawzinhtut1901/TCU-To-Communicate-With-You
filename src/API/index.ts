@@ -33,6 +33,8 @@ import { getAllFriendsRequestAPI } from "./UserAPI";
 import { getFindUserAPI } from "./UserAPI";
 import { acceptRequestApi } from "./UserAPI";
 import { cancelRequestApi } from "./UserAPI";
+import { createQuoteAPI } from "./UserAPI";
+import { getAllChatAPI } from "./ChatAPI";
 
 export { 
     SignUpAPI, 
@@ -70,4 +72,6 @@ export {
     getFindUserAPI,
     acceptRequestApi,
     cancelRequestApi,
+    createQuoteAPI,
+    getAllChatAPI,
 };

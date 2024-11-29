@@ -1,6 +1,6 @@
 import BaseURL from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService";
-import { updateProfileData, userDeleteAccountData } from "@/types/type"
+import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type"
 
 export const getMe = async() => {
     const token = getToken();
@@ -227,6 +227,26 @@ export const deleteUserAccountAPI = async(
         },
         mode: "cors",
         method: "DELETE",
+        redirect: "follow",
+        body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
+
+export const createQuoteAPI = async ({data} : {data: userPublicQuotesData}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/quotes`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "POST",
         redirect: "follow",
         body: JSON.stringify(data)
     });

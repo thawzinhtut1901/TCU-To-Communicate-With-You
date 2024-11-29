@@ -1,9 +1,11 @@
 import { ChatPages } from "@/pages/UserPages"
+import { Outlet } from "react-router-dom"
 
 const ChatLayouts = () => {
   return (
-    <div>
+    <div className="bg-radial-custom-gradient">
         <ChatPages/>
+        <Outlet/>
     </div>
   )
 }
