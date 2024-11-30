@@ -6,11 +6,16 @@ import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
 
 
-const Chatting = () => {
+const Chatting = ({ lookProfile, setLookProfile }: { lookProfile: boolean; setLookProfile: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  
+  const handleLookProfile = () => {
+    setLookProfile(!lookProfile)
+  }
+
   return (
-    <div className="flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 mr-[22px] rounded-[20px] w-screen cursor-default">
+    <div className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0" : "mr-[22px]"} rounded-[20px] w-screen cursor-default transition-all duration-300`}>
         <div className="flex justify-between items-center bg-[#9054DE] rounded-t-[20px] w-full h-[80px]">
-          <div className="flex font-medium text-[16px] text-white">
+          <div onClick={handleLookProfile} className="flex font-medium text-[16px] text-white">
             <img src={friSuggestionProfile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
             <div className="flex flex-col">
               <h1>Thaw Zin</h1>
@@ -37,4 +42,4 @@ const Chatting = () => {
   )
 }
 
-export default Chatting
+export default Chatting;

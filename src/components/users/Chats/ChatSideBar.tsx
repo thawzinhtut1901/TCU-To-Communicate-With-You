@@ -29,8 +29,8 @@ const ChatSideBar = ({ onSelectChat, selectedChat }: { onSelectChat: (id: number
 
   return (
     <div className={`flex flex-col cursor-default border-[#8566FF] border-[3px] bg-white bg-opacity-30 ml-[22px] rounded-[20px] h-screen ${menuOpen ? "w-1/4" : "w-[80px]"} transition-all duration-300`}>
-        <div className="flex items-center gap-x-3 mt-[18px] ml-[27px] text-[#591DA9]">
-            <IoMenu onClick={handleSideBar} className="w-[25px] h-[25px] cursor-pointer"/>
+        <div className={`${menuOpen ? "ml-[27px]" : "justify-center"} flex items-center gap-x-3 mt-[18px] text-[#591DA9]`}>
+            <IoMenu onClick={handleSideBar} className="flex w-[25px] h-[25px] cursor-pointer"/>
             {menuOpen && <h1 className="font-roman text-[33px]">TCU</h1>}
         </div>
 

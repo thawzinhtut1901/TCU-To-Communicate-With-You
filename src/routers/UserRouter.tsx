@@ -4,7 +4,7 @@ import { ChatLayouts, HomeLayout, UserProfileLayout } from "@/Layouts/UserLayout
 import { ProfileView } from "@/components/users";
 import { FindFriendsPage, GroupPage, ProfilePage, RelationPage, SettingsPage } from "@/pages/UserPages";
 import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Settings";
-import { Chatting } from "@/components/users/Chats";
+// import { Chatting } from "@/components/users/Chats";
 // import { useEffect, useState } from "react";
 
 // const ResponsiveNavigate = ({ to } : {to:any}) => {
@@ -89,12 +89,12 @@ const UserRouter: RouteObject[] = [
   {
     path: "/chats",
     element: <ChatLayouts/>,
-    children: [
-      {
-        path: "chatting",
-        element: <Chatting/>
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "chatting",
+    //     element: <Chatting/>
+    //   }
+    // ]
   },
   {
     path: "/view-my-profile",
