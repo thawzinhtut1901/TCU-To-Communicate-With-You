@@ -31,6 +31,8 @@ import { useGetAllFriendRequest } from "./useUser";
 import { useGetFindUsers } from "./useUser";
 import { useAcceptRequest } from "./useUser";
 import { useCancelRequest } from "./useUser";
+import { useCreateQuote } from "./useUser";
+import { useGetAllChats } from "./useChats";
 
 export { 
     useSignUp, 
@@ -66,4 +68,6 @@ export {
     useGetFindUsers,
     useAcceptRequest,
     useCancelRequest,
+    useCreateQuote,
+    useGetAllChats,
 };
