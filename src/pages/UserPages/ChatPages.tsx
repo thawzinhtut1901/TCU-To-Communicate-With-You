@@ -6,7 +6,7 @@
 // import { BsEmojiSmile } from "react-icons/bs";
 // import { useNavigate } from "react-router-dom";
 
-import { ChatSideBar, Chatting, StartChat } from "@/components/users/Chats"
+import { ChatLookProfile, ChatSideBar, Chatting, StartChat } from "@/components/users/Chats"
 import { useState } from "react";
 
 // const ChatPages = () => {
@@ -225,10 +225,12 @@ import { useState } from "react";
 
 const ChatPages = () => {
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
+  const [lookProfile, setLookProfile] = useState(false);
   return (
     <div className="flex gap-x-4 w-screen h-screen overflow-hidden">
       <ChatSideBar onSelectChat={setSelectedChat} selectedChat={selectedChat}/>
-      {selectedChat === null ? <StartChat /> : <Chatting />}
+      {selectedChat === null ? <StartChat /> : <Chatting lookProfile={lookProfile} setLookProfile={setLookProfile}/>}
+      {lookProfile && <ChatLookProfile />}
     </div>
   )
 }
