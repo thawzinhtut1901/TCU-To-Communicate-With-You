@@ -1,3 +1,2 @@
-const BaseURL = "https://tcu-backend.vercel.app/api/v1";
-
+const BaseURL = import.meta.env.VITE_BASE_URL;
 export default BaseURL;
