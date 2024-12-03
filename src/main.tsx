@@ -7,7 +7,7 @@ import { AuthProvider } from "./context/authContext.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AuthCheck from "./routers/AuthCheck.tsx";
 
-const clientId = "316123631212-nppk3tjkk3gtpu4627oiqp5kq85squju.apps.googleusercontent.com";
+const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const queryClient = new QueryClient();
 
