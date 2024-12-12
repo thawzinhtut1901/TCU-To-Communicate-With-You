@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"
 
 const ChatLayouts = () => {
   return (
-    <div className="bg-radial-custom-gradient">
+    <div className="flex gap-x-4 bg-radial-custom-gradient w-screen h-screen overflow-hidden">
         <ChatPages/>
         <Outlet/>
     </div>

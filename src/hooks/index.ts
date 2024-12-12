@@ -5,6 +5,7 @@ import { useResetPassword } from "./useAuth";
 import { useProfileSetUp } from "./useAuth";
 import { useGetPublishQuotes } from "./useHome";
 import { useGetMe } from "./useUser";
+import { useGetMyProfile } from "./useUser";
 import { useFetchUsersAccountDetails } from "./useAdmin";
 import { useAddAdmins } from "./useAdmin";
 import { useFetchAdmins } from "./useAdmin";
@@ -33,6 +34,10 @@ import { useAcceptRequest } from "./useUser";
 import { useCancelRequest } from "./useUser";
 import { useCreateQuote } from "./useUser";
 import { useGetAllChats } from "./useChats";
+import { useCancelReject } from "./useUser";
+import { useUnfriend } from "./useUser";
+import { useCreateNewChat } from "./useChats";
+import { useGetMessages } from "./useChats";
 
 export { 
     useSignUp, 
@@ -42,6 +47,7 @@ export {
     useProfileSetUp,
     useGetPublishQuotes,
     useGetMe,
+    useGetMyProfile,
     useFetchUsersAccountDetails,
     useAddAdmins,
     useFetchAdmins,
@@ -60,6 +66,7 @@ export {
     useAdminDeleteUser,
     useGetAllSuggestedFri,
     useAddFriend,
+    useUnfriend,
     useInvalidateUsers,
     useApproveValidateUser,
     useGetAllDashboardCount,
@@ -67,7 +74,10 @@ export {
     useGetAllFriendRequest,
     useGetFindUsers,
     useAcceptRequest,
+    useCancelReject,
     useCancelRequest,
     useCreateQuote,
     useGetAllChats,
+    useCreateNewChat,
+    useGetMessages,
 };

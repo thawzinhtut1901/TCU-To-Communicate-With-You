@@ -4,18 +4,87 @@ import ChatText from "./ChatText"
 import { FaMicrophone } from "react-icons/fa"
 import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
+import { useEffect, useState } from "react"
+import { createChatData, SocketData } from "@/types/type"
+import { useCreateNewChat, useGetMessages } from "@/hooks"
+import { useApp } from "@/AppProvider"
+import { useParams } from "react-router-dom"
+import { IoSend } from "react-icons/io5"
 
+const Chatting = () => {
+  // const [messages, setMessages] = useState<ChatMessageData[]>([]);
+  const [createChatData, setCreateChatData] = useState<createChatData>({
+    userTwoId: 0,
+    message: "",
+  })
+  const createNewChat = useCreateNewChat();
+  const {socket, userOneId} = useApp();
+  const {chatId} = useParams();
+  const {data: getMessage} = useGetMessages(chatId!);
+  console.log("Message",getMessage)
+  const numericChatId = chatId ? Number(chatId) : null;
 
-const Chatting = ({ lookProfile, setLookProfile }: { lookProfile: boolean; setLookProfile: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  useEffect(() => {
+    if (numericChatId && userOneId !== numericChatId) {
+      // Set numericChatId initially
+      setCreateChatData((prev) => ({
+        ...prev,
+        userTwoId: numericChatId,
+      }));
+    }
+  }, [userOneId, numericChatId]);
   
-  const handleLookProfile = () => {
-    setLookProfile(!lookProfile)
+  useEffect(() => {
+    if (!socket) return;
+  
+    console.log("Socket connected with ID: ", socket.id);
+  
+    socket.on("createChat", (data: SocketData) => {
+      console.log("Socket Data Received: ", data);
+  
+      // Update userTwoId with the received data.id
+      setCreateChatData((prev) => ({
+        ...prev,
+        userTwoId: Number(data.id), // Convert data.id (string) to number
+      }));
+    });
+  
+    return () => {
+      socket.off("createChat");
+    };
+  }, [socket]);
+  
+  
+  
+  
+  // const handleLookProfile = () => {
+  //   setLookProfile(!lookProfile)
+  // }
+
+  const handleMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const message = event.target.value;
+    setCreateChatData((prev) => ({...prev, message}))
   }
 
+  const handleSentMessage = () => {
+    createNewChat.mutate(createChatData)
+    setCreateChatData((prev) => ({ ...prev, message: "" }));
+  }
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSentMessage();
+    }
+  };
+
   return (
-    <div className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0" : "mr-[22px]"} rounded-[20px] w-screen cursor-default transition-all duration-300`}>
+    <div 
+      className="flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 mr-[22px] rounded-[20px] w-screen transition-all duration-300 cursor-default"
+      // className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0" : "mr-[22px]"} rounded-[20px] w-screen cursor-default transition-all duration-300`}
+    >
         <div className="flex justify-between items-center bg-[#9054DE] rounded-t-[20px] w-full h-[80px]">
-          <div onClick={handleLookProfile} className="flex font-medium text-[16px] text-white">
+          <div className="flex font-medium text-[16px] text-white">
             <img src={friSuggestionProfile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
             <div className="flex flex-col">
               <h1>Thaw Zin</h1>
@@ -25,10 +94,14 @@ const Chatting = ({ lookProfile, setLookProfile }: { lookProfile: boolean; setLo
 
           <BsThreeDotsVertical className="mr-[30px] w-[24px] h-[24px] text-white cursor-pointer"/>
         </div>
+        
         <ChatText/>
 
         <div className="relative flex mt-auto">
           <input 
+            onChange={handleMessage}
+            onKeyDown={handleKeyPress} 
+            value={createChatData.message}
             placeholder="Enter Your Message..."
             className="bg-[#9054DE] mx-auto mb-[22px] pr-12 pl-3 rounded-[8px] w-[98%] h-[40px] text-[16px] text-white placeholder-slate-50"
           />
@@ -36,6 +109,7 @@ const Chatting = ({ lookProfile, setLookProfile }: { lookProfile: boolean; setLo
             <FaMicrophone className="text-white cursor-pointer" size={22} />
             <MdOutlineEmojiEmotions className="text-white cursor-pointer" size={22} />
             <AiOutlinePicture className="text-white cursor-pointer" size={22} />
+            <button className="text-white cursor-pointer" type="submit" onClick={handleSentMessage}><IoSend size={22}/></button>
           </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import BaseURL from "@/services/ApiEndPoint";
+import { BaseURL } from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type"
 
@@ -62,6 +62,25 @@ export const updateMe = async(
     }
     return result;
 }
+
+export const getMyProfileAPI = async() => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/users/profile`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.ok) {
+        throw new Error(result.message);
+    }
+    return result;
+};
 
 export const getAllFriendsAPI = async() => {
     const token = getToken();
@@ -176,6 +195,25 @@ export const addFriendAPI = async ({friendId}: {friendId:number}) => {
     return result;
 }
 
+export const unfriendAPI = async({friendId} : {friendId:number}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/friends/unfriend/${friendId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "DELETE",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
+
 export const acceptRequestApi = async({friendId} : {friendId:number}) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/accept/${friendId}`, {
@@ -195,7 +233,7 @@ export const acceptRequestApi = async({friendId} : {friendId:number}) => {
     return result;
 }
 
-export const cancelRequestApi = async({friendId} : {friendId:number}) => {
+export const cancelRejectApi = async({friendId} : {friendId:number}) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/reject/${friendId}`, {
         headers: {
@@ -205,6 +243,25 @@ export const cancelRequestApi = async({friendId} : {friendId:number}) => {
         },
         mode: "cors",
         method: "PATCH",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
+
+export const cancelRequestApi = async({userId} : {userId: number}) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/friends/cancel/${userId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "DELETE",
         redirect: "follow",
     });
     const result = await response.json();

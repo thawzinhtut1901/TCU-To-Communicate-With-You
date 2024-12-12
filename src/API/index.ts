@@ -6,6 +6,7 @@ import { newPasswordAPI } from "../API/AuthAPI";
 import { profileSetupAPI } from "../API/AuthAPI";
 import { getPublishQuotes } from "./HomeAPI";
 import { getMe } from "./UserAPI";
+import { getMyProfileAPI } from "./UserAPI";
 import { usersAccount } from "./AdminAPI";
 import { usersGroups } from "./AdminAPI";
 import { addAdmins } from "./AdminAPI";
@@ -32,9 +33,13 @@ import { deleteUserAccountAPI } from "./UserAPI";
 import { getAllFriendsRequestAPI } from "./UserAPI";
 import { getFindUserAPI } from "./UserAPI";
 import { acceptRequestApi } from "./UserAPI";
-import { cancelRequestApi } from "./UserAPI";
+import { cancelRejectApi  } from "./UserAPI";
 import { createQuoteAPI } from "./UserAPI";
 import { getAllChatAPI } from "./ChatAPI";
+import { createNewChatAPI } from "./ChatAPI";
+import { cancelRequestApi } from "./UserAPI";
+import { unfriendAPI } from "./UserAPI";
+import { getMessagesAPI } from "./ChatAPI";
 
 export { 
     SignUpAPI, 
@@ -45,6 +50,7 @@ export {
     profileSetupAPI,
     getPublishQuotes,
     getMe,
+    getMyProfileAPI,
     usersAccount,
     usersGroups,
     addAdmins,
@@ -64,6 +70,7 @@ export {
     adminDeleteUsersAPI,
     getSuggestedFriAPI,
     addFriendAPI,
+    unfriendAPI,
     invalidateUsersAPI,
     approveValidateUserAPI,
     getAllDashboardCountAPI,
@@ -71,7 +78,10 @@ export {
     getAllFriendsRequestAPI,
     getFindUserAPI,
     acceptRequestApi,
-    cancelRequestApi,
+    cancelRejectApi ,
     createQuoteAPI,
     getAllChatAPI,
+    createNewChatAPI,
+    cancelRequestApi,
+    getMessagesAPI,
 };

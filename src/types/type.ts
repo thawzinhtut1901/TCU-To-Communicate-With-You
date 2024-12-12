@@ -102,3 +102,47 @@ export type quoteAdminUpdateData = {
 export type userDeleteAccountData = {
   password: string;
 }
+
+export type createChatData = {
+  userTwoId: number;
+  message: string
+}
+
+export type ChatUser = {
+  id: number;
+  userName: string;
+  displayName: string;
+  role: string;
+  email: string;
+  profile?: string;
+}
+
+export type ChatMessageData = {
+  chatId: string;
+  createdAt: string;
+  groupChatId: string | null;
+  id: number;
+  imageMsg: any[];
+  reactions: any;
+  receiverId: number;
+  receiverUser: ChatUser;
+  replyTo: any;
+  seen: boolean;
+  senderId: number;
+  senderUser: ChatUser;
+  text: string;
+  updatedAt: string;
+  videoMsg: any;
+  voiceMsg: any;
+}
+
+export type SocketData = {
+  chatName: string;
+  id: string;
+  isArchived: boolean;
+  message: ChatMessageData;
+  userOne: ChatUser;
+  userTwo: ChatUser;
+  userOneId: number;
+  userTwoId: number;
+}
