@@ -1,9 +1,9 @@
 import { HomeInput } from "@/components/ui/input"
 import { IoIosSearch } from "react-icons/io"
 import "./type.css"
-import { useAcceptRequest, useAddFriend, useCancelRequest, useGetAllFriendRequest, useGetFindUsers, useGetMe } from "@/hooks"
+import { useAcceptRequest, useAddFriend, useCancelReject, useCancelRequest, useGetAllFriendRequest, useGetFindUsers, useGetMe } from "@/hooks"
 import { Button } from "@/components/ui/button"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 const FindFriendsPage = () => {
@@ -12,24 +12,28 @@ const FindFriendsPage = () => {
   });
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const {data: getAllFris, refetch} = useGetAllFriendRequest();  
-  console.log(getAllFris)
   const {data: getMe} = useGetMe();
   const {data: getFindUser} = useGetFindUsers({
     search,
   })
   const addFriend = useAddFriend();
+  const cancelRequest = useCancelRequest();
   const [isRequestSent, setIsRequestSent] = useState<number[]>([]);
   const acceptRequest = useAcceptRequest();
-  const cancelRequest = useCancelRequest();
+  const cancelReject = useCancelReject();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if(acceptRequest.isSuccess) {
       refetch();
     } 
+    if(cancelReject.isSuccess) {
+      refetch();
+    }
     if(cancelRequest.isSuccess) {
       refetch();
     }
-  }, [acceptRequest.isSuccess, cancelRequest.isSuccess, refetch])
+  }, [acceptRequest.isSuccess, cancelReject.isSuccess, cancelRequest.isSuccess, refetch])
 
   useEffect(() => {
     const params:any = {};
@@ -60,10 +64,18 @@ const FindFriendsPage = () => {
     // setIsRequestSent(false);
   }
 
-  const handleCancelRequest = (cancelId:number) => {
-    cancelRequest.mutate(cancelId);
+  const handleCancelReject = (cancelId:number) => {
+    cancelReject.mutate(cancelId);
     // setIsRequestSent(false);
   }
+
+  const handelCancelRequest = (userId: number) => {
+    cancelRequest.mutate(userId)
+  }
+
+  const handleNavigateToChat = (userTwoId: number) => {
+    navigate(`/chats/${userTwoId}`);
+  };
   
   return (
     <div className="flex flex-col">
@@ -123,7 +135,7 @@ const FindFriendsPage = () => {
                             Accept
                           </Button>
                           <Button
-                            onClick={() => handleCancelRequest(request?.id)}
+                            onClick={() => handleCancelReject(request?.id)}
                             className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins"
                           >
                             Cancel
@@ -147,16 +159,20 @@ const FindFriendsPage = () => {
                 <div className="flex flex-col mt-[12px] ml-[14px]">
                   <h1 className="font-medium font-primary text-[18px]">{find?.displayName || "Unknown"}</h1>
 
-                  <div className={`mt-3 ${isRequestSent} ? "flex flex-col" : "flex mt-[13px]"`}>
+                  <div className={`mt-1 ${isRequestSent} ? "flex flex-col" : "flex"`}>
                     {
-                      find?.friendStatus === "Request" ? (
-                        <Button
-                        onClick={() => handleAcceptRequest(find?.id)}
-                        className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
-                      >
-                        Accept
-                      </Button>
-                      ) : find?.friendStatus === "Accepted" ? (
+                      find?.friendStatus?.status === "Request" ? (
+                        find?.friendStatus?.userOneId === getMe?.id ? (
+                          <h1 className="text-[14px] text-slate-600">Request Sent</h1>
+                        ) : (
+                          <Button
+                          onClick={() => handleAcceptRequest(find?.id)}
+                          className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
+                        >
+                          Accept
+                        </Button>
+                        )
+                      ) : find?.friendStatus?.status === "Accepted" ? (
                         <Button
                           className="bg-green-500 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
                         >
@@ -177,7 +193,9 @@ const FindFriendsPage = () => {
                         <h1 className="text-[14px] text-slate-600">Request Sent</h1>
                       )
                     } */}
-                    <Button className={`bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Cancel</Button>
+                    <Button onClick={() => handelCancelRequest(find?.id)} className={`bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Cancel</Button>
+                    <Button onClick={() => handleNavigateToChat(find?.id)} className={`bg-black ml-auto bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Sent Message</Button>
+                    
                   </div>
                 </div>
               </div>

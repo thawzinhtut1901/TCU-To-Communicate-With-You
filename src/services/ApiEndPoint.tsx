@@ -1,2 +1,6 @@
-const BaseURL = import.meta.env.VITE_BASE_URL;
-export default BaseURL;
+const BaseURL = "https://tcu-backend-uji4.onrender.com/api/v1"
+const SocketURL = "wss://tcu-backend-uji4.onrender.com"
+export {
+    BaseURL,
+    SocketURL
+};

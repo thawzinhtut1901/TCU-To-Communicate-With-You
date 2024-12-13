@@ -1,9 +1,12 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import UserLayout from "@/Layouts/UserLayout";
-import { ChatLayouts, HomeLayout, UserProfileLayout } from "@/Layouts/UserLayouts";
+import { ChatLayouts, HomeLayout } from "@/Layouts/UserLayouts";
 import { ProfileView } from "@/components/users";
 import { FindFriendsPage, GroupPage, ProfilePage, RelationPage, SettingsPage } from "@/pages/UserPages";
 import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Settings";
+import { FriendList, JoinedGp, ProfileInfo, RelationshipInfo } from "@/components/users/ProfileInfo";
+import { Chatting } from "@/components/users/Chats";
+// import { ChatSideBar, Chatting } from "@/components/users/Chats";
 // import { Chatting } from "@/components/users/Chats";
 // import { useEffect, useState } from "react";
 
@@ -24,6 +27,8 @@ import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Set
 
 //   return isDesktop ? <Navigate to={to} /> : null;
 // };
+
+// const {socket} = useApp();
 
 const UserRouter: RouteObject[] = [
   {
@@ -48,7 +53,29 @@ const UserRouter: RouteObject[] = [
       },
       {
         path: "profile",
-        element: <ProfilePage/>
+        element: <ProfilePage/>,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={"more-info"}/>
+          },
+          {
+            path: "more-info",
+            element: <ProfileInfo/>
+          },
+          {
+            path: "friend-list",
+            element: <FriendList/>
+          },
+          {
+            path: "join-group",
+            element: <JoinedGp/>
+          },
+          {
+            path: "relationship-list",
+            element: <RelationshipInfo/>
+          }
+        ]
       },
       {
         path: "groups",
@@ -83,16 +110,22 @@ const UserRouter: RouteObject[] = [
     ],
   },
   {
-    path: "/profile",
-    element: <UserProfileLayout/>
-  },
-  {
     path: "/chats",
     element: <ChatLayouts/>,
+    children: [
+      {
+        path: ":chatId",
+        element: <Chatting/>
+      }
+    ]
     // children: [
     //   {
-    //     path: "chatting",
-    //     element: <Chatting/>
+    //     index: true,
+    //     element: <ChatSideBar/>
+    //   },
+    //   {
+    //     path: ":id",
+    //     element: <Chatting />
     //   }
     // ]
   },

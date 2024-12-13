@@ -1,5 +1,5 @@
 import { getToken } from "@/services/authService";
-import BaseURL from "../services/ApiEndPoint";
+import { BaseURL } from "@/services/ApiEndPoint";
 import { AuthData, GoogleLogInData, LoginData, NewPswData, profileSetupData, VerifyData } from "../types/type";
 
 export const SignUpAPI = async ({ data }: { data: AuthData }) => {

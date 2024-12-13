@@ -1,4 +1,4 @@
-import { acceptRequestApi, addFriendAPI, cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getSuggestedFriAPI, updateMe } from "@/API";
+import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getMyProfileAPI, getSuggestedFriAPI, unfriendAPI, updateMe } from "@/API";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -9,6 +9,11 @@ export const useUpdateMe = () =>
     useMutation({
         mutationFn: (data: updateProfileData) => updateMe({data}),
       });
+
+export const useGetMyProfile = () => 
+    useQuery({
+        queryKey: ["my-profile"], queryFn: () => getMyProfileAPI()
+    })
 
 export const useGetAllFriends = () => 
     useQuery({queryKey: ["friends"], queryFn: () => getAllFriendsAPI()});
@@ -37,14 +42,24 @@ export const useAddFriend = () =>
         mutationFn: (friendId: number) => addFriendAPI({friendId})
     })
 
+export const useUnfriend = () => 
+    useMutation({
+        mutationFn: (friendId: number) => unfriendAPI({friendId})
+    })
+
 export const useAcceptRequest = () => 
     useMutation({
         mutationFn: (friendId: number) => acceptRequestApi({friendId})
     })
 
+export const useCancelReject = () => 
+    useMutation({
+        mutationFn: (friendId: number) => cancelRejectApi({friendId})
+    })
+
 export const useCancelRequest = () => 
     useMutation({
-        mutationFn: (friendId: number) => cancelRequestApi({friendId})
+        mutationFn: (userId: number) => cancelRequestApi({userId})
     })
 
 export const useDeleteUserAccount = () => 

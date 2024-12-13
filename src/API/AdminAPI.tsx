@@ -1,4 +1,4 @@
-import BaseURL from "@/services/ApiEndPoint";
+import { BaseURL } from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
 import { CreateAdminData, quoteAdminUpdateData, userPublicQuotesData } from "@/types/type";
 
