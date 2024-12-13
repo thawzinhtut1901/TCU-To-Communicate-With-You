@@ -1,7 +1,6 @@
 // import { useApp } from "@/AppProvider";
 // import { ChatLookProfile, ChatSideBar, Chatting, StartChat } from "@/components/users/Chats"
 // import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { ChatSideBar } from "@/components/users/Chats"
 
 
