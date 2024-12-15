@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { IoIosSearch } from "react-icons/io";
 import { IoMenu } from "react-icons/io5"
 import ChatList from "./ChatList";
 import { useCreateQuote } from "@/hooks";
-import { SocketData, userPublicQuotesData } from "@/types/type";
+import { userPublicQuotesData } from "@/types/type";
 // import { useNavigate } from "react-router-dom";
 import { useApp } from "@/AppProvider"
 
@@ -105,25 +105,13 @@ import { useApp } from "@/AppProvider"
 
 
 const ChatSideBar = () => {
-  const {menuOpen, setMenuOpen, socket } = useApp();
+  const {menuOpen, setMenuOpen, chatData } = useApp();
   const createYourQuote = useCreateQuote();
   const [createQuote, setCreateQuote] = useState<userPublicQuotesData>({
     quote: ""
   })
 
-  useEffect(() => {
-    if(!socket) return;
-
-    console.log(socket.id)
-
-    socket.on("createChat", (data: SocketData) => {
-      console.log("Socket is Connect", data);
-    });
-
-    return () => {
-      socket.off("createChat");
-    };
-  }, [socket])
+  console.log("Side Bar",chatData)
 
   const hadleMenuOpen = () => {
     setMenuOpen(!menuOpen)
@@ -177,7 +165,7 @@ const ChatSideBar = () => {
                     </div>
 
                     <div className="mt-[25px]">
-                        <ChatList/>
+                        <ChatList chatData={chatData}/>
                     </div>
                 </div>
                 

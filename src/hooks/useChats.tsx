@@ -1,4 +1,4 @@
-import { createNewChatAPI, getAllChatAPI, getMessagesAPI } from "@/API";
+import { createNewChatAPI, getAChatAPI, getAllChatAPI, getMessagesAPI } from "@/API";
 import { createChatData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -17,4 +17,10 @@ export const useGetMessages = (chatId:string) =>
     useQuery({
         queryKey: ["messages", chatId],
         queryFn: () => getMessagesAPI(chatId)
+    })
+
+export const useGetAChat = (chatId:string) => 
+    useQuery({
+        queryKey: ["a-chat", chatId],
+        queryFn: () => getAChatAPI(chatId)
     })
