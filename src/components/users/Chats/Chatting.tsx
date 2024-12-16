@@ -1,4 +1,3 @@
-import { friSuggestionProfile } from "@/assets"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import ChatText from "./ChatText"
 import { FaMicrophone } from "react-icons/fa"
@@ -6,7 +5,7 @@ import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
 import { useEffect, useState } from "react"
 import { createChatData, SocketData } from "@/types/type"
-import { useCreateNewChat, useGetMessages } from "@/hooks"
+import { useCreateNewChat, useGetAChat, useGetMessages } from "@/hooks"
 import { useApp } from "@/AppProvider"
 import { useParams } from "react-router-dom"
 import { IoSend } from "react-icons/io5"
@@ -21,8 +20,11 @@ const Chatting = () => {
   const {socket, userOneId} = useApp();
   const {chatId} = useParams();
   const {data: getMessage} = useGetMessages(chatId!);
+  const {data: getAChat} = useGetAChat(chatId!);
   console.log("Message",getMessage)
   const numericChatId = chatId ? Number(chatId) : null;
+  const isUserOne = getAChat?.userOneId === userOneId;
+
 
   useEffect(() => {
     if (numericChatId && userOneId !== numericChatId) {
@@ -85,11 +87,26 @@ const Chatting = () => {
     >
         <div className="flex justify-between items-center bg-[#9054DE] rounded-t-[20px] w-full h-[80px]">
           <div className="flex font-medium text-[16px] text-white">
-            <img src={friSuggestionProfile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
-            <div className="flex flex-col">
-              <h1>Thaw Zin</h1>
-              <h3 className="text-[#D9D9D9]">Active 20m ago</h3>
-            </div>
+            {
+              isUserOne ? (
+                <div className="flex items-center">
+                  <img src={getAChat?.userTwo?.profile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
+                  <div className="flex flex-col">
+                    <h1>{getAChat?.userTwo?.displayName}</h1>
+                    <h3 className="text-[#D9D9D9]">Active 20m ago</h3>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center"> 
+                  <img src={getAChat?.userOne?.profile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
+                  <div className="flex flex-col">
+                    <h1>{getAChat?.userOne?.displayName}</h1>
+                    <h3 className="text-[#D9D9D9]">Active 20m ago</h3>
+                  </div>
+              </div>
+              )
+            }
+
           </div>
 
           <BsThreeDotsVertical className="mr-[30px] w-[24px] h-[24px] text-white cursor-pointer"/>
