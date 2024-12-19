@@ -1,4 +1,4 @@
-import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getMyProfileAPI, getSuggestedFriAPI, unfriendAPI, updateMe } from "@/API";
+import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, findAUserAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getMyProfileAPI, getSuggestedFriAPI, unfriendAPI, updateMe } from "@/API";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -70,4 +70,10 @@ export const useDeleteUserAccount = () =>
 export const useCreateQuote = () => 
     useMutation({
         mutationFn: (data: userPublicQuotesData) => createQuoteAPI({data})
+    })
+
+export const useGetFindAUser = ({userId} : {userId:number}) => 
+    useQuery({
+        queryKey: ["find-a-user", userId],
+        queryFn: () => findAUserAPI({userId})
     })

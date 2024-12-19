@@ -39,6 +39,8 @@ import { useUnfriend } from "./useUser";
 import { useCreateNewChat } from "./useChats";
 import { useGetMessages } from "./useChats";
 import { useGetAChat } from "./useChats";
+import { useGetFindAUser } from "./useUser";
+import { useCreateMessages } from "./useChats";
 
 export { 
     useSignUp, 
@@ -82,4 +84,6 @@ export {
     useCreateNewChat,
     useGetMessages,
     useGetAChat,
+    useGetFindAUser,
+    useCreateMessages,
 };

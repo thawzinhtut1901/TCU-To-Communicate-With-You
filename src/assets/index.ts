@@ -27,6 +27,11 @@ import QRCode from "./QRCode.png"
 import ActiveStatus from "./activeStatus.png"
 import PersonBook from "./personBook.png"
 import CreateNewGroup from "./CreateNewGroup.png"
+import Quote from "./Quote.png"
+import FirstRank from "./FristRank.png"
+import SecondRank from "./SecondRank.png"
+import ThirdRank from "./ThirdRank.png"
+import Star from "./Star.png"
 
 export {
     TCULogCom,
@@ -58,4 +63,9 @@ export {
     ActiveStatus,
     PersonBook,
     CreateNewGroup,
+    Quote,
+    FirstRank,
+    SecondRank,
+    ThirdRank,
+    Star,
 }

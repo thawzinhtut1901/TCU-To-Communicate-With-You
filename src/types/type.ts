@@ -146,3 +146,8 @@ export type SocketData = {
   userOneId: number;
   userTwoId: number;
 }
+
+export type CreateMessageData = {
+  chatId: string,
+  text: string,
+}

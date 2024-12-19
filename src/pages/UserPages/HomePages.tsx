@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, CreateNewGroup } from "@/assets";
+import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, Quote } from "@/assets";
 import "./type.css";
 import { useGetAllFriends, useGetMe, useGetPublishQuotes } from "@/hooks";
 import { Button } from "@/components/ui/button";
@@ -32,12 +32,12 @@ const HomePages = () => {
 
       <div className="flex md:flex-row flex-col justify-center gap-x-8 mt-[30px] md:mt-[40px]">
           <div className="gap-4 grid grid-cols-3 mx-auto md:mx-0">
-            <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/groups")} src={CreateNewGroup} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
-            <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out object-cover hover:scale-105 hover:grayscale-50"/>
+            <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+            <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+            <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+            <img onClick={() => navigate("/user/quotes")} src={Quote} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+            <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+            <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
           </div>
 
           <div className="flex flex-col mt-4 md:mt-0">

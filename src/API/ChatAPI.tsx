@@ -1,6 +1,6 @@
 import { BaseURL } from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService"
-import { createChatData } from "@/types/type";
+import { createChatData, CreateMessageData } from "@/types/type";
 
 export const createNewChatAPI = async(
     {data} :
@@ -77,4 +77,30 @@ export const getAChatAPI = async(chatId:string) => {
         throw new Error(result.message)
     };
     return result;
+}
+
+export const createMessageAPI = async(
+    {data} :
+    {data: CreateMessageData}
+) =>  {
+    const token = getToken();
+    const formData = new FormData();
+    formData.append("chatId", data.chatId);
+    formData.append("text", data.text);
+  
+    const response:Response = await fetch(`${BaseURL}/messages`, {
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          mode: "cors",
+          method: "POST",
+          redirect: "follow",
+          body: formData,
+        });
+        const result = await response.json();
+        if(!response.json) {
+          throw new Error(result.message);
+        }
+        return result;
 }

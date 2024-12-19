@@ -4,8 +4,8 @@ import { FaMicrophone } from "react-icons/fa"
 import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
 import { useEffect, useState } from "react"
-import { createChatData, SocketData } from "@/types/type"
-import { useCreateNewChat, useGetAChat, useGetMessages } from "@/hooks"
+import { createChatData, CreateMessageData, SocketData } from "@/types/type"
+import { useCreateMessages, useCreateNewChat, useGetAChat, useGetMessages } from "@/hooks"
 import { useApp } from "@/AppProvider"
 import { useParams } from "react-router-dom"
 import { IoSend } from "react-icons/io5"
@@ -21,14 +21,27 @@ const Chatting = () => {
   const {chatId} = useParams();
   const {data: getMessage} = useGetMessages(chatId!);
   const {data: getAChat} = useGetAChat(chatId!);
-  console.log("Message",getMessage)
+  // console.log("Message",getMessage)
   const numericChatId = chatId ? Number(chatId) : null;
   const isUserOne = getAChat?.userOneId === userOneId;
-
+  const [createMessageData, setCreateMessageData] = useState<CreateMessageData>({
+    chatId: "",
+    text: ""
+  });
+  const createMessage = useCreateMessages();
+  console.log(createMessageData.chatId)
 
   useEffect(() => {
+    if(chatId) {
+      setCreateMessageData((prev) => ({
+        ...prev,
+        chatId
+      }))
+    }
+  }, [chatId])
+  
+  useEffect(() => {
     if (numericChatId && userOneId !== numericChatId) {
-      // Set numericChatId initially
       setCreateChatData((prev) => ({
         ...prev,
         userTwoId: numericChatId,
@@ -36,27 +49,25 @@ const Chatting = () => {
     }
   }, [userOneId, numericChatId]);
   
-  useEffect(() => {
-    if (!socket) return;
+  // useEffect(() => {
+  //   if (!socket) return;
   
-    console.log("Socket connected with ID: ", socket.id);
+  //   console.log("Socket connected with ID: ", socket.id);
   
-    socket.on("createChat", (data: SocketData) => {
-      console.log("Socket Data Received: ", data);
+  //   socket.on("createChat", (data: SocketData) => {
+  //     console.log("Socket Data Received: ", data);
   
-      // Update userTwoId with the received data.id
-      setCreateChatData((prev) => ({
-        ...prev,
-        userTwoId: Number(data.id), // Convert data.id (string) to number
-      }));
-    });
+  //     // Update userTwoId with the received data.id
+  //     setCreateChatData((prev) => ({
+  //       ...prev,
+  //       userTwoId: Number(data.id), // Convert data.id (string) to number
+  //     }));
+  //   });
   
-    return () => {
-      socket.off("createChat");
-    };
-  }, [socket]);
-  
-  
+  //   return () => {
+  //     socket.off("createChat");
+  //   };
+  // }, [socket]);
   
   
   // const handleLookProfile = () => {
@@ -64,13 +75,26 @@ const Chatting = () => {
   // }
 
   const handleMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const message = event.target.value;
-    setCreateChatData((prev) => ({...prev, message}))
+    if(numericChatId) {
+      const message = event.target.value;
+      setCreateChatData((prev) => ({...prev, message}))
+    } else {
+      const text = event.target.value;
+      setCreateMessageData((prev) => ({...prev, text}))
+    }
+ 
   }
 
   const handleSentMessage = () => {
-    createNewChat.mutate(createChatData)
-    setCreateChatData((prev) => ({ ...prev, message: "" }));
+    if(numericChatId) {
+      createNewChat.mutate(createChatData)
+      setCreateChatData((prev) => ({ ...prev, message: "" }));
+    } else {
+      createMessage.mutate(createMessageData)
+      socket.emit("createMessage", {createMessageData})
+      setCreateMessageData((prev) => ({...prev, text: ""}))
+    }
+
   }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -118,7 +142,7 @@ const Chatting = () => {
           <input 
             onChange={handleMessage}
             onKeyDown={handleKeyPress} 
-            value={createChatData.message}
+            value={createChatData.message || createMessageData.text}
             placeholder="Enter Your Message..."
             className="bg-[#9054DE] mx-auto mb-[22px] pr-12 pl-3 rounded-[8px] w-[98%] h-[40px] text-[16px] text-white placeholder-slate-50"
           />

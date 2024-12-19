@@ -1,14 +1,18 @@
-import { Navigate, RouteObject } from "react-router-dom";
+import { Navigate, RouteObject, useNavigate } from "react-router-dom";
 import UserLayout from "@/Layouts/UserLayout";
 import { ChatLayouts, HomeLayout } from "@/Layouts/UserLayouts";
 import { ProfileView } from "@/components/users";
-import { FindFriendsPage, GroupPage, ProfilePage, RelationPage, SettingsPage } from "@/pages/UserPages";
+import { FindFriendsPage, QuotePage, ProfilePage, RelationPage, SettingsPage } from "@/pages/UserPages";
 import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Settings";
 import { FriendList, JoinedGp, ProfileInfo, RelationshipInfo } from "@/components/users/ProfileInfo";
 import { Chatting } from "@/components/users/Chats";
+import { CreateQuote, LeaderBoard } from "@/components/users/Quotes";
+import { useApp } from "@/AppProvider";
+import { useEffect } from "react";
 // import { ChatSideBar, Chatting } from "@/components/users/Chats";
 // import { Chatting } from "@/components/users/Chats";
 // import { useEffect, useState } from "react";
+
 
 // const ResponsiveNavigate = ({ to } : {to:any}) => {
 //   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -29,6 +33,18 @@ import { Chatting } from "@/components/users/Chats";
 // };
 
 // const {socket} = useApp();
+
+// const SocketRoute = () => {
+//   const userId = localStorage.getItem("userChatId")
+//   const { chatData } = useApp(); 
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     if(!chatData) {
+      
+//     }
+//   })
+// }
 
 const UserRouter: RouteObject[] = [
   {
@@ -78,8 +94,22 @@ const UserRouter: RouteObject[] = [
         ]
       },
       {
-        path: "groups",
-        element: <GroupPage/>
+        path: "quotes",
+        element: <QuotePage/>,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={"leaderboard"}/>
+          },
+          {
+            path: "leaderboard",
+            element: <LeaderBoard/>
+          },
+          {
+            path: "create-quote",
+            element: <CreateQuote/>
+          }
+        ]
       },
       {
         path: "settings",
@@ -118,16 +148,6 @@ const UserRouter: RouteObject[] = [
         element: <Chatting/>
       }
     ]
-    // children: [
-    //   {
-    //     index: true,
-    //     element: <ChatSideBar/>
-    //   },
-    //   {
-    //     path: ":id",
-    //     element: <Chatting />
-    //   }
-    // ]
   },
   {
     path: "/view-my-profile",

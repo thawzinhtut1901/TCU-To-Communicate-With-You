@@ -41,6 +41,8 @@ import { cancelRequestApi } from "./UserAPI";
 import { unfriendAPI } from "./UserAPI";
 import { getMessagesAPI } from "./ChatAPI";
 import { getAChatAPI } from "./ChatAPI";
+import { findAUserAPI } from "./UserAPI";
+import { createMessageAPI } from "./ChatAPI";
 
 export { 
     SignUpAPI, 
@@ -86,4 +88,6 @@ export {
     cancelRequestApi,
     getMessagesAPI,
     getAChatAPI,
+    findAUserAPI,
+    createMessageAPI,
 };

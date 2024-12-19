@@ -67,15 +67,16 @@ const FindFriendsPage = () => {
     cancelRequest.mutate(userId)
   }
 
-  const handleNavigateToChat = (userId: number) => {
-    navigate(`/chats/${userId}`);
+  const handleNavigateToChat = (userId:number) => {
+    localStorage.setItem("userChatId", userId.toString())
+    navigate(`/chats`);
   };
   
   return (
     <div className="flex flex-col justify-center items-center overflow-hidden">
-        <div className="flex flex-col border-2 bg-white bg-opacity-40 rounded-[10px] w-[870px] md:w-[945px] h-[480px] md:h-[700px]">
+        <div className="flex flex-col border-2 bg-white bg-opacity-40 rounded-[10px] md:w-[945px] md:h-[700px]">
           <div className="flex justify-center items-center mt-2 md:mt-[15px]">
-            <form onSubmit={handleSearchSubmit} className="relative ml-4 md:ml-0">
+            <form onSubmit={handleSearchSubmit} className="relative">
                 <div className="top-[3px] md:-top-[-1px] left-6 absolute border-white bg-black -mt-2 -ml-2 border rounded-full w-3 md:w-4 h-3 md:h-4"></div>
                   <div className="top-0 left-3 md:left-5 absolute inset-y-0 flex items-center pointer-events-none">
                       <IoIosSearch className="text-[16px] text-white md:text-[18px]" />
@@ -83,32 +84,41 @@ const FindFriendsPage = () => {
                   <HomeInput
                       type="text"
                       placeholder="Please type Username that you want to find"
-                      className="border-white bg-white bg-opacity-5 shadow-md pl-8 md:pl-14 border rounded-[10px] focus:ring-2 focus:ring-white placeholder:text-black focus:outline-none"
+                      className="border-white bg-white bg-opacity-5 shadow-md pl-8 md:pl-14 border rounded-[10px] focus:ring-2 focus:ring-white focus:outline-none"
                       value={search}
                       onChange={handleSearchChange}
                   />
             </form>
           </div>
+
           <div className="flex justify-center items-center">
-            <div className="border-slate-500 bg-black bg-opacity-15 m-2 md:m-4 p-4 border rounded-[10px] w-[500px] h-[550px] max-h-[75vh] overflow-auto scrollbar-hide">
+            <div className="border-slate-500 bg-black bg-opacity-15 m-2 md:m-4 mt-4 md:mt-6 p-2 md:p-4 border rounded-[10px] w-[300px] md:w-[500px] h-[400px] md:h-[550px] max-h-[75vh] overflow-auto scrollbar-hide">
               {
                 search && getFindUser?.items?.map((find:any) => (
-                  <div key={find?.id} className="flex border-2 border-slate-100 bg-white bg-opacity-30 mt-6 rounded-[10px] w-full h-[110px]">
-                  <img src={find?.profile} alt="" className="mt-[12px] ml-[12px] rounded-full w-[54px] h-[54px]"/>
+                  <div key={find?.id} className="flex border-2 border-slate-100 bg-white bg-opacity-30 mt-6 rounded-[10px] w-full h-[95px] md:h-[110px]">
+                  <img src={find?.profile} alt="" className="mt-[12px] ml-[12px] rounded-full w-[44px] md:w-[54px] h-[44px] md:h-[54px]"/>
 
-                  <div className="flex flex-col mt-[12px] ml-[14px]">
-                    <h1 className="font-medium font-primary text-[18px]">{find?.displayName || "Unknown"}</h1>
+                  <div className="flex flex-col mt-[12px] ml-[10px] md:ml-[14px]">
+                    <h1 className="font-primary font-semibold md:font-medium text-[16px] md:text-[18px]">{find?.displayName || "Unknown"}</h1>
 
                     <div className={`mt-1 ${isRequestSent} ? "flex flex-col" : "flex"`}>
                       {
                         find?.friendStatus?.status === "Request" ? (
                           find?.friendStatus?.userOneId === getMe?.id ? (
-                            <h1 className="text-[14px] text-slate-600">Request Sent</h1>
+                            <>
+                              <h1 className="text-[12px] text-slate-600 md:text-[14px]">Request Sent</h1>
+                              <Button
+                                  onClick={() => handelCancelRequest(find?.id)}
+                                  className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-8 md:mr-6 font-poppins text-[12px] md:text-[14px]"
+                              >
+                                  Cancel
+                              </Button>
+                            </>  
                           ) : (
                             <div>
                               <Button
                                 onClick={() => handleAcceptRequest(find?.id)}
-                                className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
+                                className="bg-blue-500 hover:bg-blue-400 shadow-inner shadow-slate-200 mr-3 md:mr-6 font-poppins text-[12px] text-white md:text-[14px]"
                               >
                                 Accept
                               </Button>
@@ -118,28 +128,28 @@ const FindFriendsPage = () => {
                           )
                         ) : find?.friendStatus?.status === "Accepted" ? (
                           <Button
-                            className="bg-green-500 shadow-inner shadow-slate-200 mr-6 font-poppins text-white"
+                            className="bg-green-500 shadow-inner shadow-slate-200 mr-8 md:mr-6 font-poppins text-[12px] text-white md:text-[14px]"
                           >
                             Friend
                           </Button>
                         ) : (
                           isRequestSent.includes(find?.id) ? (
                             <>
-                              <h1 className="text-[14px] text-slate-600">Request Sent</h1>
+                              <h1 className="text-[12px] text-slate-600 md:text-[14px]">Request Sent</h1>
                               <Button
                                 onClick={() => handelCancelRequest(find?.id)}
-                                className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins"
+                                className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins text-[12px] md:text-[14px]"
                               >
                                 Cancel
                               </Button>
                             </>
                             
                           ) : (
-                            <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-6 font-poppins">Add Friend</Button>
+                            <Button onClick={() => handleAddFriend(find?.id)} className="bg-black bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 mr-3 md:mr-6 font-poppins text-[12px] md:text-[14px]">Add Friend</Button>
                           )
                         )
                       }
-                       <Button onClick={() => handleNavigateToChat(find?.id)} className={`bg-black ml-auto bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Sent Message</Button>                      
+                       <Button onClick={() => handleNavigateToChat(find?.id)} className={`bg-black md:text-[14px] text-[12px] ml-auto bg-opacity-30 hover:bg-opacity-20 shadow-inner shadow-slate-200 font-poppins ${isRequestSent} ? "flex-grow" : "" `}>Sent Message</Button>                      
                     </div>
                   </div>
                 </div>

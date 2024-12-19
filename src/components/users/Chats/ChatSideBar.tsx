@@ -165,7 +165,7 @@ const ChatSideBar = () => {
                     </div>
 
                     <div className="mt-[25px]">
-                        <ChatList chatData={chatData}/>
+                        <ChatList/>
                     </div>
                 </div>
                 

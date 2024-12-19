@@ -46,6 +46,7 @@ export default {
         luxuriousRoman: ['"Playfair Display"', 'serif'],
       },
       borderRadius: {
+        'bottom-white': '0 4px 6px 0 rgba(255, 255, 255, 0.5)',
         'custom-top': '20px 20px 0 0', 
       },
       boxShadow: {

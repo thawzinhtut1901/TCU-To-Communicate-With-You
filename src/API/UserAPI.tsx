@@ -313,3 +313,22 @@ export const createQuoteAPI = async ({data} : {data: userPublicQuotesData}) => {
     };
     return result;
 }
+
+export const findAUserAPI = async({userId} : {userId: number}) => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/users/${userId}`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
