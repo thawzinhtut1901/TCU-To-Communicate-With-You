@@ -75,7 +75,7 @@ import { io, Socket } from "socket.io-client";
 import { getToken } from "./services/authService";
 import { SocketURL } from "./services/ApiEndPoint";
 import { useGetMe } from "./hooks";
-import { ChatMessageData } from "./types/type";
+// import { ChatMessageData } from "./types/type";
 
 interface ProviderDataProps {
     socket: Socket;

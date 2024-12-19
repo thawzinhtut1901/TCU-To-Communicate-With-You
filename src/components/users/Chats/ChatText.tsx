@@ -1,16 +1,16 @@
 import { useApp } from "@/AppProvider";
-import { useGetMessages } from "@/hooks";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+// import { useGetMessages } from "@/hooks";
+// import { useEffect } from "react";
+// import { useParams } from "react-router-dom";
 
 const ChatText = () => {
-  const { chatId } = useParams();
-  const { data: getMessage } = useGetMessages(chatId!);
-  const { userOneId, receivedMessage } = useApp();
+  // const { chatId } = useParams();
+  // const { data: getMessage } = useGetMessages(chatId!);
+  const { receivedMessage } = useApp();
 
   console.log(receivedMessage?.text)
 
-  const isSender = userOneId === receivedMessage?.senderUser?.id;
+  // const isSender = userOneId === receivedMessage?.senderUser?.id;
 
   return (
     <div className="flex flex-col space-y-2 p-4 h-screen overflow-auto">
@@ -30,7 +30,7 @@ const ChatText = () => {
                 <h1>{receivedMessage?.text}</h1>
               </div>
             </div> */}
-      {
+      {/* {
         receivedMessage ? (
           (() => {
             const isSender = userOneId === receivedMessage?.senderUser?.id;
@@ -74,7 +74,7 @@ const ChatText = () => {
             );
           })
         )
-      }
+      } */}
      
     </div>
   );

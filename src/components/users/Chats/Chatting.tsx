@@ -4,8 +4,8 @@ import { FaMicrophone } from "react-icons/fa"
 import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
 import { useEffect, useState } from "react"
-import { createChatData, CreateMessageData, SocketData } from "@/types/type"
-import { useCreateMessages, useCreateNewChat, useGetAChat, useGetMessages } from "@/hooks"
+import { createChatData, CreateMessageData } from "@/types/type"
+import { useCreateMessages, useCreateNewChat, useGetAChat } from "@/hooks"
 import { useApp } from "@/AppProvider"
 import { useParams } from "react-router-dom"
 import { IoSend } from "react-icons/io5"
@@ -19,7 +19,7 @@ const Chatting = () => {
   const createNewChat = useCreateNewChat();
   const {socket, userOneId} = useApp();
   const {chatId} = useParams();
-  const {data: getMessage} = useGetMessages(chatId!);
+  // const {data: getMessage} = useGetMessages(chatId!);
   const {data: getAChat} = useGetAChat(chatId!);
   // console.log("Message",getMessage)
   const numericChatId = chatId ? Number(chatId) : null;
