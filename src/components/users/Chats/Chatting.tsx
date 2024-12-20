@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom"
 import { IoSend } from "react-icons/io5"
 
 const Chatting = () => {
-  // const [messages, setMessages] = useState<ChatMessageData[]>([]);
   const [createChatData, setCreateChatData] = useState<createChatData>({
     userTwoId: 0,
     message: "",
@@ -19,9 +18,7 @@ const Chatting = () => {
   const createNewChat = useCreateNewChat();
   const {socket, userOneId} = useApp();
   const {chatId} = useParams();
-  // const {data: getMessage} = useGetMessages(chatId!);
   const {data: getAChat} = useGetAChat(chatId!);
-  // console.log("Message",getMessage)
   const numericChatId = chatId ? Number(chatId) : null;
   const isUserOne = getAChat?.userOneId === userOneId;
   const [createMessageData, setCreateMessageData] = useState<CreateMessageData>({
