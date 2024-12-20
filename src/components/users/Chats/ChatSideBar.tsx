@@ -105,13 +105,11 @@ import { useApp } from "@/AppProvider"
 
 
 const ChatSideBar = () => {
-  const {menuOpen, setMenuOpen, chatData } = useApp();
+  const {menuOpen, setMenuOpen } = useApp();
   const createYourQuote = useCreateQuote();
   const [createQuote, setCreateQuote] = useState<userPublicQuotesData>({
     quote: ""
   })
-
-  console.log("Side Bar",chatData)
 
   const hadleMenuOpen = () => {
     setMenuOpen(!menuOpen)
