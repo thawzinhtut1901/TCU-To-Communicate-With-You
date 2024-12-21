@@ -9,7 +9,7 @@ export const useCreateNewChat = () =>
 
 export const useGetAllChats = () => 
     useQuery({
-        queryKey: ["all-chats"],
+        queryKey: ["allchats"],
         queryFn: () => getAllChatAPI()
     })
 

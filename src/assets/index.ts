@@ -32,6 +32,7 @@ import FirstRank from "./FristRank.png"
 import SecondRank from "./SecondRank.png"
 import ThirdRank from "./ThirdRank.png"
 import Star from "./Star.png"
+import Ranking from "./Ranking.png"
 
 export {
     TCULogCom,
@@ -68,4 +69,5 @@ export {
     SecondRank,
     ThirdRank,
     Star,
+    Ranking,
 }

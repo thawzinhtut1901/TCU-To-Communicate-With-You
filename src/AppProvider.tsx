@@ -46,6 +46,29 @@ import {
       });
     });
     const queryClient = useQueryClient();
+
+    const createChatMutation = useMutation({
+      mutationFn: (newChat: any) => newChat,
+      onMutate: (newChat) => {
+        const previousChat = queryClient.getQueryData([
+          "allchats"
+        ]);
+
+        queryClient.setQueryData(
+          ["allchats"],
+          (oldChats: any) => {
+            return {
+              ...oldChats,
+              items: [...(oldChats?.items || []), newChat]
+            }
+          }
+        );
+
+        return {previousChat}
+      },
+      
+    });
+    
   
     const createMsgMutation = useMutation({
       mutationFn: (messages: any) => messages,
@@ -71,9 +94,10 @@ import {
   
     useEffect(() => {
       // Listener for createChat
-      socket.on("createChat", (data) => {
-        console.log("Global listener - New chat created:", data);
-        setChatData((prevChats) => [...prevChats, data?.userTwo]);
+      socket.on("createChat", (newChat) => {
+       console.log(newChat)
+       createChatMutation.mutate(newChat);
+       setChatData(newChat);
       });
   
       // Listener for createMessage
