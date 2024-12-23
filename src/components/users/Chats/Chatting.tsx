@@ -87,7 +87,7 @@ const Chatting = () => {
     <div className="relative flex w-screen overflow-hidden">
       <div 
         // className="flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 mr-[22px] rounded-[20px] w-screen transition-all duration-300 cursor-default"
-        className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0 w-[72%]" : "mr-[22px]"} w-screen rounded-[20px] cursor-default transition-all duration-300`}
+        className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0 w-[72%]" : "mr-[22px] w-screen"} rounded-[20px] cursor-default transition-all duration-300`}
       >
           <div className="flex justify-between items-center bg-[#9054DE] rounded-t-[20px] w-full h-[80px]">
             <div className="flex font-medium text-[16px] text-white">
