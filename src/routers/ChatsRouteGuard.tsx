@@ -4,7 +4,7 @@ import { useApp } from "@/AppProvider";
 
 
 const ChatRouteGuard = () => {
-  const { chatData } = useApp(); // chatData should be of type ChatData | ChatData[] | null
+  const { chatData } = useApp(); 
   const navigate = useNavigate();
   const { chatId } = useParams();
   const userId = localStorage.getItem("userChatId");

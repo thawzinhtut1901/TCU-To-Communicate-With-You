@@ -1,14 +1,23 @@
 import { useApp } from "@/AppProvider";
 import { useGetMessages } from "@/hooks";
 import { useParams } from "react-router-dom";
+import "./type.css"
+import { useEffect, useRef } from "react";
 
 const ChatText = () => {
   const { chatId } = useParams();
   const { data: getMessage } = useGetMessages(chatId!);
   const { userOneId } = useApp();
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [getMessage]); 
 
   return (
-    <div className="flex flex-col space-y-2 p-4 h-screen overflow-auto">
+    <div className="flex flex-col space-y-2 p-4 h-screen overflow-auto vertical-scrollbar">
       {getMessage?.map((message: any) => {
         const isSender = userOneId === message?.senderId;
 
@@ -29,6 +38,7 @@ const ChatText = () => {
           </div>
         );
       })}
+       <div ref={messagesEndRef}></div>
     </div>
   );
 };

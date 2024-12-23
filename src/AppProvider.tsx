@@ -17,6 +17,8 @@ import {
     userOneId: number;
     menuOpen: boolean;
     setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    mobileMenuOpen: boolean;
+    setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
     chatData: any[];
   }
   
@@ -34,6 +36,7 @@ import {
     children,
   }) => {
     const [menuOpen, setMenuOpen] = useState(true);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { data: getMe } = useGetMe();
     const userOneId = getMe?.id;
     const [chatData, setChatData] = useState<any[]>([]);
@@ -121,6 +124,8 @@ import {
           userOneId,
           menuOpen,
           setMenuOpen,
+          mobileMenuOpen,
+          setMobileMenuOpen,
           chatData,
         }}
       >
