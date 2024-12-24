@@ -12,6 +12,7 @@ const ChatList = () => {
     const userId = localStorage.getItem("userChatId")
     const {data: getFindAUser} = useGetFindAUser({userId: Number(userId)})
 
+
     useEffect(() => {
         if (chatData) {
             localStorage.removeItem("userChatId");
@@ -54,6 +55,7 @@ const ChatList = () => {
                             <img src={profile} alt="" className="mx-[12px] rounded-full w-[64px] h-[64px]" />
                             <div className="flex flex-col font-primary">
                                 <h1 className="font-medium text-[20px]">{chat?.chatName}</h1>
+                                <p className="text-[#393939] text-[16px]">{chat?.latestMessage?.text}</p>
                             </div>
                         </div>
                     );

@@ -7,7 +7,6 @@ import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Set
 import { FriendList, JoinedGp, ProfileInfo, RelationshipInfo } from "@/components/users/ProfileInfo";
 import { Chatting } from "@/components/users/Chats";
 import { CreateQuote, LeaderBoard } from "@/components/users/Quotes";
-// import { useApp } from "@/AppProvider";
 // import { useEffect } from "react";
 // import { ChatSideBar, Chatting } from "@/components/users/Chats";
 // import { Chatting } from "@/components/users/Chats";
