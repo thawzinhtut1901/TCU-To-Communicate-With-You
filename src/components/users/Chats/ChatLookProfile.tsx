@@ -6,7 +6,7 @@ import { IoIosSearch } from "react-icons/io"
 const ChatLookProfile = ({userTwo} : any) => {
   console.log(userTwo)
   return (
-    <div className="top-0 right-2 absolute border-[#8566FF] border-[3px] bg-white bg-opacity-30 rounded-[20px] w-3/12 h-screen cursor-default">
+    <div className="top-0 my-4 right-2 absolute border-[#8566FF] border-[3px] bg-white bg-opacity-30 rounded-[20px] w-3/12 h-full cursor-default">
         <div className="bg-white bg-opacity-55 mx-auto mt-[60px] rounded-[12px] w-10/12 h-[480px]">
             <div className="flex flex-col justify-center items-center">
               <img src={userTwo?.profile} alt="" className="mt-[19px] rounded-full w-[128px] h-[128px]"/>

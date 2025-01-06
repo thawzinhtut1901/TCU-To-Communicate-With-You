@@ -10,7 +10,7 @@ const UserLayout = () => {
   const isFindFriPage = location.pathname === "/user/find-friends"
 
   return (
-    <div className="flex flex-col bg-radial-custom-gradient w-full h-screen">
+    <div className="flex flex-col bg-custom-bg bg-custom-gradient w-full h-screen">
       <div className={`${isFindFriPage ? "overflow-hidden" : " overflow-x-hidden overflow-y-auto vertical-scrollbar"} flex-grow`}>
        <div className={`${isHomePage ? "" : "flex justify-end md:justify-start"}  `}>
         <img onClick={() => navigate("/user/home")} src={Logo} alt="" className="w-[100px] md:w-[160px] h-[50px] md:h-[80px]" />

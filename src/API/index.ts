@@ -43,6 +43,8 @@ import { getMessagesAPI } from "./ChatAPI";
 import { getAChatAPI } from "./ChatAPI";
 import { findAUserAPI } from "./UserAPI";
 import { createMessageAPI } from "./ChatAPI";
+import { createGroupAPI } from "./ChatAPI";
+import { getAGroupChat } from "./ChatAPI";
 
 export { 
     SignUpAPI, 
@@ -90,4 +92,6 @@ export {
     getAChatAPI,
     findAUserAPI,
     createMessageAPI,
+    createGroupAPI,
+    getAGroupChat,
 };

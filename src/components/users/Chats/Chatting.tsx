@@ -5,7 +5,7 @@ import { MdOutlineEmojiEmotions } from "react-icons/md"
 import { AiOutlinePicture } from "react-icons/ai"
 import { useEffect, useState } from "react"
 import { createChatData, CreateMessageData } from "@/types/type"
-import { useCreateMessages, useCreateNewChat, useGetAChat } from "@/hooks"
+import { useCreateMessages, useCreateNewChat, useGetAChat, useGetAGroupChat } from "@/hooks"
 import { useApp } from "@/AppProvider"
 import { useParams } from "react-router-dom"
 import { IoSend } from "react-icons/io5"
@@ -28,8 +28,9 @@ const Chatting = () => {
     text: ""
   });
   const createMessage = useCreateMessages();
-  const [lookProfile, setLookProfile] = useState(false)
-  
+  const [lookProfile, setLookProfile] = useState(false);
+  const {data: groupChat} = useGetAGroupChat(chatId!);
+  console.log(groupChat)
 
   useEffect(() => {
     if(chatId) {
@@ -83,36 +84,78 @@ const Chatting = () => {
     }
   };
 
+  const getActivityStatus = () => {
+    // if (groupChat) {
+    //   return `${groupChat?.members?.length} members`;
+    // }
+  
+    // Get the relevant user based on who is viewing
+    const targetUser = isUserOne ? getAChat?.userTwo : getAChat?.userOne;
+  
+    // Check if user is currently active
+    if (targetUser?.activeNow) {
+      return (
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <span>Active now</span>
+        </div>
+      );
+    }
+  
+    // Calculate last seen time if available
+    if (targetUser?.lastSeen) {
+      const lastSeen = new Date(targetUser.lastSeen);
+      const now = new Date();
+      const diffInSeconds = Math.floor((now.getTime() - lastSeen.getTime()) / 1000);
+  
+      // Less than a minute
+      if (diffInSeconds < 60) {
+        return `Last seen ${diffInSeconds} seconds ago`;
+      }
+  
+      // Less than an hour
+      const diffInMinutes = Math.floor(diffInSeconds / 60);
+      if (diffInMinutes < 60) {
+        return `Last seen ${diffInMinutes} min${diffInMinutes > 1 ? 's' : ''} ago`;
+      }
+  
+      // Less than a day
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      if (diffInHours < 24) {
+        return `Last seen ${diffInHours} hr${diffInHours > 1 ? 's' : ''} ago`;
+      }
+  
+      // More than a day
+      const diffInDays = Math.floor(diffInHours / 24);
+      return `Last seen ${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    }
+  
+    return "Offline";
+  };
+
   return (
     <div className="relative flex w-screen overflow-hidden">
       <div 
         // className="flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 mr-[22px] rounded-[20px] w-screen transition-all duration-300 cursor-default"
-        className={`flex flex-col border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0 w-[72%]" : "mr-[22px] w-screen"} rounded-[20px] cursor-default transition-all duration-300`}
+        className={`flex flex-col my-4 border-[#8566FF] border-[3px] bg-white bg-opacity-30 ${lookProfile ? "mr-0 w-[72%]" : "mr-[22px] w-screen"} rounded-[20px] cursor-default transition-all duration-300`}
       >
           <div className="flex justify-between items-center bg-[#9054DE] rounded-t-[20px] w-full h-[80px]">
             <div className="flex font-medium text-[16px] text-white">
-              {
-                isUserOne ? (
-                  <div className="flex items-center">
-                    <img onClick={handleLookProfile} src={getAChat?.userTwo?.profile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
-                    <div className="flex flex-col">
-                      <h1>{getAChat?.userTwo?.displayName}</h1>
-                      <h3 className="text-[#D9D9D9]">Active 20m ago</h3>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center"> 
-                    <img onClick={handleLookProfile} src={getAChat?.userOne?.profile} alt="" className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"/>
-                    <div className="flex flex-col">
-                      <h1>{getAChat?.userOne?.displayName}</h1>
-                      <h3 className="text-[#D9D9D9]">Active 20m ago</h3>
-                    </div>
+              <div className="flex items-center">
+                <img 
+                  onClick={handleLookProfile} 
+                  src={isUserOne ? getAChat?.userTwo?.profile : getAChat?.userOne?.profile} 
+                  alt="" 
+                  className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"
+                />
+                <div className="flex flex-col">
+                  <h1>{isUserOne ? getAChat?.userTwo?.displayName : getAChat?.userOne?.displayName}</h1>
+                  <h3 className="text-[#D9D9D9] flex items-center">
+                    {getActivityStatus()}
+                  </h3>
                 </div>
-                )
-              }
-
+              </div>
             </div>
-
             <BsThreeDotsVertical className="mr-[30px] w-[24px] h-[24px] text-white cursor-pointer"/>
           </div>
           

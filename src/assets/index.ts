@@ -33,6 +33,10 @@ import SecondRank from "./SecondRank.png"
 import ThirdRank from "./ThirdRank.png"
 import Star from "./Star.png"
 import Ranking from "./Ranking.png"
+import FriendRealtion from "./FriendRelation.png"
+import BestieRelation from "./BestieRelation.png"
+import PartnerRelation from "./PartnerRelation.png"
+import SiblingRelation from "./SiblingRelation.png"
 
 export {
     TCULogCom,
@@ -70,4 +74,8 @@ export {
     ThirdRank,
     Star,
     Ranking,
+    FriendRealtion,
+    BestieRelation,
+    PartnerRelation,
+    SiblingRelation,
 }

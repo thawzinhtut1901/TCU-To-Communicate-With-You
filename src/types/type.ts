@@ -151,3 +151,9 @@ export type CreateMessageData = {
   chatId: string,
   text: string,
 }
+
+export type createGroupData = {
+  groupName: string,
+  memeberIds: number[],
+  profilePicture?: File | string;
+}
