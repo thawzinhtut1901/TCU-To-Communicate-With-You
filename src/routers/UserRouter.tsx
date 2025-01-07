@@ -7,6 +7,7 @@ import { Dashboard, Notification, PrivacySecurity } from "@/components/users/Set
 import { FriendList, JoinedGp, ProfileInfo, RelationshipInfo } from "@/components/users/ProfileInfo";
 import { Chatting } from "@/components/users/Chats";
 import { CreateQuote, LeaderBoard } from "@/components/users/Quotes";
+import { RequestRelation } from "@/components/users/Relationship";
 // import { useEffect } from "react";
 // import { ChatSideBar, Chatting } from "@/components/users/Chats";
 // import { Chatting } from "@/components/users/Chats";
@@ -134,7 +135,17 @@ const UserRouter: RouteObject[] = [
       },
       {
         path: "relation",
-        element: <RelationPage/>
+        element: <RelationPage/>,
+        children: [
+          // {
+          //   index: true,
+          //   element: <Navigate to={"relation"}/>
+          // },
+          {
+            path: "user",
+            element: <RequestRelation/>
+          }
+        ]
       }
     ],
   },

@@ -41,6 +41,8 @@ import { useGetMessages } from "./useChats";
 import { useGetAChat } from "./useChats";
 import { useGetFindAUser } from "./useUser";
 import { useCreateMessages } from "./useChats";
+import { useCreateGroup } from "./useChats";
+import { useGetAGroupChat } from "./useChats";
 
 export { 
     useSignUp, 
@@ -86,4 +88,6 @@ export {
     useGetAChat,
     useGetFindAUser,
     useCreateMessages,
+    useCreateGroup,
+    useGetAGroupChat,
 };

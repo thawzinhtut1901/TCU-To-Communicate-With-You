@@ -12,7 +12,6 @@ const ChatList = () => {
     const userId = localStorage.getItem("userChatId")
     const {data: getFindAUser} = useGetFindAUser({userId: Number(userId)})
 
-
     useEffect(() => {
         if (chatData) {
             localStorage.removeItem("userChatId");
@@ -44,7 +43,7 @@ const ChatList = () => {
             {
                 getAllChats?.items?.map((chat: any) => {
                     const isUserOne = userOneId === chat.userOneId;
-                    const profile = isUserOne ? chat?.userTwo?.profile : chat?.userOne?.profile;
+                    const profile =chat?.groupName ? chat.profile : isUserOne ? chat?.userTwo?.profile : chat?.userOne?.profile
         
                     return (
                         <div
@@ -54,8 +53,17 @@ const ChatList = () => {
                         >
                             <img src={profile} alt="" className="mx-[12px] rounded-full w-[64px] h-[64px]" />
                             <div className="flex flex-col font-primary">
-                                <h1 className="font-medium text-[20px]">{chat?.chatName}</h1>
-                                <p className="text-[#393939] text-[16px]">{chat?.latestMessage?.text}</p>
+                                <h1 className="font-medium text-[20px]">
+                                    {chat?.groupName ? chat.groupName : (
+                                        isUserOne ? chat?.userTwo?.displayName : chat?.userOne?.displayName
+                                    )}
+                                </h1>
+                                <p className="text-[#393939] text-[16px]">
+                                    {chat?.latestMessage?.senderId === userOneId 
+                                        ? `You: ${chat?.latestMessage?.text}`
+                                        : chat?.latestMessage?.text
+                                    }
+                                </p>
                             </div>
                         </div>
                     );

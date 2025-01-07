@@ -152,15 +152,25 @@ export default {
         custom: 'customAnimation 1s ease-in-out',
       },
       backgroundImage: {
-        "custom-gradient": "linear-gradient(90deg, #051960 0%, #591DA9 90%)",
+        "custom-linear-gradient": "linear-gradient(45deg, rgba(0, 0, 0, 0.8) 90%, rgba(29, 139, 169, 1) 50%)",
         "radial-custom-gradient": "radial-gradient(circle at top left, #007AFF 0%, #8566FF 25%, #1D8BA9 50%, #8566FF 75%)",
         "glass": 'rgba(255, 255, 255, 0.1)',
+        'custom-gradient': `
+        radial-gradient(at 52% 75%, hsla(211, 100%, 50%, 1) 0px, transparent 50%),
+        radial-gradient(at 57% 35%, hsla(191, 70%, 38%, 1) 0px, transparent 50%),
+        radial-gradient(at 10% 87%, hsla(252, 100%, 70%, 1) 0px, transparent 50%),
+        radial-gradient(at 41% 30%, hsla(211, 100%, 50%, 1) 0px, transparent 50%),
+        radial-gradient(at 94% 12%, hsla(268, 70%, 38%, 0.85) 0px, transparent 50%),
+        radial-gradient(at 93% 85%, hsla(252, 100%, 70%, 1) 0px, transparent 50%),
+        radial-gradient(at 4% 12%, hsla(191, 70%, 38%, 1) 0px, transparent 50%)
+      `
       },
       backdropBlur: {
         'glass': '20px', 
       },
       borderColor: {
         'glass-border': 'rgba(255, 255, 255, 0.4)',
+        'custom-bg': 'hsla(220,0%,96%,1)',
       },
       fontFamily: {
         primary: ["Prompt", "sans-serif"],
@@ -212,6 +222,8 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'custom-black': 'rgba(0, 0, 0, 0.8)',
+        'custom-blue': '#1D8BA9',
       },
       borderRadius: {
         lg: "var(--radius)",

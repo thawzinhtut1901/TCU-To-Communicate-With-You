@@ -1,5 +1,5 @@
-import { createMessageAPI, createNewChatAPI, getAChatAPI, getAllChatAPI, getMessagesAPI } from "@/API";
-import { createChatData, CreateMessageData } from "@/types/type";
+import { createGroupAPI, createMessageAPI, createNewChatAPI, getAChatAPI, getAGroupChat, getAllChatAPI, getMessagesAPI } from "@/API";
+import { createChatData, createGroupData, CreateMessageData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useCreateNewChat = () => 
@@ -29,3 +29,14 @@ export const useCreateMessages = () =>
     useMutation({
         mutationFn: (data: CreateMessageData) => createMessageAPI({data})
     })
+
+export const useCreateGroup = () => 
+    useMutation({
+        mutationFn: (data: createGroupData) => createGroupAPI({data})
+    })
+
+export const useGetAGroupChat = (groupChatId:string) => 
+    useQuery({
+        queryKey: ["group-chat", groupChatId],
+        queryFn: () => getAGroupChat(groupChatId),
+})

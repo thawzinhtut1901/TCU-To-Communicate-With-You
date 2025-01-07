@@ -1,6 +1,3 @@
-// import { useApp } from "@/AppProvider";
-// import { ChatLookProfile, ChatSideBar, Chatting, StartChat } from "@/components/users/Chats"
-// import { useEffect, useState } from "react";
 import { ChatSideBar } from "@/components/users/Chats"
 
 
@@ -33,7 +30,7 @@ import { ChatSideBar } from "@/components/users/Chats"
 
 const ChatPages = () => {
   return (
-    <div className="mr-8">
+    <div className="mr-8 my-4">
       <ChatSideBar/>
     </div>
   )
