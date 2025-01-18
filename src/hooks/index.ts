@@ -43,6 +43,7 @@ import { useGetFindAUser } from "./useUser";
 import { useCreateMessages } from "./useChats";
 import { useCreateGroup } from "./useChats";
 import { useGetAGroupChat } from "./useChats";
+import { usevoteQuote } from "./useUser";
 
 export { 
     useSignUp, 
@@ -90,4 +91,5 @@ export {
     useCreateMessages,
     useCreateGroup,
     useGetAGroupChat,
+    usevoteQuote,
 };

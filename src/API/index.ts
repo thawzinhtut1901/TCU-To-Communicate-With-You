@@ -45,6 +45,7 @@ import { findAUserAPI } from "./UserAPI";
 import { createMessageAPI } from "./ChatAPI";
 import { createGroupAPI } from "./ChatAPI";
 import { getAGroupChat } from "./ChatAPI";
+import { voteQuoteAPI } from "./UserAPI";
 
 export { 
     SignUpAPI, 
@@ -94,4 +95,5 @@ export {
     createMessageAPI,
     createGroupAPI,
     getAGroupChat,
+    voteQuoteAPI,
 };

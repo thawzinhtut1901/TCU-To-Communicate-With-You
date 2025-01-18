@@ -18,28 +18,35 @@ const Chatting = () => {
   })
   const createNewChat = useCreateNewChat();
   const {socket, userOneId} = useApp();
-  const {chatId} = useParams();
-  const {data: getAChat} = useGetAChat(chatId!);
-  console.log(getAChat?.userTwo)
+  const {chatId, groupChatId} = useParams();
+  const {data: getAChat} = useGetAChat(chatId!, Boolean(chatId));
   const numericChatId = chatId ? Number(chatId) : null;
   const isUserOne = getAChat?.userOneId === userOneId;
   const [createMessageData, setCreateMessageData] = useState<CreateMessageData>({
     chatId: "",
+    groupChatId: "",
     text: ""
   });
   const createMessage = useCreateMessages();
   const [lookProfile, setLookProfile] = useState(false);
-  const {data: groupChat} = useGetAGroupChat(chatId!);
-  console.log(groupChat)
+  const {data: groupChat} = useGetAGroupChat(groupChatId!, Boolean(groupChatId));
 
   useEffect(() => {
     if(chatId) {
       setCreateMessageData((prev) => ({
         ...prev,
-        chatId
+        chatId,
+        groupChatId: "",
+      }))
+    } 
+    if(groupChatId) {
+      setCreateMessageData((prev) => ({
+        ...prev,
+        groupChatId,
+        chatId: "",
       }))
     }
-  }, [chatId])
+  }, [chatId, groupChatId])
   
   useEffect(() => {
     if (numericChatId && userOneId !== numericChatId) {
@@ -85,9 +92,9 @@ const Chatting = () => {
   };
 
   const getActivityStatus = () => {
-    // if (groupChat) {
-    //   return `${groupChat?.members?.length} members`;
-    // }
+    if (groupChat) {
+      return `${groupChat?.groupMembers?.length} members`;
+    }
   
     // Get the relevant user based on who is viewing
     const targetUser = isUserOne ? getAChat?.userTwo : getAChat?.userOne;
@@ -96,7 +103,7 @@ const Chatting = () => {
     if (targetUser?.activeNow) {
       return (
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <div className="bg-green-500 rounded-full w-2 h-2 animate-pulse"></div>
           <span>Active now</span>
         </div>
       );
@@ -144,13 +151,25 @@ const Chatting = () => {
               <div className="flex items-center">
                 <img 
                   onClick={handleLookProfile} 
-                  src={isUserOne ? getAChat?.userTwo?.profile : getAChat?.userOne?.profile} 
+                  src={
+                    groupChatId
+                    ? groupChat?.profile
+                    : isUserOne
+                    ? getAChat?.userTwo?.profile
+                    : getAChat?.userOne?.profile
+                  } 
                   alt="" 
                   className="mx-[24px] rounded-full w-[48px] h-[48px] cursor-pointer"
                 />
                 <div className="flex flex-col">
-                  <h1>{isUserOne ? getAChat?.userTwo?.displayName : getAChat?.userOne?.displayName}</h1>
-                  <h3 className="text-[#D9D9D9] flex items-center">
+                  <h1>{
+                    groupChatId
+                    ? groupChat?.groupName
+                    : isUserOne
+                    ? getAChat?.userTwo?.displayName
+                    : getAChat?.userOne?.displayName
+                    }</h1>
+                  <h3 className="flex items-center text-[#D9D9D9]">
                     {getActivityStatus()}
                   </h3>
                 </div>

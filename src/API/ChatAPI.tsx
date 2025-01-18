@@ -85,7 +85,12 @@ export const createMessageAPI = async(
 ) =>  {
     const token = getToken();
     const formData = new FormData();
-    formData.append("chatId", data.chatId);
+    if(data.chatId) {
+        formData.append("chatId", data.chatId);
+    }
+    if(data.groupChatId) {
+        formData.append("groupChatId", data.groupChatId)
+    }
     formData.append("text", data.text);
   
     const response:Response = await fetch(`${BaseURL}/messages`, {

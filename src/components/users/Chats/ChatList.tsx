@@ -22,15 +22,19 @@ const ChatList = () => {
         navigate(`/chats/${chatId}`);
     };
 
+    const handleGroupChat = (groupChatId:string) => {
+        navigate(`/chats/groups/${groupChatId}`)
+    }
+
     return (
-        <div className="flex flex-col max-h-[70vh] overflow-auto scrollbar-hide">
+        <div className="flex flex-col max-h-[60vh] overflow-auto scrollbar-hide">
             {
                 getFindAUser ? (
                     <div
                     onClick={() => handleChatting(getFindAUser?.id)}
                     className="flex items-center border-[#591DA9] bg-[#2264E5] bg-opacity-10 mx-auto mb-4 border rounded-[12px] w-11/12 h-[88px] cursor-pointer"
                 >
-                    <img src={getFindAUser?.profile} alt="" className="mx-[12px] rounded-full w-[64px] h-[64px]" />
+                    <img src={getFindAUser?.profile} alt="" className="mx-[12px] rounded-full w-[50px] h-[50px]" />
                     <div className="flex flex-col font-primary">
                         <h1 className="font-medium text-[20px]">{getFindAUser?.displayName}</h1>
                     </div>
@@ -44,14 +48,17 @@ const ChatList = () => {
                 getAllChats?.items?.map((chat: any) => {
                     const isUserOne = userOneId === chat.userOneId;
                     const profile =chat?.groupName ? chat.profile : isUserOne ? chat?.userTwo?.profile : chat?.userOne?.profile
-        
+                    const handleClick = chat.type === "groupChat" 
+                    ? () => handleGroupChat(chat?.id) 
+                    : () => handleChatting(chat?.id);
+
                     return (
                         <div
-                            onClick={() => handleChatting(chat?.id)}
+                            onClick={handleClick}
                             key={chat?.id}
                             className="flex items-center border-[#591DA9] bg-[#2264E5] bg-opacity-10 mx-auto mb-4 border rounded-[12px] w-11/12 h-[88px] cursor-pointer"
                         >
-                            <img src={profile} alt="" className="mx-[12px] rounded-full w-[64px] h-[64px]" />
+                            <img src={profile} alt="" className="mx-[12px] rounded-full w-[50px] h-[50px]" />
                             <div className="flex flex-col font-primary">
                                 <h1 className="font-medium text-[20px]">
                                     {chat?.groupName ? chat.groupName : (

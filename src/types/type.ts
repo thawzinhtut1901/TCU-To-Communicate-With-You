@@ -149,6 +149,12 @@ export type SocketData = {
 
 export type CreateMessageData = {
   chatId: string,
+  groupChatId: string,
+  text: string,
+}
+
+export type CreateGroupMessageData = {
+  groupChatId: string,
   text: string,
 }
 

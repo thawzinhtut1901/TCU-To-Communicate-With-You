@@ -19,10 +19,11 @@ export const useGetMessages = (chatId:string) =>
         queryFn: () => getMessagesAPI(chatId),
     })
 
-export const useGetAChat = (chatId:string) => 
+export const useGetAChat = (chatId:string, enabled: boolean) => 
     useQuery({
         queryKey: ["a-chat", chatId],
         queryFn: () => getAChatAPI(chatId),
+        enabled,
     })
 
 export const useCreateMessages = () => 
@@ -35,8 +36,9 @@ export const useCreateGroup = () =>
         mutationFn: (data: createGroupData) => createGroupAPI({data})
     })
 
-export const useGetAGroupChat = (groupChatId:string) => 
+export const useGetAGroupChat = (groupChatId:string, enabled: boolean) => 
     useQuery({
         queryKey: ["group-chat", groupChatId],
         queryFn: () => getAGroupChat(groupChatId),
+        enabled,
 })

@@ -30,7 +30,7 @@ import { ChatSideBar } from "@/components/users/Chats"
 
 const ChatPages = () => {
   return (
-    <div className="mr-8 my-4">
+    <div className="my-4 mr-8">
       <ChatSideBar/>
     </div>
   )

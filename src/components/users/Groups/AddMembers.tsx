@@ -1,55 +1,3 @@
-// import { Button } from "@/components/ui/button"
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog"
-// import { Input } from "@/components/ui/input"
-// import { Label } from "@/components/ui/label"
-
-// const AddMembers = () => {
-//   return (
-//     <div>
-//        <Dialog>
-//         <DialogTrigger asChild>
-//           <Button className="bg-black bg-opacity-30 shadow-md shadow-slate-400">Create Group</Button>
-//         </DialogTrigger>
-//         <DialogContent className="sm:max-w-[425px]">
-//           <DialogHeader>
-//             <DialogTitle>Edit profile</DialogTitle>
-//             <DialogDescription>
-//               Make changes to your profile here. Click save when you're done.
-//             </DialogDescription>
-//           </DialogHeader>
-//           <div className="gap-4 grid py-4">
-//             <div className="items-center gap-4 grid grid-cols-4">
-//               <Label htmlFor="name" className="text-right">
-//                 Name
-//               </Label>
-//               <Input id="name" value="Pedro Duarte" className="col-span-3" />
-//             </div>
-//             <div className="items-center gap-4 grid grid-cols-4">
-//               <Label htmlFor="username" className="text-right">
-//                 Username
-//               </Label>
-//               <Input id="username" value="@peduarte" className="col-span-3" />
-//             </div>
-//           </div>
-//           <DialogFooter>
-//             <Button type="submit">Save changes</Button>
-//           </DialogFooter>
-//         </DialogContent>
-//       </Dialog>
-//     </div>
-//   )
-// }
-
-// export default AddMembers
-
 import { Button } from "@/components/ui/button";
 import {
   CreateGroupContent,
@@ -85,9 +33,9 @@ export const CreateGroup = ({ onNext, groupData, setGroupData }: {
   };
 
   return (
-    <div className="p-4 bg-gradient-to-b from-purple-700 via-blue-500 to-blue-400 rounded-lg">
+    <div className="bg-gradient-to-b from-purple-700 via-blue-500 to-blue-400 p-4 rounded-lg">
       <div className="flex flex-col items-center space-y-4">
-        <div className="relative w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center cursor-pointer group">
+        <div className="relative flex justify-center items-center bg-purple-600 rounded-full w-20 h-20 cursor-pointer group">
           <input
             type="file"
             accept="image/*"
@@ -95,11 +43,11 @@ export const CreateGroup = ({ onNext, groupData, setGroupData }: {
             className="hidden"
             id="groupImage"
           />
-          <label htmlFor="groupImage" className="cursor-pointer w-full h-full flex items-center justify-center">
+          <label htmlFor="groupImage" className="flex justify-center items-center w-full h-full cursor-pointer">
             {imagePreview ? (
-              <img src={imagePreview} alt="Group" className="w-full h-full rounded-full object-cover" />
+              <img src={imagePreview} alt="Group" className="rounded-full w-full h-full object-cover" />
             ) : (
-              <IoIosCamera className="text-white text-3xl group-hover:scale-110 transition-transform" />
+              <IoIosCamera className="group-hover:scale-110 text-3xl text-white transition-transform" />
             )}
           </label>
         </div>
@@ -110,11 +58,11 @@ export const CreateGroup = ({ onNext, groupData, setGroupData }: {
             value={groupData.groupName}
             onChange={(e) => setGroupData({...groupData, groupName: e.target.value})}
             placeholder="Group Name"
-            className="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            className="bg-white bg-opacity-20 placeholder-opacity-70 focus:ring-opacity-50 px-4 py-2 rounded-lg focus:ring-2 focus:ring-white w-full text-white focus:outline-none placeholder-white"
           />
         </div>
 
-        <div className="flex justify-between w-full pt-4">
+        <div className="flex justify-between pt-4 w-full">
           <Button 
             onClick={onNext} 
             className="bg-black bg-opacity-60 hover:bg-opacity-35 rounded-lg text-white"
@@ -124,7 +72,7 @@ export const CreateGroup = ({ onNext, groupData, setGroupData }: {
           <Button 
             onClick={() => {}} 
             variant="outline" 
-            className="bg-transparent border-white text-white hover:bg-white hover:text-purple-700"
+            className="border-white bg-transparent hover:bg-white text-white hover:text-purple-700"
           >
             Cancel
           </Button>
@@ -236,5 +184,3 @@ export const AddMembers = () => {
   );
 };
 
-
-// bg-gradient-to-b from-purple-700 via-blue-500 to-blue-400
