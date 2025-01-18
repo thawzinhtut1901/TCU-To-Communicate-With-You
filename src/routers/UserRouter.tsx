@@ -154,7 +154,11 @@ const UserRouter: RouteObject[] = [
     element: <ChatLayouts/>,
     children: [
       {
-        path: ":chatId",
+        path: "/chats/:chatId",
+        element: <Chatting/>
+      },
+      {
+        path: "groups/:groupChatId",
         element: <Chatting/>
       }
     ]

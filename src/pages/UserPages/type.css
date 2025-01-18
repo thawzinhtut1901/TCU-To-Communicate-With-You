@@ -43,4 +43,8 @@
     margin: 0 20px;
   }
   
+
+  .filter-red {
+    filter: hue-rotate(0deg) saturate(100%) brightness(0.7);
+  }
   
