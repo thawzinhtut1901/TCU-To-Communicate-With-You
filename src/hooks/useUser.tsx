@@ -1,4 +1,4 @@
-import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, findAUserAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getMyProfileAPI, getSuggestedFriAPI, unfriendAPI, updateMe, voteQuoteAPI } from "@/API";
+import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, findAUserAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getOthersProfileAPI, getSuggestedFriAPI, quoteRankAPI, unfriendAPI, updateMe, voteQuoteAPI } from "@/API";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -10,9 +10,9 @@ export const useUpdateMe = () =>
         mutationFn: (data: updateProfileData) => updateMe({data}),
       });
 
-export const useGetMyProfile = () => 
+export const useGetOthersProfile = ({userId} : {userId: number}) => 
     useQuery({
-        queryKey: ["my-profile"], queryFn: () => getMyProfileAPI()
+        queryKey: ["others-profile", userId], queryFn: () => getOthersProfileAPI({userId})
     })
 
 export const useGetAllFriends = () => 
@@ -83,7 +83,8 @@ export const usevoteQuote = () =>
         mutationFn: (quoteId: number) => voteQuoteAPI({quoteId})
     })
 
-// export const usevoteQuote = () => 
-//     useMutation({
-//         mutationFn: (quoteId: number) => voteQuoteAPI({quoteId})
-//     })
+export const useGetQuoteRank = () => 
+    useQuery({
+        queryKey: ["quote-rank"],
+        queryFn: () => quoteRankAPI()
+    })

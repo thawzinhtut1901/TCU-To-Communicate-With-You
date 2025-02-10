@@ -101,6 +101,7 @@ const Users = () => {
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>
+              <TableHead></TableHead>
               <TableHead className="text-center">Name</TableHead>
               <TableHead className="text-center">Username</TableHead>
               <TableHead className="text-center">User Status</TableHead>
@@ -114,7 +115,17 @@ const Users = () => {
               getAccounts?.items?.map((user:any) => (
                 <TableRow key={user?.id}>
                   <TableCell></TableCell>
-                  <TableCell className="text-center">{user?.displayName}</TableCell>
+                  <TableCell className="text-center">
+                  {user?.profile ? (
+                    <img className="rounded-full w-[32px] h-[32px]" src={user.profile} alt="User Avatar" />
+                  ) : (
+                    <div className="flex justify-center items-center bg-pink-400 rounded-full w-[32px] h-[32px] font-medium text-white">
+                      {user?.displayName ? user.displayName.charAt(0).toUpperCase() : "U"}
+                    </div>
+                  )}
+                </TableCell>
+
+                  <TableCell className="text-center">{user?.displayName || "Unknown User"}</TableCell>
                   <TableCell className="text-[#007AFF] text-center">{user?.userName}</TableCell>
                   <TableCell className="text-center">{user?.lastSeen}</TableCell>
                   <TableCell className="text-center">{user?.gender}</TableCell>

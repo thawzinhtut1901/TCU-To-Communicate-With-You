@@ -1,29 +1,34 @@
 import { useApp } from "@/AppProvider";
-import { useGetMessages } from "@/hooks";
+import { useGetGroupMessages, useGetMessages } from "@/hooks";
 import { useParams } from "react-router-dom";
 import "./type.css"
 import { useEffect, useRef } from "react";
 
 const ChatText = () => {
-  const { chatId } = useParams();
+  const { chatId, groupChatId } = useParams();
   const { data: getMessage } = useGetMessages(chatId!);
+  const {data: getGroupMessage} = useGetGroupMessages(groupChatId!)
+  console.log(getMessage)
+  console.log(getGroupMessage)
   const { userOneId } = useApp();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const messages = chatId ? getMessage : groupChatId ? getGroupMessage : [];
 
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [getMessage]); 
+  }, [getMessage, getGroupMessage ]); 
 
   return (
     <div className="flex flex-col space-y-2 p-4 h-screen overflow-auto vertical-scrollbar">
-      {getMessage?.map((message: any) => {
+      {messages?.map((message: any) => {
         const isSender = userOneId === message?.senderId;
 
         return (
           <div
-            key={message?.id}
+            key={message.id}
             className={`flex ${
               isSender ? "justify-end items-end" : "items-start"
             }`}

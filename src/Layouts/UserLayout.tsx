@@ -7,7 +7,7 @@ const UserLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === "/user/home";
-  const isFindFriPage = location.pathname === "/user/find-friends"
+  const isFindFriPage = location.pathname === "/user/find-friends" || "/user/quotes"
 
   return (
     <div className="flex flex-col bg-custom-bg bg-custom-gradient w-full h-screen">
