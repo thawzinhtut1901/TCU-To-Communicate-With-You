@@ -1,4 +1,4 @@
-import { createGroupAPI, createMessageAPI, createNewChatAPI, getAChatAPI, getAGroupChat, getAllChatAPI, getMessagesAPI } from "@/API";
+import { createGroupAPI, createMessageAPI, createNewChatAPI, getAChatAPI, getAGroupChat, getAllChatAPI, getChatMessagesAPI, getGroupMessagesAPI } from "@/API";
 import { createChatData, createGroupData, CreateMessageData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -16,7 +16,13 @@ export const useGetAllChats = () =>
 export const useGetMessages = (chatId:string) => 
     useQuery({
         queryKey: ["messages", chatId],
-        queryFn: () => getMessagesAPI(chatId),
+        queryFn: () => getChatMessagesAPI(chatId),
+    })
+
+export const useGetGroupMessages = (groupChatId:string) => 
+    useQuery({
+        queryKey: ["groupmessages", groupChatId],
+        queryFn: () => getGroupMessagesAPI(groupChatId),
     })
 
 export const useGetAChat = (chatId:string, enabled: boolean) => 

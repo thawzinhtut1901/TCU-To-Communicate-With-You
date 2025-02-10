@@ -63,9 +63,9 @@ export const updateMe = async(
     return result;
 }
 
-export const getMyProfileAPI = async() => {
+export const getOthersProfileAPI = async({userId} : {userId:number}) => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/users/profile`, {
+    const response: Response = await fetch(`${BaseURL}/users/${userId}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -352,21 +352,21 @@ export const voteQuoteAPI = async({quoteId} : {quoteId: number}) => {
     return result;
 }
 
-// export const voteQuoteAPI = async({quoteId} : {quoteId: number}) => {
-//     const token = getToken();
-//     const response:Response = await fetch(`${BaseURL}/vote/${quoteId}`, {
-//         headers: {
-//              Accept: "application/json",
-//             "Content-Type" : "application/json",
-//              Authorization: `Bearer ${token}`,
-//         },
-//         mode: "cors",
-//         method: "PATCH",
-//         redirect: "follow",
-//     })
-//     const result = await response.json();
-//     if(!response.json) {
-//         throw new Error(result.message)
-//     };
-//     return result;
-// }
+export const quoteRankAPI = async() => {
+    const token = getToken();
+    const response:Response = await fetch(`${BaseURL}/quotes/ranking`, {
+        headers: {
+             Accept: "application/json",
+            "Content-Type" : "application/json",
+             Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow",
+    })
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}

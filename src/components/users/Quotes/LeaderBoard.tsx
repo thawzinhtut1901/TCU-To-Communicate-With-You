@@ -1,98 +1,54 @@
 import { FirstRank, SecondRank, Star, ThirdRank } from "@/assets"
-import { FaRankingStar } from "react-icons/fa6"
+import { useGetQuoteRank } from "@/hooks"
+import "./type.css"
 
 const LeaderBoard = () => {
+  const { data: getRank } = useGetQuoteRank();
+
   return (
-    <div className="flex flex-col w-full font-poppins">
-        <div className="flex flex-col h-[70px]">
-            <div className="flex items-center gap-x-8 bg-gradient-to-t from-purple-300 to-purple-500 border-b border-b-white rounded-t-[10px]">
-                <div className="flex gap-x-4 ml-[15px]">
-                    <img src={FirstRank} alt="" className="w-[65px] h-[21px]"/>
-                    <h1 className="font-medium text-[16px]">Thaw Zin</h1>
-                </div>
-                <div className="flex items-center border-gray-800 my-2 pl-[14px] border rounded-[10px] w-[512px] h-[50px] font-medium text-[16px] text-white">
-                    Welcome To TCU
-                </div>
-                <div className="flex items-center gap-x-1">
-                    <img src={Star} alt="" className="w-[25px] h-[25px]"/>
-                    <h2 className="font-medium text-[16px]">1234567</h2>
-                </div>
+    <div className="flex flex-col w-full max-h-[73vh] font-poppins overflow-auto scrollbar-hide">
+      <div className="gap-4 grid bg-opacity-50 w-full">
+        {getRank?.map((ranking: any, index: number) => {
+          let rankImage;
+
+          if (index === 0) {
+            rankImage = <img src={FirstRank} alt="First Rank" className="w-12" />;
+          } else if (index === 1) {
+            rankImage = <img src={SecondRank} alt="Second Rank" className="w-12" />;
+          } else if (index === 2) {
+            rankImage = <img src={ThirdRank} alt="Third Rank" className="w-12" />;
+          } else {
+            rankImage = (
+              <div className="flex justify-center items-center bg-black bg-opacity-60 px-3 py-1 rounded-full w-10 h-10 text-white">
+                {index + 1}
+              </div>
+            );
+          }
+
+          return (
+            <div key={ranking.id} className="items-center grid grid-cols-[80px_150px_1fr_100px] bg-gradient-to-t from-purple-300 to-purple-500 p-2 border-b border-b-white rounded-md">
+              {/* Rank Column */}
+              <div className="flex justify-center w-20">{rankImage}</div>
+
+              {/* Username Column */}
+              <div className="font-medium">{ranking?.user?.displayName}</div>
+
+              {/* Quote Column */}
+              <div className="border-gray-800 bg-white bg-opacity-20 px-4 py-2 border rounded-lg text-sm text-white truncate">
+                {ranking?.quote}
+              </div>
+
+              {/* Vote Column */}
+              <div className="flex justify-end items-center gap-2 w-24">
+                <img src={Star} alt="Star" className="w-6 h-6" />
+                <span className="font-medium">{ranking?.totalVotes}</span>
+              </div>
             </div>
-
-            <div className="flex items-center gap-x-8 bg-gradient-to-t from-purple-300 to-purple-500 border-b border-b-white">
-                <div className="flex gap-x-4 ml-[15px]">
-                    <img src={SecondRank} alt="" className="w-[65px] h-[21px]"/>
-                    <h1 className="font-medium text-[16px]">Thaw Zin</h1>
-                </div>
-                <div className="flex items-center border-gray-800 my-2 pl-[14px] border rounded-[10px] w-[512px] h-[50px] font-medium text-[16px] text-white">
-                    Welcome To TCU
-                </div>
-                <div className="flex items-center gap-x-1">
-                    <img src={Star} alt="" className="w-[25px] h-[25px]"/>
-                    <h2 className="font-medium text-[16px]">1234567</h2>
-                </div>
-            </div>
-
-            <div className="flex items-center gap-x-8 bg-gradient-to-t from-purple-300 to-purple-500 border-b border-b-white">
-                <div className="flex gap-x-4 ml-[15px]">
-                    <img src={ThirdRank} alt="" className="w-[65px] h-[21px]"/>
-                    <h1 className="font-medium text-[16px]">Thaw Zin</h1>
-                </div>
-                <div className="flex items-center border-gray-800 my-2 pl-[14px] border rounded-[10px] w-[512px] h-[50px] font-medium text-[16px] text-white">
-                    Welcome To TCU
-                </div>
-                <div className="flex items-center gap-x-1">
-                    <img src={Star} alt="" className="w-[25px] h-[25px]"/>
-                    <h2 className="font-medium text-[16px]">1234567</h2>
-                </div>
-            </div>
-
-            <div className="flex items-center gap-x-8 bg-gradient-to-t from-purple-300 to-purple-500 border-b border-b-white">
-                <div className="flex items-center gap-x-[35px] ml-[35px]">
-                    <div className="flex bg-black bg-opacity-60 px-2 py-[2px] rounded-full text-white">
-                        4
-                    </div>
-                    <h1 className="font-medium text-[16px]">Thaw Zin</h1>
-                </div>
-                <div className="flex items-center border-gray-800 my-2 pl-[14px] border rounded-[10px] w-[512px] h-[50px] font-medium text-[16px] text-white">
-                    Welcome To TCU
-                </div>
-                <div className="flex items-center gap-x-1">
-                    <img src={Star} alt="" className="w-[25px] h-[25px]"/>
-                    <h2 className="font-medium text-[16px]">1234567</h2>
-                </div>
-            </div>
-
-            <div className="flex bg-gradient-to-t from-purple-300 to-purple-500 border-b border-b-white">
-                <div className="flex flex-col">
-                    <div className="flex gap-x-1 mt-1 ml-[35px] text-black text-opacity-60">
-                        <FaRankingStar className="w-[18px] h-[18px]"/>
-                        <h1 className="mt-1 text-[13px]">My Rank</h1>
-                    </div>
-
-                    <div className="flex items-center gap-x-7">
-                        <div className="flex gap-x-[35px] ml-[35px]">
-                            <div className="flex bg-black bg-opacity-60 px-2 py-[2px] rounded-full text-[14px] text-white">
-                                #
-                            </div>
-                            <h1 className="font-medium text-[16px]">Thaw Zin</h1>
-                        </div>
-                        <div className="flex items-center border-gray-800 my-2 pl-[14px] border rounded-[10px] w-[512px] h-[50px] font-medium text-[16px] text-white">
-                            Welcome To TCU
-                        </div>
-                        <div className="flex items-center gap-x-1">
-                            <img src={Star} alt="" className="w-[25px] h-[25px]"/>
-                            <h2 className="font-medium text-[16px]">1234567</h2>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
-
-
-        </div>
+          );
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LeaderBoard
+export default LeaderBoard;

@@ -76,21 +76,19 @@ import {
     const createMsgMutation = useMutation({
       mutationFn: (messages: any) => messages,
       onMutate: (variables: any) => {
-        // 1. Optimistically update the cache before mutation
-        const previousItems = queryClient.getQueryData([
-          "messages",
-          variables.chatId,
-        ]);
-  
-        // 2. Optimistically update the cache
-        queryClient.setQueryData(
-          ["messages", variables.chatId],
-          (oldData: any) => {
-            return [...oldData, { ...variables }];
-          }
-        );
-  
-        // Return previous data to rollback if mutation fails
+        // Get the appropriate query key based on whether it's a group chat or individual chat
+        const queryKey = variables.groupChatId 
+          ? ["groupmessages", variables.groupChatId]
+          : ["messages", variables.chatId];
+    
+        // Get previous items for potential rollback
+        const previousItems = queryClient.getQueryData(queryKey);
+    
+        // Optimistically update the cache
+        queryClient.setQueryData(queryKey, (oldData: any) => {
+          return oldData ? [...oldData, { ...variables }] : [{ ...variables }];
+        });
+    
         return { previousItems };
       },
     });
@@ -114,8 +112,6 @@ import {
         socket.off("createMessage");
       };
     }, []); // Dependency array is empty to avoid redundant calls
-  
-    // console.log(receivedMessage)
   
     return (
       <AppContext.Provider

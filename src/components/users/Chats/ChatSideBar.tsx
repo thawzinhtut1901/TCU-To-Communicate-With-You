@@ -3,9 +3,11 @@ import { IoMenu } from "react-icons/io5"
 import ChatList from "./ChatList";
 import { useApp } from "@/AppProvider"
 import { AddMembers } from "../Groups/AddMembers";
+import { useNavigate } from "react-router-dom";
 
 const ChatSideBar = () => {
   const {menuOpen, setMenuOpen } = useApp();
+  const navigate = useNavigate();
 
   const hadleMenuOpen = () => {
     setMenuOpen(!menuOpen)
@@ -15,7 +17,7 @@ const ChatSideBar = () => {
     <div className={`flex flex-col cursor-default border-[#8566FF] border-[3px] bg-white bg-opacity-30 ml-[22px] rounded-[20px] h-full ${menuOpen ? "w-full" : "w-[80px]"} transition-all duration-300`}>
       <div className={`${menuOpen ? "ml-[27px]" : "justify-center"} flex items-center gap-x-3 mt-[18px] text-[#591DA9]`}>
         <IoMenu onClick={hadleMenuOpen} className="flex w-[25px] h-[25px] cursor-pointer"/>
-        {menuOpen && <h1 className="font-roman text-[33px]">TCU</h1>}
+        {menuOpen && <h1 onClick={() => navigate("/")} className="font-roman text-[33px]">TCU</h1>}
       </div>
 
       {

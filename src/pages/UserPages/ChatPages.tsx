@@ -1,4 +1,6 @@
 import { ChatSideBar } from "@/components/users/Chats"
+import { FaArrowLeft } from "react-icons/fa6"
+import { useNavigate } from "react-router-dom"
 
 
 // const ChatPages = () => {
@@ -29,8 +31,11 @@ import { ChatSideBar } from "@/components/users/Chats"
 
 
 const ChatPages = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="my-4 mr-8">
+      <FaArrowLeft onClick={() => navigate("/")} className="flex ml-3 w-[24px] h-[20px] text-pink-50"/>
       <ChatSideBar/>
     </div>
   )

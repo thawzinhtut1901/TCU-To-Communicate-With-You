@@ -44,7 +44,7 @@ const HomePages = () => {
           className="flex justify-between bg-black bg-opacity-25 shadow-md shadow-slate-400 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border border-blue-500 rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[16px] text-center text-slate-50 cursor-default"
         >
           <span className="mx-auto">{getPublishQuotes?.quote}</span>
-          <div onClick={() => handleVoteQuote(getPublishQuotes?.id)} className="relative group">
+          <div onClick={() => handleVoteQuote(getPublishQuotes?.id)} className="group relative">
           <img
               src={Star}
               alt=""
@@ -92,7 +92,7 @@ const HomePages = () => {
                   const user = isUserOne ? fri.userTwo : fri.userOne;
 
                   return (
-                    <div key={fri?.id} className="flex items-center bg-white bg-opacity-20 mx-auto mt-[13px] w-[96%] h-[50px]">
+                    <div key={fri?.id} className="flex items-center bg-white bg-opacity-20 mx-auto mt-[13px] w-[96%] h-[50px] cursor-pointer">
                       <img src={user?.profile} alt="" className="ml-[10px] w-[36px] h-[36px]"/>
                       <h1 className="ml-[16px] font-medium text-[18px] text-white">{user?.displayName}</h1>
                     </div>

@@ -6,7 +6,7 @@ import { newPasswordAPI } from "../API/AuthAPI";
 import { profileSetupAPI } from "../API/AuthAPI";
 import { getPublishQuotes } from "./HomeAPI";
 import { getMe } from "./UserAPI";
-import { getMyProfileAPI } from "./UserAPI";
+import { getOthersProfileAPI } from "./UserAPI";
 import { usersAccount } from "./AdminAPI";
 import { usersGroups } from "./AdminAPI";
 import { addAdmins } from "./AdminAPI";
@@ -39,12 +39,14 @@ import { getAllChatAPI } from "./ChatAPI";
 import { createNewChatAPI } from "./ChatAPI";
 import { cancelRequestApi } from "./UserAPI";
 import { unfriendAPI } from "./UserAPI";
-import { getMessagesAPI } from "./ChatAPI";
+import { getChatMessagesAPI } from "./ChatAPI";
+import { getGroupMessagesAPI } from "./ChatAPI";
 import { getAChatAPI } from "./ChatAPI";
 import { findAUserAPI } from "./UserAPI";
 import { createMessageAPI } from "./ChatAPI";
 import { createGroupAPI } from "./ChatAPI";
 import { getAGroupChat } from "./ChatAPI";
+import { quoteRankAPI } from "./UserAPI";
 import { voteQuoteAPI } from "./UserAPI";
 
 export { 
@@ -56,7 +58,7 @@ export {
     profileSetupAPI,
     getPublishQuotes,
     getMe,
-    getMyProfileAPI,
+    getOthersProfileAPI,
     usersAccount,
     usersGroups,
     addAdmins,
@@ -89,11 +91,13 @@ export {
     getAllChatAPI,
     createNewChatAPI,
     cancelRequestApi,
-    getMessagesAPI,
+    getChatMessagesAPI,
     getAChatAPI,
     findAUserAPI,
     createMessageAPI,
     createGroupAPI,
     getAGroupChat,
     voteQuoteAPI,
+    quoteRankAPI,
+    getGroupMessagesAPI,
 };

@@ -11,8 +11,8 @@ const QuotePage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center font-poppins">
-      <div className="bg-black bg-opacity-15 border border-black border-opacity-25 rounded-[10px] w-10/12 h-[700px]">
+    <div className="flex flex-col justify-center items-center font-poppins overflow-hidden">
+      <div className="bg-black bg-opacity-15 border border-black border-opacity-25 rounded-[10px] w-10/12 h-[570px]">
         <div className="flex flex-col m-[16px]">
           <div className="flex md:justify-center items-center bg-black bg-opacity-25 rounded-[8px] w-full h-[50px]">
             <TiThMenu onClick={handleMenuOpen} className="md:hidden mx-3 w-[20px] h-[25px] font-bold text-white"/>

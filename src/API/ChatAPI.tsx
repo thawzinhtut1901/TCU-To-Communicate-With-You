@@ -43,9 +43,27 @@ export const getAllChatAPI = async() => {
     return result;
 }
 
-export const getMessagesAPI = async(chatId:string) => {
+export const getChatMessagesAPI = async(chatId:string) => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/messages/${chatId}`, {
+    const response: Response = await fetch(`${BaseURL}/messages/chat/${chatId}`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        mode: "cors",
+        method: "GET",
+        redirect: "follow"
+    });
+    const result = await response.json();
+    if(!response.json) {
+        throw new Error(result.message)
+    };
+    return result;
+}
+
+export const getGroupMessagesAPI = async(groupChatId:string) => {
+    const token = getToken();
+    const response: Response = await fetch(`${BaseURL}/messages/group/${groupChatId}`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
