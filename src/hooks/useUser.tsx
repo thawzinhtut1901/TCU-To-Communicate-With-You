@@ -1,27 +1,32 @@
-import { acceptRequestApi, addFriendAPI, cancelRejectApi , cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, findAUserAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getOthersProfileAPI, getSuggestedFriAPI, quoteRankAPI, unfriendAPI, updateMe, voteQuoteAPI } from "@/API";
+import { acceptRequestApi, addFriendAPI, cancelRejectApi, cancelRequestApi, createQuoteAPI, deleteUserAccountAPI, findAUserAPI, getAllFriendsAPI, getAllFriendsRequestAPI, getFindUserAPI, getMe, getUserProfile, getSuggestedFriAPI, quoteRankAPI, unfriendAPI, updateMe, voteQuoteAPI } from "@/API";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useGetMe = () => 
-    useQuery({queryKey: ["me"], queryFn: () => getMe()});
+export const useGetMe = () =>
+    useQuery({ queryKey: ["me"], queryFn: () => getMe() });
 
-export const useUpdateMe = () => 
+export const useUpdateMe = () =>
     useMutation({
-        mutationFn: (data: updateProfileData) => updateMe({data}),
-      });
+        mutationFn: (data: updateProfileData) => updateMe({ data }),
+    });
 
-export const useGetOthersProfile = ({userId} : {userId: number}) => 
+export const useGetUserProfile = ({ userId }: { userId: number }) =>
     useQuery({
-        queryKey: ["others-profile", userId], queryFn: () => getOthersProfileAPI({userId})
+        queryKey: ["others-profile", userId], queryFn: () => getUserProfile({ userId })
     })
 
-export const useGetAllFriends = () => 
-    useQuery({queryKey: ["friends"], queryFn: () => getAllFriendsAPI()});
+export const useGetProfile = () =>
+    useQuery({
+        queryKey: ["profile"], queryFn: () => getUserProfile()
+    })
 
-export const useGetAllFriendRequest = () => 
-    useQuery({queryKey: ["friend-request"], queryFn: () => getAllFriendsRequestAPI()});
+export const useGetAllFriends = () =>
+    useQuery({ queryKey: ["friends"], queryFn: () => getAllFriendsAPI() });
 
-export const useGetAllSuggestedFri = () => 
+export const useGetAllFriendRequest = () =>
+    useQuery({ queryKey: ["friend-request"], queryFn: () => getAllFriendsRequestAPI() });
+
+export const useGetAllSuggestedFri = () =>
     useQuery({
         queryKey: ["suggest-fr"],
         queryFn: () => getSuggestedFriAPI()
@@ -31,59 +36,59 @@ interface getFindUserParams {
     search?: string;
 }
 
-export const useGetFindUsers = (params: getFindUserParams) => 
+export const useGetFindUsers = (params: getFindUserParams) =>
     useQuery({
-        queryKey: ["find-user-acc", params], 
+        queryKey: ["find-user-acc", params],
         queryFn: () => getFindUserAPI(params)
     });
 
-export const useAddFriend = () => 
+export const useAddFriend = () =>
     useMutation({
-        mutationFn: (friendId: number) => addFriendAPI({friendId})
+        mutationFn: (friendId: number) => addFriendAPI({ friendId })
     })
 
-export const useUnfriend = () => 
+export const useUnfriend = () =>
     useMutation({
-        mutationFn: (friendId: number) => unfriendAPI({friendId})
+        mutationFn: (friendId: number) => unfriendAPI({ friendId })
     })
 
-export const useAcceptRequest = () => 
+export const useAcceptRequest = () =>
     useMutation({
-        mutationFn: (friendId: number) => acceptRequestApi({friendId})
+        mutationFn: (friendId: number) => acceptRequestApi({ friendId })
     })
 
-export const useCancelReject = () => 
+export const useCancelReject = () =>
     useMutation({
-        mutationFn: (friendId: number) => cancelRejectApi({friendId})
+        mutationFn: (friendId: number) => cancelRejectApi({ friendId })
     })
 
-export const useCancelRequest = () => 
+export const useCancelRequest = () =>
     useMutation({
-        mutationFn: (userId: number) => cancelRequestApi({userId})
+        mutationFn: (userId: number) => cancelRequestApi({ userId })
     })
 
-export const useDeleteUserAccount = () => 
+export const useDeleteUserAccount = () =>
     useMutation({
-        mutationFn: (data: userDeleteAccountData) => deleteUserAccountAPI({data})
+        mutationFn: (data: userDeleteAccountData) => deleteUserAccountAPI({ data })
     })
 
-export const useCreateQuote = () => 
+export const useCreateQuote = () =>
     useMutation({
-        mutationFn: (data: userPublicQuotesData) => createQuoteAPI({data})
+        mutationFn: (data: userPublicQuotesData) => createQuoteAPI({ data })
     })
 
-export const useGetFindAUser = ({userId} : {userId:number}) => 
+export const useGetFindAUser = ({ userId }: { userId: number }) =>
     useQuery({
         queryKey: ["find-a-user", userId],
-        queryFn: () => findAUserAPI({userId})
+        queryFn: () => findAUserAPI({ userId })
     })
 
-export const usevoteQuote = () => 
+export const useVoteQuote = () =>
     useMutation({
-        mutationFn: (quoteId: number) => voteQuoteAPI({quoteId})
+        mutationFn: (quoteId: number) => voteQuoteAPI({ quoteId })
     })
 
-export const useGetQuoteRank = () => 
+export const useGetQuoteRank = () =>
     useQuery({
         queryKey: ["quote-rank"],
         queryFn: () => quoteRankAPI()

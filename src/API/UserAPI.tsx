@@ -2,7 +2,7 @@ import { BaseURL } from "@/services/ApiEndPoint";
 import { getToken } from "@/services/authService";
 import { updateProfileData, userDeleteAccountData, userPublicQuotesData } from "@/types/type"
 
-export const getMe = async() => {
+export const getMe = async () => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/users/me`, {
         headers: {
@@ -15,34 +15,34 @@ export const getMe = async() => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.ok) {
+    if (!response.ok) {
         throw new Error(result.message);
     }
     return result;
 };
 
-export const updateMe = async(
-    {data} :
-    {data: updateProfileData}
+export const updateMe = async (
+    { data }:
+        { data: updateProfileData }
 ) => {
     const token = getToken();
     const formData = new FormData();
     formData.append("userName", data.userName);
     formData.append("displayName", data.displayName);
 
-    if(data.profilePicture) {
+    if (data.profilePicture) {
         formData.append("profilePicture", data.profilePicture);
-    };
+    }
 
-    if(data.bio){
+    if (data.bio) {
         formData.append("bio", data.bio)
-    };
+    }
 
-    if(data.gender) {
+    if (data.gender) {
         formData.append("gender", data.gender)
-      };
+    }
 
-    if(data.dateOfBirth) {
+    if (data.dateOfBirth) {
         formData.append("dateOfBirth", data.dateOfBirth);
     }
 
@@ -57,15 +57,22 @@ export const updateMe = async(
         body: formData,
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
     }
     return result;
 }
 
-export const getOthersProfileAPI = async({userId} : {userId:number}) => {
+export const getUserProfile = async (params: { userId?: number } = {}) => {
     const token = getToken();
-    const response: Response = await fetch(`${BaseURL}/users/${userId}`, {
+
+    const { userId } = params;
+
+    const queryParams = new URLSearchParams();
+    if (userId) {
+        queryParams.append("id", userId.toString())
+    }
+    const response: Response = await fetch(`${BaseURL}/users/profile?${queryParams}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -76,16 +83,16 @@ export const getOthersProfileAPI = async({userId} : {userId:number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.ok) {
+    if (!response.ok) {
         throw new Error(result.message);
     }
     return result;
 };
 
-export const getAllFriendsAPI = async() => {
+export const getAllFriendsAPI = async () => {
     const token = getToken();
     const status = "Accepted"
-    const response:Response = await fetch(`${BaseURL}/friends?status=${status}`, {
+    const response: Response = await fetch(`${BaseURL}/friends?status=${status}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -100,14 +107,14 @@ export const getAllFriendsAPI = async() => {
     if (!response.ok) {
         throw new Error(result.message);
     }
-    
+
     return result;
 }
 
-export const getAllFriendsRequestAPI = async() => {
+export const getAllFriendsRequestAPI = async () => {
     const token = getToken();
     const status = "Request"
-    const response:Response = await fetch(`${BaseURL}/friends?status=${status}`, {
+    const response: Response = await fetch(`${BaseURL}/friends?status=${status}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -122,7 +129,7 @@ export const getAllFriendsRequestAPI = async() => {
     if (!response.ok) {
         throw new Error(result.message);
     }
-    
+
     return result;
 }
 
@@ -131,16 +138,16 @@ interface getFindUserParams {
 }
 
 export const getFindUserAPI = async (params: getFindUserParams = {}) => {
-    const {search} = params;
+    const { search } = params;
 
     const queryParams = new URLSearchParams();
 
-    if(search) {
+    if (search) {
         queryParams.append("search", search)
-    };
+    }
 
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/users?${queryParams}`, {
+    const response: Response = await fetch(`${BaseURL}/users?${queryParams}`, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -150,13 +157,13 @@ export const getFindUserAPI = async (params: getFindUserParams = {}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.ok){
-        throw new Error (result.message);
-    };
+    if (!response.ok) {
+        throw new Error(result.message);
+    }
     return result;
 }
 
-export const getSuggestedFriAPI = async() => {
+export const getSuggestedFriAPI = async () => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/users/suggested`, {
         headers: {
@@ -169,13 +176,13 @@ export const getSuggestedFriAPI = async() => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.ok){
-        throw new Error (result.message);
-    };
+    if (!response.ok) {
+        throw new Error(result.message);
+    }
     return result;
 }
 
-export const addFriendAPI = async ({friendId}: {friendId:number}) => {
+export const addFriendAPI = async ({ friendId }: { friendId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends`, {
         headers: {
@@ -186,16 +193,16 @@ export const addFriendAPI = async ({friendId}: {friendId:number}) => {
         mode: "cors",
         method: "POST",
         redirect: "follow",
-        body: JSON.stringify({friendId})
+        body: JSON.stringify({ friendId })
     });
     const result = await response.json();
-    if(!response.json){
+    if (!response.json) {
         throw new Error(result.message)
     }
     return result;
 }
 
-export const unfriendAPI = async({friendId} : {friendId:number}) => {
+export const unfriendAPI = async ({ friendId }: { friendId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/unfriend/${friendId}`, {
         headers: {
@@ -208,13 +215,13 @@ export const unfriendAPI = async({friendId} : {friendId:number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const acceptRequestApi = async({friendId} : {friendId:number}) => {
+export const acceptRequestApi = async ({ friendId }: { friendId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/accept/${friendId}`, {
         headers: {
@@ -227,13 +234,13 @@ export const acceptRequestApi = async({friendId} : {friendId:number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const cancelRejectApi = async({friendId} : {friendId:number}) => {
+export const cancelRejectApi = async ({ friendId }: { friendId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/reject/${friendId}`, {
         headers: {
@@ -246,13 +253,13 @@ export const cancelRejectApi = async({friendId} : {friendId:number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const cancelRequestApi = async({userId} : {userId: number}) => {
+export const cancelRequestApi = async ({ userId }: { userId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/friends/cancel/${userId}`, {
         headers: {
@@ -265,15 +272,15 @@ export const cancelRequestApi = async({userId} : {userId: number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const deleteUserAccountAPI = async(
-    {data} :
-    {data: userDeleteAccountData}
+export const deleteUserAccountAPI = async (
+    { data }:
+        { data: userDeleteAccountData }
 ) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/users`, {
@@ -288,13 +295,13 @@ export const deleteUserAccountAPI = async(
         body: JSON.stringify(data)
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const createQuoteAPI = async ({data} : {data: userPublicQuotesData}) => {
+export const createQuoteAPI = async ({ data }: { data: userPublicQuotesData }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/quotes`, {
         headers: {
@@ -308,15 +315,15 @@ export const createQuoteAPI = async ({data} : {data: userPublicQuotesData}) => {
         body: JSON.stringify(data)
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const findAUserAPI = async({userId} : {userId: number}) => {
+export const findAUserAPI = async ({ userId }: { userId: number }) => {
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/users/${userId}`, {
+    const response: Response = await fetch(`${BaseURL}/users/${userId}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -327,13 +334,13 @@ export const findAUserAPI = async({userId} : {userId: number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const voteQuoteAPI = async({quoteId} : {quoteId: number}) => {
+export const voteQuoteAPI = async ({ quoteId }: { quoteId: number }) => {
     const token = getToken();
     const response: Response = await fetch(`${BaseURL}/quotes/vote/${quoteId}`, {
         headers: {
@@ -346,27 +353,27 @@ export const voteQuoteAPI = async({quoteId} : {quoteId: number}) => {
         redirect: "follow",
     });
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }
 
-export const quoteRankAPI = async() => {
+export const quoteRankAPI = async () => {
     const token = getToken();
-    const response:Response = await fetch(`${BaseURL}/quotes/ranking`, {
+    const response: Response = await fetch(`${BaseURL}/quotes/ranking`, {
         headers: {
-             Accept: "application/json",
-            "Content-Type" : "application/json",
-             Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         mode: "cors",
         method: "GET",
         redirect: "follow",
     })
     const result = await response.json();
-    if(!response.json) {
+    if (!response.json) {
         throw new Error(result.message)
-    };
+    }
     return result;
 }

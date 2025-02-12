@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, Quote, Star } from "@/assets";
 import "./type.css";
-import { useGetAllFriends, useGetMe, useGetPublishQuotes, usevoteQuote } from "@/hooks";
+import { useGetAllFriends, useGetMe, useGetPublishQuotes, useVoteQuote } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdOutlineNotificationImportant, MdOutlinePersonAddAlt } from "react-icons/md";
@@ -11,12 +11,12 @@ import { useState } from "react";
 
 const HomePages = () => {
   const navigate = useNavigate();
-  const  {data: getPublishQuotes} = useGetPublishQuotes();
-  const {data: getMe} = useGetMe();
-  const {data: getAllFris} = useGetAllFriends();
-  const voteQuote = usevoteQuote();
+  const { data: getPublishQuotes } = useGetPublishQuotes();
+  const { data: getMe } = useGetMe();
+  const { data: getAllFris } = useGetAllFriends();
+  const voteQuote = useVoteQuote();
   const [votedQuoteId, setVotedQuoteId] = useState<number | null>(null);
-  
+
   const handleVoteQuote = (id: number) => {
     voteQuote.mutate(id, {
       onSuccess: () => {
@@ -28,13 +28,13 @@ const HomePages = () => {
   return (
     <div>
       <div className="flex justify-end">
-          {
-            getMe?.role === "Admin" && (
-              <div onClick={() => navigate("/admin-dashboard")} className="flex">
-                <Button className="font-poppins font-semibold text-slate-50 md:text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
-              </div>
-            )
-          }
+        {
+          getMe?.role === "Admin" && (
+            <div onClick={() => navigate("/admin-dashboard")} className="flex">
+              <Button className="font-poppins font-semibold text-slate-50 md:text-[18px]">To Admin Dashboard <AiOutlineArrowRight /></Button>
+            </div>
+          )
+        }
       </div>
 
       <div className="relative mx-auto w-4/5 md:w-full max-w-sm md:max-w-md">
@@ -45,7 +45,7 @@ const HomePages = () => {
         >
           <span className="mx-auto">{getPublishQuotes?.quote}</span>
           <div onClick={() => handleVoteQuote(getPublishQuotes?.id)} className="group relative">
-          <img
+            <img
               src={Star}
               alt=""
               className={`w-[24px] h-[24px] ${votedQuoteId === getPublishQuotes?.id ? "filter-red" : ""}`}
@@ -55,51 +55,51 @@ const HomePages = () => {
             </span>
           </div>
         </h1>
-    </div>
+      </div>
 
 
       <div className="flex md:flex-row flex-col justify-center gap-x-8 mt-[30px] md:mt-[40px]">
-          <div className="gap-4 grid grid-cols-3 mx-auto md:mx-0">
-            <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
-            <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
-            <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
-            <img onClick={() => navigate("/user/quotes")} src={Quote} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
-            <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
-            <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover"/>
+        <div className="gap-4 grid grid-cols-3 mx-auto md:mx-0">
+          <img onClick={() => navigate("/chats")} src={LightChats} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+          <img onClick={() => navigate("/user/find-friends")} src={LightFindFri} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+          <img onClick={() => navigate("/user/profile")} src={LightProfile} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+          <img onClick={() => navigate("/user/quotes")} src={Quote} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+          <img onClick={() => navigate("/user/settings")} src={LightSetting} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+          <img onClick={() => navigate("/user/relation")} src={LightRelation} alt="" className="w-[100px] md:w-[170px] h-[100px] md:h-[170px] transform transition-transform duration-300 cursor-pointer ease-in-out hover:scale-105 hover:grayscale-50 object-cover" />
+        </div>
+
+        <div className="flex flex-col bg-black bg-opacity-25 mx-auto md:mx-0 mt-4 md:mt-0 rounded-[8px] w-4/5 md:w-[420px] max-h-[60vh] font-poppins">
+          <div className="flex items-center bg-white bg-opacity-20 mx-auto mt-[20px] rounded-[12px] w-[200px] h-[50px]">
+            <h1 className="flex mx-auto font-medium text-[16px] text-white">Friends</h1>
           </div>
 
-          <div className="flex flex-col bg-black bg-opacity-25 mx-auto md:mx-0 mt-4 md:mt-0 rounded-[8px] w-4/5 md:w-[420px] max-h-[60vh] font-poppins">
-            <div className="flex items-center bg-white bg-opacity-20 mx-auto mt-[20px] rounded-[12px] w-[200px] h-[50px]">
-              <h1 className="flex mx-auto font-medium text-[16px] text-white">Friends</h1>
+          <div className="flex items-center bg-white bg-opacity-20 mx-auto mt-[23px] w-[96%] h-[50px] cursor-pointer">
+            <div className="bg-white ml-[10px] rounded-[4px] w-[24px] h-[24px]">
+              <MdOutlinePersonAddAlt className="w-[22px] h-[22px] text-[#591DA9]" />
             </div>
 
-            <div className="flex items-center bg-white bg-opacity-20 mx-auto mt-[23px] w-[96%] h-[50px] cursor-pointer">
-              <div className="bg-white ml-[10px] rounded-[4px] w-[24px] h-[24px]">
-                <MdOutlinePersonAddAlt className="w-[22px] h-[22px] text-[#591DA9]"/>
-              </div>
+            <h1 className="ml-[10px] font-medium text-[16px] text-white">Friend Request</h1>
 
-              <h1 className="ml-[10px] font-medium text-[16px] text-white">Friend Request</h1>
-
-              <div className="flex ml-auto">
-                <MdOutlineNotificationImportant className="w-[24px] h-[24px] text-[#E10101]"/>
-              </div>
+            <div className="flex ml-auto">
+              <MdOutlineNotificationImportant className="w-[24px] h-[24px] text-[#E10101]" />
             </div>
+          </div>
 
-            <div className="flex flex-col overflow-auto scrollbar-hide">
-              {
-                getAllFris?.items?.length > 0 && getAllFris?.items?.map((fri: any) => {
-                  const isUserOne = getMe?.id === fri.userOneId;
-                  const user = isUserOne ? fri.userTwo : fri.userOne;
+          <div className="flex flex-col overflow-auto scrollbar-hide">
+            {
+              getAllFris?.items?.length > 0 && getAllFris?.items?.map((fri: any) => {
+                const isUserOne = getMe?.id === fri.userOneId;
+                const user = isUserOne ? fri.userTwo : fri.userOne;
 
-                  return (
-                    <div key={fri?.id} className="flex items-center bg-white bg-opacity-20 mx-auto mt-[13px] w-[96%] h-[50px] cursor-pointer">
-                      <img src={user?.profile} alt="" className="ml-[10px] w-[36px] h-[36px]"/>
-                      <h1 className="ml-[16px] font-medium text-[18px] text-white">{user?.displayName}</h1>
-                    </div>
-                  )
-                })
-              }
-              {/* <ul>
+                return (
+                  <div key={fri?.id} className="flex items-center bg-white bg-opacity-20 mx-auto mt-[13px] w-[96%] h-[50px] cursor-pointer">
+                    <img src={user?.profile} alt="" className="ml-[10px] w-[36px] h-[36px]" />
+                    <h1 className="ml-[16px] font-medium text-[18px] text-white">{user?.displayName}</h1>
+                  </div>
+                )
+              })
+            }
+            {/* <ul>
                 {getAllFris?.items?.length > 0 && getAllFris?.items.map((fri: any) => {
                   const isUserOne = getMe?.id === fri.userOneId;
                   const user = isUserOne ? fri.userTwo : fri.userOne; 
@@ -115,10 +115,10 @@ const HomePages = () => {
                   );
                 })}
               </ul> */}
-            </div>
           </div>
+        </div>
 
-          {/* <div className="flex flex-col mt-4 md:mt-0">
+        {/* <div className="flex flex-col mt-4 md:mt-0">
             <div className="flex justify-center items-center bg-black bg-opacity-25 mx-auto md:mx-0 rounded-b-full w-[320px] md:w-[420px] h-[30px] md:h-[50px]">
               <h1 className="font-medium font-poppins text-white md:text-[26px]">Friends</h1>
             </div>
