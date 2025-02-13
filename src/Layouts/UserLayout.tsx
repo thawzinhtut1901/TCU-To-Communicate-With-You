@@ -7,7 +7,7 @@ const UserLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === "/user/home";
-  const isFindFriPage = location.pathname === "/user/find-friends" || "/user/quotes"
+  const isFindFriPage = location.pathname === "/user/find-friends" || location.pathname === "/user/quotes/leaderboard"
 
   return (
     <div className="flex flex-col bg-custom-bg bg-custom-gradient w-full h-screen">
@@ -17,7 +17,7 @@ const UserLayout = () => {
        </div>
         {
           !isHomePage && (
-              <FaArrowLeft onClick={() => navigate("/user/home")} className="flex md:hidden mb-6 ml-4 w-[14px] text-white"/>
+              <FaArrowLeft onClick={() => navigate("/user/home")} className="md:hidden flex mb-6 ml-4 w-[14px] text-white"/>
           )
         }
         <Outlet />
