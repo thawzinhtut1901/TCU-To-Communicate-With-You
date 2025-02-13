@@ -1,29 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, Quote, Star } from "@/assets";
+import { LightChats, LightFindFri, LightProfile, LightSetting, LightRelation, Quote, Star, Voted } from "@/assets";
 import "./type.css";
 import { useGetAllFriends, useGetMe, useGetPublishQuotes, useVoteQuote } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdOutlineNotificationImportant, MdOutlinePersonAddAlt } from "react-icons/md";
-import { useState } from "react";
+import { useEffect } from "react";
 // import { Avatar } from "@mui/material";
 
 
 const HomePages = () => {
   const navigate = useNavigate();
-  const  {data: getPublishQuotes} = useGetPublishQuotes();
+  const  {data: getPublishQuotes, refetch} = useGetPublishQuotes();
   console.log(getPublishQuotes)
   const {data: getMe} = useGetMe();
   const {data: getAllFris} = useGetAllFriends();
   const voteQuote = useVoteQuote();
-  const [votedQuoteId, setVotedQuoteId] = useState<number | null>(null);
+  // const [_ , setVotedQuoteId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if(voteQuote.isSuccess) {
+      refetch()
+    }
+  })
 
   const handleVoteQuote = (id: number) => {
-    voteQuote.mutate(id, {
-      onSuccess: () => {
-        setVotedQuoteId(id); // Update the voted quote ID on success
-      },
-    });
+    voteQuote.mutate(id)
   };
 
   return (
@@ -38,28 +40,40 @@ const HomePages = () => {
         }
       </div>
 
-      <div className="relative mx-auto w-4/5 md:w-full max-w-sm md:max-w-md">
+      <div className="group relative mx-auto w-4/5 md:w-full max-w-sm md:max-w-md">
         <div className="-top-[2px] left-6 absolute bg-black -mt-[3px] md:-mt-2 -ml-2 border border-blue-500 rounded-full w-3 md:w-5 h-3 md:h-5"></div>
+        <span className="bottom-[-30px] left-1/2 absolute bg-white opacity-0 group-hover:opacity-100 peer-hover:opacity-0 px-4 py-2 rounded-md text-black text-xs transition-opacity -translate-x-1/2 duration-200">
+          {getPublishQuotes?.user?.displayName}
+        </span>
         <h1
           key={getPublishQuotes?.id}
           className="flex justify-between bg-black bg-opacity-25 shadow-md shadow-slate-400 mt-1 md:mt-2 px-2 md:px-4 py-1 md:py-2 border border-blue-500 rounded-[8px] max-w-[24rem] md:max-w-[40rem] text-[16px] text-slate-50 text-center cursor-default"
         >
           <span className="mx-auto">{getPublishQuotes?.quote}</span>
           <div onClick={() => handleVoteQuote(getPublishQuotes?.id)} className="group relative">
-            <img
-              src={Star}
-              alt=""
-              className={`w-[24px] h-[24px] ${votedQuoteId === getPublishQuotes?.id ? "filter-red" : ""}`}
-            />
             {
               getPublishQuotes?.isVoted === false ? (
-                <span className="-bottom-10 left-1/2 absolute bg-white opacity-0 group-hover:opacity-100 px-4 py-2 rounded-md text-black text-xs transition-opacity -translate-x-1/2 duration-200">
-                  Vote
-                </span>
+                <div onClick={() => handleVoteQuote(getPublishQuotes?.id)} className="relative">
+                  <img
+                    src={Star}
+                    alt=""
+                    className="w-[24px] h-[24px]"
+                  />
+                  {/* <span className="-bottom-10 left-1/2 absolute bg-white opacity-0 group-hover:opacity-100 px-4 py-2 rounded-md text-black text-xs transition-opacity -translate-x-1/2 duration-200">
+                    Vote
+                  </span> */}
+                </div>
               ) : (
-                <span className="-bottom-10 left-1/2 absolute bg-white opacity-0 group-hover:opacity-100 px-4 py-2 rounded-md text-black text-xs transition-opacity -translate-x-1/2 duration-200">
-                  Voted
-                </span>
+              <div className="relative">
+                <img
+                  src={Voted}
+                  alt=""
+                  className="w-[24px] h-[24px]"
+                />
+                {/* <span className="-bottom-10 left-1/2 absolute bg-white opacity-0 group-hover:opacity-100 px-4 py-2 rounded-md text-black text-xs transition-opacity -translate-x-1/2 duration-200">
+                    Voted
+                </span> */}
+              </div>
               )
             }
           </div>

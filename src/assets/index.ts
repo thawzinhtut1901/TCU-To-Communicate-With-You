@@ -37,6 +37,7 @@ import FriendRealtion from "./FriendRelation.png"
 import BestieRelation from "./BestieRelation.png"
 import PartnerRelation from "./PartnerRelation.png"
 import SiblingRelation from "./SiblingRelation.png"
+import Voted from "./Voted.png"
 
 export {
     TCULogCom,
@@ -78,4 +79,5 @@ export {
     BestieRelation,
     PartnerRelation,
     SiblingRelation,
+    Voted,
 }
