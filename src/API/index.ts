@@ -6,7 +6,7 @@ import { newPasswordAPI } from "../API/AuthAPI";
 import { profileSetupAPI } from "../API/AuthAPI";
 import { getPublishQuotes } from "./HomeAPI";
 import { getMe } from "./UserAPI";
-import { getOthersProfileAPI } from "./UserAPI";
+import { getUserProfile } from "./UserAPI";
 import { usersAccount } from "./AdminAPI";
 import { usersGroups } from "./AdminAPI";
 import { addAdmins } from "./AdminAPI";
@@ -33,7 +33,7 @@ import { deleteUserAccountAPI } from "./UserAPI";
 import { getAllFriendsRequestAPI } from "./UserAPI";
 import { getFindUserAPI } from "./UserAPI";
 import { acceptRequestApi } from "./UserAPI";
-import { cancelRejectApi  } from "./UserAPI";
+import { cancelRejectApi } from "./UserAPI";
 import { createQuoteAPI } from "./UserAPI";
 import { getAllChatAPI } from "./ChatAPI";
 import { createNewChatAPI } from "./ChatAPI";
@@ -49,8 +49,8 @@ import { getAGroupChat } from "./ChatAPI";
 import { quoteRankAPI } from "./UserAPI";
 import { voteQuoteAPI } from "./UserAPI";
 
-export { 
-    SignUpAPI, 
+export {
+    SignUpAPI,
     SignInAPI,
     forgetPasswordAPI,
     resetPswAPI,
@@ -58,7 +58,7 @@ export {
     profileSetupAPI,
     getPublishQuotes,
     getMe,
-    getOthersProfileAPI,
+    getUserProfile,
     usersAccount,
     usersGroups,
     addAdmins,
@@ -86,7 +86,7 @@ export {
     getAllFriendsRequestAPI,
     getFindUserAPI,
     acceptRequestApi,
-    cancelRejectApi ,
+    cancelRejectApi,
     createQuoteAPI,
     getAllChatAPI,
     createNewChatAPI,
