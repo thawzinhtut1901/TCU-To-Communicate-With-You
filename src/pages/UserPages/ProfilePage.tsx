@@ -1,6 +1,6 @@
 import { QRCode } from "@/assets"
 import { UserLogout } from "@/components/userUI"
-import { useGetMe, useUpdateMe } from "@/hooks"
+import { useGetProfile, useUpdateMe } from "@/hooks"
 import { useEffect, useRef, useState } from "react"
 import { IoClose, IoQrCode } from "react-icons/io5"
 import { Outlet, useNavigate } from "react-router-dom"
@@ -8,7 +8,7 @@ import { updateProfileData } from "@/types/type";
 import { FiCheck } from "react-icons/fi"
 
 const ProfilePage = () => {
-  const {data: getMyProfile, refetch } = useGetMe();
+  const { data: getMyProfile, refetch } = useGetProfile();
   const updateProfileData = useUpdateMe();
   const [preview, setPreview] = useState<string | undefined>(undefined);
   const [viewProfile, setViewProfile] = useState(false);
@@ -17,8 +17,8 @@ const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const [updateProfile, setUpdateProfile] = useState<updateProfileData> ({
-    userName: getMyProfile?.userName || "", 
+  const [updateProfile, setUpdateProfile] = useState<updateProfileData>({
+    userName: getMyProfile?.userName || "",
     displayName: getMyProfile?.displayName || "",
     profilePicture: getMyProfile?.profilePicture,
     dateOfBirth: getMyProfile?.dateOfBirth || "",
@@ -27,7 +27,7 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if(updateProfileData.isSuccess) {
+    if (updateProfileData.isSuccess) {
       setIsModalOpen(false);
       setPreview(undefined);
       refetch();
@@ -44,7 +44,7 @@ const ProfilePage = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if(file) {
+    if (file) {
       setUpdateProfile((prev) => ({
         ...prev,
         profilePicture: file,
@@ -68,7 +68,7 @@ const ProfilePage = () => {
     setViewProfile(true)
   }
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateProfileData.mutate(updateProfile)
   }
@@ -76,12 +76,12 @@ const ProfilePage = () => {
   const handleEditProfileClose = () => {
     setIsModalOpen(false);
     setPreview(undefined);
-}
+  }
 
   const handleViewProfileClose = () => {
     setIsModalOpen(false);
     setViewProfile(false);
-}
+  }
 
 
   return (
@@ -92,46 +92,46 @@ const ProfilePage = () => {
             <img src={preview} alt="Preview" className="z-50 absolute inset-0 shadow-black shadow-md mx-auto mt-[150px] rounded-[4px] w-4/5 h-full object-cover" />
             <h1 className="flex justify-center mt-5 font-semibold text-[18px] text-slate-700">View Your Profile</h1>
             <form onSubmit={handleSubmit} className="flex mt-4">
-              <button type="submit" className="flex gap-x-1 bg-blue-500 hover:bg-blue-300 mr-auto ml-5 p-2 rounded-[6px] text-white"><FiCheck className="w-[24px] h-[24px] text-green-500"/>Upload This Photo</button>
-              <button onClick={handleEditProfileClose} className="flex mr-4 ml-auto"><IoClose className="w-[24px] h-[24px]"/></button>
+              <button type="submit" className="flex gap-x-1 bg-blue-500 hover:bg-blue-300 mr-auto ml-5 p-2 rounded-[6px] text-white"><FiCheck className="w-[24px] h-[24px] text-green-500" />Upload This Photo</button>
+              <button onClick={handleEditProfileClose} className="flex mr-4 ml-auto"><IoClose className="w-[24px] h-[24px]" /></button>
             </form>
           </div>
-                  
-          )}
-          {
-            viewProfile && (
-              <div className="relative w-full h-screen">
-                <img
-                  src={
-                    typeof getMyProfile?.profile === "string"
-                      ? getMyProfile.profile
-                      : getMyProfile?.profile
+
+        )}
+        {
+          viewProfile && (
+            <div className="relative w-full h-screen">
+              <img
+                src={
+                  typeof getMyProfile?.profile === "string"
+                    ? getMyProfile.profile
+                    : getMyProfile?.profile
                       ? URL.createObjectURL(getMyProfile.profile)
                       : undefined
-                  }
-                  alt="Preview"
-                  className="z-50 absolute inset-0 shadow-black shadow-md mx-auto rounded-[4px] w-4/5 h-[850px] object-cover"
-                />
-                <button onClick={handleViewProfileClose} className="top-3 right-36 z-50 absolute flex">
-                  <IoClose className="w-[24px] h-[24px]" />
-                </button>
-              </div>
-            )
-          }
+                }
+                alt="Preview"
+                className="z-50 absolute inset-0 shadow-black shadow-md mx-auto rounded-[4px] w-4/5 h-[850px] object-cover"
+              />
+              <button onClick={handleViewProfileClose} className="top-3 right-36 z-50 absolute flex">
+                <IoClose className="w-[24px] h-[24px]" />
+              </button>
+            </div>
+          )
+        }
 
         <div className={`flex mt-[38px] ${preview ? "hidden" : ""}`}>
           <div>
-            <img 
-              src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined} 
-              alt="" 
+            <img
+              src={typeof getMyProfile?.profile === 'string' ? getMyProfile.profile : getMyProfile?.profile ? URL.createObjectURL(getMyProfile.profile) : undefined}
+              alt=""
               className="ml-[20px] md:ml-[125px] rounded-full md:rounded-[10px] w-[80px] md:w-[150px] h-[80px] md:h-[150px]"
               onClick={handleProfileClick}
             />
 
-            <input 
-              type="file" 
-              accept="image/*" 
-              onChange={handleFileChange} 
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
               className="hidden"
               ref={fileInputRef}
             />
@@ -139,11 +139,11 @@ const ProfilePage = () => {
             {isModalOpen && (
               <div className="top-[280px] left-40 z-10 absolute flex bg-white shadow-lg p-4 border rounded-md w-[200px]">
                 <ul className="font-poppins">
-                  <li 
-                    onClick={handleProfileView} 
+                  <li
+                    onClick={handleProfileView}
                     className="hover:bg-gray-200 py-2 hover:p-2 cursor-pointer">View Your Profile</li>
-                  <li 
-                    onClick={handleEditProfileClick} 
+                  <li
+                    onClick={handleEditProfileClick}
                     className="hover:bg-gray-200 py-2 hover:p-2 cursor-pointer">Edit Your Profile</li>
                 </ul>
               </div>
@@ -157,8 +157,8 @@ const ProfilePage = () => {
               <div className="flex gap-x-4 bg-clip-text bg-gradient-to-r from-[#9934D4] to-[#E365F3] mt-[5px] text-transparent">
                 {
                   getMyProfile?.role === "Admin" && (
-                    <h2 className="font-semibold text-[14px] md:text-[18px]">Founder Of TCU</h2>
-                  ) 
+                    <h2 className="font-semibold text-[14px] md:text-[18px]">TCU {getMyProfile?.adminInfo?.adminPosition}</h2>
+                  )
                 }
                 <h2 className="font-semibold text-[14px] md:text-[18px]">{getMyProfile?.userName}</h2>
               </div>
@@ -166,27 +166,27 @@ const ProfilePage = () => {
 
             <div className="flex gap-x-3 md:gap-x-6 mt-[10px] md:mt-[15px] font-medium text-[12px] md:text-[16px]">
               <div className="flex flex-col">
-                <h3 className="text-center">3</h3>
+                <h3 className="text-center">{getMyProfile?.publishedQuoteCount}</h3>
                 <h3>Published quotes</h3>
               </div>
 
               <div className="flex flex-col">
-                <h3 className="text-center">3</h3>
+                <h3 className="text-center">{getMyProfile?.followers}</h3>
                 <h3>Followers</h3>
               </div>
 
               <div className="flex flex-col">
-                <h3 className="text-center">3</h3>
+                <h3 className="text-center">{getMyProfile?.following}</h3>
                 <h3>Following</h3>
               </div>
             </div>
           </div>
 
           <div onClick={toggleQRBox} className="md:flex gap-x-1 border-slate-500 hidden bg-black bg-opacity-15 my-auto mr-[15px] md:mr-[125px] ml-auto p-4 border rounded-[15px] font-poppins cursor-pointer">
-            <IoQrCode className="md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]"/>
+            <IoQrCode className="md:mt-[3px] w-[12px] md:w-[24px] h-[12px] md:h-[24px]" />
           </div>
 
-           {isQRVisible && (
+          {isQRVisible && (
             <div className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
               <div className="relative bg-radial-custom-gradient mx-auto md:mx-0 rounded-[8px] w-[400px] h-[150px] md:h-[400px]">
                 <h1 className="mt-9 font-medium font-poppins text-[18px] text-center">Get QR Code</h1>
@@ -206,7 +206,7 @@ const ProfilePage = () => {
                 </button>
               </div>
             </div>
-        )}
+          )}
         </div>
 
         <div className="flex flex-col md:hidden ml-[30px]">
@@ -216,7 +216,7 @@ const ProfilePage = () => {
             {
               getMyProfile?.role === "Admin" && (
                 <h2 className="font-semibold text-[14px] md:text-[18px]">Founder Of TCU</h2>
-              ) 
+              )
             }
             <h2 className="font-semibold text-[14px] md:text-[18px]">{getMyProfile?.userName}</h2>
           </div>
@@ -228,33 +228,33 @@ const ProfilePage = () => {
 
         <div className={`flex mt-[50px] ${preview ? "hidden" : ""}`}>
           <div className="flex flex-col gap-y-9 ml-[125px] cursor-pointer">
-            <div onClick={() =>navigate("/user/profile/more-info")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
+            <div onClick={() => navigate("/user/profile/more-info")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
               <h1>Personal Information</h1>
             </div>
-            <div onClick={() =>navigate("/user/profile/friend-list")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
+            <div onClick={() => navigate("/user/profile/friend-list")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
               <h1>Friends</h1>
             </div>
             <div onClick={() => navigate("/user/profile/join-group")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
               <h1>Joined Groups</h1>
-            </div>  
+            </div>
             <div onClick={() => navigate("/user/profile/relationship-list")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
               <h1>Relationships</h1>
-            </div>  
+            </div>
             <div onClick={() => navigate("/user/settings")} className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
               <h1>Settings</h1>
-            </div>  
+            </div>
             <div className="flex justify-center items-center border-slate-500 bg-black bg-opacity-15 hover:bg-opacity-40 border rounded-[20px] w-[200px] h-[55px]">
-              <UserLogout/>
-            </div>  
+              <UserLogout />
+            </div>
           </div>
 
           {/* Profile Details */}
           <div className="relative border-slate-500 bg-black bg-opacity-15 mx-auto md:mx-0 md:ml-[28px] border rounded-[10px] w-[350px] md:w-[760px] md:h-full font-poppins">
-            <Outlet/>
+            <Outlet />
           </div>
 
           {/* Render EditBox if visible */}
-            {/* {isEditBoxVisible && (
+          {/* {isEditBoxVisible && (
               <EditUserProfile refetch={refetch} getMyProfile={getMyProfile} toggleEditBox={toggleEditBox}/>
             )} */}
 

@@ -4,8 +4,8 @@ import { useForgetPassword } from "./useAuth";
 import { useResetPassword } from "./useAuth";
 import { useProfileSetUp } from "./useAuth";
 import { useGetPublishQuotes } from "./useHome";
-import { useGetMe } from "./useUser";
-import { useGetOthersProfile } from "./useUser";
+import { useGetMe, useGetProfile } from "./useUser";
+import { useGetUserProfile } from "./useUser";
 import { useFetchUsersAccountDetails } from "./useAdmin";
 import { useAddAdmins } from "./useAdmin";
 import { useFetchAdmins } from "./useAdmin";
@@ -44,18 +44,19 @@ import { useGetFindAUser } from "./useUser";
 import { useCreateMessages } from "./useChats";
 import { useCreateGroup } from "./useChats";
 import { useGetAGroupChat } from "./useChats";
-import { usevoteQuote } from "./useUser";
+import { useVoteQuote } from "./useUser";
 import { useGetQuoteRank } from "./useUser";
 
-export { 
-    useSignUp, 
+export {
+    useSignUp,
     useSignIn,
     useForgetPassword,
     useResetPassword,
     useProfileSetUp,
     useGetPublishQuotes,
     useGetMe,
-    useGetOthersProfile,
+    useGetUserProfile,
+    useGetProfile,
     useFetchUsersAccountDetails,
     useAddAdmins,
     useFetchAdmins,
@@ -93,7 +94,7 @@ export {
     useCreateMessages,
     useCreateGroup,
     useGetAGroupChat,
-    usevoteQuote,
+    useVoteQuote,
     useGetQuoteRank,
     useGetGroupMessages,
 };
