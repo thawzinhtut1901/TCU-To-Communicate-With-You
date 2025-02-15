@@ -8,11 +8,13 @@ import {
 import { FriendOptionDrawer, FriendOptionDrawerDesktop } from "./FriendOptionDrawer";
 import "./type.css";
 import { IoIosSearch } from "react-icons/io";
-import { useGetAllFriends, useGetMe } from "@/hooks";
+import { useGetAllFriends, useGetProfile } from "@/hooks";
 
 const FriendList = () => {
   const {data: getAllFris, refetch} = useGetAllFriends();
-  const {data: getMe} = useGetMe();
+  console.log(getAllFris)
+  const {data: getMe} = useGetProfile();
+
   return (
     <div className="cursor-default">
         <h1 className="mt-4 font-medium text-[24px] text-center">Friend List</h1>
@@ -31,7 +33,7 @@ const FriendList = () => {
                 />
             </form>
 
-            <h1 className="mr-6 ml-auto font-medium text-[18px]">168 Friends</h1>
+            <h1 className="mr-6 ml-auto font-medium text-[18px]">{getMe?.friendsCount} Friends</h1>
         </div>
         <div className="mt-4 max-h-[60vh] overflow-auto scrollbar-hide">
             <Table>
@@ -41,6 +43,7 @@ const FriendList = () => {
                     getAllFris?.items?.map((fris:any) => {
                         const isUserOne = getMe?.id === fris.userOneId;
                         const user = isUserOne ? fris.userTwo : fris.userOne; 
+
                         return (
                             <TableRow key={fris?.id} className="flex items-center">
                             <TableCell></TableCell>
@@ -49,11 +52,11 @@ const FriendList = () => {
                             </TableCell>
                             <TableCell className="flex flex-col">
                                 <h1 className="font-medium text-[18px]">{user?.displayName}</h1>
-                                <h3 className="text-[14px]">16 Mutual Friends</h3>
+                                <h3 className="text-[14px]">{user?.friendsCount} Mutual Friends</h3>
                             </TableCell>
                             <TableCell className="ml-auto">
-                                <div className="md:flex hidden">
-                                    <FriendOptionDrawerDesktop refetch={refetch} frisId={fris?.userTwoId}/>
+                                <div className="hidden md:flex">
+                                    <FriendOptionDrawerDesktop friendChatId={fris?.chat?.id} refetch={refetch} frisId={fris?.userTwoId}/>
                                 </div>
                                 <div className="md:hidden">
                                     <FriendOptionDrawer/>
