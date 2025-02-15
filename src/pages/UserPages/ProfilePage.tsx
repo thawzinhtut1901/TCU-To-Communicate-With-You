@@ -85,7 +85,7 @@ const ProfilePage = () => {
 
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center cursor-default">
       <div className="flex flex-col bg-white bg-opacity-40 rounded-[10px] w-11/12 md:w-11/12 h-[750px] md:h-[850px]">
         {preview && (
           <div className="relative w-full h-screen">

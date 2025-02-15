@@ -92,7 +92,7 @@ const Groups = () => {
   return (
     <div className="overflow-auto vertical-scrollbar">
       <div className="flex flex-col mx-[40px]">
-        <h1 className="my-[20px] font-bold font-roboto text-[28px]">Groups Details</h1>
+        <h1 className="my-[20px] font-roboto font-bold text-[28px]">Groups Details</h1>
 
         <div className="flex">
           <div className="relative bg-white shadow-md mr-2 p-2 rounded-[10px]">
@@ -172,7 +172,7 @@ const Groups = () => {
           {
             getGroups?.items?.length !== 0 && (
               <div className="flex ml-[20px] text-[16px]">
-                <Button onClick={handleFirstPage} className="flex font-bold font-roboto text-[#9054DE] uppercase"><BsChevronDoubleLeft />First</Button>
+                <Button onClick={handleFirstPage} className="flex font-roboto font-bold text-[#9054DE] uppercase"><BsChevronDoubleLeft />First</Button>
                 <Stack spacing={1}>
                   <Pagination
                     count={getGroups?.meta?.totalPages}
@@ -206,7 +206,7 @@ const Groups = () => {
                     }}
                   />
                 </Stack>
-                <Button onClick={handleLastPage} className="flex font-bold font-roboto text-[#9054DE] uppercase">Last <BsChevronDoubleRight /> </Button>
+                <Button onClick={handleLastPage} className="flex font-roboto font-bold text-[#9054DE] uppercase">Last <BsChevronDoubleRight /> </Button>
               </div>
             )
           }

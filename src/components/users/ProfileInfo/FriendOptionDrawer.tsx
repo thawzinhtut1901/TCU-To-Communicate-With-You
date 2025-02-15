@@ -23,11 +23,13 @@ import { BsPersonXFill } from "react-icons/bs";
 import { RiUserUnfollowFill } from "react-icons/ri";
 import { useUnfriend } from "@/hooks"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
 
 interface FriendOptionDrawerDesktopProps {
     frisId: number;
     refetch: () => void;
+    friendChatId: string;
   }
 
 export function FriendOptionDrawer() {
@@ -94,8 +96,9 @@ export function FriendOptionDrawer() {
   )
 }
 
-export function FriendOptionDrawerDesktop({ frisId, refetch }: FriendOptionDrawerDesktopProps) {
+export function FriendOptionDrawerDesktop({ frisId, refetch, friendChatId }: FriendOptionDrawerDesktopProps) {
     const unfriend = useUnfriend();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(unfriend.isSuccess) {
@@ -124,7 +127,7 @@ export function FriendOptionDrawerDesktop({ frisId, refetch }: FriendOptionDrawe
                         Favorites
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className="flex items-center gap-x-3 font-bold text-[16px]">
+                    <DropdownMenuItem onClick={() => navigate(`/chats/${friendChatId}`)} className="flex items-center gap-x-3 font-bold text-[16px]">
                         <BiMessageRoundedDetail className="w-[18px] h-[18px]"/>
                         Message Thaw Zin
                     </DropdownMenuItem>
